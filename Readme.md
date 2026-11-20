@@ -153,7 +153,7 @@ Todas as telas foram tiradas do próprio programa.
   </tr>
   <tr>
     <td><img src="docs/capturas/ai.png" alt="Assistente"><br><sub>Assistente: a IA que responde quando você pergunta</sub></td>
-    <td><img src="docs/capturas/win-petcreator.png" alt="Criar meu pet"><br><sub>Criar meu pet: as suas imagens viram um bichinho</sub></td>
+    <td><img src="docs/capturas/editor.png" alt="Editor de Pets"><br><sub>Editor de Pets: as suas imagens viram um bichinho, com prévia ao vivo</sub></td>
   </tr>
 </table>
 

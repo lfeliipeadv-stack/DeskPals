@@ -91,7 +91,7 @@ O resultado tem que ser igual ao hash da linha correspondente do `SHA256SUMS`. V
 
 São quatro motivos diferentes, e nenhum deles é perda de arquivo sem explicação.
 
-**1. O pet saiu da galeria.** Quando um pet é removido do `Pets/pets.json`, o programa apaga do disco a pasta dele — é o que a rotina `ForgetRemovedPets` faz, ignorando o pet que está em uso e os pets que você mesmo criou. Na versão 2.6.2 nove pets saíram da galeria: Sábio, Twin Shot, Skywire Bean, Mareep, Pikachu, Shiny Sylveon, Neko, Buster Bunny e SSJ Goku. Se o que você usava era um deles, ele continua na tela e aparece com o aviso **"Este pet saiu da galeria. Ele continua aqui enquanto estiver em uso."** — até você adotar outro.
+**1. O pet saiu da galeria.** Quando um pet é removido do `Pets/pets.json`, o programa apaga do disco a pasta dele — é o que a rotina `ForgetRemovedPets` faz, ignorando o pet que está em uso e os pets que você mesmo criou. Se o que você usava era um deles, ele continua na tela e aparece com o aviso **"Este pet saiu da galeria. Ele continua aqui enquanto estiver em uso."** — até você adotar outro.
 
 **2. A pasta do pet mudou de nome.** O "Pingus" e o "Rex" foram unificados: as pastas `pingus_expansion` e `tico` viraram `pingus` e `rex`. O programa procura as pastas pelo nome novo, então a pasta antiga deixa de ser reconhecida.
 
@@ -176,9 +176,9 @@ Dá para contornar de duas formas:
 
 | Arquivo | O que é | Precisa do .NET 10? |
 | --- | --- | --- |
-| `DesktopPet.exe` (2.750.643 bytes, ≈ 2,6 MB) | Só o programa | **Sim** |
-| `DesktopPet-completo.exe` (52.672.112 bytes, ≈ 50,2 MB) | O mesmo programa com o runtime embutido (*self-contained*) | Não |
-| `DesktopPet-Instalador.exe` (3.150.336 bytes, ≈ 3 MB) | O instalador, escrito em .NET Framework 4.8 | Não — o 4.8 já vem no Windows 10 e 11 |
+| `DesktopPet.exe` (3.041.971 bytes, ≈ 2,9 MB) | Só o programa | **Sim** |
+| `DesktopPet-completo.exe` (52.764.698 bytes, ≈ 50,3 MB) | O mesmo programa com o runtime embutido (*self-contained*) | Não |
+| `DesktopPet-Instalador.exe` (4.399.104 bytes, ≈ 4,2 MB) | O instalador, escrito em .NET Framework 4.8 | Não — o 4.8 já vem no Windows 10 e 11 |
 
 É por isso que o instalador abre mesmo num computador sem o .NET 10: ele é .NET Framework 4.8. E é por isso que ele funciona como conferidor: ele procura o `Microsoft.WindowsDesktop.App` versão 10.x em quatro lugares (`DOTNET_ROOT\shared\Microsoft.WindowsDesktop.App`, `%ProgramFiles%\dotnet`, `C:\Program Files\dotnet` e a chave de registro `HKLM\SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App`). Se não achar, mostra o botão **"Instalar o .NET 10"**, que baixa o instalador oficial da Microsoft.
 
@@ -186,11 +186,11 @@ O runtime oficial está em <https://dotnet.microsoft.com/download/dotnet/10.0>. 
 
 ## O que muda entre as versões?
 
-Cada release traz notas de versão. Depois de atualizar, o programa mostra um balão com o título **"Novidades da versão {0}:"** e o botão **"Ver tudo"**, que abre as notas daquela versão no GitHub. O histórico completo está no [Changelog](Changelog.md) e na aba **Releases** do repositório.
+Cada release traz notas de versão. Na primeira vez que a versão nova abre, o programa mostra uma janela **"Novidades da versão {0}"** com essas notas (uma vez só). O histórico completo está no [Changelog](Changelog.md) e na aba **Releases** do repositório.
 
 O que costuma mudar de uma versão para a outra:
 
-- **A lista de pets da galeria.** Pets podem entrar, sair ou trocar de pasta (foi o que aconteceu com o Pingus e o Rex na 2.6.2).
+- **A lista de pets da galeria.** Pets podem entrar, sair ou trocar de pasta.
 - **O estado dos plugins.** Numa instalação **nova**, todos os 22 plugins começam desligados. Num computador que **já usava** uma versão anterior, o programa liga de volta os plugins que antigamente eram ligados por padrão (lembretes, foco, brincadeiras, atalhos, notas, cuidado com você, pets se cumprimentam, reações ao computador, e-mails do Outlook, tela cheia, avisos, música e visitas) e mantém o estado dos outros.
 - **O eSheep embutido**, que é relido a cada inicialização e pode ganhar animações novas.
 - **As traduções.** O arquivo `lang.zip` da release traz os idiomas extras; o português e o espanhol já vêm embutidos no executável.
@@ -215,7 +215,7 @@ Na descrição, vale colocar: a versão do programa (página **"Sobre"**), o que
 
 São dois caminhos, dependendo do que você quer.
 
-**Um pet só para você** — o botão **"Criar meu pet"** (na aba "Meus pets") transforma as suas imagens PNG, GIF ou JPG em um pet que anda, dorme e cai como os outros. Ele é gravado em `%LocalAppData%\DesktopPet\pets` com o prefixo `meu-`, aparece em "Meus pets" com o aviso **"Você criou este pet neste computador. Ele vai junto nos seus backups."** e não é apagado quando a galeria muda. O passo a passo está em [Crie o seu pet](Crie-o-seu-pet.md).
+**Um pet só para você** — o **Editor de Pets** (Configurações › Editor de Pets) transforma as suas imagens PNG ou GIF em um pet que anda, dorme e cai como os outros. Salvo em `%LocalAppData%\DesktopPet\pets` com o prefixo `meu-`, aparece em "Meus pets" com o aviso **"Você criou este pet neste computador. Ele vai junto nos seus backups."** e não é apagado quando a galeria muda. O passo a passo está em [Crie o seu pet](Crie-o-seu-pet.md).
 
 **Um pet para a galeria, para todo mundo** — o processo é o do repositório:
 
@@ -257,7 +257,7 @@ As capturas de tela dos pets saem do próprio programa: `DesktopPet.exe --snapsh
 - `src/Portable/PetBackup.cs` — o que entra e o que não entra no arquivo `.desktoppet` (`SettingKeys` e `DataFiles`).
 - `src/Portable/FormSettings.Pets.cs` — `ForgetRemovedPets`, a rotina que apaga do disco o pet que saiu da galeria, e o texto "Este pet saiu da galeria…".
 - `src/Portable/PetStore.cs` — a pasta `%LocalAppData%\DesktopPet\pets` e o `version.txt` de cada pet.
-- `src/Portable/PetCreator.cs` — o prefixo `meu-` dos pets criados no computador.
+- `src/Portable/PetStore.cs` — o prefixo `meu-` dos pets criados no computador (`LocalPrefix`).
 - `src/Portable/AgentBridge.cs` — o canal em `127.0.0.1`, a comparação do segredo em tempo fixo e o filtro que recusa caminhos, links, código e chaves.
 - `src/Portable/AiAssistant.cs` — a criptografia DPAPI da chave (`DataProtectionScope.CurrentUser`).
 - `src/Portable/ClaudeHooks.cs` — os hooks do Claude Code, o `settings.json` e a cópia `settings.json.desktoppet-backup`.
@@ -272,5 +272,5 @@ As capturas de tela dos pets saem do próprio programa: `DesktopPet.exe --snapsh
 - `src/DesktopPet.Net.csproj` — `net10.0-windows`, `win-x64`, `SelfContained=false` e a build *self-contained*.
 - `Tools/Setup/SetupForm.cs` — a conferência do .NET 10 nos quatro lugares e o download do instalador oficial.
 - `Tools/update-pets-json.ps1` — a inclusão de um pet novo no `Pets/pets.json`.
-- `release/2.6.2/NOTES.md` — as notas da versão, com a lista dos pets removidos da galeria.
+- `release/<versão>/NOTES.md` — as notas da versão publicadas na release.
 - `src/lang/pt-BR.json` — os textos citados aqui (`pets.notInGallery`, `pets.removeLink`, `pets.removeConfirm`, `pets.createdHere`, `opt.export.*`, `opt.import.*`, `opt.logs.*`, `opt.debug.*`, `opt.install.*`, `opt.restore.title`, `home.hidden`, `agenda.httpsOnly`, `ai.tag.ollama`, `whatsnew.*`).

@@ -1,106 +1,84 @@
 # Crie o seu pet
 
-O programa vem com um criador de pet: você escolhe algumas imagens e elas viram um bichinho que anda, vira, dorme, cai e pode ser arremessado como os outros. Ele fica guardado só neste computador e vai junto nos seus backups.
+O Meu Pet vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brinquedos](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-## O caminho até o criador
+## Abrir o Editor de Pets
 
-O criador fica no painel, em **Configurações › Programa › Criar meu pet**, no botão **Criar…**. É a mesma seção onde ficam o backup, a importação de pets, a janela de depuração e a apresentação.
+- **Pelo programa:** **Configurações › Programa › Editor de Pets › Abrir…**. Se o editor ainda não estiver no computador (quem baixou só o `DesktopPet.exe`), o programa baixa o `PetEditor.exe` da última versão publicada, confere o SHA-256 dele contra o `SHA256SUMS` e abre.
+- **Pelo instalador:** o `DesktopPet-Instalador.exe` já instala o editor ao lado do programa, com atalho próprio.
+- **Direto:** o `PetEditor.exe` também está na página de versões: <https://github.com/lfeliipeadv-stack/meu-pet/releases/latest>. Ele precisa do .NET 10 Desktop Runtime, como o `DesktopPet.exe`.
 
-![Página Configurações do painel, com a seção Programa e o botão de criar pet](images/application.png)
+O editor abre na página **Projeto**, sem nenhum pet carregado. Ali ficam as ações (Assistente de pet novo, Novo pet, Abrir arquivo, Abrir pasta, Salvar como, Exportar como .zip e Publicar na galeria), os pets **abertos recentemente** e os **pets baixados no DesktopPet**, em cartões com a imagem de cada um. Um clique num cartão abre o pet. Quem prefere o jeito antigo liga **Abrir o último pet ao iniciar** nas Configurações do editor.
 
-*A página de Configurações do painel; o botão "Criar…" fica na seção "Programa", mais abaixo da dobra.*
+## Criar um pet com o assistente
 
-Ao clicar, abre a janela **Criar meu pet**:
+O **Assistente de pet novo** monta um pet completo em três passos:
 
-![Janela Criar meu pet, com o campo de nome e um cartão para cada movimento](images/win-petcreator.png)
+![O primeiro passo do Assistente de pet novo: as imagens escolhidas e o lado para onde os desenhos olham](images/editor-wizard.png)
 
-*A janela "Criar meu pet": o nome em cima e um cartão por movimento, cada um com o botão "Escolher…".*
+*O primeiro passo do assistente: os quadros escolhidos e para que lado os desenhos olham.*
 
-## O que preencher
+1. **As imagens.** **Escolher imagens ou GIF…** carrega os quadros (vários PNG ou um GIF animado); **Usar a folha deste pet** aproveita a folha de sprites do pet aberto. Diga para que lado os desenhos olham: o DesktopPet usa desenhos olhando para a esquerda e espelha quando o pet vira, então desenhos virados para a direita são espelhados.
+2. **Os movimentos.** Para cada movimento (andar, parado, cair, ser pego…), clique nos quadros na ordem. Os movimentos obrigatórios pedem um número mínimo de quadros; os outros são opcionais.
+3. **O jeito do pet.** A velocidade (devagar, normal ou rápido) e se ele sobe pelas laterais da tela.
 
-### O nome do pet
+**Criar o pet** gera o `animations.xml`. O pet vai andar, virar nas laterais, cair do céu, ser pego com o mouse e, de vez em quando, fazer as outras animações escolhidas.
 
-Campo **Nome do pet**, com limite de 40 caracteres. O nome aparece no menu do pet e no painel — mas o programa corta o nome do pet em 16 caracteres quando carrega o XML, que é o que aparece no menu.
+## As páginas do editor
 
-### As imagens de cada movimento
+![O Editor de Pets na página Animações: a lista à esquerda, os quadros e o movimento da animação, a prévia ao vivo e a folha de sprites](images/editor.png)
 
-São cinco cartões, e só o primeiro é obrigatório:
+*A página Animações: cada animação com os quadros, o movimento, a prévia ao vivo e a folha de sprites.*
 
-| Cartão | Obrigatório | Para que serve |
-| --- | --- | --- |
-| **Andando** | sim (`*`) | Os quadros do pet andando pela área de trabalho |
-| **Parado** | não | O pet parado, também usado como "virar" e como quadro de pouso |
-| **Dormindo** | não | O pet dormindo e acordando |
-| **Caindo** | não | O pet caindo, arremessado e pousando |
-| **Sendo arrastado** | não | O pet enquanto você arrasta ele com o mouse |
-
-Em cada cartão, o botão **Escolher…** abre o seletor de arquivos com o filtro `Imagens|*.png;*.gif;*.jpg;*.jpeg;*.bmp`. Você pode escolher vários arquivos de uma vez; eles entram na ordem do nome (quadro_01, quadro_02…), que é a ordem em que vão tocar.
-
-O cartão mostra quantas imagens já foram escolhidas (`✓ 4 imagens`) e, enquanto estiver vazio, se o movimento é `obrigatório: escolha as imagens` ou `opcional`.
-
-Dois detalhes que valem conferir antes de criar:
-
-- **Se a imagem for maior que o resto, ela é reduzida** para caber numa faixa de 160 pixels de altura. As demais são reamostradas juntas, então use imagens do mesmo tamanho para o pet não ficar torto.
-- **A caixa "Minhas imagens olham para a direita"** espelha os desenhos na hora de montar a folha de sprites. O programa anda para a esquerda por padrão, então marque a caixa se os seus desenhos já olham para a direita: o pet fica com a cara virada para o lado em que ele anda.
-
-Se o movimento "Andando" não tiver imagem, o criador avisa: `Escolha pelo menos uma imagem para "Andando".` — e o mesmo vale para o nome: `Dê um nome ao seu pet.`
-
-## O que o pet criado sabe fazer
-
-O pet criado não é só um desenho parado: o criador gera um arquivo de animações completo, com 12 animações. O que cada uma faz:
-
-| Animação | Comportamento |
+| Página | O que faz |
 | --- | --- |
-| `walk` | Anda pela área de trabalho e pela barra de tarefas, quadro a quadro |
-| `turn` | Vira de direção, espelhando o desenho |
-| `drag` | O pet enquanto você arrasta com o botão esquerdo |
-| `toss` | O pet arremessado |
-| `fall` | A queda depois de ser solto |
-| `fall fast` | A queda rápida |
-| `fall soft` | O pouso leve depois de um arremesso |
-| `idle` | O pet parado, respirando entre um quadro e outro |
-| `sleep` | O pet dormindo |
-| `wake up` | O pet acordando |
-| `sync` | O pet quando todos os pets são sincronizados |
-| `kill` | A despedida quando o pet é removido |
+| Projeto | Novo, abrir, salvar, exportar, publicar, os recentes e os pets baixados |
+| Cabeçalho | Nome, título, autor, versão, descrição e ícone do pet |
+| Folha de sprites | A imagem com todos os quadros e como ela é cortada; o editor de pixels e o otimizador (tira quadros sem uso e diminui o PNG) |
+| Animações | Cada animação com os quadros, o movimento, a velocidade, o que vem depois e a prévia ao vivo |
+| Entradas na tela | Por onde o pet aparece (pela lateral, caindo do céu…) |
+| Janelas filhas | As janelas extras que uma animação abre (uma banheira, um balão, fumaça) |
+| Sons | Os MP3 tocados por cada animação |
+| Verificador | Erros e avisos do pet, com um clique para ir até o problema |
+| Mapa das animações | O caminho de uma animação para a outra |
+| XML | O `animations.xml` como texto, para editar à mão |
 
-Se você não escolheu imagens para "Dormindo", as animações `sleep` e `wake up` não são geradas — e o resto continua funcionando.
+Atalhos: **Ctrl+N** novo, **Ctrl+O** abrir, **Ctrl+S** salvar, **Ctrl+Shift+S** salvar como, **Ctrl+Z** desfazer, **Ctrl+Y** refazer e **F5** testar no desktop.
 
-Depois de criado, o pet entra na aba **Meus pets** do painel e o programa pergunta `"{0}" está pronto. Adotar agora?`. Ele aparece no painel com a descrição **"Você criou este pet neste computador. Ele vai junto nos seus backups."**.
+O **desfazer** continua depois de fechar o editor: ao salvar, os últimos 30 passos ficam guardados junto do projeto, e voltam quando o mesmo arquivo é aberto de novo (se ele não foi mudado por fora). E, se o editor fechar sem salvar, a próxima abertura oferece recuperar o trabalho.
 
-O seletor de animações (botão do meio do mouse sobre o pet) mostra todas elas, com o nome e um emoji:
+## Testar no desktop
 
-![Seletor de animações aberto, com as animações do pet em blocos](images/anim-picker.png)
+**Testar no desktop** (ou **F5**) abre um segundo DesktopPet só com este pet. Ele não mexe no seu pet nem nas suas configurações e recarrega sozinho quando você muda algo no editor. Para encerrar, use o ícone de teste na bandeja ou feche o editor.
 
-*O seletor de animações: cada animação do pet em um bloco, com o nome e um emoji.*
+## Usar o pet no programa
 
-## Onde o pet fica guardado
-
-O pet criado é salvo em `%LocalAppData%\DesktopPet\pets\meu-<nome>\`, com dois arquivos: `animations.xml` (o pet inteiro) e `version.txt`. O prefixo `meu-` é o que separa os pets criados aqui dos pets baixados da galeria, e o nome vem do que você digitou, em minúsculas, sem acentos e sem caracteres especiais (`Teste Ção!` vira `meu-teste-cao`).
-
-O nome da pasta tem no máximo 30 caracteres depois do prefixo, então nomes muito longos são cortados.
+O DesktopPet mostra na aba **Meus pets** todo pet guardado em `%LocalAppData%\DesktopPet\pets\`. Para adotar o seu pet, salve-o com **Salvar como** numa pasta com o prefixo `meu-` dentro dela, por exemplo `%LocalAppData%\DesktopPet\pets\meu-bolinha\animations.xml`. O prefixo `meu-` marca o pet como criado neste computador: ele nunca é apagado como os da galeria, aparece com a frase **"Você criou este pet neste computador. Ele vai junto nos seus backups."** e entra sozinho no backup.
 
 ### O backup
 
-O pet criado entra sozinho no arquivo de backup. Em **Configurações › Programa › Backup dos meus pets e configurações › Exportar…**, o arquivo `.desktoppet` gerado (salvo em Documentos, com o nome `meus-pets`) leva `pets/<pasta>/animations.xml` e `version.txt` de cada pet do computador, incluindo os que você criou. Na volta, **Importar pets** traz o arquivo de volta: só entram entradas `pets/<nome>/animations.xml` com nome de pasta simples e até 50 MB, e um arquivo corrompido nunca substitui um bom.
+Em **Configurações › Programa › Backup dos meus pets e configurações › Exportar…**, o arquivo `.desktoppet` leva `pets/<pasta>/animations.xml` e `version.txt` de cada pet do computador, incluindo os que você criou, e também os lembretes, as notas, os atalhos, o histórico de humor, o tempo em cada programa, as necessidades do pet virtual e as preferências. A chave do serviço de IA e os tokens nunca entram nele. **Importar backup** traz tudo de volta: só entram entradas `pets/<nome>/animations.xml` com nome de pasta simples e até 50 MB, e um arquivo corrompido nunca substitui um bom. A **Cópia automática** grava esse arquivo uma vez por dia numa pasta à sua escolha.
 
-O backup leva também os lembretes, os atalhos, o histórico de humor, as necessidades do pet virtual e as configurações. A chave do serviço de IA e a senha da API local nunca entram nele.
+## Mandar o pet para alguém ou para a galeria
 
-## Para ir além: PetGen, PetPack e o animations.xml
+- **Exportar como .zip** gera um arquivo só, pronto para mandar: a pasta do pet com `animations.xml`, `icon.png`, a prévia animada (`preview.gif`) e os READMEs em inglês e português.
+- **Publicar na galeria** confere o pet (precisa de nome, autor e nenhum erro no Verificador), cria o .zip em `Documentos\Meu Pet\galeria` e abre a página de envio do GitHub já preenchida. O GitHub não recebe arquivos por link: o .zip aparece selecionado no Explorador para você arrastar até a página e clicar em **Submit new issue**. Quem cuida da galeria confere o pet antes de ele aparecer para todos.
 
-O criador do programa serve para um pet rápido, com as animações que o programa já conhece. Quem quiser um pet com muitas animações, sons e cenas próprio vai para as ferramentas de linha de comando e para o formato do arquivo.
+## Para ir além: o animations.xml, PetGen e PetPack
+
+O Editor de Pets cobre o pet inteiro. Esta parte é para quem quer entender o arquivo por dentro ou gerar pets em lote com as ferramentas de linha de comando.
 
 ### O formato animations.xml
 
-O arquivo que descreve o pet inteiro é o `animations.xml`, e o programa usa o mesmo esquema do eSheep original, com o namespace `https://esheep.petrucci.ch/`. O esquema completo está em `Resources/animations.xsd`, e há um editor de XML online em <https://adrianotiger.github.io/desktopPet-Editor/>.
+O arquivo que descreve o pet inteiro é o `animations.xml`, e o programa usa o mesmo esquema do eSheep original, com o namespace `https://esheep.petrucci.ch/`. O esquema completo está em `Resources/animations.xsd`. O [Editor de Pets](#abrir-o-editor-de-pets) edita esse arquivo com prévia ao vivo, e a página **XML** dele mostra o texto para editar à mão.
 
 A raiz é `<animations>` e, dentro dela, esta ordem:
 
 | Bloco | O que guarda |
 | --- | --- |
-| `<header>` | `author`, `title`, `petname` (máximo 16 caracteres, o programa corta o que sobrar), `version`, `info`, `application` e `icon` (ícone `.ico` em base64) |
+| `<header>` | `author`, `title`, `petname` (máximo 16 caracteres, o programa corta o que sobrar), `version`, `info`, `application`, `icon` (ícone `.ico` em base64) e, opcional, `floating` (`yes`: o pet não tem gravidade e fica onde for solto, como os assistentes do Office) |
 | `<image>` | `tilesx` e `tilesy` (como a folha de sprites é cortada), `skins` (opcional), `png` (a folha de sprites em base64) e `transparency` |
 | `<spawns>` | Os pontos de entrada do pet na tela, cada `<spawn>` com `probability`, `<x>`, `<y>` e `<next>` |
 | `<animations>` | Cada `<animation>` com `id`, `<name>`, `<start>`, `<end>`, `<sequence>`, e opcionalmente `<border>` e `<gravity>` |
@@ -215,7 +193,7 @@ Os quadros ficam em `Tools/PetPack/art/<pet>/<animacao>/frame_000.png`, e o prim
 
 ### Publicar na galeria
 
-Para um pet entrar na galeria pública do GitHub, a pasta dele precisa ficar em `Pets/` com `animations.xml`, `icon.png`, `preview.gif`, `README.md` e `README.pt-BR.md`, e o `Pets/pets.json` precisa listar a pasta com `folder`, `name`, `author`, `lastupdate`, `size`, `animations` e `sounds`. Dois scripts cuidam do trabalho mecânico:
+O botão **Publicar na galeria** do Editor de Pets prepara tudo para quem não tem acesso ao repositório (veja acima). Para quem cuida da galeria: para um pet entrar na galeria pública do GitHub, a pasta dele precisa ficar em `Pets/` com `animations.xml`, `icon.png`, `preview.gif`, `README.md` e `README.pt-BR.md`, e o `Pets/pets.json` precisa listar a pasta com `folder`, `name`, `author`, `lastupdate`, `size`, `animations` e `sounds`. Dois scripts cuidam do trabalho mecânico:
 
 ```bash
 powershell -ExecutionPolicy Bypass -File Tools/update-pets-json.ps1
@@ -250,9 +228,10 @@ O resultado lista, para cada pet, o que o painel oferece e os nomes que faltam t
 
 ## Onde fica no código
 
-- `src/Portable/PetCreator.cs` — o criador: `PetCreator.Build` monta o `animations.xml`, `PetCreator.FolderFor` define o nome da pasta, `PetCreator.Icon` gera o `.ico` e `FormPetCreator` é a janela
-- `src/Portable/FormSettings.Pets.cs` — `CreatePet` (o botão "Criar…"), `AddLocalPet` (os pets com prefixo `meu-`) e a importação
-- `src/Portable/FormSettings.Options.cs` — a linha "Criar meu pet" na seção "Programa"
+- `editor/` — o Editor de Pets: `UI/MainForm.cs` (a janela), `UI/Wizard.cs` (o assistente), `Pages/` (uma classe por página), `Core/PetDoc.cs` (o pet aberto, o desfazer e o histórico entre sessões), `Core/Validator.cs` (o Verificador), `UI/GalleryDialog.cs` (exportar e publicar) e `Core/DesktopTest.cs` (testar no desktop)
+- `src/Portable/Updater.cs` — `GetEditorAsync`, que baixa o `PetEditor.exe` da release quando falta
+- `src/Portable/FormSettings.Pets.cs` — `OpenPetEditor` (o botão do Editor de Pets), `AddLocalPet` (os pets com prefixo `meu-`) e a importação
+- `src/Portable/FormSettings.Options.cs` — a linha "Editor de Pets" na seção "Programa"
 - `src/Portable/PetStore.cs` — onde os pets ficam no disco (`%LocalAppData%\DesktopPet\pets\`) e o `version.txt`
 - `src/Portable/PetBackup.cs` — o que entra e o que sai do arquivo `.desktoppet`
 - `src/dotNet/Xml.cs` — a leitura do `animations.xml` e os nomes de animação reservados
@@ -263,4 +242,4 @@ O resultado lista, para cada pet, o que o painel oferece e os nomes que faltam t
 - `Tools/PetGen/Program.cs` e `Tools/PetGen/PetModel.cs` — o desenho dos pets oficiais
 - `Tools/PetPack/Program.cs` e `Tools/PetPack/PngPet.cs` — a montagem de pets a partir de PNG
 - `Tools/update-pets-json.ps1` e `Tools/make-previews.ps1` — a galeria e as prévias
-- `src/lang/pt-BR.json` — os textos da janela do criador
+- `editor/Core/L.cs` — os textos do Editor de Pets (português, inglês e espanhol)

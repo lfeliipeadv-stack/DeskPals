@@ -168,7 +168,7 @@ namespace DesktopPet
 			string text = Lang.T(key);
 			if (text == key) return;   // nothing written for this version
 			SpeechBubble.Say(Lang.T("whatsnew.title", version) + "\n" + text, 0,
-				new SpeechBubble.Choice(Lang.T("whatsnew.more"), () => Program.OpenLink("https://github.com/lfeliipeadv-stack/meu-pet/releases/tag/v" + version), true),
+				new SpeechBubble.Choice(Lang.T("whatsnew.more"), () => Program.OpenLink(AppInfo.RepoUrl + "/releases/tag/v" + version), true),
 				new SpeechBubble.Choice("OK", null));
 		}
 	}

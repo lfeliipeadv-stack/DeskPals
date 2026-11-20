@@ -8,15 +8,17 @@ O Meu Pet (desktopPet) roda em Windows 10 e 11 de 64 bits. Toda a instalação �
 
 Os arquivos ficam na aba **Releases** do repositório: <https://github.com/lfeliipeadv-stack/meu-pet/releases>. A página do projeto (<https://lfeliipeadv-stack.github.io/meu-pet/>) tem um botão que aponta sempre para a versão mais recente.
 
-Cada release publica cinco arquivos. Na release 2.6.2:
+Cada release publica estes arquivos. Na versão 1.0.0:
 
 | Arquivo | Tamanho | O que precisa | Quando usar |
 | --- | --- | --- | --- |
-| `DesktopPet-Instalador.exe` | 3.150.336 bytes (≈ 3 MB) | Nada: é .NET Framework 4.8, que já vem no Windows 10 e 11 | **Recomendado.** Confere o .NET 10, instala o programa e cria os atalhos |
-| `DesktopPet.exe` | 2.750.643 bytes (≈ 2,6 MB) | .NET 10 Desktop Runtime (64 bits) | Só o programa, para quem já tem o runtime instalado |
-| `DesktopPet-completo.exe` | 52.672.112 bytes (≈ 50,2 MB) | Nada: o runtime vem embutido dentro do executável | Para abrir em qualquer Windows 10/11 sem instalar nada antes |
-| `lang.zip` | 36.374 bytes | — | Idiomas extras. Português e espanhol já vêm embutidos no executável |
-| `SHA256SUMS` | 338 bytes | — | Conferência do download (veja [Conferir o download](#conferir-o-download)) |
+| `DesktopPet-Instalador.exe` | 4.399.104 bytes (≈ 4,2 MB) | Nada: é .NET Framework 4.8, que já vem no Windows 10 e 11 | **Recomendado.** Confere o .NET 10, instala o programa e o Editor de Pets e cria os atalhos |
+| `DesktopPet.exe` | 3.041.971 bytes (≈ 2,9 MB) | .NET 10 Desktop Runtime (64 bits) | Só o programa, para quem já tem o runtime instalado |
+| `DesktopPet-completo.exe` | 52.764.698 bytes (≈ 50,3 MB) | Nada: o runtime vem embutido dentro do executável | Para abrir em qualquer Windows 10/11 sem instalar nada antes |
+| `PetEditor.exe` | 955.053 bytes (≈ 0,9 MB) | .NET 10 Desktop Runtime (64 bits) | O Editor de Pets, para criar e mudar pets. O instalador já traz; quem baixou só o programa recebe o editor sozinho na primeira vez que abrir Configurações → Editor de Pets |
+| `lang.zip` | 46.311 bytes | — | Idiomas do programa. Português e espanhol já vêm embutidos no executável; mais 20 idiomas são baixados em Configurações → Mais idiomas |
+| `SHA256SUMS` | 418 bytes | — | Conferência do download (veja [Conferir o download](#conferir-o-download)) |
+| `LICENSE.md` | — | — | A licença MIT do programa |
 
 ## Instalar com o instalador (recomendado)
 
@@ -149,4 +151,4 @@ O programa continua funcionando; o que muda é apenas a galeria:
 - `src/DesktopPet.Net.csproj` — `net10.0-windows`, `win-x64`, `PublishSingleFile` e a build `SelfContained`
 - `src/lang/pt-BR.json` — textos da interface (`inst.*`, `opt.install.*`, `tray.install`, `tray.repair`)
 - `site/index.html` — página do projeto, com os links de download e o aviso do editor desconhecido
-- `release/2.6.2/SHA256SUMS` — hashes publicados de cada artefato
+- `release/1.0.0/SHA256SUMS` — hashes publicados de cada artefato

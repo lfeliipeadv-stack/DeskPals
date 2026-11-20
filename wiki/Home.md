@@ -6,7 +6,7 @@ O **Meu Pet** (o programa se chama **desktopPet**) é um bichinho que vive na su
 
 ## O que é
 
-Escrito em C# (Windows Forms) sobre .NET 10, o Meu Pet é um executável único para Windows 10 e 11. A versão atual é a **2.6.2**: o `DesktopPet.exe` tem 2.750.643 bytes (cerca de 2,6 MB) e precisa do .NET 10 Desktop Runtime instalado; o `DesktopPet-completo.exe` (52.672.112 bytes, cerca de 50 MB) traz o runtime dentro e abre em qualquer Windows 10/11; e o `DesktopPet-Instalador.exe` (3.150.336 bytes) é o instalador em .NET Framework 4.8, que confere o runtime e cria os atalhos.
+Escrito em C# (Windows Forms) sobre .NET 10, o Meu Pet é um executável único para Windows 10 e 11. A versão atual é a **1.0.0**, a primeira versão pública: o `DesktopPet.exe` tem 3.041.971 bytes (cerca de 2,9 MB) e precisa do .NET 10 Desktop Runtime instalado; o `DesktopPet-completo.exe` (52.764.698 bytes, cerca de 50 MB) traz o runtime dentro e abre em qualquer Windows 10/11; o `DesktopPet-Instalador.exe` (4.399.104 bytes) é o instalador em .NET Framework 4.8, que confere o runtime, instala o programa e o Editor de Pets e cria os atalhos; e o `PetEditor.exe` (955.053 bytes) é o Editor de Pets, para criar e mudar pets (veja [Crie o seu pet](Crie-o-seu-pet.md)).
 
 O programa tem duas partes:
 
@@ -26,9 +26,9 @@ O programa tem duas partes:
 
 ### No painel
 
-- A galeria tem duas abas: **Meus pets** (o que já está no computador) e **Baixar pets** (o que está publicado no repositório). O `Pets/pets.json` do repositório lista hoje 16 pets, entre eles o eSheep original, o Pingus, as sete ovelhas coloridas e os pets criados pelo autor.
+- A galeria tem duas abas: **Meus pets** (o que já está no computador) e **Baixar pets** (o que está publicado no repositório). O `Pets/pets.json` do repositório lista hoje 26 pets, entre eles o eSheep original, o Pingus, as sete ovelhas coloridas, os dez assistentes do Office (que não têm gravidade e ficam onde você soltar) e os pets criados pelo autor.
 - Antes de baixar, o programa mostra o tamanho do arquivo; durante o download, o botão vira barra de progresso e pode ser cancelado ou repetido.
-- O botão **Criar meu pet** transforma as suas imagens (PNG, GIF, JPG) em um pet que anda, dorme e cai como os outros.
+- O **Editor de Pets** (`PetEditor.exe`, aberto em Configurações › Editor de Pets) cria um pet a partir das suas imagens ou GIF, ou muda um que já existe, com prévia ao vivo, teste no desktop e publicação na galeria. Veja [Crie o seu pet](Crie-o-seu-pet.md).
 - Exportar e importar pets, tema claro/escuro/automático, idioma, inicialização com o Windows e tamanho 1×, 2× ou 4×.
 
 ### Na sua rotina
@@ -109,7 +109,7 @@ Se algo aqui estiver errado ou desatualizado, prefira conferir no código: os ca
 ## Onde fica no código
 
 - `src/DesktopPet.Net.csproj` — projeto SDK-style .NET 10 (`net10.0-windows`), WinForms, `win-x64`
-- `src/Properties/AssemblyInfoPortable.cs` — versão do programa (2.6.2.0)
+- `src/Properties/AssemblyInfoPortable.cs` — versão do programa (1.0.0.0)
 - `src/lang/pt-BR.json` — todos os textos em português do Brasil
 - `src/lang/es.json` — textos em espanhol
 - `src/Portable/FormSettings.cs` — janela do painel (barra lateral e páginas)
@@ -128,7 +128,7 @@ Se algo aqui estiver errado ou desatualizado, prefira conferir no código: os ca
 - `src/Portable/HideHotkey.cs` — atalhos globais (Ctrl+Alt+P e o atalho de perguntar)
 - `src/Portable/Chat.cs`, `src/Portable/AiAssistant.cs`, `src/Portable/FormAi.cs` — conversa com o pet e serviços de IA
 - `src/Portable/ClaudeHooks.cs`, `src/Portable/ClaudeMcp.cs`, `src/Portable/McpServer.cs`, `src/Portable/AgentBridge.cs` — integração com o Claude Code
-- `src/Portable/PetCreator.cs` — criador de pets
+- `editor/` — o Editor de Pets (programa separado, `PetEditor.exe`)
 - `src/Portable/SelfTest.cs` — autoteste (`--selftest`)
 - `Pets/pets.json` — índice da galeria de pets
 - `Tools/release.ps1` — publicação das releases

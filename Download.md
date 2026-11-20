@@ -1,33 +1,14 @@
 # Downloads
 
-This application has different versions, you can download a Windows 7/8/10 portable exe, a UWP or also a Javascript version.
+A versão mais recente do Meu Pet fica na página de versões do GitHub: <https://github.com/lfeliipeadv-stack/meu-pet/releases/latest>. A página do projeto, <https://lfeliipeadv-stack.github.io/meu-pet/>, tem o botão de download e a demo no navegador.
 
-## Changelog
-To see the last changes on this application, check the <a href="Changelog.html">Changelog</a> page.
+| Arquivo | Para quem |
+| --- | --- |
+| [DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe) | **Recomendado.** Confere o .NET 10, instala o programa e o Editor de Pets e cria os atalhos. |
+| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-completo.exe) | Abre direto, sem instalar nada (arquivo maior, com o .NET dentro). |
+| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
+| [PetEditor.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/PetEditor.exe) | O Editor de Pets, para criar e mudar pets. O instalador já traz, e o programa baixa sozinho na primeira vez que você abre Configurações › Editor de Pets. |
 
-## Windows 10
-The easiest way to install it is over the Windows Store. As UWP it is simple to execute and to remove once you don't want it anymore. 
-Works only with Windows 10.
+Os arquivos não têm assinatura digital, então o Windows pode avisar que o editor é desconhecido. Cada versão publica o `SHA256SUMS` para conferir o download: veja [Instalação](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Instalacao.html).
 
-<a href="https://www.microsoft.com/store/apps/9MX2V0TQT6RM">DOWNLOAD FROM STORE</a>
-
-
-## Windows 7/8/10
-This portable version does not have a certificate, so your antivirus could give you a warning.
-The nice thing is that the entire application is in a single EXE and you can distribute it on every Windows without pack or unpack something.
-You can also create your own pet and distribute it as single installer with winrar.
-
-Once executed, you can choose if you want install it (for the autostart option) or just close it.
-
-<a href="https://github.com/Adrianotiger/desktopPet/releases">DOWNLOAD FROM GITHUB</a>
-
-## Javascript
-You can download also a script for your webpage, this project is hosted in GitHub.
-
-Currenty this script is not able to download the pets from this project.
-
-## Editor
-If you want more mates or are a designer, why not create your own pet? 
-If you have a sprite sheet, you can just use my offline editor to create and animate your pet.
-
-<a href="https://github.com/Adrianotiger/desktopPet/releases">DOWNLOAD FROM GITHUB</a>
+O que mudou em cada versão está no [Changelog](Changelog.md).

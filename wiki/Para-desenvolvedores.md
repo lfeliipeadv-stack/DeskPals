@@ -45,7 +45,7 @@ Com `SelfContained=true` o projeto define a constante `SELFCONTAINED` e liga `En
 
 ### A versão do programa
 
-A versão não está no `.csproj`: ela vive em **`src/Properties/AssemblyInfoPortable.cs`**, nas linhas `AssemblyVersion` e `AssemblyFileVersion` (hoje `2.6.2.0`). O `Tools/release.ps1` reescreve esse arquivo sozinho e depois confere se a `FileVersion` do executável publicado é exatamente `<versão>.0`.
+A versão não está no `.csproj`: ela vive em **`src/Properties/AssemblyInfoPortable.cs`**, nas linhas `AssemblyVersion` e `AssemblyFileVersion` (hoje `1.0.0.0`). O `Tools/release.ps1` reescreve esse arquivo sozinho e depois confere se a `FileVersion` do executável publicado é exatamente `<versão>.0`.
 
 ### Referência rápida de comandos
 
@@ -129,7 +129,7 @@ A build legada em .NET Framework tem o runner `tests/run-motion-tests.ps1`, que 
 | `Tools/update-pets-json.ps1` | Reescreve em `Pets/pets.json` o campo `size` (o tamanho que o GitHub vai servir, já com LF) e as contagens `animations` e `sounds` de cada pet, lendo o `animations.xml` dele. Rode depois de mexer em um pet. | `powershell -ExecutionPolicy Bypass -File Tools\update-pets-json.ps1` |
 | `Tools/make-previews.ps1` | Gera o `preview.gif` de cada pet (o pet andando mais uma de suas maracinhas, ~120 px, fundo transparente, 128 cores) com `ffmpeg`. O programa mostra esse GIF no painel de detalhes. | `powershell -ExecutionPolicy Bypass -File Tools\make-previews.ps1` — ou `-Only rex` para um pet só |
 | `Tools/Setup` | O instalador em .NET Framework 4.8 (`DesktopPet-Instalador.exe`). Ele procura o .NET 10 Desktop Runtime, oferece o instalador oficial da Microsoft quando falta, cria os atalhos e instala em `%LocalAppData%\DesktopPet`. | `dotnet build Tools\Setup\Setup.csproj -c Release -p:AppExe=<caminho do exe> -p:Version=<versão>` |
-| `Tools/release.ps1` | Monta a versão nova e publica a release no GitHub. Detalhado na seção seguinte. | `pwsh Tools\release.ps1 -Version 2.6.2` |
+| `Tools/release.ps1` | Monta a versão nova e publica a release no GitHub. Detalhado na seção seguinte. | `pwsh Tools\release.ps1 -Version 1.0.1` |
 
 As duas primeiras ferramentas recebem a pasta de destino como primeiro argumento (`Pets`, por padrão). Depois de rodar o PetGen ou o PetPack, o passo obrigatório é rodar o `update-pets-json.ps1` e o `make-previews.ps1`, senão o painel mostra tamanho e contagens errados e a prévia não existe.
 
@@ -147,6 +147,8 @@ O script faz tudo em ordem, cada passo conferindo o anterior:
 | 1 | Escreve a versão em `src/Properties/AssemblyInfoPortable.cs` (`AssemblyVersion` e `AssemblyFileVersion` como `<versão>.0`) |
 | 2 | `dotnet publish` da build normal e conferência: a `FileVersion` do exe tem de ser exatamente `<versão>.0` |
 | 2b | `dotnet publish -p:SelfContained=true` e renomeia o resultado para `DesktopPet-completo.exe` |
+| 2b2 | `dotnet publish` do Editor de Pets (`editor/PetEditor.csproj`) para `PetEditor.exe` |
+| 2b3 | Roda os testes do editor (`--devtests`) e tira as fotos de cada página em 100% e 150% de zoom; **falha** se um teste falhar ou se algum texto ficar cortado |
 | 2c | Compila o instalador net48 em `Tools/Setup` com `-p:AppExe=<exe>` e `-p:Version=<versão>` |
 | 3 | Empacota `src/lang/*.json` em `lang.zip` |
 | 4 | Escreve `SHA256SUMS` no formato `hash  nome` (duas espaços, hex minúsculo, fim de linha LF), uma linha por artefato |
@@ -154,25 +156,27 @@ O script faz tudo em ordem, cada passo conferindo o anterior:
 
 ```powershell
 # só montar e ver os hashes, sem mandar nada para o GitHub
-pwsh Tools\release.ps1 -Version 2.6.2 -NoUpload
+pwsh Tools\release.ps1 -Version 1.0.1 -NoUpload
 
 # publicar de verdade (precisa de "gh auth login")
-pwsh Tools\release.ps1 -Version 2.6.3 -Notes "- Novo pet: Rex"
+pwsh Tools\release.ps1 -Version 1.0.1 -Notes "- Novo pet: Rex"
 ```
 
 As notas de versão vão por um arquivo (`NOTES.md`) e não pela linha de comando, porque aspas e quebras de linha quebrariam o comando do `gh`. Tudo é deixado em `release/<versão>/`.
 
 ### O que a release contém
 
-Cada release `vX.Y.Z` publica cinco arquivos. Os tamanhos abaixo são os reais da 2.6.2:
+Cada release `vX.Y.Z` publica estes arquivos. Os tamanhos abaixo são os reais da 1.0.0:
 
 | Arquivo | Tamanho | Para quê |
 | --- | --- | --- |
-| `DesktopPet.exe` | 2.750.643 bytes (~2,6 MB) | o programa; precisa do .NET 10 Desktop Runtime |
-| `DesktopPet-completo.exe` | 52.672.112 bytes (~50 MB) | o programa com o runtime dentro; não precisa instalar nada |
-| `DesktopPet-Instalador.exe` | 3.150.336 bytes (~3 MB) | instalador em .NET Framework 4.8: confere o runtime, instala e cria os atalhos |
-| `lang.zip` | — | os arquivos de idioma, para quem baixou só o `.exe` |
-| `SHA256SUMS` | — | o hash de cada um dos quatro arquivos acima |
+| `DesktopPet.exe` | 3.041.971 bytes (~2,9 MB) | o programa; precisa do .NET 10 Desktop Runtime |
+| `DesktopPet-completo.exe` | 52.764.698 bytes (~50 MB) | o programa com o runtime dentro; não precisa instalar nada |
+| `DesktopPet-Instalador.exe` | 4.399.104 bytes (~4,2 MB) | instalador em .NET Framework 4.8: confere o runtime, instala o programa e o Editor de Pets e cria os atalhos |
+| `PetEditor.exe` | 955.053 bytes (~0,9 MB) | o Editor de Pets (programa separado; o DesktopPet baixa sozinho quando falta) |
+| `lang.zip` | 46.311 bytes | os arquivos de idioma, para quem baixou só o `.exe` |
+| `SHA256SUMS` | 418 bytes | o hash de cada um dos cinco arquivos acima |
+| `LICENSE.md` | — | a licença MIT |
 
 O atualizador do programa (`src/Portable/Updater.cs`) consulta `https://api.github.com/repos/lfeliipeadv-stack/meu-pet/releases/latest`, mostra as novidades (limite de 1500 caracteres) e só troca o executável depois de conferir o SHA-256 de cada arquivo contra o `SHA256SUMS` da própria release. Hash ausente ou divergente cancela a atualização (`inst.hashMissing` / `inst.hashMismatch`). Só depois disso o executável em uso é renomeado para `DesktopPet_old.exe` e o programa se reinicia. A release não é assinada digitalmente: a garantia é o hash publicado junto dos arquivos.
 
@@ -325,8 +329,6 @@ Dois deles precisam de atenção em ambiente de CI: o `--selftest` abre janelas 
 ![Janela de depuração do pet](images/debug.png)
 *A janela de depuração mostra ao vivo a animação que o pet está tocando; ela também abre segurando CTRL ao iniciar o programa.*
 
-![Criador de pet dentro do programa](images/win-petcreator.png)
-*"Criar meu pet" transforma imagens suas em um pet completo, sem passar pelo código.*
 
 ![Página Sobre do painel](images/about.png)
 *A página Sobre mostra a versão do programa e os links do projeto.*
@@ -334,7 +336,7 @@ Dois deles precisam de atenção em ambiente de CI: o `--selftest` abre janelas 
 ## Ver também
 
 - [Instalação](Instalacao.md) — os arquivos da release e o que cada um faz
-- [Crie o seu pet](Crie-o-seu-pet.md) — o criador dentro do programa e o formato do XML do pet
+- [Crie o seu pet](Crie-o-seu-pet.md) — o Editor de Pets e o formato do XML do pet
 - [Painel de pets](Painel-de-pets.md) — a galeria, as abas e os selos
 - [Plugins e integrações](Plugins-e-integracoes.md) — o canal local, os hooks e o MCP com o Claude Code
 - [Changelog](Changelog.md) — o que mudou em cada versão
@@ -353,7 +355,7 @@ Dois deles precisam de atenção em ambiente de CI: o `--selftest` abre janelas 
 - `src/lang/pt-BR.json`, `src/lang/es.json` — os textos do programa
 - `src/Portable/Updater.cs`, `src/Portable/AppInfo.cs` — a atualização automática e os endereços do repositório
 - `src/Portable/FormSettings.Snapshots.cs` — as capturas das janelas (`--snapshot`)
-- `src/Portable/PetCreator.cs` — o criador de pet dentro do programa
+- `editor/` — o Editor de Pets (`PetEditor.exe`)
 - `src/Resources/animations.xsd` — o esquema do `animations.xml`
 - `Pets/pets.json` — o índice da galeria
 - `Tools/PetGen/Program.cs`, `Tools/PetGen/PetModel.cs`, `Tools/PetGen/PetSounds.cs` — o gerador de pets

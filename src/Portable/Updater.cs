@@ -475,18 +475,21 @@ namespace DesktopPet
 
         /// <summary>
         /// The Pet Editor of the latest release, downloaded (and checked against SHA256SUMS) into the user's folder.
-        /// It is downloaded again when this DesktopPet is newer than the release it came with. Returns its path.
+        /// It is downloaded again when it is not the editor of this DesktopPet's version nor of the latest release
+        /// (any other version: the versions started again at 1.0.0, so "older" can't be told by the number). Returns its path.
         /// </summary>
         public static async Task<string> GetEditorAsync()
         {
             string versionFile = EditorPath + ".version";
             string have = File.Exists(versionFile) ? File.ReadAllText(versionFile).Trim() : "";
-            if (File.Exists(EditorPath) && ParseTag(have) is Version v && v >= CurrentVersion) return EditorPath;
+            Version haveVersion = File.Exists(EditorPath) ? ParseTag(have) : null;
+            if (haveVersion != null && haveVersion == CurrentVersion) return EditorPath;
             try
             {
                 var release = await GetLatestAsync();
                 if (release == null || !release.Assets.ContainsKey(EditorAsset) || !release.Assets.ContainsKey(SumsAsset))
                     return File.Exists(EditorPath) ? EditorPath : null;
+                if (haveVersion != null && haveVersion == release.Version) return EditorPath;   // already the latest one
                 var sums = ParseSums(await http.GetStringAsync(release.Assets[SumsAsset]));
                 byte[] exe = await DownloadVerifiedAsync(release, EditorAsset, sums);
                 Directory.CreateDirectory(InstallPlace.DataDir);

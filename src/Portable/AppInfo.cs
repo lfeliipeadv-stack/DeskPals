@@ -23,8 +23,10 @@ namespace DesktopPet
         public const string PetsWebUrl = RepoUrl + "/tree/" + Branch + "/Pets";
         /// <summary>GitHub API: latest release.</summary>
         public const string LatestReleaseApi = "https://api.github.com/repos/" + RepoOwner + "/" + RepoName + "/releases/latest";
-        /// <summary>Help page.</summary>
-        public const string HelpUrl = RepoUrl + "#readme";
+        /// <summary>The project page (download, demo and the manual).</summary>
+        public const string SiteUrl = "https://" + RepoOwner + ".github.io/" + RepoName + "/";
+        /// <summary>Help: the manual (Wiki) on the project page.</summary>
+        public const string HelpUrl = SiteUrl + "wiki/Home.html";
         /// <summary>Where a pet is sent to the gallery (a new issue with the form for pets; the .zip goes attached).</summary>
         public const string PetSubmitUrl = RepoUrl + "/issues/new?template=new_pet.md&labels=pet";
     }

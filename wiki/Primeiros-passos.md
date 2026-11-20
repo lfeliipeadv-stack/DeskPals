@@ -176,9 +176,10 @@ Ela é dividida em duas seções, **Pet** e **Programa**.
 | **Tamanho do pet** | 1×, 2× ou 4×. O programa reinicia para aplicar. | 1× |
 | **Restaurar o pet original** | Volta para a ovelha original que vem com o programa. | ação pontual |
 | **Esconder pets com Ctrl+Alt+P** | O atalho esconde todos os pets (e os sons) ou mostra de novo, de qualquer programa. Útil em reuniões. | Ligado |
-| **Backup dos meus pets e configurações** | Exporta tudo num arquivo `.desktoppet`. | Exportar… |
-| **Importar pets** | Traz de volta os pets de um arquivo exportado. | Importar… |
-| **Criar meu pet** | Transforma as suas próprias imagens (PNG, GIF, JPG) em um pet. | Criar… |
+| **Backup dos meus pets e configurações** | Exporta pets, lembretes, notas e preferências num arquivo `.desktoppet`. | Exportar… |
+| **Importar backup** | Traz de volta os pets, lembretes, notas e preferências de um arquivo exportado (ou da cópia automática). | Importar… |
+| **Cópia automática** | Uma cópia de tudo numa pasta, uma vez por dia (OneDrive ou Google Drive levam para outro computador). | Desligada |
+| **Editor de Pets** | Abre o Editor de Pets, para criar um pet com as suas imagens ou mudar um que já existe. | Abrir… |
 | **Janela de depuração** | Mostra ao vivo o que o pet está fazendo. Também abre se você segurar CTRL ao iniciar o programa. | Abrir |
 | **Apresentação** | Mostra de novo o que o pet sabe fazer. | Mostrar |
 | **Arquivos de registro** | Avisos e erros dos últimos 7 dias. | Abrir pasta |
@@ -200,11 +201,11 @@ Se outro programa já estiver usando o Ctrl+Alt+P, o painel avisa na barra de st
 
 ## O que o pet conta depois de uma atualização
 
-Quando o programa é atualizado para uma versão nova, o pet avisa no balão com o resumo da versão:
+Quando o programa é atualizado para uma versão nova, ele mostra uma vez a janela **"Novidades da versão {0}"** com as notas da release (as mesmas da página de versões no GitHub). Se a versão não tiver notas salvas, o pet avisa no balão com o resumo da versão:
 
 > Novidades da versão {0}:
 
-seguido do texto escrito para aquela versão (2.6.0, 2.6.1, 2.6.2… — o que existir no arquivo de idioma). Os botões são **Ver tudo** (abre as notas completas da versão no GitHub) e **OK**.
+seguido do texto escrito para aquela versão no arquivo de idioma. Os botões são **Ver tudo** (abre as notas completas da versão no GitHub) e **OK**.
 
 Esse aviso aparece cerca de 6 segundos depois de o programa abrir, e só quando a versão é realmente diferente da última rodada. Na primeira execução não é esse aviso que aparece, e sim a apresentação do pet.
 
