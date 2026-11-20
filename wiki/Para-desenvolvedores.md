@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-Esta página é para quem quer compilar, testar e publicar o **Meu Pet** (o programa se chama **desktopPet**) ou quer colocar um pet novo na galeria. Ela descreve o que dá para fazer com o código que está no repositório, com os comandos exatos e os caminhos dos arquivos.
+Esta página é para quem quer compilar, testar e publicar o **Desktop-Pet** ou quer colocar um pet novo na galeria. Ela descreve o que dá para fazer com o código que está no repositório, com os comandos exatos e os caminhos dos arquivos.
 
 O projeto é escrito em C# com Windows Forms sobre **.NET 10** (`net10.0-windows`), alvo `win-x64`, e não usa nenhum pacote NuGet: o som sai pela API MCI do Windows (`src/dotNet/Mp3Player.cs`) e o JSON sai do `System.Text.Json` do próprio runtime (`src/Portable/JsonText.cs`). É por isso que o executável da release normal fica perto de 2,6 MB.
 

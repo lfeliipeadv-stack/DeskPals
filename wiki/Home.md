@@ -1,12 +1,12 @@
-# Meu Pet (desktopPet)
+# Desktop-Pet
 
 [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Demo no navegador](Demo-no-navegador.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-O **Meu Pet** (o programa se chama **desktopPet**) é um bichinho que vive na sua área de trabalho do Windows: ele anda pelo topo das suas janelas, cai na barra de tarefas, dorme, dança e pode ser arrastado e arremessado com o mouse.
+O **Desktop-Pet** é um bichinho que vive na sua área de trabalho do Windows: ele anda pelo topo das suas janelas, cai na barra de tarefas, dorme, dança e pode ser arrastado e arremessado com o mouse.
 
 ## O que é
 
-Escrito em C# (Windows Forms) sobre .NET 10, o Meu Pet é um executável único para Windows 10 e 11. A versão atual é a **1.0.0**, a primeira versão pública: o `DesktopPet.exe` tem 3.041.971 bytes (cerca de 2,9 MB) e precisa do .NET 10 Desktop Runtime instalado; o `DesktopPet-completo.exe` (52.764.698 bytes, cerca de 50 MB) traz o runtime dentro e abre em qualquer Windows 10/11; o `DesktopPet-Instalador.exe` (4.399.104 bytes) é o instalador em .NET Framework 4.8, que confere o runtime, instala o programa e o Editor de Pets e cria os atalhos; e o `PetEditor.exe` (955.053 bytes) é o Editor de Pets, para criar e mudar pets (veja [Crie o seu pet](Crie-o-seu-pet.md)).
+Escrito em C# (Windows Forms) sobre .NET 10, o Desktop-Pet é um executável único para Windows 10 e 11. A versão atual é a **1.0.0**, a primeira versão pública: o `DesktopPet.exe` tem 3.041.971 bytes (cerca de 2,9 MB) e precisa do .NET 10 Desktop Runtime instalado; o `DesktopPet-completo.exe` (52.764.698 bytes, cerca de 50 MB) traz o runtime dentro e abre em qualquer Windows 10/11; o `DesktopPet-Instalador.exe` (4.399.104 bytes) é o instalador em .NET Framework 4.8, que confere o runtime, instala o programa e o Editor de Pets e cria os atalhos; e o `PetEditor.exe` (955.053 bytes) é o Editor de Pets, para criar e mudar pets (veja [Crie o seu pet](Crie-o-seu-pet.md)).
 
 O programa tem duas partes:
 

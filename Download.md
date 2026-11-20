@@ -1,6 +1,6 @@
 # Downloads
 
-A versão mais recente do Meu Pet fica na página de versões do GitHub: <https://github.com/lfeliipeadv-stack/meu-pet/releases/latest>. A página do projeto, <https://lfeliipeadv-stack.github.io/meu-pet/>, tem o botão de download e a demo no navegador.
+A versão mais recente do Desktop-Pet fica na página de versões do GitHub: <https://github.com/lfeliipeadv-stack/meu-pet/releases/latest>. A página do projeto, <https://lfeliipeadv-stack.github.io/meu-pet/>, tem o botão de download e a demo no navegador.
 
 | Arquivo | Para quem |
 | --- | --- |

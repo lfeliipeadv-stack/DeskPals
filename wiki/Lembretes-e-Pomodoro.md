@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brinquedos](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-O "Meu Pet" tem duas funções que servem para a mesma coisa: ele avisa você no momento certo e some da frente enquanto você trabalha. São os **lembretes** (avisos de água, alongamento, descanso dos olhos, pausa do almoço e lembretes que você mesmo escreve) e o **Foco (Pomodoro)**, que segura a fala e os sons do pet durante o bloco de foco e guarda o que ele queria dizer.
+O Desktop-Pet tem duas funções que servem para a mesma coisa: ele avisa você no momento certo e some da frente enquanto você trabalha. São os **lembretes** (avisos de água, alongamento, descanso dos olhos, pausa do almoço e lembretes que você mesmo escreve) e o **Foco (Pomodoro)**, que segura a fala e os sons do pet durante o bloco de foco e guarda o que ele queria dizer.
 
 Tudo isso roda dentro do Windows, sem internet. A IA é opcional e, quando existe, só entra como reforço para reescrever uma frase de lembrete que o programa não entendeu — quem decide o horário é sempre o programa.
 

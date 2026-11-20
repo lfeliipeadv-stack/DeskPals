@@ -21,7 +21,7 @@ Não é uma caixa dentro de uma página: ao abrir a demo, a tela inteira do nave
 A área de trabalho imita o Windows 11: janelas com cantos arredondados e o material translúcido do sistema, tema claro e escuro (segue o do computador), três papéis de parede e a barra de tarefas centralizada. Nela ficam:
 
 - à esquerda, o **humor do pet** (como o tempo no Windows 11): o rosto e o que ele está sentindo, de acordo com as necessidades — um clique abre o painel;
-- no meio, o **Iniciar** (o símbolo do Meu Pet), a **Pesquisar** e as janelas abertas, com o tracinho embaixo: cinza para a janela aberta, azul e comprido para a da frente;
+- no meio, o **Iniciar** (o símbolo do Desktop-Pet), a **Pesquisar** e as janelas abertas, com o tracinho embaixo: cinza para a janela aberta, azul e comprido para a da frente;
 - à direita, as **dicas**, a **pata** (o menu do pet), o grupo de **rede, som e bateria** (as configurações rápidas), o **relógio** (o calendário) e o cantinho de **mostrar a área de trabalho**.
 
 ## O que dá para fazer na demo
@@ -36,7 +36,7 @@ A área de trabalho imita o Windows 11: janelas com cantos arredondados e o mate
 | Ver as animações | Menu do pet → **Animações do pet** (ou o botão do meio do mouse): todas as animações dele, com o primeiro quadro de cada uma |
 | Pomodoro | A janela **Foco e Anotações**: 25 minutos de foco, 5 de pausa, com aviso no balão quando o bloco acaba |
 | Anotar | A janela **Bloco de Notas**: o que você escreve fica guardado no navegador. Os botões de **anotações do dia** também vão para lá |
-| Trocar de pet | Os botões da janela **Meu Pet — Painel** ou a seção **Pets** do Iniciar: Claude, eSheep 64, Rex, Boo, Pingo, Mago, Nuvi e o **Clippy**, que não tem gravidade e fica onde você soltar — voltar para um pet já aberto é instantâneo |
+| Trocar de pet | Os botões da janela **Desktop-Pet — Painel** ou a seção **Pets** do Iniciar: Claude, eSheep 64, Rex, Boo, Pingo, Mago, Nuvi e o **Clippy**, que não tem gravidade e fica onde você soltar — voltar para um pet já aberto é instantâneo |
 | Ligar e desligar o som | O botão **Som** do painel, o item do menu ou as **configurações rápidas** (com o volume) |
 | Iniciar e pesquisar | O **Iniciar** ou a **Pesquisar** da barra: os aplicativos fixados, os pets e as ações recomendadas; a pesquisa acha aplicativos, pets e ações ("foco", "tema", "Clippy"…) e o Enter abre o primeiro |
 | Configurações rápidas | O grupo de rede, som e bateria: som, tema escuro, papel de parede, foco (Pomodoro), **Não perturbe** (o pet não puxa conversa sozinho), dicas e o volume do pet |
@@ -56,7 +56,7 @@ As janelas se comportam como as de verdade:
 - a **barra de tarefas** mostra as janelas abertas: clicar numa janela de trás a traz para a frente, clicar na da frente a minimiza, como no Windows 11;
 - o cantinho à direita da barra **mostra a área de trabalho** (minimiza tudo) e, clicado de novo, traz as janelas de volta.
 
-São cinco janelas: o **painel do Meu Pet** (com as necessidades do pet, os pets e os botões de conversa e som), o **foco com Pomodoro** (e as anotações do dia), o **Bloco de Notas** (editável, e ele guarda o texto), o **seletor de animações** e a **Sobre a demo**, que explica o que está rolando na tela.
+São cinco janelas: o **painel do Desktop-Pet** (com as necessidades do pet, os pets e os botões de conversa e som), o **foco com Pomodoro** (e as anotações do dia), o **Bloco de Notas** (editável, e ele guarda o texto), o **seletor de animações** e a **Sobre a demo**, que explica o que está rolando na tela.
 
 No celular a tela é pequena demais para cinco janelas: a demo abre uma de cada vez, os ícones viram uma faixa no topo e a barra de tarefas mostra só o essencial (o Iniciar, as janelas, a pata, o som e a hora).
 

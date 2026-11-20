@@ -1,6 +1,6 @@
 # Como contribuir
 
-Obrigado por querer ajudar o Meu Pet! Há três jeitos principais.
+Obrigado por querer ajudar o Desktop-Pet! Há três jeitos principais.
 
 ## Um pet novo para a galeria
 
@@ -8,7 +8,7 @@ Obrigado por querer ajudar o Meu Pet! Há três jeitos principais.
 2. Crie o pet com o **Assistente de pet novo** ou mude um que já existe (use **Salvar como** para não mexer no original).
 3. Teste com **Testar no desktop** (F5): ele abre um segundo DesktopPet só com o seu pet, sem mexer no seu.
 4. Confira o **Verificador**: a galeria só recebe pets sem erros, com nome e autor no Cabeçalho.
-5. Clique em **Publicar na galeria**: o editor cria o .zip (em `Documentos\Meu Pet\galeria`) e abre o
+5. Clique em **Publicar na galeria**: o editor cria o .zip (em `Documentos\Desktop-Pet\galeria`) e abre o
    [formulário de pet](https://github.com/lfeliipeadv-stack/meu-pet/issues/new?template=new_pet.md) já preenchido.
    Arraste o .zip para a página e envie.
 

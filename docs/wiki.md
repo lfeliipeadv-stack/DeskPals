@@ -1,4 +1,4 @@
-# O Wiki do Meu Pet
+# O Wiki do Desktop-Pet
 
 O manual do projeto tem duas cópias, geradas a partir da mesma fonte.
 

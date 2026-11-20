@@ -1,8 +1,8 @@
 # Changelog
 
-<h3>Meu Pet 1.0.0<sup>20 nov 2026</sup>:</h3>
+<h3>Desktop-Pet 1.0.0<sup>20 nov 2026</sup>:</h3>
 
-Primeira versão pública do Meu Pet, feito a partir do [desktopPet](https://github.com/Adrianotiger/desktopPet) de Adriano Petrucci (as versões abaixo são as do projeto original).
+Primeira versão pública do Desktop-Pet, feito a partir do [desktopPet](https://github.com/Adrianotiger/desktopPet) de Adriano Petrucci (as versões abaixo são as do projeto original).
 
 - Painel novo: Início com o dia, a semana e a previsão do tempo, galeria de pets, lembretes, assistente com IA, plugins e integrações (Claude Code e outros agentes).
 - Galeria com pets novos (Rex, Pingo, Boo, Mago, Nuvi, Claude), as ovelhas gSheep, o Pingus e os assistentes do Office (Clippy e amigos), que ficam onde você soltar.

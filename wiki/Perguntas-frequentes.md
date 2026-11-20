@@ -234,7 +234,7 @@ As capturas de tela dos pets saem do próprio programa: `DesktopPet.exe --snapsh
 | Palavra | O que significa |
 | --- | --- |
 | **Claude Code** | O programa de terminal para se trabalhar com código com um assistente de IA. O pet se liga a ele de duas formas: por *hooks* (o pet reage: pensando, editando, rodando, pronto) e por MCP (o Claude fala pelo balão do pet). |
-| **MCP** (*Model Context Protocol*) | Protocolo aberto pelo qual um programa oferece ferramentas a um assistente de IA. Aqui o Meu Pet é o servidor MCP: ele fala JSON-RPC 2.0 (protocolo `2025-06-18`) e oferece três ferramentas — `pet_say`, `pet_react` e `pet_status`. |
+| **MCP** (*Model Context Protocol*) | Protocolo aberto pelo qual um programa oferece ferramentas a um assistente de IA. Aqui o Desktop-Pet é o servidor MCP: ele fala JSON-RPC 2.0 (protocolo `2025-06-18`) e oferece três ferramentas — `pet_say`, `pet_react` e `pet_status`. |
 | **hook** | Comando que o Claude Code roda quando um evento acontece (sessão iniciada, pergunta enviada, arquivo editado, comando rodado, erro, fim do turno). Aqui cada hook é um `curl.exe` de um POST para `127.0.0.1`, e o pet transforma o evento em animação e balão. |
 | **iCal** | Formato de arquivo de calendário (`.ics`). O plugin Agenda lê o link secreto da agenda do Google ou do Outlook e avisa antes de cada reunião. O programa só aceita link que comece com `https://` ou `webcal://`. |
 | **Ollama** | Programa que roda modelos de IA dentro do seu próprio computador. Sem chave, sem conta e sem enviar pergunta para fora. Na página Assistente ele aparece com o selo **"Grátis · no seu computador"**. |

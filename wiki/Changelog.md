@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md)
 
-Esta página reúne as versões do **Meu Pet** em ordem decrescente, com a data de cada uma e o que ela trouxe. As versões publicadas também ficam na página de releases do repositório: <https://github.com/lfeliipeadv-stack/meu-pet/releases>.
+Esta página reúne as versões do **Desktop-Pet** em ordem decrescente, com a data de cada uma e o que ela trouxe. As versões publicadas também ficam na página de releases do repositório: <https://github.com/lfeliipeadv-stack/meu-pet/releases>.
 
 ## Como as versões são publicadas
 
@@ -24,7 +24,7 @@ Esta página reúne as versões do **Meu Pet** em ordem decrescente, com a data 
 
 ## Versão 1.0.0 — 20 de novembro de 2026 (tag `v1.0.0`)
 
-A primeira versão pública do Meu Pet, feita a partir do desktopPet de Adriano Petrucci.
+A primeira versão pública do Desktop-Pet, feita a partir do desktopPet de Adriano Petrucci.
 
 - **Painel:** Início com o dia, a semana, a previsão do tempo e o estado do programa; galeria de pets; lembretes e Pomodoro; assistente com IA; plugins; integrações com o Claude Code e outros agentes; configurações e a página Sobre, com créditos e licenças.
 - **Galeria:** Rex, Pingo, Boo, Mago, Nuvi e Claude, as ovelhas gSheep, o eSheep Mate, o Pingus e os assistentes do Office (Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links, Rocky e Bonzi). Os assistentes não têm gravidade: ficam onde você soltar.
@@ -32,9 +32,9 @@ A primeira versão pública do Meu Pet, feita a partir do desktopPet de Adriano 
 - **Idiomas:** português, espanhol e inglês no programa, e mais 20 idiomas para baixar em Configurações → Mais idiomas.
 - **Atualização:** procura a versão nova ao abrir, baixa e confere em segundo plano e instala ao fechar.
 - **Backup:** pets, lembretes, notas e todas as preferências num arquivo, e uma cópia automática diária numa pasta (OneDrive ou Google Drive).
-## Antes do "Meu Pet": o desktopPet original (0.1 → 2.0.0)
+## Antes do Desktop-Pet: o desktopPet original (0.1 → 2.0.0)
 
-O Meu Pet é uma continuação do projeto desktopPet de Adrianotiger, que já tinha 40 versões registradas. O histórico completo está no `Changelog.md` da raiz do repositório; o `Changelog.txt` traz o mesmo histórico no formato antigo, até a 1.0.6. As versões que mais marcaram:
+O Desktop-Pet é uma continuação do projeto desktopPet de Adrianotiger, que já tinha 40 versões registradas. O histórico completo está no `Changelog.md` da raiz do repositório; o `Changelog.txt` traz o mesmo histórico no formato antigo, até a 1.0.6. As versões que mais marcaram:
 
 | Versão | Data | O que trouxe |
 | --- | --- | --- |
@@ -53,7 +53,7 @@ O Meu Pet é uma continuação do projeto desktopPet de Adrianotiger, que já ti
 
 - `Changelog.md` (raiz do repositório) — o changelog completo, do 0.1 (dezembro de 2015) ao 2.0.0 (novembro de 2026), com as 40 versões do projeto original.
 - `Changelog.txt` (raiz do repositório) — o mesmo histórico no formato antigo, até a 1.0.6.
-- As notas completas de cada versão do Meu Pet estão nas *releases* do GitHub: <https://github.com/lfeliipeadv-stack/meu-pet/releases>.
+- As notas completas de cada versão do Desktop-Pet estão nas *releases* do GitHub: <https://github.com/lfeliipeadv-stack/meu-pet/releases>.
 
 ## Ver também
 

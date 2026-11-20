@@ -84,7 +84,7 @@ const ANSWERS = [
 /* A primeira frase de cada visitante: quem chegou na página quer saber
    o que é isto e onde se baixa. Os dois botões do balão respondem a isso
    sem tirar o pet da tela. */
-const PITCH = "Eu sou o pet do Meu Pet: um bichinho que mora na área de trabalho do Windows. Quer me levar com você?";
+const PITCH = "Eu sou o pet do Desktop-Pet: um bichinho que mora na área de trabalho do Windows. Quer me levar com você?";
 
 /* O índice da fala que vem a seguir: as falas do pet vão passando uma a
    uma, sem repetir. */
@@ -177,7 +177,7 @@ const WINDOW_DEFS = [
   // A largura de cada janela é uma fração da tela, com limites: assim o
   // arranjo não se desfaz num monitor grande nem fica minúsculo no
   // celular.
-  { id: "painel", title: "Meu Pet — Painel", kind: "panel", icon: "painel",
+  { id: "painel", title: "Desktop-Pet — Painel", kind: "panel", icon: "painel",
     x: 0.11, y: 0.04, wFrac: 0.30, wMin: 300, wMax: 500, h: 262, z: 2 },
   { id: "pomodoro", title: "Foco e Anotações", kind: "pomodoro", icon: "pomodoro",
     x: 0.42, y: 0.30, wFrac: 0.23, wMin: 260, wMax: 400, h: 300, z: 3 },
@@ -333,7 +333,7 @@ function buildIcons() {
   link.target = "_blank";
   link.rel = "noopener";
   link.innerHTML = `<b>${iconeApp("download")}</b><span></span>`;
-  link.querySelector("span").textContent = "Baixar o Meu Pet";
+  link.querySelector("span").textContent = "Baixar o Desktop-Pet";
   iconList.appendChild(link);
 }
 
@@ -1978,9 +1978,9 @@ function startEntries() {
     hint: "Aplicativo", run: () => openWindow(win)
   }));
   apps.push(
-    { kind: "app", name: "Baixar o Meu Pet", icon: iconeApp("download"), hint: "Instalador para Windows 10 e 11",
+    { kind: "app", name: "Baixar o Desktop-Pet", icon: iconeApp("download"), hint: "Instalador para Windows 10 e 11",
       run: () => window.open(DOWNLOAD, "_blank", "noopener") },
-    { kind: "app", name: "Página do Meu Pet", icon: iconeApp("site"), hint: "Todos os recursos",
+    { kind: "app", name: "Página do Desktop-Pet", icon: iconeApp("site"), hint: "Todos os recursos",
       run: () => { window.location.href = PAGE_URL; } },
     { kind: "app", name: "Manual (Wiki)", icon: iconeApp("wiki"), hint: "Como usar cada recurso",
       run: () => window.open(WIKI_URL, "_blank", "noopener") }
@@ -2240,11 +2240,11 @@ function openDeskMenu(x, y) {
     { icon: "image", label: "Próximo papel de parede", run: () => nextWallpaper() },
     { icon: isDark() ? "sun" : "moon", label: isDark() ? "Usar o tema claro" : "Usar o tema escuro", run: () => applyTheme(!isDark(), true) },
     "-",
-    { icon: "grid", label: "Abrir o painel do Meu Pet", run: () => { const win = windowById("painel"); if (win) openWindow(win); } },
+    { icon: "grid", label: "Abrir o painel do Desktop-Pet", run: () => { const win = windowById("painel"); if (win) openWindow(win); } },
     { icon: "chat", label: "Conversar com o pet", run: () => ask() },
     { icon: "bulb", label: "Mostrar as dicas", run: () => showTip(0) },
     "-",
-    { icon: "download", label: "Baixar o Meu Pet", run: () => window.open(DOWNLOAD, "_blank", "noopener") },
+    { icon: "download", label: "Baixar o Desktop-Pet", run: () => window.open(DOWNLOAD, "_blank", "noopener") },
     { icon: "info", label: "Sobre a demo", run: () => { const win = windowById("sobre"); if (win) openWindow(win); } }
   ]);
   placeMenu(deskMenu, x, y);
@@ -2257,7 +2257,7 @@ function openPowerMenu() {
     { icon: "moon", label: "Suspender (o pet dorme)", run: () => petAction("dormir") },
     { icon: "refresh", label: "Reiniciar a demo", run: () => window.location.reload() },
     "-",
-    { icon: "download", label: "Baixar o Meu Pet de verdade", run: () => window.open(DOWNLOAD, "_blank", "noopener") }
+    { icon: "download", label: "Baixar o Desktop-Pet de verdade", run: () => window.open(DOWNLOAD, "_blank", "noopener") }
   ]);
   deskMenu.hidden = false;
   placeMenu(deskMenu, rect.right - stageRect.left - deskMenu.offsetWidth, rect.top - stageRect.top - deskMenu.offsetHeight - 8);

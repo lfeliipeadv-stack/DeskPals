@@ -18,7 +18,7 @@ assignees: ''
 3.
 
 **Versão e Windows** / Version and Windows
-- Versão do Meu Pet (Configurações › Sobre): 
+- Versão do Desktop-Pet (Configurações › Sobre): 
 - Download usado: Instalador / DesktopPet.exe / DesktopPet-completo.exe
 - Windows: 10 / 11
 - Pet em uso: 

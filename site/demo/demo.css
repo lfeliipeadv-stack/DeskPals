@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------
-   Demo — a área de trabalho do Meu Pet dentro da página.
+   Demo — a área de trabalho do Desktop-Pet dentro da página.
 
    A página inteira é a área de trabalho, no jeito do Windows 11:
    papel de parede, janelas com cantos arredondados e material
@@ -37,7 +37,7 @@ body.demo-pagina {
   --accent-2: #0067c0;
   --accent-text: #ffffff;
   --accent-soft: rgba(0, 95, 184, .1);
-  --brand: #12804b;              /* o verde do Meu Pet: o download */
+  --brand: #12804b;              /* o verde do Desktop-Pet: o download */
   --brand-hover: #0f6e40;
   --mica: rgba(243, 243, 243, .86);
   --acrylic: rgba(249, 249, 249, .82);
@@ -425,7 +425,7 @@ body.demo-pagina {
 .demo-tb-btn:active { background: var(--subtle); }
 .demo-tb-btn:focus-visible, .demo-search:focus-visible, .demo-widget:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
 
-/* O Iniciar: o símbolo do Meu Pet no lugar do logotipo. */
+/* O Iniciar: o símbolo do Desktop-Pet no lugar do logotipo. */
 .demo-start { padding: 0; width: 40px; }
 .demo-start svg { width: 26px; height: 26px; transition: transform .12s ease; }
 .demo-start:active svg { transform: scale(.88); }

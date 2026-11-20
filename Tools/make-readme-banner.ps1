@@ -5,7 +5,9 @@
 #   pwsh -File Tools/make-readme-banner.ps1      (PowerShell 7: the texts have accents)
 param(
   [string[]]$Pets = @('esheep64', 'rex', 'pingo', 'boo', 'mago', 'nuvi', 'claude', 'clippy'),
-  [string[]]$Chips = @('Windows 10 e 11', 'Grátis e código aberto', '26 pets', '23 idiomas', 'Editor de pets')
+  [string[]]$Chips = @('Windows 10 e 11', 'Grátis e código aberto', '26 pets', '23 idiomas', 'Editor de pets'),
+  [string]$Subtitle = 'Bichinhos que vivem na sua área de trabalho do Windows',
+  [string]$Out = ''
 )
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
@@ -40,8 +42,8 @@ function Font([string[]]$names, [float]$size, [Drawing.FontStyle]$style) {
   return New-Object Drawing.Font 'Segoe UI', $size, $style, ([Drawing.GraphicsUnit]::Pixel)
 }
 $white = [Drawing.Brushes]::White
-$g.DrawString('Meu Pet', (Font @('Segoe UI Variable Display', 'Segoe UI') 68 'Bold'), $white, 206, 54)
-$g.DrawString('Bichinhos que vivem na sua área de trabalho do Windows', (Font @('Segoe UI Variable Text', 'Segoe UI') 25 'Regular'),
+$g.DrawString('Desktop-Pet', (Font @('Segoe UI Variable Display', 'Segoe UI') 68 'Bold'), $white, 206, 54)
+$g.DrawString($Subtitle, (Font @('Segoe UI Variable Text', 'Segoe UI') 25 'Regular'),
   (New-Object Drawing.SolidBrush ([Drawing.Color]::FromArgb(225, 255, 255, 255))), 212, 140)
 
 # the chips
@@ -89,7 +91,7 @@ foreach ($pet in $Pets) {
   $i++
 }
 
-$out = Join-Path $root '.github\readme\banner.png'
+$out = if ($Out) { $Out } else { Join-Path $root '.github\readme\banner.png' }
 $bmp.Save($out, [Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $bmp.Dispose()
 "banner: $out"

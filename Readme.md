@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/readme/banner.png" alt="Meu Pet: bichinhos que vivem na sua área de trabalho do Windows" width="100%">
+  <img src=".github/readme/banner.png" alt="Desktop-Pet: bichinhos que vivem na sua área de trabalho do Windows" width="100%">
 </p>
 
 <p align="center">
@@ -58,7 +58,7 @@ papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/meu-p
 ## Os pets
 
 A galeria tem **26 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
-com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o Meu Pet, em pixel art:
+com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o Desktop-Pet, em pixel art:
 
 <table>
   <tr>

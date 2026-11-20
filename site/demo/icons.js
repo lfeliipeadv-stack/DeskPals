@@ -29,7 +29,7 @@ function grad(a, b, angle = 90) {
 const svg = (body, defs = "") =>
   `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">${defs ? "<defs>" + defs + "</defs>" : ""}${body}</svg>`;
 
-/* Os ícones coloridos: um por janela, mais o download e o Meu Pet. */
+/* Os ícones coloridos: um por janela, mais o download e o Desktop-Pet. */
 const DESENHOS = {
   /* o painel: uma janela com a pata do pet */
   painel() {
@@ -103,7 +103,7 @@ const DESENHOS = {
        <rect x="14" y="32" width="20" height="3.4" rx="1.7" fill="#fff"/>`,
       fundo.def);
   },
-  /* a página do Meu Pet: o globo */
+  /* a página do Desktop-Pet: o globo */
   site() {
     const fundo = grad("#4fc3f7", "#1565c0", 110);
     return svg(
@@ -123,7 +123,7 @@ const DESENHOS = {
        <g stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".85"><path d="M12 17c3-1 6-1 8 0M12 22c3-1 6-1 8 0M12 27c3-1 6-1 8 0"/></g>`,
       capa.def);
   },
-  /* o Meu Pet, para o botão Iniciar e o canto do menu */
+  /* o Desktop-Pet, para o botão Iniciar e o canto do menu */
   meupet() {
     const fundo = grad("#3ccf8e", "#14794a", 120);
     return svg(

@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-Tudo o que dá para apertar, clicar ou digitar no Meu Pet: os atalhos de teclado que funcionam de qualquer programa, os cliques no pet e no ícone da bandeja, onde se muda o idioma e o tema e a lista completa de argumentos que o executável aceita.
+Tudo o que dá para apertar, clicar ou digitar no Desktop-Pet: os atalhos de teclado que funcionam de qualquer programa, os cliques no pet e no ícone da bandeja, onde se muda o idioma e o tema e a lista completa de argumentos que o executável aceita.
 
 ## Atalhos de teclado
 

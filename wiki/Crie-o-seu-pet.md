@@ -1,6 +1,6 @@
 # Crie o seu pet
 
-O Meu Pet vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
+O Desktop-Pet vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brinquedos](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
@@ -64,7 +64,7 @@ Em **Configurações › Programa › Backup dos meus pets e configurações ›
 ## Mandar o pet para alguém ou para a galeria
 
 - **Exportar como .zip** gera um arquivo só, pronto para mandar: a pasta do pet com `animations.xml`, `icon.png`, a prévia animada (`preview.gif`) e os READMEs em inglês e português.
-- **Publicar na galeria** confere o pet (precisa de nome, autor e nenhum erro no Verificador), cria o .zip em `Documentos\Meu Pet\galeria` e abre a página de envio do GitHub já preenchida. O GitHub não recebe arquivos por link: o .zip aparece selecionado no Explorador para você arrastar até a página e clicar em **Submit new issue**. Quem cuida da galeria confere o pet antes de ele aparecer para todos.
+- **Publicar na galeria** confere o pet (precisa de nome, autor e nenhum erro no Verificador), cria o .zip em `Documentos\Desktop-Pet\galeria` e abre a página de envio do GitHub já preenchida. O GitHub não recebe arquivos por link: o .zip aparece selecionado no Explorador para você arrastar até a página e clicar em **Submit new issue**. Quem cuida da galeria confere o pet antes de ele aparecer para todos.
 
 ## Para ir além: o animations.xml, PetGen e PetPack
 
