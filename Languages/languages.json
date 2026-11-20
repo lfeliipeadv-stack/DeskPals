@@ -1,0 +1,24 @@
+{
+  "languages": [
+    { "code": "ar", "name": "العربية", "english": "Arabic", "updated": "59586802e4ac", "size": 92150 },
+    { "code": "bn", "name": "বাংলা", "english": "Bengali", "updated": "6317d1f8db43", "size": 123972 },
+    { "code": "de", "name": "Deutsch", "english": "German", "updated": "3f29c03e4150", "size": 74211 },
+    { "code": "fa", "name": "فارسی", "english": "Persian", "updated": "c2d91890aff3", "size": 98458 },
+    { "code": "fr", "name": "Français", "english": "French", "updated": "688a44854b6c", "size": 76729 },
+    { "code": "hi", "name": "हिन्दी", "english": "Hindi", "updated": "6d215c525550", "size": 123170 },
+    { "code": "id", "name": "Bahasa Indonesia", "english": "Indonesian", "updated": "d88292b123ce", "size": 68553 },
+    { "code": "it", "name": "Italiano", "english": "Italian", "updated": "6598e1824f71", "size": 71024 },
+    { "code": "ja", "name": "日本語", "english": "Japanese", "updated": "c429f6732710", "size": 84405 },
+    { "code": "ko", "name": "한국어", "english": "Korean", "updated": "d31108460f38", "size": 75862 },
+    { "code": "mr", "name": "मराठी", "english": "Marathi", "updated": "e9f78eefa093", "size": 120174 },
+    { "code": "ru", "name": "Русский", "english": "Russian", "updated": "75eed699efc1", "size": 100703 },
+    { "code": "sw", "name": "Kiswahili", "english": "Kiswahili", "updated": "f225bb84707f", "size": 70659 },
+    { "code": "ta", "name": "தமிழ்", "english": "Tamil", "updated": "59c58ab08715", "size": 152349 },
+    { "code": "te", "name": "తెలుగు", "english": "Telugu", "updated": "89419db1e290", "size": 137669 },
+    { "code": "th", "name": "ไทย", "english": "Thai", "updated": "8cea52d903e3", "size": 127820 },
+    { "code": "tr", "name": "Türkçe", "english": "Turkish", "updated": "31c7863da1ac", "size": 72732 },
+    { "code": "ur", "name": "اردو", "english": "Urdu", "updated": "9c49f4ce8d6e", "size": 95129 },
+    { "code": "vi", "name": "Tiếng Việt", "english": "Vietnamese", "updated": "6080f1f18a78", "size": 80451 },
+    { "code": "zh-CN", "name": "中文（简体）", "english": "Chinese (Simplified)", "updated": "820deb5ae5cb", "size": 67085 }
+  ]
+}

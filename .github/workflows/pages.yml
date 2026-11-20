@@ -1,0 +1,79 @@
+name: Página de download
+
+# Publica a página (pasta site) no GitHub Pages, com as prévias animadas dos pets (Pets/*/preview.gif),
+# a lista pets.json e as imagens do README. Roda quando a página, os pets ou as imagens mudam.
+on:
+  push:
+    branches: [master]
+    paths: ['site/**', 'wiki/**', 'Pets/**', 'docs/capturas/**', '.github/readme/**', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gerar as páginas do Wiki
+        # O Wiki do GitHub (github.com/OWNER/REPO/wiki) precisa da primeira página
+        # criada pela interface do site. Esta gera a mesma pasta wiki/ como HTML
+        # navegável, para o manual já ficar no ar.
+        # Se a API falhar, o site principal continua valendo: a cópia gerada
+        # antes fica no repositório e é a que vai para o ar.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          bash site/gerar-wiki.sh
+
+      - name: Montar o site
+        run: |
+          mkdir -p _site/pets _site/img/capturas
+          cp -r site/index.html site/style.css site/demo.html _site/
+          cp -r site/demo _site/
+          # As fontes ficam no proprio repositorio: a pagina abre sem
+          # internet e sem pedir nada a servidor de terceiro.
+          [ -d site/fonts ] && cp -r site/fonts _site/
+          [ -d site/wiki ] && cp -r site/wiki _site/
+          # As imagens do Wiki ficam na pasta wiki/images e vao junto.
+          [ -d wiki/images ] && cp -r wiki/images _site/wiki/ 2>/dev/null || true
+          cp Pets/pets.json _site/
+          for d in Pets/*/; do f=$(basename "$d"); [ -f "$d/preview.gif" ] && cp "$d/preview.gif" "_site/pets/$f.gif"; done
+          # As animacoes dos pets que aparecem na demo: a pagina roda o mesmo
+          # animations.xml que o programa para Windows abre.
+          for p in esheep64 claude rex boo pingo mago nuvi; do
+            if [ -f "Pets/$p/animations.xml" ]; then
+              mkdir -p "_site/pets/$p"
+              cp "Pets/$p/animations.xml" "_site/pets/$p/animations.xml"
+            fi
+          done
+          cp .github/readme/painel-meus-pets.png .github/readme/painel-detalhe.png _site/img/
+          cp Pets/esheep64/icon.png _site/img/icon.png
+          # as capturas de tela do programa, tiradas pelo próprio app (--snapshot)
+          cp docs/capturas/*.png _site/img/capturas/ 2>/dev/null || true
+          ls -R _site | head -50
+
+      - name: Conferir a página da demo
+        # A página é feita de arquivos soltos. Um arquivo que falta ou um
+        # módulo com erro de escrita só apareceria depois de publicado,
+        # com a página quebrada no ar. Aqui a publicação é barrada antes.
+        run: node site/verificar-demo.js _site
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

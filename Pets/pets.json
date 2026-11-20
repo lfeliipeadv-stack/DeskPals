@@ -1,0 +1,238 @@
+{
+  "pets" : [
+    {
+      "folder" : "rex",
+      "name" : "Rex",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-18 22:46",
+      "size" : 560042,
+      "animations" : 195,
+      "sounds" : 24
+    },
+    {
+      "folder" : "pingo",
+      "name" : "Pingo",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-18 22:46",
+      "size" : 289136,
+      "animations" : 104,
+      "sounds" : 16
+    },
+    {
+      "folder" : "boo",
+      "name" : "Boo",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-18 22:46",
+      "size" : 3307685,
+      "animations" : 403,
+      "sounds" : 120
+    },
+    {
+      "folder" : "nuvi",
+      "name" : "Nuvi",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-11 20:45",
+      "size" : 207262,
+      "animations" : 45,
+      "sounds" : 14
+    },
+    {
+      "folder" : "mago",
+      "name" : "Mago",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-18 22:46",
+      "size" : 1356697,
+      "animations" : 201,
+      "sounds" : 72
+    },
+    {
+      "folder" : "claude",
+      "name" : "Claude",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-11 20:45",
+      "size" : 220219,
+      "animations" : 45,
+      "sounds" : 10
+    },
+    {
+      "folder" : "blue_sheep",
+      "name" : "gSheep Blue",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1163002,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "esheep64",
+      "name" : "eSheep",
+      "author" : "Adriano",
+      "lastupdate" : "2026-11-18 19:00",
+      "size" : 174321,
+      "animations" : 58,
+      "sounds" : 0
+    },
+    {
+      "folder" : "green_sheep",
+      "name" : "gSheep Green",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1163012,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "orange_sheep",
+      "name" : "gSheep Orange",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1163556,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "pingus",
+      "name" : "Pingus",
+      "author" : "Adriano & Zecheriah",
+      "lastupdate" : "2026-11-18 19:00",
+      "size" : 1254682,
+      "animations" : 69,
+      "sounds" : 30
+    },
+    {
+      "folder" : "pink_sheep",
+      "name" : "gSheep Pink",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1164166,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "purple_sheep",
+      "name" : "gSheep Purple",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1163159,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "red_sheep",
+      "name" : "gSheep Red",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1163470,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "yellow_sheep",
+      "name" : "gSheep Yellow",
+      "author" : "Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1163556,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "sheep_mate",
+      "name" : "eSheep Mate",
+      "author" : "TheSuperCat & Oliver B.",
+      "lastupdate" : "2026-11-18 19:33",
+      "size" : 1087843,
+      "animations" : 273,
+      "sounds" : 35
+    },
+    {
+      "folder" : "clippy",
+      "name" : "Clippy",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 3253419,
+      "animations" : 46,
+      "sounds" : 18
+    },
+    {
+      "folder" : "merlin",
+      "name" : "Merlin",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 2584333,
+      "animations" : 76,
+      "sounds" : 17
+    },
+    {
+      "folder" : "rover",
+      "name" : "Rover",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 1665500,
+      "animations" : 32,
+      "sounds" : 4
+    },
+    {
+      "folder" : "peedy",
+      "name" : "Peedy",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 4607572,
+      "animations" : 88,
+      "sounds" : 14
+    },
+    {
+      "folder" : "genie",
+      "name" : "Genie",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 2289306,
+      "animations" : 79,
+      "sounds" : 8
+    },
+    {
+      "folder" : "genius",
+      "name" : "Genius",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 2926362,
+      "animations" : 50,
+      "sounds" : 15
+    },
+    {
+      "folder" : "f1",
+      "name" : "F1",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 2714509,
+      "animations" : 51,
+      "sounds" : 17
+    },
+    {
+      "folder" : "links",
+      "name" : "Links",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 2036998,
+      "animations" : 53,
+      "sounds" : 19
+    },
+    {
+      "folder" : "rocky",
+      "name" : "Rocky",
+      "author" : "Microsoft",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 3230506,
+      "animations" : 49,
+      "sounds" : 17
+    },
+    {
+      "folder" : "bonzi",
+      "name" : "Bonzi",
+      "author" : "BONZI Software",
+      "lastupdate" : "2026-11-20 11:40",
+      "size" : 2033403,
+      "animations" : 76,
+      "sounds" : 7
+    }
+  ]
+}

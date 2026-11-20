@@ -1,0 +1,136 @@
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace DesktopPet
+{
+	/// <summary>
+	/// Right click on a pet: everything the pet can do for you in one menu — needs (virtual pet), little games,
+	/// focus timer, reminders, shortcuts, mood, PC monitor, animations and the panel.
+	/// </summary>
+	public static class PetMenu
+	{
+		public static ContextMenuStrip Show(FormPet pet, Control anchor, Point at)
+		{
+			var cm = new ContextMenuStrip();
+			FormPet.Hold(true);   // every pet stands still while the menu is open
+			Theme.ApplyTo(cm);
+			ToolStripMenuItem Item(ToolStripItemCollection to, string text, Action run, bool enabled = true)
+			{
+				var it = new ToolStripMenuItem(text) { Enabled = enabled };
+				if (run != null) it.Click += (s, e) => run();
+				to.Add(it);
+				return it;
+			}
+
+			// header: the pet (and its needs)
+			var head = Item(cm.Items, Program.Mainthread?.CurrentHeader?.Petname ?? "Pet", null, false);
+			head.Font = new Font(head.Font, FontStyle.Bold);
+			if (VirtualPet.Enabled)
+			{
+				Item(cm.Items, VirtualPet.Bars(VirtualPet.Current), null, false);
+				Item(cm.Items, Lang.T("vpet.feed"), VirtualPet.Feed);
+				Item(cm.Items, Lang.T("vpet.pet"), VirtualPet.Pet);
+				Item(cm.Items, Lang.T("vpet.play"), VirtualPet.Play);
+				Item(cm.Items, Lang.T("vpet.sleep"), VirtualPet.Sleep);
+			}
+			cm.Items.Add(new ToolStripSeparator());
+
+			// the chat: reminders, weather and meetings work without the AI too
+			{
+				var ask = Item(cm.Items, Lang.T("menu.ask"), FormAsk.Open);
+				ask.Font = new Font(ask.Font, FontStyle.Bold);
+			}
+
+			var games = Item(cm.Items, Lang.T("menu.games"), null);
+			Item(games.DropDownItems, Lang.T("menu.fortune"), Fun.FortuneCookie);
+			Item(games.DropDownItems, Lang.T("menu.ball"), Fun.MagicBall);
+			Item(games.DropDownItems, Lang.T("menu.joke"), Fun.Joke);
+
+			var focus = Item(cm.Items, Pomodoro.Current == Pomodoro.Phase.Off ? Lang.T("menu.focus") : Pomodoro.Status(), null);
+			if (Pomodoro.Current == Pomodoro.Phase.Off)
+			{
+				// the usual length first, then the others
+				var usual = Item(focus.DropDownItems, Lang.T("menu.focusStart", Pomodoro.Minutes(Pomodoro.FocusMinutes)), Pomodoro.StartFocus);
+				usual.Font = new Font(usual.Font, FontStyle.Bold);
+				var other = Item(focus.DropDownItems, Lang.T("menu.focusOther"), null);
+				foreach (int m in Pomodoro.FocusChoices) { int min = m; Item(other.DropDownItems, Pomodoro.Minutes(min), () => Pomodoro.StartFocus(min)); }
+			}
+			else
+			{
+				Item(focus.DropDownItems, Pomodoro.Paused ? Lang.T("menu.focusResume") : Lang.T("menu.focusPause"), Pomodoro.TogglePause);
+				Item(focus.DropDownItems, Lang.T("menu.focusStop"), Pomodoro.Stop);
+			}
+
+			if (Weather.Enabled) Item(cm.Items, Lang.T("menu.weather"), Weather.SayNow);
+
+			var remind = Item(cm.Items, Lang.T("tray.reminders"), null);
+			foreach (int m in new[] { 5, 10, 15, 30, 60 }) { int min = m; Item(remind.DropDownItems, Lang.T("tray.remindIn", min), () => Reminders.In(min)); }
+			remind.DropDownItems.Add(new ToolStripSeparator());
+			Item(remind.DropDownItems, Lang.T("rem.smartMenu"), SmartReminder.AskAndAdd);
+			Item(remind.DropDownItems, Lang.T("tray.manageReminders"), () => FormSettings.ShowPage(FormSettings.Page.Reminders));
+
+			var shortcuts = Item(cm.Items, Lang.T("menu.shortcuts"), null);
+			foreach (var l in Launchers.All) { var launcher = l; Item(shortcuts.DropDownItems, l.Name, () => Launchers.Open(launcher)); }
+			if (Launchers.All.Count > 0) shortcuts.DropDownItems.Add(new ToolStripSeparator());
+			Item(shortcuts.DropDownItems, Lang.T("menu.shortcutsManage"), () => { FormPet.Hold(true); try { using (var f = new FormLaunchers()) f.ShowDialog(); } finally { FormPet.Hold(false); } });
+
+			// ⏱ Timer: lengths to start, or the one running (pause, +5 min, cancel)
+			var timer = Item(cm.Items, SimpleTimer.Active ? Lang.T("menu.timerRunning", SimpleTimer.Finished ? Lang.T("timer.doneShort") : SimpleTimer.LeftText) : Lang.T("menu.timer"), null);
+			if (SimpleTimer.Running)
+			{
+				Item(timer.DropDownItems, Lang.T(SimpleTimer.Paused ? "timer.resume" : "timer.pause"), SimpleTimer.TogglePause);
+				Item(timer.DropDownItems, Lang.T("timer.add5"), () => SimpleTimer.AddMinutes(5));
+				Item(timer.DropDownItems, Lang.T("timer.cancel"), SimpleTimer.Close);
+			}
+			else
+			{
+				if (SimpleTimer.Finished) { Item(timer.DropDownItems, Lang.T("timer.close"), SimpleTimer.Close); timer.DropDownItems.Add(new ToolStripSeparator()); }
+				foreach (int m in SimpleTimer.Presets) { int min = m; Item(timer.DropDownItems, min < 60 ? Lang.T("timer.min", min) : Lang.T("timer.hours", min / 60), () => SimpleTimer.Start(TimeSpan.FromMinutes(min))); }
+				timer.DropDownItems.Add(new ToolStripSeparator());
+				Item(timer.DropDownItems, Lang.T("timer.other"), SimpleTimer.AskAndStart);
+			}
+			timer.Visible = PluginSwitch.On("timer") || SimpleTimer.Active;
+
+			// 🔕 Do not disturb: for a while, or turn it off
+			var dnd = Item(cm.Items, DoNotDisturb.Active ? Lang.T("menu.dndOn", DoNotDisturb.StatusText) : Lang.T("menu.dnd"), null);
+			if (DoNotDisturb.Manual) { Item(dnd.DropDownItems, Lang.T("dnd.stop"), DoNotDisturb.Stop); dnd.DropDownItems.Add(new ToolStripSeparator()); }
+			foreach (int m in DoNotDisturb.Choices) { int min = m; Item(dnd.DropDownItems, DoNotDisturb.ChoiceText(min), () => DoNotDisturb.Start(min)); }
+
+			// the day: time in programs, the summary, help with the copied text
+			if (AppTime.Enabled) Item(cm.Items, Lang.T("menu.apptime"), AppTime.Show);
+			if (DaySummary.Enabled) Item(cm.Items, Lang.T("menu.summary"), () => DaySummary.Tell());
+			if (ClipboardWatch.Enabled && ClipboardWatch.History.Count > 0 && AiAssistant.Configured) Item(cm.Items, Lang.T("menu.clipAi"), ClipboardWatch.OfferLast);
+
+			var notes = Item(cm.Items, Notes.Counting ? Lang.T("menu.notesTime", Notes.Remaining) : Lang.T("menu.notes"), Notes.Open);
+			if (ClipboardWatch.Enabled && ClipboardWatch.History.Count > 0) Item(cm.Items, Lang.T("menu.clipHistory"), () => ClipboardWatch.ShowHistory(null));
+
+			// plugins switched off leave the menu
+			notes.Visible = PluginSwitch.On("notes");
+			games.Visible = PluginSwitch.On("games");
+			focus.Visible = PluginSwitch.On("focus") || Pomodoro.Current != Pomodoro.Phase.Off;
+			shortcuts.Visible = PluginSwitch.On("shortcuts");
+
+			if (Agenda.Configured)
+			{
+				var next = Agenda.Next;
+				Item(cm.Items, next == null ? Lang.T("menu.agendaNone")
+					: Lang.T("menu.agendaNext", next.Start.ToString("t", System.Globalization.CultureInfo.CurrentCulture), next.Title.Length > 40 ? next.Title.Substring(0, 39) + "…" : next.Title), null, false);
+			}
+			Item(cm.Items, Lang.T("menu.mood"), Mood.Ask);
+			var mon = Item(cm.Items, Lang.T("menu.monitor"), () => PcMonitor.Enabled = !PcMonitor.Enabled);
+			mon.Checked = PcMonitor.Enabled;
+			Item(cm.Items, Lang.T("menu.optimizeRam"), PcMonitor.OptimizeRam, !PcMonitor.Optimizing);
+
+			cm.Items.Add(new ToolStripSeparator());
+			Item(cm.Items, Lang.T("tray.panel").Replace("&", ""), () => FormSettings.ShowPage(FormSettings.Page.Home));
+			// the animations of this pet (also with the middle click on it, which few people find)
+			Item(cm.Items, Lang.T("menu.animations"), pet.OpenAnimationPicker);
+			Item(cm.Items, Lang.T("menu.sendAway"), () => { if (!Program.Mainthread.KillSheep(pet)) pet.Close(); });
+
+			cm.Closed += (s, e) => { FormPet.Hold(false); cm.BeginInvoke(new MethodInvoker(cm.Dispose)); };
+			cm.Show(anchor, at);
+			return cm;
+		}
+	}
+}

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Editor de Pets: creates and edits DesktopPet pets (animations.xml) with a live preview.
+    A separate program from DesktopPet.exe; it shares the XML model, the theme and the MP3 player of the app
+    (linked from ..\src, not copied) and tests the pet on the desktop with "DesktopPet.exe -test-pet=<file>".
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>PetEditor</AssemblyName>
+    <RootNamespace>PetEditor</RootNamespace>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <ApplicationUseCompatibleTextRendering>false</ApplicationUseCompatibleTextRendering>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <Version>1.0.0</Version>
+    <Product>Editor de Pets</Product>
+    <Company>DesktopPet</Company>
+    <NoWarn>$(NoWarn);CA1416;WFO1000</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- the icon with all its sizes, for the windows (the one taken from the exe has only 32 px) -->
+    <EmbeddedResource Include="icon.ico" LogicalName="PetEditor.icon.ico" />
+    <Compile Include="..\src\LocalData\AnimationXML.cs" Link="Shared\AnimationXML.cs" />
+    <Compile Include="..\src\Portable\Theme.cs" Link="Shared\Theme.cs" />
+    <Compile Include="..\src\Portable\ColorText.cs" Link="Shared\ColorText.cs" />
+    <Compile Include="..\src\Portable\AppInfo.cs" Link="Shared\AppInfo.cs" />
+    <Compile Include="..\src\dotNet\Mp3Player.cs" Link="Shared\Mp3Player.cs" />
+  </ItemGroup>
+
+</Project>

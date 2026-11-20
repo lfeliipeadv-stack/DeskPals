@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Pet no navegador — o bichinho de área de trabalho, grátis para Windows</title>
+<meta name="description" content="A demo do Meu Pet é uma área de trabalho simulada: janelas, ícones e barra de tarefas, com o pet de verdade andando por ela no navegador, com os mesmos desenhos e animações do programa para Windows. Teste o Pomodoro, as notas e as animações — e baixe o programa, grátis, para Windows 10 e 11.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meu Pet no navegador — o bichinho de área de trabalho">
+<meta property="og:description" content="O pet de verdade andando pela tela do navegador: o mesmo motor, os mesmos desenhos e as mesmas animações do programa para Windows.">
+<meta property="og:url" content="https://lfeliipeadv-stack.github.io/meu-pet/demo.html">
+<meta property="og:image" content="https://lfeliipeadv-stack.github.io/meu-pet/wiki/images/demo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="demo/demo.css">
+</head>
+<body class="demo-pagina">
+
+<!-- O nome da página, para quem chega por leitor de tela ou por busca. -->
+<h1 class="demo-sr-only">Meu Pet — a área de trabalho simulada, com o pet andando pela tela</h1>
+
+<!-- A página inteira é a área de trabalho. A página inteira é a tela do
+     computador: o pet anda por ela inteira, sem moldura nenhuma. -->
+<div class="demo-stage" id="stage">
+  <div class="demo-wallpaper" aria-hidden="true"></div>
+
+  <!-- Os ícones da área de trabalho -->
+  <div class="demo-icons" id="icons"></div>
+
+  <!-- As janelas são criadas aqui pelo demo.js -->
+
+  <!-- A barra de tarefas -->
+  <div class="demo-taskbar">
+    <a class="demo-start" href="index.html" title="Voltar para a página do Meu Pet">▦ Meu Pet</a>
+    <div class="demo-taskbar-apps" id="taskbar-apps"></div>
+    <div class="demo-tray">
+      <span class="demo-tray-icons" aria-hidden="true"><span id="tray-sound">🔊</span><span>💬</span></span>
+      <button class="demo-tray-btn" id="tips-btn" type="button" title="Ver as dicas">?</button>
+      <button class="demo-tray-btn" id="menu-btn" type="button" title="O que o pet sabe fazer">⋯</button>
+      <span class="demo-clock" id="clock"><b>--:--</b><small>--/--/----</small></span>
+    </div>
+  </div>
+
+  <!-- O pet é desenhado aqui -->
+  <canvas class="demo-canvas" id="canvas" tabindex="0" role="button"
+          aria-label="O pet na área de trabalho. Aperte Enter para conversar com ele."></canvas>
+
+  <!-- O balão de fala -->
+  <div class="demo-bubble" id="bubble" hidden>
+    <p id="bubble-text"></p>
+    <div class="demo-choices" id="bubble-choices" hidden></div>
+  </div>
+
+  <!-- O que o pet fala, para o leitor de tela. A região viva fica fora
+       do balão: dentro de um elemento escondido, nada é anunciado. -->
+  <p class="demo-sr-only" id="pet-fala" aria-live="polite" aria-atomic="true"></p>
+
+  <!-- O menu do pet -->
+  <div class="demo-menu" id="menu" role="menu" hidden></div>
+
+  <!-- A dica de primeiro contato -->
+  <div class="demo-tips" id="tips" hidden>
+    <span class="demo-tips-n" id="tips-n">1</span>
+    <p id="tips-text"></p>
+    <button type="button" id="tips-close" aria-label="Fechar a dica">✕</button>
+  </div>
+
+  <!-- A tela de carregamento -->
+  <div class="demo-loading" id="loading" role="status">
+    <div class="demo-loading-bar"><i></i></div>
+    <p id="loading-text">carregando o pet…</p>
+    <button class="btn btn-ghost" id="loading-retry" type="button" hidden>Tentar de novo</button>
+  </div>
+</div>
+
+<!-- O conteúdo das janelas fica no HTML e o demo.js coloca cada um
+     dentro da janela correspondente. -->
+<div id="demo-painel" hidden>
+  <div class="demo-needs" id="needs-bars"></div>
+  <div class="demo-pets" id="pet-list" role="group" aria-label="Escolher o pet"></div>
+  <div class="demo-actions">
+    <button class="btn btn-ghost" id="ask" type="button">💬 Perguntar</button>
+    <button class="btn btn-ghost" id="sound" type="button" aria-pressed="true">🔊 Som</button>
+  </div>
+  <p class="demo-panel-note">O painel do programa tem oito páginas e dezesseis pets. Aqui vão os sete que trazem as animações publicadas.</p>
+</div>
+
+<div id="demo-pomodoro" hidden>
+  <div class="demo-pomo">
+    <p class="demo-pomo-label">Pomodoro</p>
+    <p class="demo-pomo-time" id="pomo-time">25:00</p>
+    <div class="demo-pomo-track"><i id="pomo-fill"></i></div>
+    <div class="demo-pomo-actions">
+      <button class="btn btn-ghost" id="pomo-start" type="button" aria-pressed="false">▶ Começar</button>
+      <button class="btn btn-ghost" id="pomo-reset" type="button">↺ Reiniciar</button>
+    </div>
+    <p class="demo-pomo-label">Anotações do dia</p>
+    <ul class="demo-reminders" id="pomo-reminders">
+      <li><button type="button" data-text="💧 Anotado: beber água. O pet também não esquece!">💧 Beber água</button></li>
+      <li><button type="button" data-text="🧍 Anotado: alongar as costas. Five minutes, como diz o English!">🧍 Alongar</button></li>
+      <li><button type="button" data-text="☕ Anotado: um café. Eu quero um também!">☕ Café</button></li>
+    </ul>
+  </div>
+</div>
+
+<div id="demo-animacoes" hidden>
+  <p class="demo-anim-lead">Estas são as animações do pet, lidas do mesmo <code>animations.xml</code> que o programa para Windows abre. Clique numa para o pet fazer.</p>
+  <div class="demo-anim-list" id="anim-list"></div>
+</div>
+
+<div id="demo-sobre" hidden>
+  <h3>O que você está vendo</h3>
+  <p class="demo-sobre-lead">Não é vídeo e não é imagem: é o pet de verdade, com os mesmos desenhos e a mesma lógica de movimento do programa para Windows.</p>
+  <p>Ele chega do céu, cai, pousa no topo da janela, anda por ela, desce para a barra de tarefas e vira de frente quando chega na borda. Dá para arrastar, arremessar e conversar com ele.</p>
+
+  <h3>O que dá para fazer aqui</h3>
+  <ul>
+    <li><b>Perguntar</b> ao pet e receber as respostas dele no balão</li>
+    <li><b>Arastar e soltar</b> para arremessá-lo pela tela</li>
+    <li><b>Comida, carinho, brincadeira e sono</b>: as três necessidades caem com o tempo</li>
+    <li><b>Pomodoro</b> de 25 minutos, com aviso quando o bloco acaba</li>
+    <li><b>Bloco de notas</b> que guarda o que você escreve</li>
+    <li><b>Todas as animações</b> dele, lidas do <code>animations.xml</code> do programa</li>
+  </ul>
+
+  <h3>No Windows tem muito mais</h3>
+  <ul>
+    <li><b>Conversa de verdade</b> no balão, com IA</li>
+    <li><b>Lembretes em português</b>: "me lembra de ligar para a Ana às 15h"</li>
+    <li><b>Pomodoro com pausa longa</b> a cada quatro blocos</li>
+    <li><b>Agenda do Google e do Outlook</b>, com aviso antes de cada reunião</li>
+    <li><b>Plugins, atalhos e dezesseis pets</b> para adotar</li>
+  </ul>
+
+  <div class="demo-sobre-cta">
+    <a class="btn btn-main" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe">⬇ Baixar para o Windows</a>
+    <a class="btn btn-ghost" href="index.html">Ver todos os recursos</a>
+  </div>
+  <p class="demo-sobre-nota">Esta página é a simulação de uma área de trabalho: o pet anda por ela inteira, do mesmo jeito que anda pela tela do Windows. Quem instala o programa de verdade ganha agenda, lembretes, Pomodoro e conversa com IA — tudo isso aqui é só o começo.</p>
+</div>
+
+<script src="demo/demo.js" type="module"></script>
+
+<!-- Sem JavaScript não há pet — mas há o programa. -->
+<noscript>
+  <div class="demo-noscript">
+    <p><strong>A demo precisa de JavaScript</strong> — o pet é desenhado quadro a quadro no navegador, usando o mesmo arquivo de animações do programa para Windows.</p>
+    <p><a href="index.html">Ver a página do Meu Pet</a> · <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe">⬇ Baixar para o Windows</a></p>
+  </div>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,702 @@
+/* ---------------------------------------------------------------
+   Demo — a área de trabalho do Meu Pet dentro da página.
+
+   A página inteira é a área de trabalho: papel de parede, janelas
+   e barra de tarefas, sem moldura nenhuma. O pet é desenhado num
+   canvas por cima de tudo, andando pela tela como no Windows.
+
+   O cromo é o do Windows 95 — o mesmo do site: moldura com chanfro,
+   botões quadrados, barra de tarefas cinza e os ícones. O conteúdo
+   das janelas (o texto, os botões) é o do site.
+   --------------------------------------------------------------- */
+
+[hidden] { display: none !important; }
+
+/* A página da demo não tem rolagem: ela é a tela do computador.
+   O dvh (e não o vh) deixa a barra de tarefas visível também no
+   celular, onde a barra do navegador muda a altura da tela. */
+body.demo-pagina {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #0b0f13;
+}
+
+.demo-stage {
+  /* A demo simula uma tela do Windows 95: a paleta dela é a mesma nos
+     dois temas do site. Sem isto, no tema escuro os botões das janelas
+     ficariam com o texto branco sobre o fundo branco. */
+  --ink: #16191c;
+  --muted: #5b6469;
+  --line: #dfe4e1;
+  --surface: #f6f7f5;
+  --bg: #ffffff;
+  --accent: #1a7545;
+  --accent-lo: #e8f3ec;
+  --accent-texto: #14603c;
+
+  /* O cromo do Windows 95. */
+  --chrome: #c0c0c0;
+  --chrome-hi: #ffffff;
+  --chrome-lo: #808080;
+  --chrome-escuro: #404040;
+  --teal: #008080;
+  --navy: #0a246a;
+  --navy-2: #3a6ea5;
+  --taskbar-h: 38px;
+
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  background: #0b0f13;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: var(--font-text);
+}
+
+/* O texto de verdade pode ser escolhido: só a moldura não deixa. */
+.demo-window-body { user-select: text; -webkit-user-select: text; }
+
+/* Um título só para o leitor de tela e para a busca. */
+.demo-sr-only {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* Sem JavaScript: a página avisa e oferece o programa. */
+.demo-noscript {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-content: center; gap: 12px;
+  padding: 24px; text-align: center;
+  background: #10161c; color: #e6eef5;
+  font-family: var(--font-text);
+}
+.demo-noscript p { margin: 0; max-width: 46ch; }
+.demo-noscript a { color: #6fd39b; }
+
+/* ---------------------------------------------------- o papel de parede
+   Quatro camadas: a base escura, três luzes (uma acesa no canto, uma
+   fria embaixo, uma morna do lado) e o granulado fino, que impede o
+   degradê de virar faixas. A vinheta fecha a borda da tela.       */
+.demo-wallpaper {
+  position: absolute; inset: 0;
+  /* A mesa teal do Windows 95, escurecida para o pet deitado em cima
+     aparecer. O token --teal é o mesmo da página do projeto. */
+  background:
+    radial-gradient(1200px 620px at 20% 4%, rgba(116,196,214,.40) 0%, transparent 66%),
+    radial-gradient(1000px 520px at 94% 108%, rgba(72,156,126,.32) 0%, transparent 66%),
+    radial-gradient(900px 420px at 76% 12%, rgba(214,158,98,.18) 0%, transparent 70%),
+    radial-gradient(700px 380px at 38% 92%, rgba(96,120,196,.16) 0%, transparent 70%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--teal) 34%, #243440) 0%,
+      color-mix(in srgb, var(--teal) 18%, #18222b) 46%,
+      #0d1217 100%);
+}
+.demo-wallpaper::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(130% 110% at 50% 36%, transparent 48%, rgba(0,0,0,.34) 100%);
+}
+.demo-wallpaper::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: .5;
+  mix-blend-mode: overlay;
+}
+
+/* --------------------------------------------------- a janela do desktop
+   A moldura do Windows 95: a borda fina, o chanfro (branco em cima e
+   à esquerda, cinza embaixo e à direita) e a sombra em dois degraus. */
+.demo-window {
+  position: absolute;
+  left: 0; top: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid #0b0f13;
+  border-radius: 0;
+  box-shadow:
+    inset 1px 1px 0 var(--chrome-hi),
+    inset -1px -1px 0 var(--chrome-lo),
+    2px 2px 0 rgba(0,0,0,.3),
+    6px 10px 22px rgba(0,0,0,.38);
+  overflow: hidden;
+  pointer-events: auto;
+  transition: box-shadow .16s ease;
+}
+.demo-window.maximized { border-radius: 0; }
+/* A janela da frente é a acesa; as de trás ficam apagadas, como no Windows. */
+.demo-window:not(.active) { box-shadow:
+    inset 1px 1px 0 var(--chrome-hi),
+    inset -1px -1px 0 var(--chrome-lo),
+    2px 2px 0 rgba(0,0,0,.22),
+    4px 8px 16px rgba(0,0,0,.3); }
+.demo-window:not(.active) .demo-window-bar { filter: saturate(.4) brightness(.85); }
+
+.demo-window-bar {
+  flex: none;
+  background: linear-gradient(90deg, var(--navy), var(--navy-2));
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  letter-spacing: .2px;
+  padding: 7px 8px 7px 9px;
+  display: flex; align-items: center; gap: 8px;
+  cursor: grab;
+  user-select: none;
+}
+/* Os ícones da barra de título: o desenho de 16 pixels do Windows 95. */
+.demo-window-icon { line-height: 1; display: inline-flex; }
+.demo-window-icon svg { width: 16px; height: 16px; image-rendering: pixelated; }
+.demo-window-buttons {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 3px;
+}
+.demo-window-title {
+  margin-left: 2px; opacity: .96;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* O corpo ocupa o que sobra da janela e rola por dentro: uma janela
+   mais alta que a tela mostra o conteúdo inteiro, com a barra de
+   rolagem, em vez de cortar o texto. */
+.demo-window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 15px 16px 18px;
+  overflow: auto;
+}
+
+/* Os botões da janela: quadradinhos do Windows, à direita, com o
+   desenho em relevo e o glifo dentro. */
+.demo-window-dot {
+  flex: none;
+  width: 17px; height: 15px;
+  padding: 0; border: 1px solid;
+  border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
+  background: var(--chrome);
+  color: #000;
+  cursor: pointer;
+  display: grid; place-items: center;
+  font-family: var(--font-pixel); font-size: 9px; line-height: 1;
+  box-shadow: inset -1px -1px 0 var(--chrome-lo);
+}
+.demo-window-dot:hover { background: #d4d0c8; }
+.demo-window-dot:active {
+  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+  box-shadow: inset 1px 1px 0 var(--chrome-lo);
+}
+.demo-window-dot:focus-visible { outline: 1px dotted #000; outline-offset: -3px; }
+.demo-window-dot.max { color: #000; }
+.demo-window-dot.close { color: #000; }
+
+/* O corpo da janela "Sobre": texto miúdo, com um respiro bom. */
+#demo-sobre p { margin: 0 0 10px; line-height: 1.55; font-size: .85rem; color: #333b3f; }
+#demo-sobre p:last-child { margin-bottom: 0; }
+#demo-sobre h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-pixel); font-size: 10px;
+  color: var(--muted); text-transform: lowercase;
+}
+#demo-sobre ul { margin: 0 0 12px; padding-left: 18px; }
+#demo-sobre li { font-size: .83rem; line-height: 1.5; color: #333b3f; margin-bottom: 3px; }
+.demo-sobre-lead { font-weight: 600; color: #1f2a2e !important; }
+.demo-sobre-nota {
+  border-top: 1px solid #e2e6e3; padding-top: 10px;
+  color: #5c666a !important; font-size: .78rem !important;
+}
+.demo-sobre-cta { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
+.demo-sobre-cta .btn { font-size: .8rem; padding: 7px 13px; }
+
+/* -------------------------------------------- os ícones da área de trabalho */
+.demo-icons {
+  position: absolute; z-index: 2;
+  top: 10px; left: 10px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.demo-icon {
+  width: 86px; padding: 8px 4px 6px;
+  border: 0; border-radius: 0; background: transparent;
+  color: #eaf1f7; cursor: pointer; font: inherit;
+  display: grid; justify-items: center; gap: 3px;
+}
+/* O desenho do ícone: 16×16 pixels, como no Windows 95. */
+.demo-icon b {
+  line-height: 0;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.6));
+}
+.demo-icon b svg {
+  width: 32px; height: 32px;
+  image-rendering: pixelated;
+}
+.demo-icon span {
+  font-family: var(--font-pixel);
+  font-size: 10px; line-height: 1.35; text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.9);
+  overflow-wrap: anywhere;
+}
+.demo-icon:hover { background: rgba(255,255,255,.12); }
+.demo-icon:focus-visible { outline: 1px dotted #fff; outline-offset: -2px; }
+
+/* ------------------------------------------------------- a barra de tarefas
+   O cinza do Windows 95, opaco, com a barra de menu em cima. */
+.demo-taskbar {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: var(--taskbar-h);
+  z-index: 15;
+  background: var(--chrome);
+  border-top: 1px solid var(--chrome-hi);
+  box-shadow: inset 0 1px 0 var(--chrome-hi);
+  color: #000;
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 4px;
+  font-family: var(--font-pixel); font-size: 11px;
+}
+.demo-start {
+  flex: none;
+  display: flex; align-items: center; gap: 6px;
+  background: var(--chrome);
+  border: 1px solid;
+  border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
+  box-shadow: inset -1px -1px 0 var(--chrome-lo);
+  color: #000; text-decoration: none;
+  padding: 4px 10px 4px 7px;
+  font-family: var(--font-pixel); font-size: 11px;
+}
+.demo-start:hover { background: #d4d0c8; }
+.demo-start:active {
+  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+  box-shadow: inset 1px 1px 0 var(--chrome-lo);
+}
+.demo-taskbar-apps {
+  display: flex; gap: 4px; flex: 1; min-width: 0;
+  overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none;
+}
+.demo-taskbar-apps::-webkit-scrollbar { display: none; }
+.demo-task {
+  display: flex; align-items: center; gap: 6px;
+  max-width: 190px; flex: none;
+  border: 1px solid;
+  border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
+  box-shadow: inset -1px -1px 0 var(--chrome-lo);
+  background: var(--chrome); color: #000;
+  padding: 4px 9px 4px 6px; cursor: pointer;
+  font: inherit; font-size: 11px;
+}
+.demo-task b { line-height: 0; }
+.demo-task b svg { width: 16px; height: 16px; image-rendering: pixelated; }
+.demo-task span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-task:hover { background: #d4d0c8; }
+.demo-task.on {
+  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+  box-shadow: inset 1px 1px 0 var(--chrome-lo);
+  font-weight: 700;
+}
+
+/* A bandeja: os ícones do sistema e o relógio, à direita. */
+.demo-tray {
+  flex: none;
+  display: flex; align-items: center; gap: 8px;
+  padding: 2px 5px;
+  border: 1px solid;
+  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+  color: #000;
+}
+.demo-tray-icons { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+.demo-clock {
+  text-align: right; line-height: 1.2;
+  font-family: var(--font-pixel);
+}
+.demo-clock b { display: block; font-weight: 400; }
+.demo-clock small { display: block; font-size: 9px; opacity: .8; }
+
+/* ---------------------------------------------------------------- o pet
+   O canvas fica acima de tudo: o pet passa por cima das janelas, do
+   menu e da barra de tarefas, como o pet do Windows, que é sempre por
+   cima (o TopMost do FormPet).                                */
+.demo-canvas {
+  position: absolute; inset: 0;
+  z-index: 34;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* --------------------------------------------------------- o balão de fala
+   O balão do Windows 95: branco, borda preta, cantos retos. */
+.demo-bubble {
+  /* O balão fica acima do pet: a cauda dele aponta para a cabeça do
+     bichinho, e ela tem que aparecer por cima. */
+  position: absolute; z-index: 36;
+  max-width: min(280px, 62vw);
+  background: #fff;
+  color: #16191c;
+  border: 2px solid #101318;
+  border-radius: 0;
+  padding: 10px 12px;
+  font-size: .93rem;
+  line-height: 1.45;
+  box-shadow: 3px 3px 0 rgba(0,0,0,.3);
+  animation: demo-pop .18s ease-out;
+}
+@keyframes demo-pop {
+  from { opacity: 0; transform: translateY(4px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+.demo-bubble p { margin: 0; }
+.demo-bubble::after {
+  content: "";
+  position: absolute; left: var(--cauda, 22px); bottom: -9px;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 9px solid #101318;
+  transform: translateX(-9px);
+}
+.demo-bubble::before {
+  content: "";
+  position: absolute; left: var(--cauda, 22px); bottom: -6px; z-index: 1;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #fff;
+  transform: translateX(-7px);
+}
+/* Quando o balão fica embaixo do pet, a cauda aponta para cima. */
+.demo-bubble.abaixo::after {
+  bottom: auto; top: -9px;
+  border-top: 0; border-bottom: 9px solid #101318;
+}
+.demo-bubble.abaixo::before {
+  bottom: auto; top: -6px;
+  border-top: 0; border-bottom: 7px solid #fff;
+}
+.demo-choices { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.demo-choices button {
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  border-radius: 4px; padding: 5px 9px; cursor: pointer;
+  font: inherit; font-size: .82rem; line-height: 1.3;
+}
+.demo-choices button:hover { border-color: var(--accent); background: var(--accent-lo); color: var(--accent-texto); }
+
+/* ------------------------------------------------------------- o menu
+   O menu do Windows 95: cinza, com o item marcado em azul. */
+.demo-menu {
+  position: absolute; z-index: 32;
+  min-width: 226px;
+  max-height: calc(100% - 12px);
+  overflow-y: auto;
+  background: var(--chrome);
+  border: 1px solid #0b0f13;
+  border-radius: 0;
+  padding: 2px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,.3);
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  animation: demo-pop .14s ease-out;
+}
+.demo-menu button {
+  display: block; width: 100%; text-align: left;
+  padding: 6px 8px; border: 0; border-radius: 0;
+  background: transparent; color: #000;
+  font: inherit; cursor: pointer;
+}
+.demo-menu button:hover, .demo-menu button:focus-visible { background: var(--navy); color: #fff; }
+.demo-menu hr {
+  border: 0; height: 2px; margin: 3px 1px;
+  border-top: 1px solid var(--chrome-lo);
+  border-bottom: 1px solid var(--chrome-hi);
+}
+.demo-menu .demo-menu-head {
+  padding: 5px 8px 6px; font-weight: 700; font-size: 10px; color: #000;
+  text-transform: lowercase; letter-spacing: .03em;
+}
+/* As necessidades do pet, na segunda linha do cabeçalho. */
+.demo-menu .demo-menu-bars {
+  padding: 0 8px 6px;
+  font-size: 10px; color: #2c2c2c;
+  border-bottom: 2px solid var(--chrome-lo);
+  margin-bottom: 3px;
+}
+.demo-menu a {
+  display: block; padding: 6px 8px;
+  text-decoration: none; color: #000;
+}
+.demo-menu a:hover { background: var(--navy); color: #fff; }
+/* O download é o item em destaque. */
+.demo-menu .demo-menu-cta {
+  display: block; width: 100%; text-align: left;
+  padding: 7px 8px; border: 0; border-radius: 0;
+  background: var(--accent); color: #fff;
+  font: inherit; font-size: 11px; cursor: pointer;
+}
+.demo-menu .demo-menu-cta:hover { background: var(--accent-texto); color: #fff; }
+
+/* ------------------------------------------------------ o carregamento */
+.demo-loading {
+  position: absolute; inset: 0; z-index: 40;
+  display: grid; place-content: center; justify-items: center; gap: 14px;
+  background: rgba(9,14,19,.82); color: #dfe8f4;
+  backdrop-filter: blur(3px);
+}
+.demo-loading p { margin: 0; font-family: var(--font-pixel); font-size: 11px; }
+.demo-loading .btn { font-size: .8rem; padding: 7px 14px; }
+.demo-loading-detail {
+  max-width: 40ch; text-align: center;
+  font-family: var(--font-text) !important; font-size: .78rem !important;
+  color: #9fb2c4; opacity: .8;
+}
+.demo-loading-bar {
+  width: 200px; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,.16); overflow: hidden;
+}
+.demo-loading-bar i {
+  display: block; width: 40%; height: 100%;
+  background: var(--accent); border-radius: 3px;
+  animation: demo-loading 1.1s ease-in-out infinite;
+}
+@keyframes demo-loading {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+
+/* --------------------------------------------------------- os controles
+   Eles moram dentro da janela do painel, como no programa: os pets
+   que podem ser trocados e os botões de conversa e de som.        */
+.demo-pets { display: flex; flex-wrap: wrap; gap: 6px; }
+.demo-pet {
+  display: flex; align-items: center; gap: 7px;
+  border: 1px solid var(--line); background: #fff;
+  border-radius: 7px; padding: 4px 9px 4px 5px;
+  cursor: pointer; font: inherit; color: #16191c;
+}
+.demo-pet img {
+  width: 30px; height: 30px; object-fit: contain;
+  image-rendering: pixelated;
+}
+.demo-pet span { font-size: .78rem; }
+.demo-pet:hover { border-color: #2f7d5f; }
+.demo-pet[aria-pressed="true"] {
+  border-color: #2f7d5f; background: #e4f2ea; color: #1f5f45;
+}
+.demo-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.demo-actions .btn { font-size: .82rem; padding: 6px 12px; }
+
+/* ------------------------------------------- as necessidades do pet
+   As três barras do programa (VirtualPet): comida, carinho e energia. */
+.demo-needs {
+  display: grid; gap: 4px;
+  padding: 8px 10px; margin-bottom: 11px;
+  background: #eef1ef; border: 1px solid var(--line);
+}
+.demo-need {
+  display: grid; grid-template-columns: 78px 1fr 34px;
+  align-items: center; gap: 7px;
+}
+.demo-need-name { font-size: .74rem; color: #3c4548; }
+.demo-need-track {
+  height: 8px; background: #d7ddd9; border: 1px solid #b9c2bc;
+  overflow: hidden;
+}
+.demo-need-track i {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #3aa06d, #1a7545);
+  transition: width .4s ease;
+}
+.demo-need-track i.baixo { background: linear-gradient(90deg, #d08a4a, #b8562f); }
+.demo-need-value {
+  font-family: var(--font-pixel); font-size: 9px;
+  color: #4b5559; text-align: right;
+}
+.demo-panel-note {
+  margin: 11px 0 0;
+  font-size: .72rem; line-height: 1.45; color: var(--muted);
+}
+
+/* ------------------------------------------------ o bloco de notas
+   É o plugin de notas do programa: escreve e fica guardado. */
+.demo-note-label {
+  display: block;
+  font-family: var(--font-pixel); font-size: 10px;
+  color: var(--muted); text-transform: lowercase;
+  margin: 0 0 6px;
+}
+.demo-notes {
+  width: 100%; min-height: 104px; resize: vertical;
+  border: 1px solid var(--line); border-radius: 4px;
+  padding: 8px 9px; background: #fff; color: #16191c;
+  font: inherit; font-size: .82rem; line-height: 1.5;
+}
+.demo-notes:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ------------------------------------------------------ o Pomodoro */
+.demo-pomo { display: grid; gap: 9px; }
+.demo-pomo-label {
+  margin: 0;
+  font-family: var(--font-pixel); font-size: 10px;
+  color: var(--muted); text-transform: lowercase;
+}
+.demo-pomo-time {
+  margin: 0;
+  font-family: var(--font-pixel); font-size: 30px;
+  color: #1b2a22; letter-spacing: 1px; line-height: 1;
+}
+.demo-pomo-track {
+  height: 7px; border-radius: 4px;
+  background: #e4e9e6; overflow: hidden;
+}
+.demo-pomo-track i {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, #2f9e69, #1a7545);
+  border-radius: 4px;
+  transition: width .4s linear;
+}
+.demo-pomo-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.demo-pomo-actions .btn { font-size: .8rem; padding: 6px 12px; }
+.demo-reminders { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.demo-reminders button {
+  width: 100%; text-align: left;
+  border: 1px solid var(--line); background: #fff; color: #16191c;
+  border-radius: 4px; padding: 6px 9px;
+  cursor: pointer; font: inherit; font-size: .8rem;
+}
+.demo-reminders button:hover { border-color: var(--accent); background: var(--accent-lo); color: var(--accent-texto); }
+
+/* -------------------------------------------- a janela de animações */
+.demo-anim-lead {
+  margin: 0 0 10px;
+  font-size: .8rem; line-height: 1.5; color: var(--muted);
+}
+.demo-anim-lead code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: .92em; color: #333b3f;
+}
+.demo-anim-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+  gap: 6px;
+}
+.demo-anim {
+  display: grid; justify-items: center; gap: 3px;
+  padding: 6px 3px 5px;
+  border: 1px solid var(--line); border-radius: 4px;
+  background: #fff; color: #16191c;
+  cursor: pointer; font: inherit;
+}
+.demo-anim:hover { border-color: var(--accent); background: var(--accent-lo); }
+.demo-anim-thumb {
+  width: 48px; height: 48px;
+  image-rendering: pixelated;
+  background:
+    linear-gradient(45deg, #eef1ef 25%, transparent 25%, transparent 75%, #eef1ef 75%) 0 0 / 8px 8px,
+    linear-gradient(45deg, #eef1ef 25%, #fff 25%, #fff 75%, #eef1ef 75%) 4px 4px / 8px 8px;
+}
+.demo-anim span {
+  font-size: .68rem; line-height: 1.2; text-align: center;
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* -------------------------------------------- os botões da bandeja */
+.demo-tray-btn {
+  width: 22px; height: 22px; flex: none;
+  border: 1px solid transparent; border-radius: 0;
+  background: transparent; color: #000;
+  cursor: pointer; font: inherit; font-size: 12px; line-height: 1;
+  display: grid; place-items: center;
+}
+.demo-tray-btn:hover { background: #d4d0c8; }
+.demo-tray-btn:focus-visible { outline: 1px dotted #000; outline-offset: -2px; }
+
+/* O pet em foco: o foco fica no desenho do pet, não na tela inteira. */
+.demo-canvas:focus { outline: none; }
+
+/* -------------------------------------------------------- as dicas
+   O primeiro contato: uma ou duas frases que somem sozinhas.
+   A caixa não atrapalha o clique no pet: só o botão de fechar
+   recebe o mouse.                                                  */
+.demo-tips {
+  position: absolute; z-index: 28;
+  left: 50%; bottom: calc(var(--taskbar-h) + 14px); transform: translateX(-50%);
+  max-width: min(440px, 84vw);
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--chrome);
+  border: 1px solid #0b0f13;
+  color: #000;
+  padding: 9px 11px;
+  font-family: var(--font-pixel); font-size: 11px; line-height: 1.5;
+  box-shadow: 3px 3px 0 rgba(0,0,0,.3);
+  animation: demo-tips-pop .18s ease-out;
+  pointer-events: none;
+}
+/* A dica é centralizada com translateX(-50%); a animação precisa
+   manter isso, senão a caixa pula para a direita durante o aparecimento. */
+@keyframes demo-tips-pop {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px) scale(.96); }
+  to   { opacity: 1; transform: translateX(-50%); }
+}
+.demo-tips b { color: var(--accent-texto); font-weight: 700; }
+.demo-tips p { margin: 0; }
+.demo-tips .demo-tips-n {
+  flex: none; width: 18px; height: 18px;
+  background: var(--navy); color: #fff;
+  display: grid; place-items: center;
+  font-size: .7rem; font-weight: 700;
+}
+.demo-tips button {
+  flex: none; margin-left: 4px;
+  border: 0; background: transparent; color: #000;
+  cursor: pointer; font: inherit; font-size: 12px; line-height: 1; padding: 2px 4px;
+  pointer-events: auto;
+}
+.demo-tips button:hover { color: var(--accent-texto); }
+
+/* A janela se move: ela ganha a mão. */
+.demo-stage.dragging-window .demo-window-bar { cursor: grabbing; }
+.demo-stage.dragging-pet { cursor: grabbing; }
+
+/* ------------------------------------------------- quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .demo-bubble, .demo-menu, .demo-tips { animation: none; }
+  .demo-loading-bar i { animation-duration: 2.4s; }
+  .demo-pomo-track i { transition: none; }
+  .demo-window { transition: none; }
+}
+
+/* ------------------------------------------------------------- o celular
+   A tela pequena não é um desktop encolhido: o pet fica no meio, as
+   janelas viram uma de cada vez e a barra de tarefas rola.          */
+@media (max-width: 760px) {
+  .demo-icons {
+    top: 6px; left: 6px; right: 6px;
+    flex-direction: row; flex-wrap: nowrap;
+    gap: 2px; overflow-x: auto; scrollbar-width: none;
+  }
+  .demo-icons::-webkit-scrollbar { display: none; }
+  .demo-icon { width: 64px; padding: 5px 3px 4px; flex: none; }
+  .demo-icon b svg { width: 16px; height: 16px; }
+  /* O Silkscreen em 8 pixels fica nítido (é o tamanho para o qual ele
+     foi desenhado) e o nome do ícone cabe sem quebrar no meio. */
+  .demo-icon span { font-size: 8px; }
+  .demo-pet span { display: none; }
+  .demo-pet { padding: 4px; }
+  .demo-window-body { padding: 13px 14px 16px; }
+  .demo-tray-icons { display: none; }
+  .demo-tray { padding: 2px 3px; }
+  .demo-task { max-width: 42px; padding: 6px 8px; }
+  .demo-task span { display: none; }
+  .demo-start { padding: 7px 10px; }
+  .demo-tray-btn { width: 28px; height: 28px; }
+  .demo-window-dot { width: 22px; height: 20px; }
+  .demo-tips { bottom: calc(var(--taskbar-h) + 10px); font-size: 10px; }
+}
