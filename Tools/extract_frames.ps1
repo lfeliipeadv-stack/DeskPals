@@ -2,7 +2,7 @@ param(
     # Folder with the reference videos (*.mp4)
     [string]$VideoDir = (Join-Path $env:USERPROFILE "Downloads\Video"),
     # Where the extracted frames are written
-    [string]$OutDir = (Join-Path $PSScriptRoot "shots\mascot-frames"),
+    [string]$OutDir = (Join-Path (Split-Path $PSScriptRoot -Parent) "shots\mascot-frames"),
     # Frames per second to extract
     [int]$Fps = 5
 )
