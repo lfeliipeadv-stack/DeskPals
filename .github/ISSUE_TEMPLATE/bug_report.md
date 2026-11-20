@@ -1,19 +1,28 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: "[1.60][Portable]"
-labels: ''
+name: Problema / Bug report
+about: Algo não funciona como deveria / Something doesn't work
+title: '[Bug] '
+labels: bug
 assignees: ''
-type: Bug
 
 ---
 
-**Version**
-- App Version [e.g. 1.50]
-- Release [e.g. Windows Store, Portable, Browser]
+**O que aconteceu** / What happened
+<!-- Conte o que você fez e o que deu errado. -->
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**O que você esperava** / What you expected
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Como repetir** / How to reproduce
+1.
+2.
+3.
+
+**Versão e Windows** / Version and Windows
+- Versão do Meu Pet (Configurações › Sobre): 
+- Download usado: Instalador / DesktopPet.exe / DesktopPet-completo.exe
+- Windows: 10 / 11
+- Pet em uso: 
+
+**Telas ou log** / Screenshots or log
+<!-- Se puder, anexe uma foto da tela. O log dos últimos dias abre em
+     Configurações › Programa › Arquivos de log › Abrir pasta. -->

@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-O Meu Pet (desktopPet) roda em Windows 10 e 11 de 64 bits. Toda a instalação é feita dentro da sua conta: não é preciso ser administrador e nada é gravado fora da sua pasta de usuário.
+O Meu Pet (desktopPet) roda em Windows 10 e 11 de 64 bits. O instalador coloca o programa em `C:\Program Files\DesktopPet`, como os outros programas — por isso o Windows pede permissão de administrador uma vez, ao abrir o instalador. Os seus pets, lembretes, notas e configurações ficam na sua pasta de usuário (`%LocalAppData%\DesktopPet`), e o programa em si nunca pede administrador.
 
 ## Escolha o download
 
@@ -25,9 +25,9 @@ Cada release publica estes arquivos. Na versão 1.0.0:
 1. Baixe o `DesktopPet-Instalador.exe` e abra com dois cliques.
 2. **Passo 1 — ".NET 10 Desktop Runtime".** O instalador procura o runtime no computador. Se achar, aparece *"O .NET 10 já está instalado neste computador. Tudo pronto!"*. Se faltar, o botão **"Instalar o .NET 10"** baixa o instalador oficial da Microsoft e o abre; o botão **"Instalar"** continua desabilitado até o runtime ser encontrado, e o instalador reconfere a cada 3 segundos.
 3. **Passo 2 — "Atalhos".** Três caixas: **"Menu Iniciar"** e **"Área de trabalho"** já vêm marcadas, **"Iniciar com o Windows"** vem desmarcada.
-4. **"Instalar".** O programa é copiado para `%LocalAppData%\DesktopPet`, os atalhos `.url` são criados, o `uninstall.cmd` e a entrada de desinstalação no registro (`HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\DesktopPet`) são gravados, e o programa é aberto. A confirmação é: *"Pronto! O desktopPet foi instalado e já está aberto. Procure o ícone perto do relógio."*
+4. **"Instalar".** O programa e o Editor de Pets são copiados para `C:\Program Files\DesktopPet`, os atalhos `.url` são criados, o `uninstall.cmd` e a entrada de desinstalação do Windows são gravados, e o programa é aberto como usuário comum. A confirmação é: *"Pronto! O desktopPet foi instalado e já está aberto. Procure o ícone perto do relógio."*
 
-Nada disso pede privilégio de administrador: a dica da própria tela é *"Instala só para você, sem precisar de administrador."*
+O instalador pede permissão de administrador ao abrir, porque grava em Arquivos de Programas; a dica da própria tela é *"Instala em C:\Program Files, como os outros programas."* Quem não quer instalar nada usa o `DesktopPet-completo.exe`, que abre direto de qualquer pasta.
 
 ## Aviso do Windows sobre editor desconhecido
 
@@ -83,8 +83,8 @@ Antes de copiar o executável, o instalador fecha qualquer `DesktopPet.exe` que 
 - **Windows 10 ou 11, 64 bits.** O projeto é compilado como `net10.0-windows` com `RuntimeIdentifier` `win-x64` e `PlatformTarget` `x64`.
 - **.NET 10 Desktop Runtime** — só para o `DesktopPet.exe` e para o `DesktopPet-Instalador.exe`; a versão completa não precisa.
 - **Espaço em disco:** o programa instalado ocupa poucos MB; a versão completa ocupa cerca de 50 MB.
-- **Nenhuma conta e nenhum privilégio de administrador.**
-- **Internet é opcional.** Ela é usada para baixar pets da galeria, procurar versão nova do programa e talking com um serviço de IA. Todo o resto funciona sem rede.
+- **Nenhuma conta.** Só o instalador pede administrador (uma vez, para gravar em Arquivos de Programas); o programa roda como usuário comum.
+- **Internet é opcional.** Ela é usada para baixar pets da galeria, procurar versão nova do programa, baixar idiomas e falar com um serviço de IA. Todo o resto funciona sem rede.
 
 ## Abrir o painel pela bandeja
 

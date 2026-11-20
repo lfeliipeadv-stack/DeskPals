@@ -1,21 +1,17 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
+name: Ideia / Feature request
+about: Sugira algo novo para o Meu Pet / Suggest something new
+title: '[Ideia] '
+labels: enhancement
 assignees: ''
-type: Feature
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**A ideia** / The idea
+<!-- O que você gostaria que o pet ou o programa fizesse? -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**Para quê** / Why
+<!-- Em que momento do seu dia isso ajudaria? -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**Alguma referência** / Anything else
+<!-- Uma imagem, um exemplo, outro programa que faz algo parecido. -->

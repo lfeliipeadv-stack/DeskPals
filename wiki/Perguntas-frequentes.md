@@ -6,7 +6,7 @@ Reunidas aqui as dúvidas que aparecem mais no dia a dia: se o programa é segur
 
 ## O programa é seguro?
 
-O programa **não pede administrador**, **não instala serviço**, **não abre porta na rede** e **não manda estatísticas de uso**. O que ele faz com os seus dados está descrito logo abaixo, para você conferir em vez de acreditar.
+O programa **não pede administrador** (só o instalador pede, uma vez, para gravar em Arquivos de Programas), **não instala serviço**, **não abre porta na rede** e **não manda estatísticas de uso**. O que ele faz com os seus dados está descrito logo abaixo, para você conferir em vez de acreditar.
 
 ### Onde ficam os seus dados
 
