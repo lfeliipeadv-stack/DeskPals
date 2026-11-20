@@ -53,7 +53,7 @@ jobs:
           for d in Pets/*/; do f=$(basename "$d"); [ -f "$d/preview.gif" ] && cp "$d/preview.gif" "_site/pets/$f.gif"; done
           # As animacoes dos pets que aparecem na demo: a pagina roda o mesmo
           # animations.xml que o programa para Windows abre.
-          for p in esheep64 claude rex boo pingo mago nuvi; do
+          for p in esheep64 claude rex boo pingo mago nuvi clippy; do
             if [ -f "Pets/$p/animations.xml" ]; then
               mkdir -p "_site/pets/$p"
               cp "Pets/$p/animations.xml" "_site/pets/$p/animations.xml"

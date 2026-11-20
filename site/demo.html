@@ -30,16 +30,85 @@
 
   <!-- As janelas são criadas aqui pelo demo.js -->
 
-  <!-- A barra de tarefas -->
-  <div class="demo-taskbar">
-    <a class="demo-start" href="index.html" title="Voltar para a página do Meu Pet">▦ Meu Pet</a>
-    <div class="demo-taskbar-apps" id="taskbar-apps"></div>
-    <div class="demo-tray">
-      <span class="demo-tray-icons" aria-hidden="true"><span id="tray-sound">🔊</span><span>💬</span></span>
-      <button class="demo-tray-btn" id="tips-btn" type="button" title="Ver as dicas">?</button>
-      <button class="demo-tray-btn" id="menu-btn" type="button" title="O que o pet sabe fazer">⋯</button>
-      <span class="demo-clock" id="clock"><b>--:--</b><small>--/--/----</small></span>
+  <!-- A barra de tarefas, no jeito do Windows 11: à esquerda o "widget"
+       com o humor do pet, no meio o Iniciar, a pesquisa e as janelas,
+       à direita a bandeja com o som, a bateria e o relógio. -->
+  <div class="demo-taskbar" role="toolbar" aria-label="Barra de tarefas">
+    <button class="demo-widget" id="widget-btn" type="button" title="Como o pet está">
+      <span class="demo-widget-face" id="widget-face" aria-hidden="true">😊</span>
+      <span class="demo-widget-text"><b id="widget-title">Pet</b><small id="widget-sub">feliz</small></span>
+    </button>
+    <div class="demo-taskbar-center">
+      <button class="demo-tb-btn demo-start" id="start-btn" type="button" aria-haspopup="dialog" aria-expanded="false" title="Iniciar"></button>
+      <button class="demo-search" id="search-btn" type="button" aria-haspopup="dialog" title="Pesquisar">
+        <span class="demo-search-glyph" aria-hidden="true"></span><span>Pesquisar</span>
+      </button>
+      <div class="demo-taskbar-apps" id="taskbar-apps"></div>
     </div>
+    <div class="demo-tray">
+      <button class="demo-tb-btn demo-tray-btn" id="tips-btn" type="button" title="Ver as dicas" aria-label="Ver as dicas"></button>
+      <button class="demo-tb-btn demo-tray-btn" id="menu-btn" type="button" title="O que o pet sabe fazer" aria-label="O que o pet sabe fazer"></button>
+      <button class="demo-tb-btn demo-tray-group" id="quick-btn" type="button" aria-haspopup="dialog" aria-expanded="false" title="Configurações rápidas">
+        <span id="tray-wifi" aria-hidden="true"></span><span id="tray-sound" aria-hidden="true"></span><span id="tray-battery" aria-hidden="true"></span>
+      </button>
+      <button class="demo-tb-btn demo-clock" id="clock" type="button" aria-haspopup="dialog" aria-expanded="false" title="Calendário"><b>--:--</b><small>--/--/----</small></button>
+      <button class="demo-show-desktop" id="show-desktop" type="button" title="Mostrar a área de trabalho" aria-label="Mostrar a área de trabalho"></button>
+    </div>
+  </div>
+
+  <!-- O menu Iniciar: a pesquisa, os aplicativos fixados, os pets e o
+       botão de energia. -->
+  <div class="demo-flyout demo-startmenu" id="start-menu" role="dialog" aria-label="Iniciar" hidden>
+    <label class="demo-sm-search">
+      <span class="demo-search-glyph" aria-hidden="true"></span>
+      <input type="search" id="start-search" placeholder="Pesquise aplicativos, pets e ações" autocomplete="off" spellcheck="false" aria-label="Pesquisar">
+    </label>
+    <div class="demo-sm-scroll">
+      <div class="demo-sm-head"><h2>Fixados</h2></div>
+      <div class="demo-sm-grid" id="start-pinned"></div>
+      <div class="demo-sm-head"><h2>Pets</h2><small>clique para trocar</small></div>
+      <div class="demo-sm-pets" id="start-pets"></div>
+      <div class="demo-sm-head"><h2>Recomendado</h2></div>
+      <div class="demo-sm-recs" id="start-recs"></div>
+      <div class="demo-sm-results" id="start-results" hidden></div>
+    </div>
+    <div class="demo-sm-foot">
+      <span class="demo-sm-user"><span class="demo-sm-avatar" aria-hidden="true"></span>Visitante</span>
+      <button class="demo-tb-btn" id="power-btn" type="button" title="Energia" aria-label="Energia"></button>
+    </div>
+  </div>
+
+  <!-- As configurações rápidas: o som, o tema, o papel de parede, o foco. -->
+  <div class="demo-flyout demo-quick" id="quick" role="dialog" aria-label="Configurações rápidas" hidden>
+    <div class="demo-qs-grid" id="quick-tiles"></div>
+    <div class="demo-qs-slider">
+      <span id="quick-vol-icon" aria-hidden="true"></span>
+      <input type="range" id="quick-volume" min="0" max="100" value="60" aria-label="Volume do pet">
+      <output id="quick-volume-out">60</output>
+    </div>
+    <div class="demo-qs-foot"><span id="quick-battery"></span><span>Bateria do pet: cheia</span></div>
+  </div>
+
+  <!-- O calendário do relógio. -->
+  <div class="demo-flyout demo-calendar" id="calendar" role="dialog" aria-label="Calendário" hidden>
+    <div class="demo-cal-head"><b id="cal-title"></b>
+      <span><button class="demo-tb-btn" id="cal-prev" type="button" aria-label="Mês anterior">‹</button><button class="demo-tb-btn" id="cal-next" type="button" aria-label="Próximo mês">›</button></span>
+    </div>
+    <div class="demo-cal-grid" id="cal-grid"></div>
+    <div class="demo-cal-focus">
+      <span>Foco</span>
+      <button class="demo-pill" id="cal-focus" type="button">▶ Começar 25 min</button>
+    </div>
+  </div>
+
+  <!-- O menu do botão direito na área de trabalho. -->
+  <div class="demo-ctx" id="desk-menu" role="menu" hidden></div>
+
+  <!-- A notificação do Windows (o fim do Pomodoro, o papel de parede…). -->
+  <div class="demo-toast" id="toast" role="status" hidden>
+    <span class="demo-toast-app"><span id="toast-icon" aria-hidden="true"></span>Meu Pet</span>
+    <b id="toast-title"></b>
+    <p id="toast-text"></p>
   </div>
 
   <!-- O pet é desenhado aqui -->
@@ -83,7 +152,7 @@
     <button class="btn btn-ghost" id="ask" type="button">💬 Perguntar</button>
     <button class="btn btn-ghost" id="sound" type="button" aria-pressed="true">🔊 Som</button>
   </div>
-  <p class="demo-panel-note">O painel do programa tem oito páginas e dezesseis pets. Aqui vão os sete que trazem as animações publicadas.</p>
+  <p class="demo-panel-note">No programa, o painel tem a galeria inteira, com 26 pets. Aqui estão os que trazem as animações publicadas — e o Clippy, que flutua: fica onde você soltar.</p>
 </div>
 
 <div id="demo-pomodoro" hidden>
@@ -98,7 +167,7 @@
     <p class="demo-pomo-label">Anotações do dia</p>
     <ul class="demo-reminders" id="pomo-reminders">
       <li><button type="button" data-text="💧 Anotado: beber água. O pet também não esquece!">💧 Beber água</button></li>
-      <li><button type="button" data-text="🧍 Anotado: alongar as costas. Five minutes, como diz o English!">🧍 Alongar</button></li>
+      <li><button type="button" data-text="🧍 Anotado: alongar as costas. Cinco minutinhos já ajudam!">🧍 Alongar</button></li>
       <li><button type="button" data-text="☕ Anotado: um café. Eu quero um também!">☕ Café</button></li>
     </ul>
   </div>
@@ -117,8 +186,9 @@
   <h3>O que dá para fazer aqui</h3>
   <ul>
     <li><b>Perguntar</b> ao pet e receber as respostas dele no balão</li>
-    <li><b>Arastar e soltar</b> para arremessá-lo pela tela</li>
-    <li><b>Comida, carinho, brincadeira e sono</b>: as três necessidades caem com o tempo</li>
+    <li><b>Arrastar e soltar</b> para arremessá-lo pela tela</li>
+    <li><b>Comida, carinho e energia</b>: as necessidades do pet caem com o tempo</li>
+    <li><b>Menu Iniciar, configurações rápidas e calendário</b>, como no Windows 11</li>
     <li><b>Pomodoro</b> de 25 minutos, com aviso quando o bloco acaba</li>
     <li><b>Bloco de notas</b> que guarda o que você escreve</li>
     <li><b>Todas as animações</b> dele, lidas do <code>animations.xml</code> do programa</li>
@@ -130,7 +200,7 @@
     <li><b>Lembretes em português</b>: "me lembra de ligar para a Ana às 15h"</li>
     <li><b>Pomodoro com pausa longa</b> a cada quatro blocos</li>
     <li><b>Agenda do Google e do Outlook</b>, com aviso antes de cada reunião</li>
-    <li><b>Plugins, atalhos e dezesseis pets</b> para adotar</li>
+    <li><b>Plugins, atalhos e 26 pets</b> para adotar, em 23 idiomas</li>
   </ul>
 
   <div class="demo-sobre-cta">

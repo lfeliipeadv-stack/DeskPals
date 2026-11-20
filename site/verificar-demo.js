@@ -56,7 +56,8 @@ const extras = [
   "pets/boo/animations.xml",
   "pets/pingo/animations.xml",
   "pets/mago/animations.xml",
-  "pets/nuvi/animations.xml"
+  "pets/nuvi/animations.xml",
+  "pets/clippy/animations.xml"
 ];
 
 for (const rel of referencias.concat(extras)) {

@@ -218,7 +218,9 @@ export function parsePetXml(xmlText) {
     name: headerNode ? childText(headerNode, "petname", "Pet") : "Pet",
     title: headerNode ? childText(headerNode, "title", "") : "",
     author: headerNode ? childText(headerNode, "author", "") : "",
-    info: headerNode ? childText(headerNode, "info", "") : ""
+    info: headerNode ? childText(headerNode, "info", "") : "",
+    // "yes": o pet não tem gravidade e fica onde for solto (os assistentes do Office)
+    floating: headerNode ? childText(headerNode, "floating", "").trim().toLowerCase() === "yes" : false
   };
 
   const imageNode = childElement(root, "image");
@@ -723,7 +725,7 @@ export class Pet {
 
     this.x = bounds.left + spawn.start.x.get(ctx);
     this.y = bounds.top + spawn.start.y.get(ctx);
-    if (!this.isMovingLeft) {
+    if (!this.isMovingLeft && !this.header.floating) {
       // Andando para a direita: nasce fora da tela, à esquerda.
       this.x = bounds.left - (spawn.start.x.get(ctx) - bounds.right) - this.width;
     }
@@ -750,6 +752,8 @@ export class Pet {
    * caindo e pode pousar no topo de uma janela.
    */
   arriveFromSky(x = null) {
+    // Um pet sem gravidade não cai: ele aparece no ponto da sua entrada.
+    if (this.header.floating) { this.play(); return; }
     const bounds = this.world.bounds;
     this.x = x === null
       ? bounds.left + (bounds.right - bounds.left) / 2 - this.width / 2
@@ -1184,7 +1188,12 @@ export class Pet {
     this.tossForce = this.dragVelocity.tossForce(now);
     const length = Math.hypot(this.tossForce.x, this.tossForce.y);
 
-    if (length > 5) {
+    if (this.header.floating) {
+      // Sem gravidade: fica exatamente onde foi solto, sem arremesso.
+      this.isTossing = false;
+      this.tossForce = { x: 0, y: 0 };
+      if (this.keyAnimations.fall >= 0) this.setNewAnimation(this.keyAnimations.fall);
+    } else if (length > 5) {
       if (this.keyAnimations.toss >= 0) this.setNewAnimation(this.keyAnimations.toss);
       this.isTossing = true;
       this.tossVertVel = this.tossForce.y;

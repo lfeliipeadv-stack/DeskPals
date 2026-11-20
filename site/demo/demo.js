@@ -13,7 +13,7 @@
 
 import { Pet, World, holdPets } from "./pet-engine.js";
 import { VirtualPet, actionNames, RECLAMACOES, RESPOSTAS } from "./virtual-pet.js";
-import { iconePixels } from "./icons.js";
+import { iconeApp, glifo } from "./icons.js";
 
 /* Os pets que têm as animações publicadas na página. */
 const PETS = [
@@ -23,7 +23,8 @@ const PETS = [
   { folder: "boo", name: "Boo", note: "" },
   { folder: "pingo", name: "Pingo", note: "" },
   { folder: "mago", name: "Mago", note: "" },
-  { folder: "nuvi", name: "Nuvi", note: "" }
+  { folder: "nuvi", name: "Nuvi", note: "" },
+  { folder: "clippy", name: "Clippy", note: "flutua: fica onde você soltar" }
 ];
 
 /* As falas do pet: as mesmas do programa (src/lang/pt-BR.json). */
@@ -96,20 +97,21 @@ let respostaIndice = -1;
    conhece é o que ele faz. O fim da cadeia tem nomes que todos os
    pets da demo conhecem, para a reação nunca ficar muda.            */
 const REACTIONS = {
-  ola:     ["wave", "hello", "hi", "dance", "jump", "look around"],
-  alegria: ["dance", "cheer", "happy", "confetti", "party", "jump", "flower"],
-  pensei:  ["think", "idea", "detective", "look", "look around", "look_down", "sleep"],
-  comer:   ["eat", "chef", "pizza", "meat", "coffee", "drink", "jump", "dance"],
-  tonto:   ["dizzy", "spin", "rotate", "turn", "boing", "jump", "dance"],
-  carinho: ["love", "hearts", "heart", "kiss", "hug", "flower", "sleep", "look_down"],
-  cansado: ["sleep", "sleep1a", "sit", "sleep2a", "look_down", "jump"]
+  ola:     ["wave", "hello", "hi", "dance", "jump", "look around", "greeting", "get attention"],
+  alegria: ["dance", "cheer", "happy", "confetti", "party", "jump", "flower", "happy 2"],
+  pensei:  ["think", "idea", "detective", "look", "look around", "look_down", "sleep", "processing", "searching"],
+  comer:   ["eat", "chef", "pizza", "meat", "coffee", "drink", "jump", "dance", "get techy", "happy"],
+  tonto:   ["dizzy", "spin", "rotate", "turn", "boing", "jump", "dance", "confused", "surprised"],
+  carinho: ["love", "hearts", "heart", "kiss", "hug", "flower", "sleep", "look_down", "happy", "acknowledge"],
+  cansado: ["sleep", "sleep1a", "sit", "sleep2a", "look_down", "jump", "idle snooze", "rest pose"]
 };
 
 /* As dicas do primeiro contato: uma de cada vez, e somem sozinhas. */
 const TIPS = [
   "Clique no pet para conversar. Ele responde na hora.",
   "Arraste o pet e solte com força: ele voa, bate na borda e quica.",
-  "Use o botão <b>⋯</b> da barra de tarefas para ver tudo o que ele sabe fazer.",
+  "Clique com o botão direito no pet (ou na <b>pata</b> da barra de tarefas) para ver tudo o que ele sabe fazer.",
+  "O <b>Iniciar</b>, a pesquisa, o som e o relógio da barra de tarefas funcionam, como no Windows 11.",
   "No programa para Windows ele também cuida da agenda, dos lembretes e do Pomodoro."
 ];
 
@@ -248,13 +250,13 @@ function windowBody(win) {
   return `<div class="demo-slot" data-slot="demo-painel"></div>`;
 }
 
-/** Os três botões da janela, no desenho do Windows 95: quadradinhos
-    com o glifo desenhado dentro (o mesmo dosMinimizar/Maximizar/
-    Fechar do programa). */
+/** Os três botões da janela, no desenho do Windows 11: glifos finos,
+    sem moldura; o maximizar vira "restaurar" com a janela maximizada. */
 const WINDOW_GLYPHS = {
-  min: '<svg width="6" height="2" viewBox="0 0 6 2" aria-hidden="true"><rect width="6" height="2" fill="#000"/></svg>',
-  max: '<svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x=".6" y=".6" width="6.8" height="6.8" fill="none" stroke="#000" stroke-width="1.2"/></svg>',
-  close: '<svg width="8" height="7" viewBox="0 0 8 7" aria-hidden="true"><path d="M0 0l7 7M7 0L0 7" fill="none" stroke="#000" stroke-width="1.4"/></svg>'
+  min: glifo("minimize"),
+  max: glifo("maximize"),
+  restore: glifo("restore"),
+  close: glifo("close")
 };
 
 /** Cria o elemento de cada janela na tela. */
@@ -265,7 +267,7 @@ function buildWindows() {
     el.dataset.window = win.id;
     el.innerHTML = `
       <div class="demo-window-bar">
-        <span class="demo-window-icon" aria-hidden="true">${iconePixels(win.icon)}</span>
+        <span class="demo-window-icon" aria-hidden="true">${iconeApp(win.icon)}</span>
         <span class="demo-window-title"></span>
         <span class="demo-window-buttons">
           <button type="button" class="demo-window-dot min" data-action="min"></button>
@@ -310,9 +312,16 @@ function buildIcons() {
     icon.type = "button";
     icon.className = "demo-icon";
     icon.dataset.window = win.id;
-    icon.innerHTML = `<b>${iconePixels(win.icon)}</b><span></span>`;
+    icon.innerHTML = `<b>${iconeApp(win.icon)}</b><span></span>`;
     icon.querySelector("span").textContent = win.title;
-    icon.addEventListener("click", () => openWindow(win));
+    icon.title = "Abrir " + win.title;
+    // Como no Windows: o mouse abre com dois cliques (um clique só
+    // seleciona); o teclado (Enter) e o toque abrem na hora.
+    icon.addEventListener("click", (event) => {
+      if (event.detail === 0 || lastPointerType === "touch" || lastPointerType === "pen") openWindow(win);
+      else icon.focus();
+    });
+    icon.addEventListener("dblclick", () => openWindow(win));
     iconList.appendChild(icon);
   }
 
@@ -323,12 +332,19 @@ function buildIcons() {
   link.href = DOWNLOAD;
   link.target = "_blank";
   link.rel = "noopener";
-  link.innerHTML = `<b>${iconePixels("download")}</b><span></span>`;
+  link.innerHTML = `<b>${iconeApp("download")}</b><span></span>`;
   link.querySelector("span").textContent = "Baixar o Meu Pet";
   iconList.appendChild(link);
 }
 
 function openWindow(win) {
+  // A janela que estava fora da tela abre crescendo, como no Windows 11.
+  if ((win.closed || win.minimized) && win.el && !SHOT) {
+    win.el.classList.remove("abrindo");
+    void win.el.offsetWidth;
+    win.el.classList.add("abrindo");
+    win.el.addEventListener("animationend", () => win.el.classList.remove("abrindo"), { once: true });
+  }
   win.closed = false;
   win.minimized = false;
   // No celular cabe uma janela de cada vez: as outras saem de cena
@@ -390,11 +406,16 @@ function buildTaskbar() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "demo-task";
-    button.innerHTML = `<b>${iconePixels(win.icon)}</b><span></span>`;
+    button.innerHTML = `<b>${iconeApp(win.icon)}</b><span></span>`;
     button.querySelector("span").textContent = win.title;
+    button.title = win.title;
     button.addEventListener("click", () => {
+      // Como no Windows 11: o botão da janela da frente a minimiza; o de
+      // uma janela de trás a traz para a frente; o de uma fechada a abre.
       if (win.closed || win.minimized) {
         openWindow(win);
+      } else if (win === frontWindow() && !narrow) {
+        windowAction(win, "min");
       } else {
         raiseWindow(win);
       }
@@ -406,11 +427,14 @@ function buildTaskbar() {
 }
 
 function updateTaskbar() {
+  const front = frontWindow();
   for (const win of windows) {
     const button = taskButtons.get(win.id);
     if (!button) continue;
     const visivel = !win.closed && !win.minimized;
-    button.classList.toggle("on", visivel);
+    // o tracinho: cinza para a janela aberta, azul e comprido para a da frente
+    button.classList.toggle("aberto", !win.closed);
+    button.classList.toggle("on", visivel && win === front);
     button.classList.toggle("closed", win.closed);
     button.setAttribute("aria-pressed", String(visivel));
   }
@@ -573,6 +597,17 @@ function layoutWindows(forcar) {
     const estavaEscondida = win.el.hidden;
     win.gone = win.minimized;
     win.el.hidden = win.minimized;
+    if (win.el.classList.contains("maximized") !== full || !win.glyphSet) {
+      // o botão do meio: "maximizar" ou "restaurar", como no Windows 11
+      win.glyphSet = true;
+      const maxButton = win.el.querySelector('[data-action="max"]');
+      if (maxButton) {
+        const name = (full ? "Restaurar " : "Maximizar ") + win.title;
+        maxButton.innerHTML = full ? WINDOW_GLYPHS.restore : WINDOW_GLYPHS.max;
+        maxButton.title = name;
+        maxButton.setAttribute("aria-label", name);
+      }
+    }
     win.el.classList.toggle("maximized", full);
     win.el.style.left = left + "px";
     win.el.style.top = top + "px";
@@ -778,7 +813,7 @@ function positionBubble(now) {
   const abaixo = top < 6;
   if (abaixo) top = state.y + state.height + 14;
   left = Math.max(6, Math.min(world.width - width - 6, left));
-  top = Math.max(6, Math.min(world.height - height - 6, top));
+  top = Math.max(6, Math.min(world.height - (world.taskbarHeight || 48) - height - 6, top));
   bubble.style.left = Math.round(left) + "px";
   bubble.style.top = Math.round(top) + "px";
   bubble.classList.toggle("abaixo", abaixo);
@@ -908,8 +943,10 @@ function openMenu(x, y) {
   const height = menu.offsetHeight;
   // O menu cabe na tela: se for alto demais, ele sobe em vez de
   // transbordar por baixo.
-  const fitsBelow = y + height <= world.height - 6;
-  const top = fitsBelow ? y : Math.max(6, world.height - height - 6);
+  // (acima da barra de tarefas, que fica na frente dele)
+  const chao = world.height - (world.taskbarHeight || 48);
+  const fitsBelow = y + height <= chao - 6;
+  const top = fitsBelow ? y : Math.max(6, chao - height - 6);
   menu.style.left = Math.round(Math.max(6, Math.min(world.width - width - 6, x))) + "px";
   menu.style.top = Math.round(top) + "px";
   menu.querySelector("button")?.focus();
@@ -998,6 +1035,7 @@ function paintNeeds() {
     fill.className = p < 25 ? "baixo" : "";
     line.querySelector(".demo-need-value").textContent = p + "%";
   });
+  paintWidget();
 }
 
 /** O tique das necessidades: elas caem com o tempo, como no programa
@@ -1055,9 +1093,10 @@ function askMood() {
 
 function toggleSound() {
   soundOn = !soundOn;
-  if (pet) pet.volume = soundOn ? 0.6 : 0;
+  if (pet) pet.volume = soundOn ? volume : 0;
   paintSoundButton();
-  if (traySound) traySound.textContent = soundOn ? "🔊" : "🔇";
+  paintTray();
+  paintQuick();
 }
 
 /** O botão de som diz a verdade: um pet sem som não promete som. */
@@ -1089,6 +1128,7 @@ function showTip(index) {
   tipsBox.hidden = false;
   window.clearTimeout(tipTimer);
   tipTimer = window.setTimeout(() => showTip(index + 1), 8000);
+  if (typeof paintQuick === "function") paintQuick();
 }
 
 function hideTips() {
@@ -1137,6 +1177,7 @@ function pomoPaint() {
     // é o que a pessoa procura quando lê o manual.
     if (title) title.textContent = win.title + " — " + (pomoIsBreak ? "Pausa " : "") + minutes + ":" + seconds;
   }
+  paintCalendarFocus();
 }
 
 function pomoStartStop() {
@@ -1170,6 +1211,8 @@ function pomoTick() {
     say(pomoIsBreak
       ? "⏱ Fim do foco! Agora são cinco minutos de pausa. Alonga as costas!"
       : "⏱ A pausa acabou. Bora voltar?");
+    showToast(pomoIsBreak ? "Fim do foco" : "Fim da pausa",
+      pomoIsBreak ? "Cinco minutos de pausa. Levante, beba água, alongue." : "Hora de voltar para mais 25 minutos de foco.");
     beep();
   }
   pomoPaint();
@@ -1249,11 +1292,16 @@ function hitPet(point) {
          point.y >= state.y - margin && point.y <= state.y + state.height + margin;
 }
 
+/* O último tipo de ponteiro (mouse, toque ou caneta): o ícone da área de
+   trabalho abre com dois cliques no mouse, e com um toque no celular. */
+let lastPointerType = "mouse";
+document.addEventListener("pointerdown", (event) => { lastPointerType = event.pointerType || "mouse"; }, true);
+
 stage.addEventListener("pointerdown", (event) => {
   if (event.button === 2) return;
-  // O menu e o balão ficam por cima do palco: clicar neles não é
-  // tentar pegar o pet.
-  if (event.target.closest && event.target.closest("#menu, #bubble, .demo-tips")) return;
+  // O menu, o balão, a barra de tarefas e os painéis ficam por cima do
+  // palco: clicar neles não é tentar pegar o pet.
+  if (event.target.closest && event.target.closest("#menu, #bubble, .demo-tips, .demo-taskbar, .demo-flyout, .demo-ctx, .demo-toast")) return;
   // A dica some quando a pessoa começa a mexer na demo.
   hideTips();
   const point = localPoint(event);
@@ -1303,17 +1351,13 @@ stage.addEventListener("pointerdown", (event) => {
   // Os botões da janela (minimizar, maximizar, fechar) são tratados no
   // clique, e não aqui: é o clique que o teclado dispara no botão.
 
-  // Os ícones da área de trabalho.
+  // Os ícones da área de trabalho: abrem no clique (veja buildIcons).
   const icon = event.target.closest ? event.target.closest(".demo-icon") : null;
-  if (icon) {
-    const win = windowById(icon.dataset.window);
-    if (win) openWindow(win);
-    return;
-  }
+  if (icon) return;
 
-  // A barra do título: arrasta a janela.
+  // A barra do título: arrasta a janela (os botões dela não arrastam).
   const bar = event.target.closest ? event.target.closest(".demo-window-bar") : null;
-  if (bar) {
+  if (bar && !event.target.closest("[data-action]")) {
     const win = windowOf(bar);
     if (!win) return;
     raiseWindow(win);
@@ -1413,7 +1457,23 @@ stage.addEventListener("contextmenu", (event) => {
     // continua em cima de tudo, do jeito que ele anda sobre as janelas.
     const state = pet.renderState();
     openMenu(state.x + state.width / 2, state.y + state.height + 6);
+    return;
   }
+  // Na área de trabalho vazia: o menu do Windows 11 (papel de parede,
+  // tema, as janelas). Nas janelas continua o do navegador.
+  const sobre = event.target.closest && event.target.closest(".demo-window, .demo-taskbar, .demo-flyout, .demo-ctx, #menu, #bubble, .demo-tips, .demo-toast");
+  if (!sobre) {
+    event.preventDefault();
+    openDeskMenu(point.x, point.y);
+  }
+});
+
+/* Dois cliques na barra de título maximizam (ou restauram) a janela. */
+stage.addEventListener("dblclick", (event) => {
+  const bar = event.target.closest ? event.target.closest(".demo-window-bar") : null;
+  if (!bar || event.target.closest("[data-action]")) return;
+  const win = windowOf(bar);
+  if (win && !narrow) windowAction(win, "max");
 });
 
 document.addEventListener("pointerdown", (event) => {
@@ -1423,6 +1483,8 @@ document.addEventListener("pointerdown", (event) => {
 /* ----------------------------------------------------------- o teclado */
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
+    if (deskMenu && !deskMenu.hidden) { closeDeskMenu(); return; }
+    if (anyFlyoutOpen()) { closeFlyouts(); return; }
     if (!menu.hidden) { closeMenu(true); return; }
     if (!bubble.hidden) { hideBubble(); return; }
     if (!tipsBox.hidden) { hideTips(); return; }
@@ -1598,7 +1660,7 @@ async function loadPet(folder) {
   hideBubble();
 
   const next = new Pet(world);
-  next.volume = soundOn ? 0.6 : 0;
+  next.volume = soundOn ? volume : 0;
   next.onEvent = (event) => {
     if (event.type === "spawn") measure();
   };
@@ -1679,7 +1741,7 @@ async function loadPet(folder) {
   // O pet reclama quando está com fome, sem carinho ou sem energia
   // (o mesmo do programa: uma vez por hora, no máximo).
   window.setTimeout(() => {
-    if (!vpet) return;
+    if (!vpet || naoPerturbe) return;
     const problema = vpet.reclamar();
     if (!problema) return;
     const fala = RECLAMACOES[problema];
@@ -1698,8 +1760,18 @@ async function loadPet(folder) {
   // precisa saber o que está olhando e o que dá para fazer com isso.
   // Se a pessoa perguntou antes, a apresentação já aconteceu.
   if (!SHOT) {
-    window.setTimeout(() => {
-      if (greeted) return;
+    // A fala espera o pet chegar: ele vem do céu, e um balão aberto antes
+    // de ele aparecer ficaria preso no alto da tela, longe dele.
+    const esperaPousar = (tentativas) => {
+      if (greeted || naoPerturbe || pet !== este) return;
+      const state = pet.renderState();
+      const chegou = state.y >= 0 && !pet.isDragging && !pet.isTossing &&
+                     (pet.window || pet.header.floating || state.y + state.height >= world.area.bottom - 2);
+      if (!chegou && tentativas > 0) {
+        window.setTimeout(() => esperaPousar(tentativas - 1), 300);
+        return;
+      }
+      if (state.y < 0) return;   // ainda fora da tela: melhor não falar
       greeted = true;
       say(
         "Oi! Eu sou o " + (pet.header.name || "pet") + ". Esta é a área de trabalho de verdade: " +
@@ -1713,7 +1785,9 @@ async function loadPet(folder) {
             } }
         ]
       );
-    }, 900);
+    };
+    const este = pet;
+    window.setTimeout(() => esperaPousar(30), 900);
   }
 }
 
@@ -1784,6 +1858,506 @@ function unlockAudio() {
 }
 document.addEventListener("pointerdown", unlockAudio, { once: true });
 document.addEventListener("keydown", unlockAudio, { once: true });
+
+/* ===================================================== o Windows 11 da demo
+   O menu Iniciar, a pesquisa, as configurações rápidas, o calendário,
+   o menu do botão direito, as notificações, o tema e o papel de
+   parede. Tudo é da página: nada sai do navegador.                  */
+
+const startBtn = document.getElementById("start-btn");
+const searchBtn = document.getElementById("search-btn");
+const startMenu = document.getElementById("start-menu");
+const startSearch = document.getElementById("start-search");
+const quickBtn = document.getElementById("quick-btn");
+const quickPanel = document.getElementById("quick");
+const calendarPanel = document.getElementById("calendar");
+const deskMenu = document.getElementById("desk-menu");
+const toastBox = document.getElementById("toast");
+const widgetBtn = document.getElementById("widget-btn");
+const showDesktopBtn = document.getElementById("show-desktop");
+
+const PAGE_URL = "index.html";
+const WIKI_URL = "wiki/Home.html";
+const THEME_KEY = "meupet.demo.tema";
+const WALL_KEY = "meupet.demo.parede";
+const WALLPAPERS = ["Flor", "Pôr do sol", "Aurora"];
+
+let volume = 0.6;          // o volume do pet (0 a 1)
+let naoPerturbe = false;   // o pet não puxa conversa sozinho
+let wallpaper = 0;
+let calendarOffset = 0;    // meses antes ou depois do atual
+let toastTimer = 0;
+let desktopShown = null;   // as janelas que o "mostrar a área de trabalho" escondeu
+
+const lerGuardado = (key) => { try { return window.localStorage.getItem(key); } catch (error) { return null; } };
+const guardar = (key, value) => { try { window.localStorage.setItem(key, value); } catch (error) { /* sem armazenamento */ } };
+
+/* ------------------------------------------------- o tema e o papel de parede */
+function applyTheme(dark, save) {
+  stage.classList.toggle("escuro", dark);
+  if (save) guardar(THEME_KEY, dark ? "escuro" : "claro");
+  paintQuick();
+}
+function isDark() {
+  return stage.classList.contains("escuro");
+}
+function applyWallpaper(index, save) {
+  wallpaper = ((index % WALLPAPERS.length) + WALLPAPERS.length) % WALLPAPERS.length;
+  stage.classList.remove("parede-2", "parede-3");
+  if (wallpaper > 0) stage.classList.add("parede-" + (wallpaper + 1));
+  if (save) guardar(WALL_KEY, String(wallpaper));
+}
+function nextWallpaper() {
+  applyWallpaper(wallpaper + 1, true);
+  showToast("Papel de parede", "Agora é “" + WALLPAPERS[wallpaper] + "”. O pet gostou.");
+  react(REACTIONS.alegria);
+}
+
+/* ------------------------------------------------------- os painéis (flyouts) */
+const FLYOUTS = {
+  start: { el: startMenu, buttons: [startBtn, searchBtn] },
+  quick: { el: quickPanel, buttons: [quickBtn] },
+  calendar: { el: calendarPanel, buttons: [clock] }
+};
+
+function openFlyout(name) {
+  const alvo = FLYOUTS[name];
+  const jaAberto = alvo && !alvo.el.hidden;
+  closeFlyouts();
+  closeDeskMenu();
+  if (!alvo || jaAberto) return;
+  alvo.el.hidden = false;
+  for (const button of alvo.buttons) if (button) button.setAttribute("aria-expanded", "true");
+  hideTips();
+  if (name === "start") {
+    buildStartMenu();
+    startSearch.value = "";
+    filterStart("");
+    window.setTimeout(() => startSearch.focus(), 30);
+  } else if (name === "quick") {
+    paintQuick();
+    const first = quickPanel.querySelector("button");
+    if (first) first.focus();
+  } else if (name === "calendar") {
+    calendarOffset = 0;
+    renderCalendar();
+  }
+}
+
+function closeFlyouts() {
+  for (const flyout of Object.values(FLYOUTS)) {
+    if (!flyout.el) continue;
+    flyout.el.hidden = true;
+    for (const button of flyout.buttons) if (button) button.setAttribute("aria-expanded", "false");
+  }
+}
+
+function anyFlyoutOpen() {
+  return Object.values(FLYOUTS).some((flyout) => flyout.el && !flyout.el.hidden);
+}
+
+document.addEventListener("pointerdown", (event) => {
+  const dentro = event.target.closest && event.target.closest(".demo-flyout, #start-btn, #search-btn, #quick-btn, #clock, .demo-ctx, #power-btn");
+  if (!dentro) {
+    closeFlyouts();
+    closeDeskMenu();
+  }
+});
+
+/* ------------------------------------------------------------ o menu Iniciar */
+function launch(run) {
+  closeFlyouts();
+  closeDeskMenu();
+  run();
+}
+
+/** Tudo o que o Iniciar e a pesquisa encontram. */
+function startEntries() {
+  const apps = windows.map((win) => ({
+    kind: "app", name: win.title, icon: iconeApp(win.icon),
+    hint: "Aplicativo", run: () => openWindow(win)
+  }));
+  apps.push(
+    { kind: "app", name: "Baixar o Meu Pet", icon: iconeApp("download"), hint: "Instalador para Windows 10 e 11",
+      run: () => window.open(DOWNLOAD, "_blank", "noopener") },
+    { kind: "app", name: "Página do Meu Pet", icon: iconeApp("site"), hint: "Todos os recursos",
+      run: () => { window.location.href = PAGE_URL; } },
+    { kind: "app", name: "Manual (Wiki)", icon: iconeApp("wiki"), hint: "Como usar cada recurso",
+      run: () => window.open(WIKI_URL, "_blank", "noopener") }
+  );
+  const pets = PETS.map((info) => ({
+    kind: "pet", name: info.name, folder: info.folder,
+    hint: info.note || "Pet", run: () => loadPet(info.folder)
+  }));
+  const acoes = [
+    { kind: "acao", name: "Conversar com o pet", icon: iconeApp("painel"), hint: "Ele responde no balão", run: () => ask() },
+    { kind: "acao", name: "Começar um Pomodoro", icon: iconeApp("pomodoro"), hint: "25 minutos de foco",
+      run: () => { const win = windowById("pomodoro"); if (win) openWindow(win); if (!pomoRunning) pomoStartStop(); } },
+    { kind: "acao", name: "Trocar o papel de parede", icon: iconeApp("site"), hint: WALLPAPERS.join(", "), run: () => nextWallpaper() },
+    { kind: "acao", name: isDark() ? "Usar o tema claro" : "Usar o tema escuro", icon: iconeApp("sobre"), hint: "Como no Windows 11",
+      run: () => applyTheme(!isDark(), true) },
+    { kind: "acao", name: "Ver as animações do pet", icon: iconeApp("animacoes"), hint: "Lidas do animations.xml",
+      run: () => { buildAnimations(); const win = windowById("animacoes"); if (win) openWindow(win); } },
+    { kind: "acao", name: "Como você está hoje?", icon: iconeApp("notas"), hint: "O pet pergunta do seu humor", run: () => askMood() }
+  ];
+  return { apps, pets, acoes };
+}
+
+function startItem(entry, className) {
+  const element = document.createElement("button");
+  element.type = "button";
+  element.className = className;
+  const figure = document.createElement("b");
+  if (entry.kind === "pet") {
+    const image = document.createElement("img");
+    image.src = "pets/" + entry.folder + ".gif";
+    image.alt = "";
+    image.loading = "lazy";
+    figure.appendChild(image);
+    element.setAttribute("aria-pressed", String(entry.folder === currentFolder));
+  } else {
+    figure.innerHTML = entry.icon;
+  }
+  element.appendChild(figure);
+  if (className === "demo-sm-rec") {
+    const text = document.createElement("span");
+    const name = document.createElement("strong");
+    name.textContent = entry.name;
+    const hint = document.createElement("small");
+    hint.textContent = entry.hint || "";
+    text.append(name, hint);
+    element.appendChild(text);
+  } else {
+    element.appendChild(document.createTextNode(entry.name));
+  }
+  element.title = entry.hint ? entry.name + " — " + entry.hint : entry.name;
+  element.addEventListener("click", () => launch(entry.run));
+  return element;
+}
+
+function buildStartMenu() {
+  const { apps, pets, acoes } = startEntries();
+  const pinned = document.getElementById("start-pinned");
+  const petBox = document.getElementById("start-pets");
+  const recs = document.getElementById("start-recs");
+  pinned.replaceChildren(...apps.map((entry) => startItem(entry, "demo-sm-app")));
+  petBox.replaceChildren(...pets.map((entry) => startItem(entry, "demo-sm-app")));
+  recs.replaceChildren(...acoes.map((entry) => startItem(entry, "demo-sm-rec")));
+}
+
+const semAcento = (text) => text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+/** A pesquisa: os aplicativos, os pets e as ações que têm o texto. */
+function filterStart(query) {
+  const results = document.getElementById("start-results");
+  const busca = semAcento(query.trim());
+  const sections = startMenu.querySelectorAll(".demo-sm-head, #start-pinned, #start-pets, #start-recs");
+  if (!busca) {
+    results.hidden = true;
+    for (const section of sections) section.hidden = false;
+    return;
+  }
+  for (const section of sections) section.hidden = true;
+  const { apps, pets, acoes } = startEntries();
+  const achados = [...apps, ...pets, ...acoes].filter((entry) =>
+    semAcento(entry.name + " " + (entry.hint || "")).includes(busca));
+  results.hidden = false;
+  if (!achados.length) {
+    const vazio = document.createElement("p");
+    vazio.className = "demo-sm-empty";
+    vazio.textContent = "Nada encontrado para “" + query.trim() + "”. Tente “pet”, “foco” ou “tema”.";
+    results.replaceChildren(vazio);
+    return;
+  }
+  results.replaceChildren(...achados.map((entry) => startItem(entry, "demo-sm-rec")));
+}
+
+startSearch.addEventListener("input", () => filterStart(startSearch.value));
+startSearch.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    const first = startMenu.querySelector("#start-results:not([hidden]) button, #start-pinned button");
+    if (first) first.click();
+  } else if (event.key === "ArrowDown") {
+    event.preventDefault();
+    const first = startMenu.querySelector(".demo-sm-scroll button:not([hidden])");
+    if (first) first.focus();
+  }
+});
+
+/* --------------------------------------------- as configurações rápidas */
+const QUICK_TILES = [
+  { id: "som", label: () => soundOn ? "Som" : "Sem som", icon: () => glifo(soundOn ? "volume" : "mute"),
+    on: () => soundOn, run: () => toggleSound() },
+  { id: "tema", label: () => "Tema escuro", icon: () => glifo("moon"), on: () => isDark(),
+    run: () => applyTheme(!isDark(), true) },
+  { id: "parede", label: () => WALLPAPERS[wallpaper], icon: () => glifo("image"), on: () => false,
+    run: () => nextWallpaper() },
+  { id: "foco", label: () => pomoRunning ? "Foco ligado" : "Foco", icon: () => glifo("timer"), on: () => pomoRunning,
+    run: () => { pomoStartStop(); const win = windowById("pomodoro"); if (win && pomoRunning) openWindow(win); } },
+  { id: "silencio", label: () => "Não perturbe", icon: () => glifo("bell"), on: () => naoPerturbe,
+    run: () => {
+      naoPerturbe = !naoPerturbe;
+      if (naoPerturbe) { hideTips(); hideBubble(); }
+      showToast(naoPerturbe ? "Não perturbe ligado" : "Não perturbe desligado",
+        naoPerturbe ? "O pet não puxa conversa sozinho. Clique nele quando quiser falar." : "O pet volta a conversar quando tiver algo a dizer.");
+    } },
+  { id: "dicas", label: () => "Dicas", icon: () => glifo("bulb"), on: () => !tipsBox.hidden,
+    run: () => { if (tipsBox.hidden) showTip(0); else hideTips(); } }
+];
+
+function paintQuick() {
+  const box = document.getElementById("quick-tiles");
+  if (!box) return;
+  if (!box.children.length) {
+    for (const tile of QUICK_TILES) {
+      const holder = document.createElement("div");
+      holder.className = "demo-qs-tile";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.tile = tile.id;
+      button.addEventListener("click", () => { tile.run(); paintQuick(); });
+      const label = document.createElement("small");
+      holder.append(button, label);
+      box.appendChild(holder);
+    }
+  }
+  for (const tile of QUICK_TILES) {
+    const button = box.querySelector(`[data-tile="${tile.id}"]`);
+    if (!button) continue;
+    button.innerHTML = tile.icon();
+    button.setAttribute("aria-pressed", String(!!tile.on()));
+    button.setAttribute("aria-label", tile.label());
+    button.nextElementSibling.textContent = tile.label();
+  }
+  const slider = document.getElementById("quick-volume");
+  const out = document.getElementById("quick-volume-out");
+  const icon = document.getElementById("quick-vol-icon");
+  const valor = soundOn ? Math.round(volume * 100) : 0;
+  if (slider && document.activeElement !== slider) slider.value = String(valor);
+  if (out) out.textContent = String(valor);
+  if (icon) icon.innerHTML = glifo(valor > 0 ? "volume" : "mute");
+  const battery = document.getElementById("quick-battery");
+  if (battery && !battery.innerHTML) battery.innerHTML = glifo("battery");
+}
+
+document.getElementById("quick-volume").addEventListener("input", (event) => {
+  const valor = Number(event.target.value) / 100;
+  if (valor > 0) volume = valor;
+  soundOn = valor > 0;
+  if (pet) pet.volume = soundOn ? volume : 0;
+  paintSoundButton();
+  paintTray();
+  paintQuick();
+});
+
+/* ------------------------------------------------------------- o calendário */
+function renderCalendar() {
+  const hoje = new Date();
+  const base = new Date(hoje.getFullYear(), hoje.getMonth() + calendarOffset, 1);
+  const title = document.getElementById("cal-title");
+  const grid = document.getElementById("cal-grid");
+  const mes = base.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+  title.textContent = mes.charAt(0).toUpperCase() + mes.slice(1);
+  const cells = [];
+  for (const dia of ["D", "S", "T", "Q", "Q", "S", "S"]) {
+    const head = document.createElement("span");
+    head.className = "dow";
+    head.textContent = dia;
+    cells.push(head);
+  }
+  const inicio = new Date(base);
+  inicio.setDate(1 - base.getDay());
+  for (let i = 0; i < 42; i++) {
+    const data = new Date(inicio);
+    data.setDate(inicio.getDate() + i);
+    const cell = document.createElement("span");
+    cell.className = "day";
+    if (data.getMonth() !== base.getMonth()) cell.classList.add("fora");
+    if (data.toDateString() === hoje.toDateString()) cell.classList.add("hoje");
+    cell.textContent = String(data.getDate());
+    cells.push(cell);
+  }
+  grid.replaceChildren(...cells);
+  paintCalendarFocus();
+}
+
+function paintCalendarFocus() {
+  const button = document.getElementById("cal-focus");
+  if (!button) return;
+  button.textContent = pomoRunning ? "⏸ Pausar o foco" : (pomoLeft < pomoTotal() ? "▶ Continuar o foco" : "▶ Começar 25 min");
+}
+
+document.getElementById("cal-prev").addEventListener("click", () => { calendarOffset--; renderCalendar(); });
+document.getElementById("cal-next").addEventListener("click", () => { calendarOffset++; renderCalendar(); });
+document.getElementById("cal-focus").addEventListener("click", () => {
+  pomoStartStop();
+  paintCalendarFocus();
+  const win = windowById("pomodoro");
+  if (win && pomoRunning) openWindow(win);
+});
+
+/* ------------------------------------------- o menu do botão direito (e o de energia) */
+function fillMenu(list, items) {
+  list.replaceChildren();
+  for (const item of items) {
+    if (item === "-") {
+      list.appendChild(document.createElement("hr"));
+      continue;
+    }
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("role", "menuitem");
+    button.innerHTML = item.icon ? glifo(item.icon) : "";
+    button.appendChild(document.createTextNode(item.label));
+    if (item.kbd) {
+      const kbd = document.createElement("kbd");
+      kbd.textContent = item.kbd;
+      button.appendChild(kbd);
+    }
+    button.addEventListener("click", () => launch(item.run));
+    list.appendChild(button);
+  }
+}
+
+function placeMenu(list, x, y) {
+  list.hidden = false;
+  const width = list.offsetWidth;
+  const height = list.offsetHeight;
+  const left = Math.max(6, Math.min(world.width - width - 6, x));
+  const top = Math.max(6, Math.min(world.height - world.taskbarHeight - height - 6, y));
+  list.style.left = Math.round(left) + "px";
+  list.style.top = Math.round(top) + "px";
+  const first = list.querySelector("button");
+  if (first) first.focus({ preventScroll: true });
+}
+
+function openDeskMenu(x, y) {
+  closeFlyouts();
+  closeMenu();
+  fillMenu(deskMenu, [
+    { icon: "refresh", label: "Atualizar", run: () => { react(REACTIONS.ola); } },
+    "-",
+    { icon: "image", label: "Próximo papel de parede", run: () => nextWallpaper() },
+    { icon: isDark() ? "sun" : "moon", label: isDark() ? "Usar o tema claro" : "Usar o tema escuro", run: () => applyTheme(!isDark(), true) },
+    "-",
+    { icon: "grid", label: "Abrir o painel do Meu Pet", run: () => { const win = windowById("painel"); if (win) openWindow(win); } },
+    { icon: "chat", label: "Conversar com o pet", run: () => ask() },
+    { icon: "bulb", label: "Mostrar as dicas", run: () => showTip(0) },
+    "-",
+    { icon: "download", label: "Baixar o Meu Pet", run: () => window.open(DOWNLOAD, "_blank", "noopener") },
+    { icon: "info", label: "Sobre a demo", run: () => { const win = windowById("sobre"); if (win) openWindow(win); } }
+  ]);
+  placeMenu(deskMenu, x, y);
+}
+
+function openPowerMenu() {
+  const rect = document.getElementById("power-btn").getBoundingClientRect();
+  const stageRect = stage.getBoundingClientRect();
+  fillMenu(deskMenu, [
+    { icon: "moon", label: "Suspender (o pet dorme)", run: () => petAction("dormir") },
+    { icon: "refresh", label: "Reiniciar a demo", run: () => window.location.reload() },
+    "-",
+    { icon: "download", label: "Baixar o Meu Pet de verdade", run: () => window.open(DOWNLOAD, "_blank", "noopener") }
+  ]);
+  deskMenu.hidden = false;
+  placeMenu(deskMenu, rect.right - stageRect.left - deskMenu.offsetWidth, rect.top - stageRect.top - deskMenu.offsetHeight - 8);
+}
+
+function closeDeskMenu() {
+  if (deskMenu) deskMenu.hidden = true;
+}
+
+/* ------------------------------------------------------------ a notificação */
+function showToast(title, text) {
+  if (!toastBox) return;
+  document.getElementById("toast-icon").innerHTML = iconeApp("meupet");
+  document.getElementById("toast-title").textContent = title;
+  document.getElementById("toast-text").textContent = text;
+  toastBox.hidden = false;
+  window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(() => { toastBox.hidden = true; }, 5000);
+}
+toastBox.addEventListener("click", () => { toastBox.hidden = true; });
+
+/* ------------------------------------------------------------ o "widget" */
+function paintWidget() {
+  if (!widgetBtn) return;
+  const nome = pet && pet.header ? pet.header.name : "Pet";
+  let face = "😊";
+  let texto = "feliz";
+  if (vpet) {
+    const n = vpet.numeros;
+    const menor = Math.min(n.food, n.love, n.energy);
+    if (menor < 25) {
+      if (n.food === menor) { face = "😋"; texto = "com fome"; }
+      else if (n.love === menor) { face = "🥺"; texto = "quer carinho"; }
+      else { face = "😴"; texto = "com sono"; }
+    } else if (menor < 60) {
+      face = "🙂"; texto = "tranquilo";
+    }
+  }
+  document.getElementById("widget-face").textContent = face;
+  document.getElementById("widget-title").textContent = nome;
+  document.getElementById("widget-sub").textContent = texto;
+  widgetBtn.title = nome + " está " + texto + ". Clique para abrir o painel.";
+}
+widgetBtn.addEventListener("click", () => {
+  const win = windowById("painel");
+  if (win) openWindow(win);
+});
+
+/* ------------------------------------------- a bandeja: som, rede, bateria */
+function paintTray() {
+  const wifi = document.getElementById("tray-wifi");
+  const battery = document.getElementById("tray-battery");
+  if (wifi && !wifi.innerHTML) wifi.innerHTML = glifo("wifi");
+  if (battery && !battery.innerHTML) battery.innerHTML = glifo("battery");
+  if (traySound) traySound.innerHTML = glifo(soundOn ? "volume" : "mute");
+  quickBtn.title = "Configurações rápidas — som " + (soundOn ? "ligado" : "desligado");
+}
+
+/* -------------------------------------------- mostrar a área de trabalho */
+function toggleDesktop() {
+  if (desktopShown) {
+    for (const win of desktopShown) if (!win.closed && win.minimized) openWindow(win);
+    desktopShown = null;
+    return;
+  }
+  desktopShown = windows.filter((win) => !win.closed && !win.minimized);
+  for (const win of desktopShown) {
+    win.minimized = true;
+    win.gone = true;
+  }
+  layoutWindows();
+  updateTaskbar();
+}
+
+/* ------------------------------------------------------------ os botões da barra */
+startBtn.innerHTML = iconeApp("meupet");
+for (const glyph of document.querySelectorAll(".demo-search-glyph")) glyph.innerHTML = glifo("search");
+tipsBtn.innerHTML = glifo("bulb");
+menuBtn.innerHTML = glifo("paw");
+document.getElementById("power-btn").innerHTML = glifo("power");
+document.querySelector(".demo-sm-avatar").innerHTML = glifo("user");
+startBtn.addEventListener("click", () => openFlyout("start"));
+searchBtn.addEventListener("click", () => openFlyout("start"));
+quickBtn.addEventListener("click", () => openFlyout("quick"));
+clock.addEventListener("click", () => openFlyout("calendar"));
+showDesktopBtn.addEventListener("click", toggleDesktop);
+document.getElementById("power-btn").addEventListener("click", (event) => {
+  event.stopPropagation();
+  if (!deskMenu.hidden) { closeDeskMenu(); return; }
+  openPowerMenu();
+});
+
+/* O tema começa como o do computador (ou o escolhido da última vez). */
+{
+  const temaSalvo = lerGuardado(THEME_KEY);
+  const escuroDoSistema = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(temaSalvo ? temaSalvo === "escuro" : escuroDoSistema, false);
+  applyWallpaper(Number(lerGuardado(WALL_KEY)) || 0, false);
+  paintTray();
+}
 
 /* ----------------------------------------------------------------- início */
 askButton.addEventListener("click", ask);
@@ -1888,7 +2462,21 @@ if (document.fonts && document.fonts.ready) {
 }
 // No modo foto o quadro fica parado: a imagem sai sempre igual.
 requestAnimationFrame(frame);
-loadPet(PETS[0].folder);
+/* Parâmetros para as fotos da documentação e para testar a página:
+   ?pet=clippy (o pet que abre), ?tema=escuro|claro, ?parede=1..3 e
+   ?abrir=iniciar|rapidas|calendario|menu|pet (o painel aberto na foto). */
+const PARAMS = new URLSearchParams(window.location.search);
+if (PARAMS.get("tema")) applyTheme(PARAMS.get("tema") === "escuro", false);
+if (PARAMS.get("parede")) applyWallpaper(Number(PARAMS.get("parede")) - 1, false);
+const petInicial = PETS.some((info) => info.folder === PARAMS.get("pet")) ? PARAMS.get("pet") : PETS[0].folder;
+loadPet(petInicial).then(() => {
+  const abrir = PARAMS.get("abrir");
+  if (abrir === "iniciar") openFlyout("start");
+  else if (abrir === "rapidas") openFlyout("quick");
+  else if (abrir === "calendario") openFlyout("calendar");
+  else if (abrir === "menu") openDeskMenu(world.width * 0.55, world.height * 0.35);
+  else if (abrir === "pet" && pet) { const s = pet.renderState(); openMenu(s.x + s.width / 2, s.y + s.height + 6); }
+});
 showTip(0);
 
 // O relógio se acerta com o minuto, para não atrasar na tela.

@@ -1,65 +1,116 @@
 /* ---------------------------------------------------------------
    Demo — a área de trabalho do Meu Pet dentro da página.
 
-   A página inteira é a área de trabalho: papel de parede, janelas
-   e barra de tarefas, sem moldura nenhuma. O pet é desenhado num
-   canvas por cima de tudo, andando pela tela como no Windows.
+   A página inteira é a área de trabalho, no jeito do Windows 11:
+   papel de parede, janelas com cantos arredondados e material
+   translúcido (o "Mica"), a barra de tarefas centralizada, o menu
+   Iniciar, as configurações rápidas e o calendário. O pet é desenhado
+   num canvas por cima de tudo, andando pela tela como no Windows.
 
-   O cromo é o do Windows 95 — o mesmo do site: moldura com chanfro,
-   botões quadrados, barra de tarefas cinza e os ícones. O conteúdo
-   das janelas (o texto, os botões) é o do site.
+   Os dois temas do Windows 11: o claro e o escuro. O tema segue o do
+   computador e muda pelas configurações rápidas.
    --------------------------------------------------------------- */
 
 [hidden] { display: none !important; }
 
-/* A página da demo não tem rolagem: ela é a tela do computador.
-   O dvh (e não o vh) deixa a barra de tarefas visível também no
-   celular, onde a barra do navegador muda a altura da tela. */
 body.demo-pagina {
   margin: 0;
   padding: 0;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  background: #0b0f13;
+  background: #1b2433;
 }
 
+/* ------------------------------------------------------------ os temas */
 .demo-stage {
-  /* A demo simula uma tela do Windows 95: a paleta dela é a mesma nos
-     dois temas do site. Sem isto, no tema escuro os botões das janelas
-     ficariam com o texto branco sobre o fundo branco. */
-  --ink: #16191c;
-  --muted: #5b6469;
-  --line: #dfe4e1;
-  --surface: #f6f7f5;
-  --bg: #ffffff;
-  --accent: #1a7545;
-  --accent-lo: #e8f3ec;
-  --accent-texto: #14603c;
+  --font-ui: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system,
+             "Helvetica Neue", Roboto, Arial, sans-serif;
+  --font-display: "Segoe UI Variable Display", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system,
+             "Helvetica Neue", Roboto, Arial, sans-serif;
 
-  /* O cromo do Windows 95. */
-  --chrome: #c0c0c0;
-  --chrome-hi: #ffffff;
-  --chrome-lo: #808080;
-  --chrome-escuro: #404040;
-  --teal: #008080;
-  --navy: #0a246a;
-  --navy-2: #3a6ea5;
-  --taskbar-h: 38px;
+  /* o tema claro do Windows 11 */
+  --text: #1b1b1b;
+  --text-2: #5c5c5c;
+  --text-3: #8a8a8a;
+  --accent: #005fb8;
+  --accent-2: #0067c0;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(0, 95, 184, .1);
+  --brand: #12804b;              /* o verde do Meu Pet: o download */
+  --brand-hover: #0f6e40;
+  --mica: rgba(243, 243, 243, .86);
+  --acrylic: rgba(249, 249, 249, .82);
+  --layer: #fbfbfb;
+  --layer-2: #ffffff;
+  --card: rgba(255, 255, 255, .7);
+  --card-hover: rgba(249, 249, 249, .55);
+  --subtle: rgba(0, 0, 0, .04);
+  --subtle-2: rgba(0, 0, 0, .065);
+  --stroke: rgba(0, 0, 0, .0803);
+  --stroke-2: rgba(0, 0, 0, .14);
+  --control: rgba(255, 255, 255, .7);
+  --control-hover: rgba(249, 249, 249, .5);
+  --control-stroke: rgba(0, 0, 0, .0578);
+  --control-stroke-b: rgba(0, 0, 0, .1622);
+  --taskbar: rgba(238, 238, 238, .84);
+  --shadow-window: 0 0 0 1px rgba(0, 0, 0, .06), 0 8px 16px rgba(0, 0, 0, .14), 0 24px 48px rgba(0, 0, 0, .12);
+  --shadow-window-off: 0 0 0 1px rgba(0, 0, 0, .05), 0 2px 6px rgba(0, 0, 0, .1), 0 12px 24px rgba(0, 0, 0, .08);
+  --shadow-flyout: 0 0 0 1px rgba(0, 0, 0, .06), 0 8px 16px rgba(0, 0, 0, .14), 0 32px 64px rgba(0, 0, 0, .18);
+  --close-hover: #c42b1c;
+  --good: #0f7b0f;
+  --bad: #c42b1c;
+  --warn: #9d5d00;
+  --taskbar-h: 48px;
 
   position: fixed;
   inset: 0;
   height: 100vh;
   height: 100dvh;
-  border: 0;
-  border-radius: 0;
   overflow: hidden;
-  box-shadow: none;
-  background: #0b0f13;
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
-  font-family: var(--font-text);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--text);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* o tema escuro do Windows 11 */
+.demo-stage.escuro {
+  --text: #ffffff;
+  --text-2: #cfcfcf;
+  --text-3: #9d9d9d;
+  --accent: #60cdff;
+  --accent-2: #4cc2ff;
+  --accent-text: #000000;
+  --accent-soft: rgba(96, 205, 255, .14);
+  --brand: #3ccf8e;
+  --brand-hover: #5bdca2;
+  --mica: rgba(32, 32, 32, .84);
+  --acrylic: rgba(44, 44, 44, .8);
+  --layer: #272727;
+  --layer-2: #2d2d2d;
+  --card: rgba(255, 255, 255, .05);
+  --card-hover: rgba(255, 255, 255, .08);
+  --subtle: rgba(255, 255, 255, .06);
+  --subtle-2: rgba(255, 255, 255, .09);
+  --stroke: rgba(255, 255, 255, .0837);
+  --stroke-2: rgba(255, 255, 255, .16);
+  --control: rgba(255, 255, 255, .061);
+  --control-hover: rgba(255, 255, 255, .084);
+  --control-stroke: rgba(255, 255, 255, .07);
+  --control-stroke-b: rgba(255, 255, 255, .05);
+  --taskbar: rgba(28, 28, 28, .85);
+  --shadow-window: 0 0 0 1px rgba(0, 0, 0, .5), 0 8px 16px rgba(0, 0, 0, .3), 0 24px 48px rgba(0, 0, 0, .34);
+  --shadow-window-off: 0 0 0 1px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .26), 0 12px 24px rgba(0, 0, 0, .22);
+  --shadow-flyout: 0 0 0 1px rgba(0, 0, 0, .5), 0 8px 16px rgba(0, 0, 0, .3), 0 32px 64px rgba(0, 0, 0, .4);
+  --good: #6ccb5f;
+  --bad: #ff99a4;
+  --warn: #fce100;
+  color-scheme: dark;
 }
 
 /* O texto de verdade pode ser escolhido: só a moldura não deixa. */
@@ -77,626 +128,898 @@ body.demo-pagina {
   position: fixed; inset: 0; z-index: 100;
   display: grid; place-content: center; gap: 12px;
   padding: 24px; text-align: center;
-  background: #10161c; color: #e6eef5;
-  font-family: var(--font-text);
+  background: #1b2433; color: #e6eef5;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 .demo-noscript p { margin: 0; max-width: 46ch; }
 .demo-noscript a { color: #6fd39b; }
 
 /* ---------------------------------------------------- o papel de parede
-   Quatro camadas: a base escura, três luzes (uma acesa no canto, uma
-   fria embaixo, uma morna do lado) e o granulado fino, que impede o
-   degradê de virar faixas. A vinheta fecha a borda da tela.       */
+   Três papéis de parede desenhados aqui mesmo (nada para baixar):
+   a "flor" de pétalas de luz, o pôr do sol e a aurora. Cada um tem a
+   versão clara e a escura, como os papéis de parede do Windows 11.  */
 .demo-wallpaper {
   position: absolute; inset: 0;
-  /* A mesa teal do Windows 95, escurecida para o pet deitado em cima
-     aparecer. O token --teal é o mesmo da página do projeto. */
-  background:
-    radial-gradient(1200px 620px at 20% 4%, rgba(116,196,214,.40) 0%, transparent 66%),
-    radial-gradient(1000px 520px at 94% 108%, rgba(72,156,126,.32) 0%, transparent 66%),
-    radial-gradient(900px 420px at 76% 12%, rgba(214,158,98,.18) 0%, transparent 70%),
-    radial-gradient(700px 380px at 38% 92%, rgba(96,120,196,.16) 0%, transparent 70%),
-    linear-gradient(180deg,
-      color-mix(in srgb, var(--teal) 34%, #243440) 0%,
-      color-mix(in srgb, var(--teal) 18%, #18222b) 46%,
-      #0d1217 100%);
+  overflow: hidden;
+  background: linear-gradient(160deg, #e8f0fb 0%, #c4d8f4 45%, #9dbbe6 100%);
+  transition: background .5s ease;
 }
-.demo-wallpaper::before {
-  content: "";
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(130% 110% at 50% 36%, transparent 48%, rgba(0,0,0,.34) 100%);
-}
+.demo-wallpaper::before,
 .demo-wallpaper::after {
   content: "";
-  position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity: .5;
-  mix-blend-mode: overlay;
+  position: absolute;
+  pointer-events: none;
+  transition: opacity .5s ease, background .5s ease;
+}
+/* a flor: pétalas que saem do centro, desfocadas */
+.demo-wallpaper::before {
+  left: 50%; top: 56%;
+  width: min(118vw, 1500px); aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background:
+    conic-gradient(from 200deg at 50% 50%,
+      transparent 0deg, rgba(40, 110, 230, .9) 22deg, rgba(120, 180, 255, .55) 40deg, transparent 62deg,
+      transparent 80deg, rgba(20, 90, 220, .85) 104deg, rgba(150, 200, 255, .5) 124deg, transparent 146deg,
+      transparent 162deg, rgba(60, 130, 245, .8) 186deg, rgba(170, 210, 255, .45) 206deg, transparent 228deg,
+      transparent 246deg, rgba(30, 100, 225, .85) 270deg, rgba(130, 190, 255, .5) 290deg, transparent 312deg,
+      transparent 330deg, rgba(70, 140, 250, .7) 350deg, transparent 360deg);
+  -webkit-mask: radial-gradient(closest-side, #000 18%, rgba(0,0,0,.85) 45%, transparent 72%);
+          mask: radial-gradient(closest-side, #000 18%, rgba(0,0,0,.85) 45%, transparent 72%);
+  filter: blur(22px) saturate(1.15);
+  opacity: .95;
+}
+/* o brilho no miolo da flor */
+.demo-wallpaper::after {
+  left: 50%; top: 56%;
+  width: min(46vw, 560px); aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(255,255,255,.85), rgba(190,220,255,.45) 45%, transparent 75%);
+  filter: blur(20px);
+}
+.demo-stage.escuro .demo-wallpaper {
+  background: linear-gradient(160deg, #0f1a2e 0%, #0a1426 50%, #050a14 100%);
+}
+.demo-stage.escuro .demo-wallpaper::before { opacity: .95; filter: blur(26px) saturate(1.35); }
+.demo-stage.escuro .demo-wallpaper::after {
+  background: radial-gradient(closest-side, rgba(150,200,255,.55), rgba(40,100,220,.3) 45%, transparent 75%);
 }
 
-/* --------------------------------------------------- a janela do desktop
-   A moldura do Windows 95: a borda fina, o chanfro (branco em cima e
-   à esquerda, cinza embaixo e à direita) e a sombra em dois degraus. */
+/* o pôr do sol */
+.demo-stage.parede-2 .demo-wallpaper { background: linear-gradient(170deg, #ffe4c7 0%, #ffb59a 42%, #c9789e 78%, #6d5a9e 100%); }
+.demo-stage.parede-2 .demo-wallpaper::before {
+  top: 74%;
+  background:
+    radial-gradient(closest-side, rgba(255, 200, 120, .95), rgba(255, 140, 90, .7) 40%, transparent 70%);
+  -webkit-mask: none; mask: none;
+  filter: blur(24px);
+}
+.demo-stage.parede-2 .demo-wallpaper::after {
+  top: auto; bottom: -30%; left: -10%; transform: none;
+  width: 130%; aspect-ratio: auto; height: 60%;
+  background:
+    radial-gradient(60% 70% at 25% 100%, rgba(120, 70, 140, .9), transparent 70%),
+    radial-gradient(60% 70% at 80% 100%, rgba(80, 60, 130, .9), transparent 70%);
+  filter: blur(10px);
+}
+.demo-stage.escuro.parede-2 .demo-wallpaper { background: linear-gradient(170deg, #3a1f3d 0%, #2b1830 45%, #120c1e 100%); }
+.demo-stage.escuro.parede-2 .demo-wallpaper::before { opacity: .6; }
+
+/* a aurora */
+.demo-stage.parede-3 .demo-wallpaper { background: linear-gradient(180deg, #d6f3ec 0%, #b8e3e9 50%, #9ccbe0 100%); }
+.demo-stage.parede-3 .demo-wallpaper::before {
+  top: 40%;
+  width: 160vw; aspect-ratio: auto; height: 70vh;
+  background:
+    radial-gradient(40% 60% at 30% 50%, rgba(40, 200, 150, .75), transparent 70%),
+    radial-gradient(35% 55% at 62% 40%, rgba(60, 150, 230, .7), transparent 70%),
+    radial-gradient(30% 50% at 85% 60%, rgba(130, 90, 220, .55), transparent 70%);
+  -webkit-mask: none; mask: none;
+  filter: blur(40px);
+  transform: translate(-50%, -50%) rotate(-8deg);
+}
+.demo-stage.parede-3 .demo-wallpaper::after { opacity: 0; }
+.demo-stage.escuro.parede-3 .demo-wallpaper { background: linear-gradient(180deg, #07161f 0%, #061019 60%, #03080d 100%); }
+.demo-stage.escuro.parede-3 .demo-wallpaper::before { opacity: .85; }
+
+/* ----------------------------------------------- o material das superfícies
+   O "Mica" (as janelas) e o "Acrylic" (menus e painéis): translúcidos,
+   com o papel de parede desfocado por trás. Sem suporte ao desfoque,
+   a cor fica opaca o bastante para o texto continuar legível.     */
+.demo-window,
+.demo-taskbar,
+.demo-flyout,
+.demo-ctx,
+.demo-menu,
+.demo-toast {
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
+          backdrop-filter: blur(40px) saturate(1.6);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .demo-stage { --mica: #f3f3f3; --acrylic: #f9f9f9; --taskbar: #eeeeee; }
+  .demo-stage.escuro { --mica: #202020; --acrylic: #2c2c2c; --taskbar: #1c1c1c; }
+}
+
+/* --------------------------------------------------- a janela do desktop */
 .demo-window {
   position: absolute;
   left: 0; top: 0;
   display: flex;
   flex-direction: column;
-  background: var(--surface);
-  color: var(--ink);
-  border: 1px solid #0b0f13;
-  border-radius: 0;
-  box-shadow:
-    inset 1px 1px 0 var(--chrome-hi),
-    inset -1px -1px 0 var(--chrome-lo),
-    2px 2px 0 rgba(0,0,0,.3),
-    6px 10px 22px rgba(0,0,0,.38);
+  background: var(--mica);
+  color: var(--text);
+  border-radius: 8px;
+  box-shadow: var(--shadow-window);
   overflow: hidden;
   pointer-events: auto;
-  transition: box-shadow .16s ease;
+  transition: box-shadow .2s ease;
 }
+.demo-window:not(.active) { box-shadow: var(--shadow-window-off); }
 .demo-window.maximized { border-radius: 0; }
-/* A janela da frente é a acesa; as de trás ficam apagadas, como no Windows. */
-.demo-window:not(.active) { box-shadow:
-    inset 1px 1px 0 var(--chrome-hi),
-    inset -1px -1px 0 var(--chrome-lo),
-    2px 2px 0 rgba(0,0,0,.22),
-    4px 8px 16px rgba(0,0,0,.3); }
-.demo-window:not(.active) .demo-window-bar { filter: saturate(.4) brightness(.85); }
+/* A janela abre crescendo de leve, como no Windows 11. */
+.demo-window.abrindo { animation: demo-abrir .2s cubic-bezier(.1, .9, .2, 1); }
+@keyframes demo-abrir {
+  from { opacity: 0; transform: scale(.94) translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
 
 .demo-window-bar {
   flex: none;
-  background: linear-gradient(90deg, var(--navy), var(--navy-2));
-  color: #fff;
-  font-family: var(--font-pixel);
-  font-size: 11px;
-  letter-spacing: .2px;
-  padding: 7px 8px 7px 9px;
-  display: flex; align-items: center; gap: 8px;
-  cursor: grab;
+  height: 36px;
+  display: flex; align-items: center; gap: 10px;
+  padding-left: 12px;
+  color: var(--text);
+  font-size: 12px;
+  cursor: default;
   user-select: none;
 }
-/* Os ícones da barra de título: o desenho de 16 pixels do Windows 95. */
-.demo-window-icon { line-height: 1; display: inline-flex; }
-.demo-window-icon svg { width: 16px; height: 16px; image-rendering: pixelated; }
-.demo-window-buttons {
-  margin-left: auto;
-  display: flex; align-items: center; gap: 3px;
+.demo-window:not(.active) .demo-window-bar { color: var(--text-3); }
+.demo-window-icon { flex: none; width: 16px; height: 16px; display: inline-flex; }
+.demo-window-icon svg { width: 16px; height: 16px; }
+.demo-window-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-window-buttons { margin-left: auto; display: flex; align-self: stretch; }
+
+/* Os botões da janela: 46 × 36 px, glifo fino, o fechar fica vermelho. */
+.demo-window-dot {
+  flex: none;
+  width: 46px; height: 100%;
+  padding: 0; border: 0; border-radius: 0;
+  background: transparent;
+  color: inherit;
+  display: grid; place-items: center;
+  cursor: default;
+  transition: background .1s ease, color .1s ease;
 }
-.demo-window-title {
-  margin-left: 2px; opacity: .96;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-/* O corpo ocupa o que sobra da janela e rola por dentro: uma janela
-   mais alta que a tela mostra o conteúdo inteiro, com a barra de
-   rolagem, em vez de cortar o texto. */
+.demo-window-dot svg { width: 16px; height: 16px; }
+.demo-window-dot:hover { background: var(--subtle-2); }
+.demo-window-dot:active { background: var(--subtle); }
+.demo-window-dot.close:hover { background: var(--close-hover); color: #fff; }
+.demo-window-dot.close:active { background: #c84031; color: rgba(255,255,255,.8); }
+.demo-window-dot:focus-visible { outline: 2px solid var(--text); outline-offset: -3px; border-radius: 4px; }
+
+/* O conteúdo da janela: a camada lisa por cima do Mica. */
 .demo-window-body {
   flex: 1 1 auto;
   min-height: 0;
-  padding: 15px 16px 18px;
+  margin: 0;
+  padding: 16px 18px 18px;
   overflow: auto;
+  background: var(--layer);
+  border-top: 1px solid var(--stroke);
+  font-size: 13.5px;
+  line-height: 1.5;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-3) transparent;
+}
+.demo-window-body::-webkit-scrollbar { width: 10px; }
+.demo-window-body::-webkit-scrollbar-thumb {
+  background: var(--text-3); border-radius: 10px;
+  border: 3px solid transparent; background-clip: content-box;
 }
 
-/* Os botões da janela: quadradinhos do Windows, à direita, com o
-   desenho em relevo e o glifo dentro. */
-.demo-window-dot {
-  flex: none;
-  width: 17px; height: 15px;
-  padding: 0; border: 1px solid;
-  border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
-  background: var(--chrome);
-  color: #000;
-  cursor: pointer;
-  display: grid; place-items: center;
-  font-family: var(--font-pixel); font-size: 9px; line-height: 1;
-  box-shadow: inset -1px -1px 0 var(--chrome-lo);
+/* Os botões dentro das janelas: os do Windows 11. */
+.demo-window .btn,
+.demo-pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 32px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--control-stroke);
+  border-bottom-color: var(--control-stroke-b);
+  background: var(--control);
+  color: var(--text);
+  font: 400 13.5px/1.3 var(--font-ui);
+  text-decoration: none;
+  cursor: default;
+  box-shadow: none;
+  transition: background .1s ease;
 }
-.demo-window-dot:hover { background: #d4d0c8; }
-.demo-window-dot:active {
-  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
-  box-shadow: inset 1px 1px 0 var(--chrome-lo);
+.demo-window .btn:hover, .demo-pill:hover { background: var(--control-hover); }
+.demo-window .btn:active, .demo-pill:active { background: var(--subtle); color: var(--text-2); }
+.demo-window .btn-main {
+  background: var(--brand);
+  border-color: rgba(255,255,255,.08);
+  border-bottom-color: rgba(0,0,0,.4);
+  color: #fff;
+  font-weight: 600;
 }
-.demo-window-dot:focus-visible { outline: 1px dotted #000; outline-offset: -3px; }
-.demo-window-dot.max { color: #000; }
-.demo-window-dot.close { color: #000; }
+.demo-stage.escuro .demo-window .btn-main { color: #04210f; }
+.demo-window .btn-main:hover { background: var(--brand-hover); }
+.demo-window .btn:focus-visible, .demo-pill:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; }
+.demo-window .btn[disabled] { opacity: .5; }
+.demo-window .btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
 
-/* O corpo da janela "Sobre": texto miúdo, com um respiro bom. */
-#demo-sobre p { margin: 0 0 10px; line-height: 1.55; font-size: .85rem; color: #333b3f; }
-#demo-sobre p:last-child { margin-bottom: 0; }
-#demo-sobre h3 {
-  margin: 0 0 6px;
-  font-family: var(--font-pixel); font-size: 10px;
-  color: var(--muted); text-transform: lowercase;
+/* A janela "Sobre". */
+.demo-window-body h3 {
+  margin: 18px 0 6px;
+  font: 600 14px/1.3 var(--font-ui);
+  color: var(--text);
 }
-#demo-sobre ul { margin: 0 0 12px; padding-left: 18px; }
-#demo-sobre li { font-size: .83rem; line-height: 1.5; color: #333b3f; margin-bottom: 3px; }
-.demo-sobre-lead { font-weight: 600; color: #1f2a2e !important; }
-.demo-sobre-nota {
-  border-top: 1px solid #e2e6e3; padding-top: 10px;
-  color: #5c666a !important; font-size: .78rem !important;
+.demo-window-body h3:first-child { margin-top: 0; }
+.demo-window-body p { margin: 0 0 8px; color: var(--text-2); }
+.demo-window-body ul { margin: 0 0 6px; padding-left: 18px; color: var(--text-2); }
+.demo-window-body li { margin: 3px 0; }
+.demo-window-body li b { color: var(--text); font-weight: 600; }
+.demo-window-body code {
+  font: 12px/1 "Cascadia Code", Consolas, monospace;
+  background: var(--subtle-2); padding: 1px 5px; border-radius: 4px;
 }
-.demo-sobre-cta { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
-.demo-sobre-cta .btn { font-size: .8rem; padding: 7px 13px; }
+.demo-sobre-lead { color: var(--text) !important; font-weight: 600; }
+.demo-sobre-nota { font-size: 12px; color: var(--text-3) !important; margin-top: 4px !important; }
+.demo-sobre-cta { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 14px; }
 
 /* -------------------------------------------- os ícones da área de trabalho */
 .demo-icons {
-  position: absolute; z-index: 2;
-  top: 10px; left: 10px;
-  display: flex; flex-direction: column; gap: 2px;
+  position: absolute; left: 6px; top: 6px; z-index: 2;
+  display: grid; grid-auto-flow: row; gap: 2px;
+  max-height: calc(100% - var(--taskbar-h) - 12px);
 }
 .demo-icon {
-  width: 86px; padding: 8px 4px 6px;
-  border: 0; border-radius: 0; background: transparent;
-  color: #eaf1f7; cursor: pointer; font: inherit;
-  display: grid; justify-items: center; gap: 3px;
+  width: 80px;
+  padding: 6px 4px 7px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  border: 1px solid transparent; border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font: 400 12px/1.25 var(--font-ui);
+  cursor: default;
 }
-/* O desenho do ícone: 16×16 pixels, como no Windows 95. */
-.demo-icon b {
-  line-height: 0;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,.6));
-}
-.demo-icon b svg {
-  width: 32px; height: 32px;
-  image-rendering: pixelated;
-}
+.demo-icon b { width: 44px; height: 44px; display: grid; place-items: center; }
+.demo-icon b svg { width: 44px; height: 44px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.25)); }
 .demo-icon span {
-  font-family: var(--font-pixel);
-  font-size: 10px; line-height: 1.35; text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.9);
-  overflow-wrap: anywhere;
+  text-align: center;
+  text-shadow: 0 0 2px rgba(0,0,0,.9), 0 1px 3px rgba(0,0,0,.75), 0 0 8px rgba(0,0,0,.35);
+  word-break: break-word;
 }
-.demo-icon:hover { background: rgba(255,255,255,.12); }
-.demo-icon:focus-visible { outline: 1px dotted #fff; outline-offset: -2px; }
+.demo-icon:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.14); }
+.demo-icon:focus-visible { outline: none; background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.4); }
 
-/* ------------------------------------------------------- a barra de tarefas
-   O cinza do Windows 95, opaco, com a barra de menu em cima. */
+/* ------------------------------------------------------- a barra de tarefas */
 .demo-taskbar {
-  position: absolute; left: 0; right: 0; bottom: 0;
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 40;
   height: var(--taskbar-h);
-  z-index: 15;
-  background: var(--chrome);
-  border-top: 1px solid var(--chrome-hi);
-  box-shadow: inset 0 1px 0 var(--chrome-hi);
-  color: #000;
-  display: flex; align-items: center; gap: 6px;
-  padding: 3px 4px;
-  font-family: var(--font-pixel); font-size: 11px;
+  display: flex; align-items: center;
+  padding: 0 0 0 12px;
+  background: var(--taskbar);
+  border-top: 1px solid var(--stroke);
+  color: var(--text);
 }
-.demo-start {
+.demo-taskbar-center {
+  position: absolute; left: 50%; top: 0; bottom: 0;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 4px;
+  max-width: calc(100% - 520px);
+}
+.demo-tb-btn {
   flex: none;
-  display: flex; align-items: center; gap: 6px;
-  background: var(--chrome);
-  border: 1px solid;
-  border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
-  box-shadow: inset -1px -1px 0 var(--chrome-lo);
-  color: #000; text-decoration: none;
-  padding: 4px 10px 4px 7px;
-  font-family: var(--font-pixel); font-size: 11px;
+  min-width: 40px; height: 40px;
+  padding: 0 8px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid transparent; border-radius: 4px;
+  background: transparent; color: var(--text);
+  font: inherit; cursor: default;
+  transition: background .1s ease;
 }
-.demo-start:hover { background: #d4d0c8; }
-.demo-start:active {
-  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
-  box-shadow: inset 1px 1px 0 var(--chrome-lo);
+.demo-tb-btn svg { width: 20px; height: 20px; }
+.demo-tb-btn:hover, .demo-tb-btn[aria-expanded="true"] { background: var(--card); border-color: var(--stroke); }
+.demo-tb-btn:active { background: var(--subtle); }
+.demo-tb-btn:focus-visible, .demo-search:focus-visible, .demo-widget:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
+
+/* O Iniciar: o símbolo do Meu Pet no lugar do logotipo. */
+.demo-start { padding: 0; width: 40px; }
+.demo-start svg { width: 26px; height: 26px; transition: transform .12s ease; }
+.demo-start:active svg { transform: scale(.88); }
+
+/* A pesquisa: a pílula da barra do Windows 11. */
+.demo-search {
+  flex: none;
+  height: 34px; width: 210px;
+  margin: 0 2px;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 0 14px;
+  border-radius: 17px;
+  border: 1px solid var(--control-stroke);
+  background: var(--control);
+  color: var(--text-2);
+  font: 400 13px var(--font-ui);
+  cursor: text;
 }
+.demo-search:hover { background: var(--control-hover); }
+.demo-search-glyph { display: inline-flex; color: var(--text); }
+.demo-search-glyph svg { width: 16px; height: 16px; }
+
+/* Os aplicativos abertos: o ícone e o tracinho embaixo. */
 .demo-taskbar-apps {
-  display: flex; gap: 4px; flex: 1; min-width: 0;
-  overflow-x: auto; overflow-y: hidden;
-  scrollbar-width: none;
+  display: flex; align-items: center; gap: 4px;
+  overflow-x: auto; scrollbar-width: none;
 }
 .demo-taskbar-apps::-webkit-scrollbar { display: none; }
 .demo-task {
-  display: flex; align-items: center; gap: 6px;
-  max-width: 190px; flex: none;
-  border: 1px solid;
-  border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
-  box-shadow: inset -1px -1px 0 var(--chrome-lo);
-  background: var(--chrome); color: #000;
-  padding: 4px 9px 4px 6px; cursor: pointer;
-  font: inherit; font-size: 11px;
-}
-.demo-task b { line-height: 0; }
-.demo-task b svg { width: 16px; height: 16px; image-rendering: pixelated; }
-.demo-task span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.demo-task:hover { background: #d4d0c8; }
-.demo-task.on {
-  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
-  box-shadow: inset 1px 1px 0 var(--chrome-lo);
-  font-weight: 700;
-}
-
-/* A bandeja: os ícones do sistema e o relógio, à direita. */
-.demo-tray {
+  position: relative;
   flex: none;
-  display: flex; align-items: center; gap: 8px;
-  padding: 2px 5px;
-  border: 1px solid;
-  border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
-  color: #000;
+  width: 44px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid transparent; border-radius: 4px;
+  background: transparent; cursor: default;
+  transition: background .1s ease;
 }
-.demo-tray-icons { display: flex; align-items: center; gap: 7px; font-size: 13px; }
-.demo-clock {
-  text-align: right; line-height: 1.2;
-  font-family: var(--font-pixel);
+.demo-task b { line-height: 0; display: grid; place-items: center; transition: transform .12s ease; }
+.demo-task b svg { width: 26px; height: 26px; }
+.demo-task span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.demo-task:hover { background: var(--card); border-color: var(--stroke); }
+.demo-task:active b { transform: scale(.86); }
+.demo-task:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
+.demo-task::after {
+  content: "";
+  position: absolute; left: 50%; bottom: 2px;
+  width: 6px; height: 3px; border-radius: 2px;
+  transform: translateX(-50%);
+  background: var(--text-3);
+  opacity: 0;
+  transition: width .2s ease, background .2s ease, opacity .2s ease;
 }
-.demo-clock b { display: block; font-weight: 400; }
-.demo-clock small { display: block; font-size: 9px; opacity: .8; }
+.demo-task.aberto::after { opacity: 1; }
+.demo-task.on { background: var(--card); border-color: var(--stroke); }
+.demo-task.on::after { opacity: 1; width: 16px; background: var(--accent); }
+.demo-task.closed b svg { opacity: .9; }
 
-/* ---------------------------------------------------------------- o pet
-   O canvas fica acima de tudo: o pet passa por cima das janelas, do
-   menu e da barra de tarefas, como o pet do Windows, que é sempre por
-   cima (o TopMost do FormPet).                                */
+/* O "widget" da esquerda: o humor do pet, como o tempo no Windows 11. */
+.demo-widget {
+  height: 40px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 10px 0 6px;
+  border: 1px solid transparent; border-radius: 4px;
+  background: transparent; color: var(--text);
+  font: inherit; text-align: left; cursor: default;
+}
+.demo-widget:hover { background: var(--card); border-color: var(--stroke); }
+.demo-widget-face { font-size: 22px; line-height: 1; }
+.demo-widget-text { display: grid; line-height: 1.15; }
+.demo-widget-text b { font-size: 12px; font-weight: 600; }
+.demo-widget-text small { font-size: 12px; color: var(--text-2); }
+
+/* A bandeja, à direita. */
+.demo-tray {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 2px;
+  height: 100%;
+}
+.demo-tray-btn { width: 36px; min-width: 36px; padding: 0; }
+.demo-tray-btn svg { width: 17px; height: 17px; }
+.demo-tray-group { gap: 8px; padding: 0 10px; }
+.demo-tray-group span { display: inline-flex; }
+.demo-tray-group svg { width: 17px; height: 17px; }
+.demo-clock {
+  flex-direction: column; align-items: flex-end; justify-content: center; gap: 0;
+  padding: 0 10px;
+  font-size: 12px; line-height: 1.3;
+}
+.demo-clock b { font-weight: 400; }
+.demo-clock small { font-size: 12px; }
+.demo-show-desktop {
+  width: 10px; height: 100%;
+  margin-left: 4px;
+  border: 0; border-left: 1px solid var(--stroke);
+  background: transparent; cursor: default;
+}
+.demo-show-desktop:hover { background: var(--card); }
+
+/* --------------------------------------------------- os painéis (flyouts) */
+.demo-flyout {
+  position: absolute; z-index: 45;
+  bottom: calc(var(--taskbar-h) + 12px);
+  background: var(--acrylic);
+  color: var(--text);
+  border-radius: 8px;
+  box-shadow: var(--shadow-flyout);
+  overflow: hidden;
+  animation: demo-subir .22s cubic-bezier(.1, .9, .2, 1);
+}
+@keyframes demo-subir {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* O menu Iniciar */
+.demo-startmenu {
+  left: 50%;
+  width: min(640px, calc(100% - 24px));
+  height: min(700px, calc(100% - var(--taskbar-h) - 24px));
+  margin-left: calc(min(640px, 100% - 24px) / -2);
+  display: flex; flex-direction: column;
+}
+.demo-sm-search {
+  margin: 28px 32px 8px;
+  display: flex; align-items: center; gap: 10px;
+  height: 36px; padding: 0 14px;
+  border-radius: 18px;
+  background: var(--layer-2);
+  border: 1px solid var(--control-stroke);
+  border-bottom: 2px solid var(--accent);
+}
+.demo-sm-search input {
+  flex: 1; min-width: 0;
+  border: 0; outline: 0; background: transparent;
+  color: var(--text); font: 400 14px var(--font-ui);
+}
+.demo-sm-search input::placeholder { color: var(--text-3); }
+.demo-sm-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 4px 24px 12px; scrollbar-width: thin; }
+.demo-sm-head { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 10px 6px; }
+.demo-sm-head h2 { margin: 0; font: 600 14px var(--font-ui); }
+.demo-sm-head small { color: var(--text-3); font-size: 12px; }
+.demo-sm-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+.demo-sm-app {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 4px 10px;
+  border: 1px solid transparent; border-radius: 4px;
+  background: transparent; color: var(--text);
+  font: 400 12px/1.25 var(--font-ui); text-align: center; text-decoration: none;
+  cursor: default;
+}
+.demo-sm-app b { width: 32px; height: 32px; display: grid; place-items: center; }
+.demo-sm-app b svg { width: 32px; height: 32px; }
+.demo-sm-app img { width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated; }
+.demo-sm-app:hover, .demo-sm-app:focus-visible { background: var(--card); border-color: var(--stroke); outline: none; }
+.demo-sm-app[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.demo-sm-pets { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 4px; }
+.demo-sm-recs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.demo-sm-rec {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid transparent; border-radius: 4px;
+  background: transparent; color: var(--text);
+  font: inherit; text-align: left; text-decoration: none; cursor: default;
+}
+.demo-sm-rec b { width: 32px; height: 32px; flex: none; display: grid; place-items: center; }
+.demo-sm-rec b svg { width: 32px; height: 32px; }
+.demo-sm-rec span { display: grid; line-height: 1.3; min-width: 0; }
+.demo-sm-rec strong { font-weight: 400; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-sm-rec small { font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-sm-rec:hover, .demo-sm-rec:focus-visible { background: var(--card); border-color: var(--stroke); outline: none; }
+.demo-sm-results { display: grid; gap: 2px; padding-top: 10px; }
+.demo-sm-empty { padding: 24px 10px; color: var(--text-2); text-align: center; }
+.demo-sm-foot {
+  flex: none;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+  background: var(--subtle);
+  border-top: 1px solid var(--stroke);
+}
+.demo-sm-user { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; }
+.demo-sm-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent);
+}
+.demo-sm-avatar svg { width: 18px; height: 18px; }
+
+/* As configurações rápidas */
+.demo-quick { right: 12px; width: 360px; max-width: calc(100% - 24px); }
+.demo-qs-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 12px;
+  padding: 20px 20px 8px;
+}
+.demo-qs-tile { display: grid; gap: 6px; justify-items: stretch; text-align: center; }
+.demo-qs-tile button {
+  height: 48px;
+  display: grid; place-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--control-stroke);
+  border-bottom-color: var(--control-stroke-b);
+  background: var(--control);
+  color: var(--text);
+  cursor: default;
+  transition: background .1s ease;
+}
+.demo-qs-tile button svg { width: 18px; height: 18px; }
+.demo-qs-tile button:hover { background: var(--control-hover); }
+.demo-qs-tile button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: transparent; }
+.demo-qs-tile button[aria-pressed="true"]:hover { background: var(--accent-2); }
+.demo-qs-tile button:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; }
+.demo-qs-tile small { font-size: 12px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-qs-slider {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px 18px;
+}
+.demo-qs-slider span { display: inline-flex; }
+.demo-qs-slider svg { width: 18px; height: 18px; }
+.demo-qs-slider input { flex: 1; accent-color: var(--accent); }
+.demo-qs-slider output { width: 26px; text-align: right; font-size: 12px; color: var(--text-2); }
+.demo-qs-foot {
+  display: flex; align-items: center; gap: 8px;
+  height: 48px; padding: 0 20px;
+  background: var(--subtle);
+  border-top: 1px solid var(--stroke);
+  font-size: 12px; color: var(--text-2);
+}
+.demo-qs-foot span:first-child { display: inline-flex; color: var(--text); }
+.demo-qs-foot svg { width: 18px; height: 18px; }
+
+/* O calendário */
+.demo-calendar { right: 12px; width: 334px; max-width: calc(100% - 24px); }
+.demo-cal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 12px 6px 20px;
+}
+.demo-cal-head b { font-weight: 600; font-size: 14px; }
+.demo-cal-head .demo-tb-btn { min-width: 32px; height: 32px; font-size: 16px; }
+.demo-cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  padding: 4px 12px 14px;
+  text-align: center;
+}
+.demo-cal-grid .dow { font-size: 12px; color: var(--text); padding: 8px 0; font-weight: 600; }
+.demo-cal-grid .day {
+  width: 38px; height: 38px; margin: 1px auto;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: 13px;
+}
+.demo-cal-grid .day.fora { color: var(--text-3); }
+.demo-cal-grid .day.hoje { background: var(--accent); color: var(--accent-text); font-weight: 600; }
+.demo-cal-grid .day:not(.hoje):hover { background: var(--subtle-2); }
+.demo-cal-focus {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px; padding: 0 16px 0 20px;
+  background: var(--subtle);
+  border-top: 1px solid var(--stroke);
+  font-size: 13px;
+}
+
+/* ----------------------------------------- o menu do botão direito e o do pet */
+.demo-ctx,
+.demo-menu {
+  position: absolute; z-index: 46;
+  min-width: 240px;
+  max-height: calc(100% - 12px);
+  overflow-y: auto;
+  padding: 4px;
+  background: var(--acrylic);
+  color: var(--text);
+  border-radius: 8px;
+  box-shadow: var(--shadow-flyout);
+  font: 400 13.5px var(--font-ui);
+  animation: demo-menu-in .16s cubic-bezier(.1, .9, .2, 1);
+  scrollbar-width: thin;
+}
+.demo-menu { z-index: 32; }
+@keyframes demo-menu-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+.demo-ctx button,
+.demo-menu button,
+.demo-menu a {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; min-height: 32px;
+  padding: 4px 12px;
+  border: 0; border-radius: 4px;
+  background: transparent; color: var(--text);
+  font: inherit; text-align: left; text-decoration: none;
+  cursor: default;
+}
+.demo-ctx button svg { width: 16px; height: 16px; flex: none; }
+.demo-ctx button kbd { margin-left: auto; font: inherit; font-size: 12px; color: var(--text-3); }
+.demo-ctx button:hover, .demo-ctx button:focus-visible,
+.demo-menu button:hover, .demo-menu button:focus-visible,
+.demo-menu a:hover, .demo-menu a:focus-visible { background: var(--subtle-2); outline: none; }
+.demo-ctx hr, .demo-menu hr { border: 0; height: 1px; margin: 4px -4px; background: var(--stroke); }
+.demo-menu .demo-menu-head {
+  padding: 8px 12px 6px;
+  font-weight: 600;
+}
+.demo-menu .demo-menu-bars { font-weight: 400; font-size: 12px; color: var(--text-2); margin-top: 2px; }
+.demo-menu .demo-menu-cta {
+  background: var(--brand); color: #fff; font-weight: 600; margin-top: 2px;
+}
+.demo-stage.escuro .demo-menu .demo-menu-cta { color: #04210f; }
+.demo-menu .demo-menu-cta:hover { background: var(--brand-hover); }
+
+/* --------------------------------------------------------- a notificação */
+.demo-toast {
+  position: absolute; z-index: 47;
+  right: 12px; bottom: calc(var(--taskbar-h) + 12px);
+  width: min(364px, calc(100% - 24px));
+  padding: 14px 16px 16px;
+  background: var(--acrylic);
+  color: var(--text);
+  border-radius: 8px;
+  box-shadow: var(--shadow-flyout);
+  animation: demo-toast-in .3s cubic-bezier(.1, .9, .2, 1);
+}
+@keyframes demo-toast-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: none; }
+}
+.demo-toast-app { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); margin-bottom: 10px; }
+.demo-toast-app span { display: inline-flex; }
+.demo-toast-app svg { width: 16px; height: 16px; }
+.demo-toast b { display: block; font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.demo-toast p { margin: 0; font-size: 13px; color: var(--text-2); }
+
+/* ---------------------------------------------------------------- o pet */
 .demo-canvas {
-  position: absolute; inset: 0;
-  z-index: 34;
+  position: absolute; inset: 0; z-index: 30;
   width: 100%; height: 100%;
   pointer-events: none;
   image-rendering: pixelated;
 }
+.demo-canvas:focus { outline: none; }
 
 /* --------------------------------------------------------- o balão de fala
-   O balão do Windows 95: branco, borda preta, cantos retos. */
+   Um cartão do Windows 11, com a cauda apontando para o pet. */
 .demo-bubble {
-  /* O balão fica acima do pet: a cauda dele aponta para a cabeça do
-     bichinho, e ela tem que aparecer por cima. */
   position: absolute; z-index: 36;
-  max-width: min(280px, 62vw);
-  background: #fff;
-  color: #16191c;
-  border: 2px solid #101318;
-  border-radius: 0;
-  padding: 10px 12px;
-  font-size: .93rem;
-  line-height: 1.45;
-  box-shadow: 3px 3px 0 rgba(0,0,0,.3);
-  animation: demo-pop .18s ease-out;
+  max-width: min(300px, 70vw);
+  background: var(--layer-2);
+  color: var(--text);
+  border: 1px solid var(--stroke-2);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  box-shadow: 0 8px 16px rgba(0,0,0,.14), 0 2px 4px rgba(0,0,0,.08);
+  animation: demo-pop .2s cubic-bezier(.1, .9, .2, 1);
 }
 @keyframes demo-pop {
-  from { opacity: 0; transform: translateY(4px) scale(.96); }
+  from { opacity: 0; transform: translateY(6px) scale(.96); }
   to   { opacity: 1; transform: none; }
 }
 .demo-bubble p { margin: 0; }
-.demo-bubble::after {
-  content: "";
-  position: absolute; left: var(--cauda, 22px); bottom: -9px;
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-top: 9px solid #101318;
-  transform: translateX(-9px);
-}
+.demo-bubble::after,
 .demo-bubble::before {
   content: "";
-  position: absolute; left: var(--cauda, 22px); bottom: -6px; z-index: 1;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #fff;
-  transform: translateX(-7px);
+  position: absolute; left: var(--cauda, 22px);
+  width: 12px; height: 12px;
+  transform: translateX(-6px) rotate(45deg);
 }
-/* Quando o balão fica embaixo do pet, a cauda aponta para cima. */
+.demo-bubble::after { bottom: -7px; background: var(--layer-2); border-right: 1px solid var(--stroke-2); border-bottom: 1px solid var(--stroke-2); }
+.demo-bubble::before { display: none; }
 .demo-bubble.abaixo::after {
-  bottom: auto; top: -9px;
-  border-top: 0; border-bottom: 9px solid #101318;
+  bottom: auto; top: -7px;
+  border-right: 0; border-bottom: 0;
+  border-left: 1px solid var(--stroke-2); border-top: 1px solid var(--stroke-2);
 }
-.demo-bubble.abaixo::before {
-  bottom: auto; top: -6px;
-  border-top: 0; border-bottom: 7px solid #fff;
-}
-.demo-choices { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.demo-choices { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
 .demo-choices button {
-  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
-  border-radius: 4px; padding: 5px 9px; cursor: pointer;
-  font: inherit; font-size: .82rem; line-height: 1.3;
+  min-height: 30px;
+  border: 1px solid var(--control-stroke);
+  border-bottom-color: var(--control-stroke-b);
+  background: var(--control); color: var(--text);
+  border-radius: 4px; padding: 4px 11px;
+  font: 400 13px/1.3 var(--font-ui);
+  cursor: default;
 }
-.demo-choices button:hover { border-color: var(--accent); background: var(--accent-lo); color: var(--accent-texto); }
+.demo-choices button:hover { background: var(--control-hover); }
+.demo-choices button:first-child { background: var(--accent); color: var(--accent-text); border-color: transparent; }
+.demo-choices button:first-child:hover { background: var(--accent-2); }
 
-/* ------------------------------------------------------------- o menu
-   O menu do Windows 95: cinza, com o item marcado em azul. */
-.demo-menu {
-  position: absolute; z-index: 32;
-  min-width: 226px;
-  max-height: calc(100% - 12px);
-  overflow-y: auto;
-  background: var(--chrome);
-  border: 1px solid #0b0f13;
-  border-radius: 0;
-  padding: 2px;
-  box-shadow: 3px 3px 0 rgba(0,0,0,.3);
-  font-family: var(--font-pixel);
-  font-size: 11px;
-  animation: demo-pop .14s ease-out;
-}
-.demo-menu button {
-  display: block; width: 100%; text-align: left;
-  padding: 6px 8px; border: 0; border-radius: 0;
-  background: transparent; color: #000;
-  font: inherit; cursor: pointer;
-}
-.demo-menu button:hover, .demo-menu button:focus-visible { background: var(--navy); color: #fff; }
-.demo-menu hr {
-  border: 0; height: 2px; margin: 3px 1px;
-  border-top: 1px solid var(--chrome-lo);
-  border-bottom: 1px solid var(--chrome-hi);
-}
-.demo-menu .demo-menu-head {
-  padding: 5px 8px 6px; font-weight: 700; font-size: 10px; color: #000;
-  text-transform: lowercase; letter-spacing: .03em;
-}
-/* As necessidades do pet, na segunda linha do cabeçalho. */
-.demo-menu .demo-menu-bars {
-  padding: 0 8px 6px;
-  font-size: 10px; color: #2c2c2c;
-  border-bottom: 2px solid var(--chrome-lo);
-  margin-bottom: 3px;
-}
-.demo-menu a {
-  display: block; padding: 6px 8px;
-  text-decoration: none; color: #000;
-}
-.demo-menu a:hover { background: var(--navy); color: #fff; }
-/* O download é o item em destaque. */
-.demo-menu .demo-menu-cta {
-  display: block; width: 100%; text-align: left;
-  padding: 7px 8px; border: 0; border-radius: 0;
-  background: var(--accent); color: #fff;
-  font: inherit; font-size: 11px; cursor: pointer;
-}
-.demo-menu .demo-menu-cta:hover { background: var(--accent-texto); color: #fff; }
-
-/* ------------------------------------------------------ o carregamento */
+/* ------------------------------------------------------ o carregamento
+   O anel de pontinhos girando do Windows. */
 .demo-loading {
-  position: absolute; inset: 0; z-index: 40;
+  position: absolute; inset: 0; z-index: 50;
   display: grid; place-content: center; justify-items: center; gap: 14px;
-  background: rgba(9,14,19,.82); color: #dfe8f4;
-  backdrop-filter: blur(3px);
-}
-.demo-loading p { margin: 0; font-family: var(--font-pixel); font-size: 11px; }
-.demo-loading .btn { font-size: .8rem; padding: 7px 14px; }
-.demo-loading-detail {
-  max-width: 40ch; text-align: center;
-  font-family: var(--font-text) !important; font-size: .78rem !important;
-  color: #9fb2c4; opacity: .8;
-}
-.demo-loading-bar {
-  width: 200px; height: 6px; border-radius: 3px;
-  background: rgba(255,255,255,.16); overflow: hidden;
-}
-.demo-loading-bar i {
-  display: block; width: 40%; height: 100%;
-  background: var(--accent); border-radius: 3px;
-  animation: demo-loading 1.1s ease-in-out infinite;
-}
-@keyframes demo-loading {
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(250%); }
-}
-
-/* --------------------------------------------------------- os controles
-   Eles moram dentro da janela do painel, como no programa: os pets
-   que podem ser trocados e os botões de conversa e de som.        */
-.demo-pets { display: flex; flex-wrap: wrap; gap: 6px; }
-.demo-pet {
-  display: flex; align-items: center; gap: 7px;
-  border: 1px solid var(--line); background: #fff;
-  border-radius: 7px; padding: 4px 9px 4px 5px;
-  cursor: pointer; font: inherit; color: #16191c;
-}
-.demo-pet img {
-  width: 30px; height: 30px; object-fit: contain;
-  image-rendering: pixelated;
-}
-.demo-pet span { font-size: .78rem; }
-.demo-pet:hover { border-color: #2f7d5f; }
-.demo-pet[aria-pressed="true"] {
-  border-color: #2f7d5f; background: #e4f2ea; color: #1f5f45;
-}
-.demo-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.demo-actions .btn { font-size: .82rem; padding: 6px 12px; }
-
-/* ------------------------------------------- as necessidades do pet
-   As três barras do programa (VirtualPet): comida, carinho e energia. */
-.demo-needs {
-  display: grid; gap: 4px;
-  padding: 8px 10px; margin-bottom: 11px;
-  background: #eef1ef; border: 1px solid var(--line);
-}
-.demo-need {
-  display: grid; grid-template-columns: 78px 1fr 34px;
-  align-items: center; gap: 7px;
-}
-.demo-need-name { font-size: .74rem; color: #3c4548; }
-.demo-need-track {
-  height: 8px; background: #d7ddd9; border: 1px solid #b9c2bc;
-  overflow: hidden;
-}
-.demo-need-track i {
-  display: block; height: 100%;
-  background: linear-gradient(90deg, #3aa06d, #1a7545);
-  transition: width .4s ease;
-}
-.demo-need-track i.baixo { background: linear-gradient(90deg, #d08a4a, #b8562f); }
-.demo-need-value {
-  font-family: var(--font-pixel); font-size: 9px;
-  color: #4b5559; text-align: right;
-}
-.demo-panel-note {
-  margin: 11px 0 0;
-  font-size: .72rem; line-height: 1.45; color: var(--muted);
-}
-
-/* ------------------------------------------------ o bloco de notas
-   É o plugin de notas do programa: escreve e fica guardado. */
-.demo-note-label {
-  display: block;
-  font-family: var(--font-pixel); font-size: 10px;
-  color: var(--muted); text-transform: lowercase;
-  margin: 0 0 6px;
-}
-.demo-notes {
-  width: 100%; min-height: 104px; resize: vertical;
-  border: 1px solid var(--line); border-radius: 4px;
-  padding: 8px 9px; background: #fff; color: #16191c;
-  font: inherit; font-size: .82rem; line-height: 1.5;
-}
-.demo-notes:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-
-/* ------------------------------------------------------ o Pomodoro */
-.demo-pomo { display: grid; gap: 9px; }
-.demo-pomo-label {
-  margin: 0;
-  font-family: var(--font-pixel); font-size: 10px;
-  color: var(--muted); text-transform: lowercase;
-}
-.demo-pomo-time {
-  margin: 0;
-  font-family: var(--font-pixel); font-size: 30px;
-  color: #1b2a22; letter-spacing: 1px; line-height: 1;
-}
-.demo-pomo-track {
-  height: 7px; border-radius: 4px;
-  background: #e4e9e6; overflow: hidden;
-}
-.demo-pomo-track i {
-  display: block; height: 100%; width: 0;
-  background: linear-gradient(90deg, #2f9e69, #1a7545);
-  border-radius: 4px;
-  transition: width .4s linear;
-}
-.demo-pomo-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.demo-pomo-actions .btn { font-size: .8rem; padding: 6px 12px; }
-.demo-reminders { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
-.demo-reminders button {
-  width: 100%; text-align: left;
-  border: 1px solid var(--line); background: #fff; color: #16191c;
-  border-radius: 4px; padding: 6px 9px;
-  cursor: pointer; font: inherit; font-size: .8rem;
-}
-.demo-reminders button:hover { border-color: var(--accent); background: var(--accent-lo); color: var(--accent-texto); }
-
-/* -------------------------------------------- a janela de animações */
-.demo-anim-lead {
-  margin: 0 0 10px;
-  font-size: .8rem; line-height: 1.5; color: var(--muted);
-}
-.demo-anim-lead code {
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: .92em; color: #333b3f;
-}
-.demo-anim-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
-  gap: 6px;
-}
-.demo-anim {
-  display: grid; justify-items: center; gap: 3px;
-  padding: 6px 3px 5px;
-  border: 1px solid var(--line); border-radius: 4px;
-  background: #fff; color: #16191c;
-  cursor: pointer; font: inherit;
-}
-.demo-anim:hover { border-color: var(--accent); background: var(--accent-lo); }
-.demo-anim-thumb {
-  width: 48px; height: 48px;
-  image-rendering: pixelated;
-  background:
-    linear-gradient(45deg, #eef1ef 25%, transparent 25%, transparent 75%, #eef1ef 75%) 0 0 / 8px 8px,
-    linear-gradient(45deg, #eef1ef 25%, #fff 25%, #fff 75%, #eef1ef 75%) 4px 4px / 8px 8px;
-}
-.demo-anim span {
-  font-size: .68rem; line-height: 1.2; text-align: center;
-  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-
-/* -------------------------------------------- os botões da bandeja */
-.demo-tray-btn {
-  width: 22px; height: 22px; flex: none;
-  border: 1px solid transparent; border-radius: 0;
-  background: transparent; color: #000;
-  cursor: pointer; font: inherit; font-size: 12px; line-height: 1;
-  display: grid; place-items: center;
-}
-.demo-tray-btn:hover { background: #d4d0c8; }
-.demo-tray-btn:focus-visible { outline: 1px dotted #000; outline-offset: -2px; }
-
-/* O pet em foco: o foco fica no desenho do pet, não na tela inteira. */
-.demo-canvas:focus { outline: none; }
-
-/* -------------------------------------------------------- as dicas
-   O primeiro contato: uma ou duas frases que somem sozinhas.
-   A caixa não atrapalha o clique no pet: só o botão de fechar
-   recebe o mouse.                                                  */
-.demo-tips {
-  position: absolute; z-index: 28;
-  left: 50%; bottom: calc(var(--taskbar-h) + 14px); transform: translateX(-50%);
-  max-width: min(440px, 84vw);
-  display: flex; align-items: flex-start; gap: 10px;
-  background: var(--chrome);
-  border: 1px solid #0b0f13;
-  color: #000;
-  padding: 9px 11px;
-  font-family: var(--font-pixel); font-size: 11px; line-height: 1.5;
-  box-shadow: 3px 3px 0 rgba(0,0,0,.3);
-  animation: demo-tips-pop .18s ease-out;
+  background: rgba(0, 0, 0, .28);
+  color: #fff;
   pointer-events: none;
 }
-/* A dica é centralizada com translateX(-50%); a animação precisa
-   manter isso, senão a caixa pula para a direita durante o aparecimento. */
-@keyframes demo-tips-pop {
-  from { opacity: 0; transform: translateX(-50%) translateY(4px) scale(.96); }
-  to   { opacity: 1; transform: translateX(-50%); }
+.demo-loading .btn { pointer-events: auto; }
+.demo-loading p { margin: 0; font-size: 14px; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.demo-loading-bar {
+  position: relative;
+  width: 44px; height: 44px;
 }
-.demo-tips b { color: var(--accent-texto); font-weight: 700; }
+.demo-loading-bar i {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,.25);
+  border-top-color: #fff;
+  animation: demo-girar .9s linear infinite;
+}
+@keyframes demo-girar { to { transform: rotate(360deg); } }
+.demo-loading-detail { font-size: 12px; opacity: .8; }
+
+/* --------------------------------------------------------- os controles
+   Dentro do painel: as necessidades, os pets e os botões. */
+.demo-needs {
+  display: grid; gap: 10px;
+  padding: 12px 14px; margin-bottom: 14px;
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 6px;
+}
+.demo-need { display: grid; grid-template-columns: 82px 1fr 38px; align-items: center; gap: 10px; }
+.demo-need-name { font-size: 12.5px; color: var(--text); }
+.demo-need-track { height: 4px; border-radius: 2px; background: var(--subtle-2); overflow: hidden; }
+.demo-need-track i {
+  display: block; height: 100%; border-radius: 2px;
+  background: var(--accent);
+  transition: width .4s ease;
+}
+.demo-need-track i.baixo { background: var(--warn); }
+.demo-need-value { font-size: 12px; color: var(--text-2); text-align: right; font-variant-numeric: tabular-nums; }
+
+.demo-pets { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 6px; }
+.demo-pet {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 40px;
+  border: 1px solid var(--control-stroke);
+  border-bottom-color: var(--control-stroke-b);
+  background: var(--control);
+  border-radius: 4px; padding: 4px 8px 4px 5px;
+  font: 400 13px var(--font-ui); color: var(--text);
+  cursor: default;
+}
+.demo-pet img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; flex: none; }
+.demo-pet span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-pet:hover { background: var(--control-hover); }
+.demo-pet[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.demo-pet:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; }
+.demo-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.demo-panel-note { margin: 12px 0 0 !important; font-size: 12px; color: var(--text-3) !important; }
+
+/* ------------------------------------------------ o bloco de notas */
+.demo-note-label { display: block; font-size: 12px; color: var(--text-2); margin: 0 0 8px; }
+.demo-notes {
+  box-sizing: border-box;
+  width: 100%; min-height: 120px; resize: vertical;
+  border: 1px solid var(--control-stroke);
+  border-bottom: 1px solid var(--control-stroke-b);
+  border-radius: 4px;
+  padding: 8px 10px;
+  background: var(--control); color: var(--text);
+  font: 400 13.5px/1.55 var(--font-ui);
+}
+.demo-notes:focus { outline: 0; background: var(--layer-2); border-bottom: 2px solid var(--accent); }
+
+/* ------------------------------------------------------ o Pomodoro */
+.demo-pomo { display: grid; gap: 10px; }
+.demo-pomo-label { margin: 0 !important; font-size: 12px; font-weight: 600; color: var(--text-2) !important; }
+.demo-pomo-time {
+  margin: 0 !important;
+  font: 600 44px/1 var(--font-display);
+  color: var(--text) !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.5px;
+}
+.demo-pomo-track { height: 4px; border-radius: 2px; background: var(--subtle-2); overflow: hidden; }
+.demo-pomo-track i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 2px; transition: width .6s linear; }
+.demo-pomo-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.demo-reminders { list-style: none; margin: 0; padding: 0 !important; display: grid; gap: 4px; }
+.demo-reminders li { margin: 0 !important; }
+.demo-reminders button {
+  width: 100%; min-height: 36px;
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--stroke); border-radius: 4px;
+  background: var(--card); color: var(--text);
+  padding: 6px 12px; text-align: left;
+  font: 400 13px var(--font-ui); cursor: default;
+}
+.demo-reminders button:hover { background: var(--card-hover); border-color: var(--stroke-2); }
+
+/* -------------------------------------------- a janela de animações */
+.demo-anim-lead { margin: 0 0 12px !important; font-size: 12.5px; }
+.demo-anim-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
+.demo-anim {
+  display: grid; justify-items: center; gap: 5px;
+  padding: 8px 4px 7px;
+  border: 1px solid var(--stroke); border-radius: 6px;
+  background: var(--card); color: var(--text);
+  font: 400 12px/1.25 var(--font-ui); cursor: default;
+}
+.demo-anim:hover { background: var(--card-hover); border-color: var(--accent); }
+.demo-anim:focus-visible { outline: 2px solid var(--text); outline-offset: 1px; }
+.demo-anim-thumb { width: 64px; height: 56px; object-fit: contain; image-rendering: pixelated; }
+.demo-anim span { text-align: center; word-break: break-word; }
+
+/* -------------------------------------------------------- as dicas
+   A "dica de ensino" do Windows 11: um cartão com a cor de destaque. */
+.demo-tips {
+  position: absolute; z-index: 38;
+  left: 50%; bottom: calc(var(--taskbar-h) + 14px);
+  transform: translateX(-50%);
+  width: min(460px, calc(100% - 24px));
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px;
+  padding: 12px 10px 12px 14px;
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: 8px;
+  box-shadow: var(--shadow-flyout);
+  font-size: 13.5px; line-height: 1.45;
+  animation: demo-tip-in .3s cubic-bezier(.1, .9, .2, 1);
+}
+@keyframes demo-tip-in {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+.demo-tips b { font-weight: 700; }
 .demo-tips p { margin: 0; }
 .demo-tips .demo-tips-n {
-  flex: none; width: 18px; height: 18px;
-  background: var(--navy); color: #fff;
+  width: 26px; height: 26px; border-radius: 50%;
   display: grid; place-items: center;
-  font-size: .7rem; font-weight: 700;
+  background: rgba(255,255,255,.22); font-weight: 600; font-size: 13px;
 }
+.demo-stage.escuro .demo-tips .demo-tips-n { background: rgba(0,0,0,.14); }
 .demo-tips button {
-  flex: none; margin-left: 4px;
-  border: 0; background: transparent; color: #000;
-  cursor: pointer; font: inherit; font-size: 12px; line-height: 1; padding: 2px 4px;
-  pointer-events: auto;
+  width: 32px; height: 32px;
+  border: 0; border-radius: 4px;
+  background: transparent; color: inherit;
+  font-size: 14px; cursor: default;
 }
-.demo-tips button:hover { color: var(--accent-texto); }
+.demo-tips button:hover { background: rgba(255,255,255,.18); }
+.demo-stage.escuro .demo-tips button:hover { background: rgba(0,0,0,.1); }
 
-/* A janela se move: ela ganha a mão. */
-.demo-stage.dragging-window .demo-window-bar { cursor: grabbing; }
+/* A janela e o pet se movem: o cursor muda. */
 .demo-stage.dragging-pet { cursor: grabbing; }
 
 /* ------------------------------------------------- quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce) {
-  .demo-bubble, .demo-menu, .demo-tips { animation: none; }
+  .demo-bubble, .demo-menu, .demo-ctx, .demo-tips, .demo-flyout, .demo-toast, .demo-window.abrindo { animation: none; }
   .demo-loading-bar i { animation-duration: 2.4s; }
-  .demo-pomo-track i { transition: none; }
-  .demo-window { transition: none; }
+  .demo-pomo-track i, .demo-need-track i { transition: none; }
+}
+
+/* ------------------------------------------------------------- telas médias */
+@media (max-width: 1100px) {
+  .demo-widget-text { display: none; }
+  .demo-search { width: 40px; padding: 0; justify-content: center; border-radius: 4px; border-color: transparent; background: transparent; }
+  .demo-search > span:last-child { display: none; }
+  .demo-search:hover { background: var(--card); }
+  .demo-taskbar-center { max-width: calc(100% - 300px); }
 }
 
 /* ------------------------------------------------------------- o celular
-   A tela pequena não é um desktop encolhido: o pet fica no meio, as
-   janelas viram uma de cada vez e a barra de tarefas rola.          */
+   Uma janela de cada vez, ícones numa faixa em cima e a barra com
+   o essencial. */
 @media (max-width: 760px) {
   .demo-icons {
-    top: 6px; left: 6px; right: 6px;
-    flex-direction: row; flex-wrap: nowrap;
-    gap: 2px; overflow-x: auto; scrollbar-width: none;
+    left: 0; right: 0; top: 0;
+    grid-auto-flow: column; justify-content: start;
+    overflow-x: auto; scrollbar-width: none;
+    padding: 4px 6px;
   }
   .demo-icons::-webkit-scrollbar { display: none; }
-  .demo-icon { width: 64px; padding: 5px 3px 4px; flex: none; }
-  .demo-icon b svg { width: 16px; height: 16px; }
-  /* O Silkscreen em 8 pixels fica nítido (é o tamanho para o qual ele
-     foi desenhado) e o nome do ícone cabe sem quebrar no meio. */
-  .demo-icon span { font-size: 8px; }
-  .demo-pet span { display: none; }
-  .demo-pet { padding: 4px; }
-  .demo-window-body { padding: 13px 14px 16px; }
-  .demo-tray-icons { display: none; }
-  .demo-tray { padding: 2px 3px; }
-  .demo-task { max-width: 42px; padding: 6px 8px; }
-  .demo-task span { display: none; }
-  .demo-start { padding: 7px 10px; }
-  .demo-tray-btn { width: 28px; height: 28px; }
-  .demo-window-dot { width: 22px; height: 20px; }
-  .demo-tips { bottom: calc(var(--taskbar-h) + 10px); font-size: 10px; }
+  .demo-icon { width: 70px; padding: 4px 2px 5px; font-size: 11px; }
+  .demo-icon b, .demo-icon b svg { width: 36px; height: 36px; }
+  .demo-widget, .demo-show-desktop, #tips-btn { display: none; }
+  .demo-taskbar { padding: 0 4px; }
+  .demo-taskbar-center { position: static; transform: none; max-width: none; flex: 1; min-width: 0; }
+  .demo-tray-group { padding: 0 6px; gap: 5px; }
+  .demo-tray-group #tray-wifi, .demo-tray-group #tray-battery { display: none; }
+  .demo-search { display: none; }
+  .demo-clock small { display: none; }
+  .demo-taskbar-center { gap: 2px; overflow: hidden; }
+  .demo-taskbar-apps { min-width: 0; }
+  .demo-clock { padding: 0 6px; }
+  .demo-task { width: 38px; }
+  .demo-window-body { padding: 14px 14px 16px; }
+  .demo-window-dot { width: 44px; }
+  .demo-sm-grid { grid-template-columns: repeat(3, 1fr); }
+  .demo-sm-recs { grid-template-columns: 1fr; }
+  .demo-sm-search { margin: 18px 16px 6px; }
+  .demo-sm-scroll { padding: 4px 10px 12px; }
+  .demo-sm-foot { padding: 0 20px; }
+  .demo-quick, .demo-calendar { right: 6px; left: 6px; width: auto; max-width: none; }
+  .demo-tips { font-size: 12.5px; }
 }
