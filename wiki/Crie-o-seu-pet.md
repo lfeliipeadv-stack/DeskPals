@@ -2,6 +2,8 @@
 
 O Desktop-Pet vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
 
+A ideia de um editor de pets vem do [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), o editor online de Adriano Petrucci, criador do desktopPet. Os dois usam o mesmo formato (`animations.xml`, validado pelo esquema `animations.xsd` dele), então um pet feito num abre no outro.
+
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brinquedos](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
 ## Abrir o Editor de Pets

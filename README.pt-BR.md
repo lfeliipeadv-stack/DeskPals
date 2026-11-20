@@ -302,6 +302,7 @@ fazendo. Os detalhes estão em [Para desenvolvedores](https://lfeliipeadv-stack.
 
 - **Ideia e arte originais da ovelha:** Tatsutoshi Nomura (Stray Sheep, Fuji TV, 1994).
 - **Programa original:** [desktopPet](https://github.com/Adrianotiger/desktopPet) de Adriano Petrucci, a versão para Windows moderno da ovelhinha clássica do eSheep (licença MIT).
+- **Ideia do Editor de Pets:** [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), o editor online de pets de Adriano Petrucci. O Editor de Pets do Desktop-Pet foi inspirado nele e usa o mesmo formato `animations.xml` e o mesmo esquema.
 - **Ícone na bandeja do sistema:** Sergi Fumanya Grunwaldt.
 - **Arremesso do pet e colisões com janelas e outros pets:** Zecheriah.
 - **Versão .NET 10, tradução, pets novos e Editor de Pets:** Luan Felipe.

@@ -299,9 +299,10 @@ More details in [For developers](https://lfeliipeadv-stack.github.io/Desktop-Pet
 
 - **Original sheep idea and art:** Tatsutoshi Nomura (Stray Sheep, Fuji TV, 1994).
 - **Original app:** [desktopPet](https://github.com/Adrianotiger/desktopPet) by Adriano Petrucci, the modern Windows version of the classic eSheep (MIT license).
+- **Pet Editor idea:** [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), the online pet editor by Adriano Petrucci. Desktop-Pet's Pet Editor was inspired by it and uses the same `animations.xml` format and schema.
 - **System tray icon:** Sergi Fumanya Grunwaldt.
 - **Pet throwing and collisions with windows and other pets:** Zecheriah.
-- **.NET 10 version, translation, new pets and Pet Editor:** Luan Felipe.
+- **.NET 10 version, translation, new pets and the Pet Editor app:** Luan Felipe.
 - **Community pets:** Oliver B. (gSheep), TheSuperCat and Oliver B. (eSheep Mate), Adriano Petrucci and Zecheriah (Pingus). Each pet shows its author in the panel.
 - **Pingus:** art and sounds from the free game [Pingus](https://pingus.seul.org/), under the GNU GPL.
 - **Office assistants:** Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links and Rocky are Microsoft characters, and Bonzi belongs to BONZI Software (characters, art and sounds). They were converted from [ClippyJS](https://github.com/pithings/clippy), whose code is MIT. Unofficial: not affiliated with these companies.
