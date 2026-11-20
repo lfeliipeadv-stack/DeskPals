@@ -62,16 +62,16 @@ com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o M
 
 <table>
   <tr>
-    <td align="center" valign="top" width="25%"><img src="Pets/rex/preview.gif" height="110" alt="Rex"><br><b>Rex</b><br><sub>Dinossauro que ruge, joga bola, toca guitarra e vira super-herói. 195 animações, 24 sons.</sub></td>
-    <td align="center" valign="top" width="25%"><img src="Pets/pingo/preview.gif" height="110" alt="Pingo"><br><b>Pingo</b><br><sub>Pinguim que desliza de barriga, patina, toca trompete e faz boneco de neve. 104 animações.</sub></td>
-    <td align="center" valign="top" width="25%"><img src="Pets/boo/preview.gif" height="110" alt="Boo"><br><b>Boo</b><br><sub>Fantasminha que voa pela tela, dá sustos, some e reaparece. 403 animações, 120 sons.</sub></td>
-    <td align="center" valign="top" width="25%"><img src="Pets/mago/preview.gif" height="110" alt="Mago"><br><b>Mago</b><br><sub>Faz feitiços, se teletransporta, voa de vassoura e é engolido pelo chapéu. 201 animações.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/rex.gif" height="110" alt="Rex"><br><b>Rex</b><br><sub>Dinossauro que ruge, joga bola, toca guitarra e vira super-herói. 195 animações, 24 sons.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/pingo.gif" height="110" alt="Pingo"><br><b>Pingo</b><br><sub>Pinguim que desliza de barriga, patina, toca trompete e faz boneco de neve. 104 animações.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/boo.gif" height="110" alt="Boo"><br><b>Boo</b><br><sub>Fantasminha que voa pela tela, dá sustos, some e reaparece. 403 animações, 120 sons.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/mago.gif" height="110" alt="Mago"><br><b>Mago</b><br><sub>Faz feitiços, se teletransporta, voa de vassoura e é engolido pelo chapéu. 201 animações.</sub></td>
   </tr>
   <tr>
-    <td align="center" valign="top"><img src="Pets/nuvi/preview.gif" height="110" alt="Nuvi"><br><b>Nuvi</b><br><sub>Nuvem-terminal que programa, dá erro, compila e faz trovão. 45 animações.</sub></td>
-    <td align="center" valign="top"><img src="Pets/claude/preview.gif" height="110" alt="Claude"><br><b>Claude</b><br><sub>Homenagem de fã ao mascote do Claude Code (sem vínculo com a Anthropic). 45 animações.</sub></td>
-    <td align="center" valign="top"><img src="Pets/esheep64/preview.gif" height="110" alt="eSheep"><br><b>eSheep</b><br><sub>A ovelhinha clássica. Vem dentro do programa e funciona sem internet.</sub></td>
-    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="110" alt="Pingus"><br><b>Pingus</b><br><sub>Os pinguins do jogo livre Pingus: cavam, explodem e voam de balão. De Adriano Petrucci e Zecheriah.</sub></td>
+    <td align="center" valign="top"><img src=".github/readme/nuvi.gif" height="110" alt="Nuvi"><br><b>Nuvi</b><br><sub>Nuvem-terminal que programa, dá erro, compila e faz trovão. 45 animações.</sub></td>
+    <td align="center" valign="top"><img src=".github/readme/claude.gif" height="110" alt="Claude"><br><b>Claude</b><br><sub>Homenagem de fã ao mascote do Claude Code (sem vínculo com a Anthropic). 45 animações.</sub></td>
+    <td align="center" valign="top"><img src="Pets/esheep64/preview.gif" height="84" alt="eSheep"><br><b>eSheep</b><br><sub>A ovelhinha clássica. Vem dentro do programa e funciona sem internet.</sub></td>
+    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>Os pinguins do jogo livre Pingus: cavam, explodem e voam de balão. De Adriano Petrucci e Zecheriah.</sub></td>
   </tr>
 </table>
 
@@ -92,16 +92,16 @@ com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o M
 e os sons originais. Eles **não têm gravidade**: ficam exatamente onde você soltar.
 
 <p>
-  <img src="Pets/clippy/preview.gif" height="72" alt="Clippy">
-  <img src="Pets/merlin/preview.gif" height="72" alt="Merlin">
-  <img src="Pets/rover/preview.gif" height="72" alt="Rover">
-  <img src="Pets/peedy/preview.gif" height="72" alt="Peedy">
-  <img src="Pets/genie/preview.gif" height="72" alt="Genie">
-  <img src="Pets/genius/preview.gif" height="72" alt="Genius">
-  <img src="Pets/f1/preview.gif" height="72" alt="F1">
-  <img src="Pets/links/preview.gif" height="72" alt="Links">
-  <img src="Pets/rocky/preview.gif" height="72" alt="Rocky">
-  <img src="Pets/bonzi/preview.gif" height="72" alt="Bonzi">
+  <img src="Pets/clippy/preview.gif" height="62" alt="Clippy">
+  <img src="Pets/merlin/preview.gif" height="62" alt="Merlin">
+  <img src="Pets/rover/preview.gif" height="62" alt="Rover">
+  <img src="Pets/peedy/preview.gif" height="62" alt="Peedy">
+  <img src="Pets/genie/preview.gif" height="62" alt="Genie">
+  <img src="Pets/genius/preview.gif" height="62" alt="Genius">
+  <img src="Pets/f1/preview.gif" height="62" alt="F1">
+  <img src="Pets/links/preview.gif" height="62" alt="Links">
+  <img src="Pets/rocky/preview.gif" height="62" alt="Rocky">
+  <img src="Pets/bonzi/preview.gif" height="62" alt="Bonzi">
 </p>
 
 ## O que ele faz
