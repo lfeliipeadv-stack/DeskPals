@@ -1,41 +1,41 @@
-# Como contribuir
+# How to contribute
 
-Obrigado por querer ajudar o Desktop-Pet! Há três jeitos principais.
+Thanks for wanting to help Desktop-Pet! There are three main ways. (Issues and pull requests are welcome in English or Portuguese.)
 
-## Um pet novo para a galeria
+## A new pet for the gallery
 
-1. Abra o **Editor de Pets** (Configurações › Programa › Editor de Pets, ou o `PetEditor.exe`).
-2. Crie o pet com o **Assistente de pet novo** ou mude um que já existe (use **Salvar como** para não mexer no original).
-3. Teste com **Testar no desktop** (F5): ele abre um segundo DesktopPet só com o seu pet, sem mexer no seu.
-4. Confira o **Verificador**: a galeria só recebe pets sem erros, com nome e autor no Cabeçalho.
-5. Clique em **Publicar na galeria**: o editor cria o .zip (em `Documentos\Desktop-Pet\galeria`) e abre o
-   [formulário de pet](https://github.com/lfeliipeadv-stack/meu-pet/issues/new?template=new_pet.md) já preenchido.
-   Arraste o .zip para a página e envie.
+1. Open the **Pet Editor** (Settings › App › Pet Editor, or `PetEditor.exe`).
+2. Create the pet with the **New pet wizard** or change an existing one (use **Save as** to keep the original untouched).
+3. Test it with **Test on desktop** (F5): it opens a second DesktopPet with only your pet, without touching yours.
+4. Check the **Validator**: the gallery only accepts pets with no errors and with a name and author in the Header.
+5. Click **Publish to gallery**: the editor creates the .zip (in `Documents\Desktop-Pet\galeria`) and opens the
+   [pet form](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new?template=new_pet.md) already filled in.
+   Drag the .zip onto the page and submit.
 
-Use desenhos seus ou com licença que permita a distribuição, e diga de onde vieram a arte e os sons.
-O passo a passo completo está em [Crie o seu pet](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Crie-o-seu-pet.html).
+Use your own drawings or ones whose license allows redistribution, and say where the art and sounds came from.
+The full guide is in [Make your pet](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Crie-o-seu-pet.html) (in Portuguese).
 
-## Uma tradução
+## A translation
 
-Os idiomas do programa ficam em `src/lang` (os que vêm com ele) e em `Languages` (os que se baixam nas
-configurações). Cada arquivo é um JSON de chave → texto. Para traduzir um idioma novo ou corrigir um que já existe,
-siga [Languages/README.md](Languages/README.md) e abra um pull request.
+The app's languages live in `src/lang` (the built-in ones) and in `Languages` (the ones downloaded from the
+settings). Each file is a key → text JSON. To translate a new language or fix an existing one,
+follow [Languages/README.md](Languages/README.md) and open a pull request.
 
-## Um problema ou uma ideia
+## A bug or an idea
 
-Abra uma [issue](https://github.com/lfeliipeadv-stack/meu-pet/issues/new/choose) com o formulário de problema ou de
-ideia. Para um problema, diga a versão (Configurações › Sobre), o Windows e como repetir.
+Open an [issue](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new/choose) with the bug or idea form.
+For a bug, include the version (Settings › About), your Windows version and how to reproduce it.
 
-## Código
+## Code
 
-O programa é C# (Windows Forms) sobre .NET 10. Antes de mandar um pull request:
+The app is C# (Windows Forms) on .NET 10. Before sending a pull request:
 
 ```bash
 dotnet build src/DesktopPet.Net.csproj -c Release
-src\bin\Release\net10.0-windows\win-x64\DesktopPet.exe --selftest=resultado.txt --only=<o que você mudou>
+src\bin\Release\net10.0-windows\win-x64\DesktopPet.exe --selftest=result.txt --only=<what you changed>
 ```
 
-O autoteste roda com o código de verdade; o código de saída é o número de falhas. Os detalhes estão em
-[Para desenvolvedores](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Para-desenvolvedores.html).
+The self-test runs against the real code; the exit code is the number of failures. Details are in
+[For developers](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Para-desenvolvedores.html) (in Portuguese).
 
-Ao contribuir, você concorda que a sua contribuição fica sob a [licença MIT](LICENSE.md) do projeto.
+By contributing, you agree that your contribution is licensed under the project's [MIT license](LICENSE.md).

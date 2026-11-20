@@ -199,7 +199,7 @@ Os pets têm versão própria: o programa confere a galeria de tempos em tempos 
 
 ## Como reporto um bug?
 
-Abra uma *issue* em <https://github.com/lfeliipeadv-stack/meu-pet/issues>. Ajude a encontrar a causa com duas ferramentas que o programa já tem:
+Abra uma *issue* em <https://github.com/lfeliipeadv-stack/Desktop-Pet/issues>. Ajude a encontrar a causa com duas ferramentas que o programa já tem:
 
 **Os arquivos de registro** — Painel → **Configurações** → **"Arquivos de registro"** → **"Abrir pasta"**. Abre `%LocalAppData%\DesktopPet\logs`, com um arquivo por dia (`desktoppet-AAAA-MM-DD.log`) e histórico de 7 dias. Anexar o arquivo do dia em que o problema aconteceu ajuda muito.
 

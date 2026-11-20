@@ -4,7 +4,7 @@
 
 Existe uma versão do pet que roda **dentro do navegador**, na página do projeto:
 
-**https://lfeliipeadv-stack.github.io/meu-pet/demo.html**
+**https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html**
 
 Não é vídeo nem imagem: é o pet de verdade, desenhado quadro a quadro num `canvas`, usando o mesmo arquivo `animations.xml` que o programa para Windows abre. Você vê o bicho chegar do céu, cair, pousar no topo da janela, andar por ela, descer para a barra de tarefas e virar de frente quando chega na borda.
 

@@ -1,95 +1,97 @@
 <p align="center">
-  <img src=".github/readme/banner.png" alt="Desktop-Pet: bichinhos que vivem na sua área de trabalho do Windows" width="100%">
+  <img src=".github/readme/banner.png" alt="Desktop-Pet: little pets that live on your Windows desktop" width="100%">
 </p>
 
+<p align="center"><b>English</b> · <a href="README.pt-BR.md">Português</a></p>
+
 <p align="center">
-  <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest"><img src="https://img.shields.io/github/v/release/lfeliipeadv-stack/meu-pet?label=vers%C3%A3o&color=1f7a4d" alt="Versão"></a>
-  <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases"><img src="https://img.shields.io/github/downloads/lfeliipeadv-stack/meu-pet/total?label=downloads&color=1f7a4d" alt="Downloads"></a>
-  <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-1f7a4d" alt="Windows 10 e 11">
+  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest"><img src="https://img.shields.io/github/v/release/lfeliipeadv-stack/Desktop-Pet?label=version&color=1f7a4d" alt="Version"></a>
+  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet/releases"><img src="https://img.shields.io/github/downloads/lfeliipeadv-stack/Desktop-Pet/total?label=downloads&color=1f7a4d" alt="Downloads"></a>
+  <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-1f7a4d" alt="Windows 10 and 11">
   <img src="https://img.shields.io/badge/.NET-10-1f7a4d" alt=".NET 10">
-  <img src="https://img.shields.io/badge/idiomas-23-1f7a4d" alt="23 idiomas">
-  <a href="LICENSE.md"><img src="https://img.shields.io/badge/licen%C3%A7a-MIT-1f7a4d" alt="Licença MIT"></a>
+  <img src="https://img.shields.io/badge/languages-23-1f7a4d" alt="23 languages">
+  <a href="LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-1f7a4d" alt="MIT license"></a>
 </p>
 
 <p align="center">
-  <b>Um bichinho que mora na sua área de trabalho.</b><br>
-  Ele anda pelas suas janelas, cai na barra de tarefas, dorme, dança, conversa com você
-  e lembra das pausas. Dá para arrastar e arremessar com o mouse — e criar o seu próprio.
+  <b>A little pet that lives on your desktop.</b><br>
+  It walks along your windows, drops onto the taskbar, sleeps, dances, chats with you
+  and reminds you to take breaks. You can drag it and toss it with the mouse — and make your own.
 </p>
 
 <p align="center">
-  <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe"><b>⬇️ Baixar para Windows (grátis)</b></a>
+  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet-Instalador.exe"><b>⬇️ Download for Windows (free)</b></a>
   &nbsp;·&nbsp;
-  <a href="https://lfeliipeadv-stack.github.io/meu-pet/demo.html">🖥️ Testar no navegador</a>
+  <a href="https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html">🖥️ Try it in the browser</a>
   &nbsp;·&nbsp;
-  <a href="https://lfeliipeadv-stack.github.io/meu-pet/wiki/Home.html">📖 Manual</a>
+  <a href="https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Home.html">📖 Manual</a>
   &nbsp;·&nbsp;
-  <a href="https://lfeliipeadv-stack.github.io/meu-pet/">🌐 Página do projeto</a>
+  <a href="https://lfeliipeadv-stack.github.io/Desktop-Pet/">🌐 Website</a>
 </p>
 
 ---
 
-## Sumário
+## Contents
 
-- [Teste antes de instalar](#teste-antes-de-instalar)
-- [Os pets](#os-pets)
-- [O que ele faz](#o-que-ele-faz)
-- [Telas](#telas)
-- [Instalar](#instalar)
-- [Privacidade](#privacidade)
-- [Perguntas rápidas](#perguntas-rápidas)
-- [O manual](#o-manual)
-- [Contribuir](#contribuir)
-- [Para desenvolvedores](#para-desenvolvedores)
-- [Créditos](#créditos) · [Licença](#licença)
+- [Try it before installing](#try-it-before-installing)
+- [The pets](#the-pets)
+- [What it does](#what-it-does)
+- [Screenshots](#screenshots)
+- [Install](#install)
+- [Privacy](#privacy)
+- [Quick questions](#quick-questions)
+- [The manual](#the-manual)
+- [Contributing](#contributing)
+- [For developers](#for-developers)
+- [Credits](#credits) · [License](#license)
 
-## Teste antes de instalar
+## Try it before installing
 
-A demo roda o pet de verdade dentro do navegador, numa área de trabalho com a cara do Windows 11:
-**[lfeliipeadv-stack.github.io/meu-pet/demo.html](https://lfeliipeadv-stack.github.io/meu-pet/demo.html)**
+The demo runs the real pet inside your browser, on a desktop that looks like Windows 11:
+**[lfeliipeadv-stack.github.io/Desktop-Pet/demo.html](https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html)**
 
-[![A demo no navegador: uma área de trabalho do Windows 11 com o painel do pet, o Pomodoro, o bloco de notas e a janela "Sobre a demo", o pet em cima de uma janela e a barra de tarefas centralizada](wiki/images/demo.png)](https://lfeliipeadv-stack.github.io/meu-pet/demo.html)
+[![The browser demo: a Windows 11 desktop with the pet panel, Pomodoro, the notepad and the "About the demo" window, the pet standing on a window and the centered taskbar](wiki/images/demo.png)](https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html)
 
-Não é vídeo: são os mesmos desenhos, o mesmo `animations.xml` e a mesma lógica de movimento do programa. O pet
-chega do céu, pousa numa janela, anda por ela e cai quando ela some. Dá para arrastar e arremessar, conversar,
-trocar de pet (inclusive o Clippy, que flutua), usar o Iniciar, o Pomodoro, o bloco de notas, o tema escuro e os
-papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Demo-no-navegador.html).
+It isn't a video: it uses the same drawings, the same `animations.xml` and the same movement logic as the app. The pet
+drops from the sky, lands on a window, walks along it and falls when the window goes away. You can drag it and toss it,
+chat with it, switch pets (including Clippy, who floats), and use the Start menu, Pomodoro, the notepad, dark mode and
+the wallpapers. The demo itself is in Portuguese.
 
-## Os pets
+## The pets
 
-A galeria tem **26 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
-com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o Desktop-Pet, em pixel art:
+The gallery has **26 pets**, downloaded straight from this repository (the [`Pets`](Pets) folder) through the app's
+panel, with an animated preview and the size of each one before you download it. The ones made for Desktop-Pet, in pixel art:
 
 <table>
   <tr>
-    <td align="center" valign="top" width="25%"><img src=".github/readme/rex.gif" height="110" alt="Rex"><br><b>Rex</b><br><sub>Dinossauro que ruge, joga bola, toca guitarra e vira super-herói. 195 animações, 24 sons.</sub></td>
-    <td align="center" valign="top" width="25%"><img src=".github/readme/pingo.gif" height="110" alt="Pingo"><br><b>Pingo</b><br><sub>Pinguim que desliza de barriga, patina, toca trompete e faz boneco de neve. 104 animações.</sub></td>
-    <td align="center" valign="top" width="25%"><img src=".github/readme/boo.gif" height="110" alt="Boo"><br><b>Boo</b><br><sub>Fantasminha que voa pela tela, dá sustos, some e reaparece. 403 animações, 120 sons.</sub></td>
-    <td align="center" valign="top" width="25%"><img src=".github/readme/mago.gif" height="110" alt="Mago"><br><b>Mago</b><br><sub>Faz feitiços, se teletransporta, voa de vassoura e é engolido pelo chapéu. 201 animações.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/rex.gif" height="110" alt="Rex"><br><b>Rex</b><br><sub>A dinosaur that roars, plays ball, plays guitar and turns into a superhero. 195 animations, 24 sounds.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/pingo.gif" height="110" alt="Pingo"><br><b>Pingo</b><br><sub>A penguin that belly-slides, skates, plays the trumpet and builds snowmen. 104 animations.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/boo.gif" height="110" alt="Boo"><br><b>Boo</b><br><sub>A little ghost that flies around the screen, gives scares, vanishes and comes back. 403 animations, 120 sounds.</sub></td>
+    <td align="center" valign="top" width="25%"><img src=".github/readme/mago.gif" height="110" alt="Mago"><br><b>Mago</b><br><sub>A wizard who casts spells, teleports, flies on a broomstick and gets swallowed by his hat. 201 animations.</sub></td>
   </tr>
   <tr>
-    <td align="center" valign="top"><img src=".github/readme/nuvi.gif" height="110" alt="Nuvi"><br><b>Nuvi</b><br><sub>Nuvem-terminal que programa, dá erro, compila e faz trovão. 45 animações.</sub></td>
-    <td align="center" valign="top"><img src=".github/readme/claude.gif" height="110" alt="Claude"><br><b>Claude</b><br><sub>Homenagem de fã ao mascote do Claude Code (sem vínculo com a Anthropic). 45 animações.</sub></td>
-    <td align="center" valign="top"><img src="Pets/esheep64/preview.gif" height="84" alt="eSheep"><br><b>eSheep</b><br><sub>A ovelhinha clássica. Vem dentro do programa e funciona sem internet.</sub></td>
-    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>Os pinguins do jogo livre Pingus: cavam, explodem e voam de balão. De Adriano Petrucci e Zecheriah.</sub></td>
+    <td align="center" valign="top"><img src=".github/readme/nuvi.gif" height="110" alt="Nuvi"><br><b>Nuvi</b><br><sub>A terminal cloud that codes, hits errors, compiles and makes thunder. 45 animations.</sub></td>
+    <td align="center" valign="top"><img src=".github/readme/claude.gif" height="110" alt="Claude"><br><b>Claude</b><br><sub>A fan tribute to the Claude Code mascot (not affiliated with Anthropic). 45 animations.</sub></td>
+    <td align="center" valign="top"><img src="Pets/esheep64/preview.gif" height="84" alt="eSheep"><br><b>eSheep</b><br><sub>The classic little sheep. Built into the app and works offline.</sub></td>
+    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>The penguins from the free game Pingus: they dig, explode and fly balloons. By Adriano Petrucci and Zecheriah.</sub></td>
   </tr>
 </table>
 
-**As ovelhas da comunidade** — as sete gSheep coloridas e o eSheep Mate, de Oliver B. e TheSuperCat, com 273 animações cada:
+**The community sheep** — the seven colorful gSheep and eSheep Mate, by Oliver B. and TheSuperCat, with 273 animations each:
 
 <p>
-  <img src="Pets/blue_sheep/preview.gif" height="64" alt="gSheep azul">
-  <img src="Pets/green_sheep/preview.gif" height="64" alt="gSheep verde">
-  <img src="Pets/yellow_sheep/preview.gif" height="64" alt="gSheep amarela">
-  <img src="Pets/orange_sheep/preview.gif" height="64" alt="gSheep laranja">
-  <img src="Pets/red_sheep/preview.gif" height="64" alt="gSheep vermelha">
-  <img src="Pets/pink_sheep/preview.gif" height="64" alt="gSheep rosa">
-  <img src="Pets/purple_sheep/preview.gif" height="64" alt="gSheep roxa">
+  <img src="Pets/blue_sheep/preview.gif" height="64" alt="Blue gSheep">
+  <img src="Pets/green_sheep/preview.gif" height="64" alt="Green gSheep">
+  <img src="Pets/yellow_sheep/preview.gif" height="64" alt="Yellow gSheep">
+  <img src="Pets/orange_sheep/preview.gif" height="64" alt="Orange gSheep">
+  <img src="Pets/red_sheep/preview.gif" height="64" alt="Red gSheep">
+  <img src="Pets/pink_sheep/preview.gif" height="64" alt="Pink gSheep">
+  <img src="Pets/purple_sheep/preview.gif" height="64" alt="Purple gSheep">
   <img src="Pets/sheep_mate/preview.gif" height="64" alt="eSheep Mate">
 </p>
 
-**Os assistentes do Office** — Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links, Rocky e Bonzi, com as animações
-e os sons originais. Eles **não têm gravidade**: ficam exatamente onde você soltar.
+**The Office assistants** — Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links, Rocky and Bonzi, with their original
+animations and sounds. They have **no gravity**: they stay exactly where you drop them.
 
 <p>
   <img src="Pets/clippy/preview.gif" height="62" alt="Clippy">
@@ -104,214 +106,210 @@ e os sons originais. Eles **não têm gravidade**: ficam exatamente onde você s
   <img src="Pets/bonzi/preview.gif" height="62" alt="Bonzi">
 </p>
 
-## O que ele faz
+## What it does
 
 <table>
 <tr><td valign="top" width="50%">
 
-**🐾 No dia a dia**
-- Anda pelo topo das janelas e cai quando elas somem
-- Arraste e solte: ele cai, quica e volta a andar; com força, ele voa
-- Botão do meio no pet: escolha qualquer animação dele
-- **Ctrl + Alt + P** esconde todos os pets (e os sons) — ótimo em reuniões
-- Vários pets ao mesmo tempo, que se cumprimentam quando se encontram
-- Tamanho 1×, 2× ou 4×, vários monitores, tema claro ou escuro
+**🐾 Every day**
+- Walks along the top of your windows and falls when they disappear
+- Drag and drop: it falls, bounces and walks again; throw it hard and it flies
+- Middle-click the pet to pick any of its animations
+- **Ctrl + Alt + P** hides every pet (and the sounds) — great for meetings
+- Several pets at once, which greet each other when they meet
+- 1×, 2× or 4× size, multiple monitors, light or dark theme
 
-**💬 Pergunte ao pet**
-- Passe o mouse sobre ele e clique em **Perguntar**: a resposta aparece no balão
-- Funciona com serviços gratuitos: Ollama (no seu computador), Google Gemini, Groq, OpenRouter ou outro compatível
-- Lembra a conversa, tem personalidades e aceita ditado por voz
-- A chave fica criptografada só para o seu usuário do Windows
+**💬 Ask the pet**
+- Hover over it and click **Ask**: the answer shows up in a speech bubble
+- Works with free services: Ollama (on your own computer), Google Gemini, Groq, OpenRouter or any compatible one
+- Remembers the conversation, has personalities and accepts voice dictation
+- The API key is encrypted for your Windows user only
 
-**⏰ Companhia no trabalho**
-- **Lembretes** de água, alongamento e pausa, e **Pomodoro** com o pet em silêncio durante o foco
-- **Lembretes escritos**: "me lembra de ligar para a Ana às 15h", "todo dia às 8"
-- **Agenda** do Google ou do Outlook: o pet avisa antes de cada reunião
-- **Previsão do tempo** no Início e aviso de chuva
-- Sugere uma pausa depois de muito tempo sem parar
+**⏰ A work buddy**
+- **Reminders** for water, stretching and breaks, and **Pomodoro** with the pet quiet while you focus
+- **Written reminders**: "remind me to call Ana at 3pm", "every day at 8"
+- **Calendar** from Google or Outlook: the pet warns you before every meeting
+- **Weather forecast** on the Home page and rain alerts
+- Suggests a break after a long stretch without stopping
 
 </td><td valign="top" width="50%">
 
-**🎨 Editor de Pets**
-- Crie um pet a partir das suas imagens ou de um GIF, em três passos
-- Mude qualquer pet: folha de sprites, animações com prévia ao vivo, sons, entradas na tela
-- Teste no desktop sem mexer no seu pet, com desfazer que continua depois de fechar
-- Exporte em .zip ou **publique na galeria** direto do editor
+**🎨 Pet Editor**
+- Make a pet from your own images or a GIF, in three steps
+- Change any pet: sprite sheet, animations with live preview, sounds, entrances on screen
+- Test on the desktop without touching your pet, with undo that survives closing the editor
+- Export as .zip or **publish to the gallery** straight from the editor
 
-**🧸 Pet virtual e brincadeiras**
-- Ele sente fome, quer carinho e tem sono — e reclama (de leve)
-- Biscoito da sorte, piadas, bola 8 mágica e "como você está hoje?"
-- Visitas de borboletas, pássaros, abelhas e joaninhas
+**🧸 Virtual pet and games**
+- It gets hungry, wants attention and gets sleepy — and (gently) complains
+- Fortune cookies, jokes, a magic 8-ball and "how are you today?"
+- Visits from butterflies, birds, bees and ladybugs
 
-**🔌 Plugins e integrações**
-- 22 plugins: monitor de CPU e memória, atalhos para pastas e sites, notas, tempo em cada programa…
-- Reage ao **Claude Code** (pensando, editando, pronto) e o Claude pode mandar recados pelo balão (MCP)
+**🔌 Plugins and integrations**
+- 22 plugins: CPU and memory monitor, shortcuts to folders and sites, notes, time spent in each app…
+- Reacts to **Claude Code** (thinking, editing, done), and Claude can send you messages through the bubble (MCP)
 
-**⚙️ Por baixo**
-- Programa de cerca de 3 MB, leve: menos de 1% de CPU
-- **23 idiomas**: português, inglês e espanhol, mais 20 para baixar nas configurações
-- **Atualização automática** em segundo plano, conferida por SHA-256, instalada ao fechar
-- **Backup** de pets, lembretes, notas e preferências, com cópia automática numa pasta (OneDrive, Google Drive)
+**⚙️ Under the hood**
+- A light app of about 3 MB: less than 1% CPU
+- **23 languages**: Portuguese, English and Spanish built in, plus 20 to download in the settings
+- **Automatic updates** in the background, verified with SHA-256 and installed when you close the app
+- **Backup** of pets, reminders, notes and preferences, with an automatic copy to a folder (OneDrive, Google Drive)
 
 </td></tr>
 </table>
 
-## Telas
+## Screenshots
 
-Tiradas do próprio programa.
+Taken from the app itself (shown here in Portuguese; the app also runs in English, Spanish and 20 other languages).
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/capturas/home.png" alt="Painel: Início"><br><sub>Início: seu pet, o dia, a semana e a previsão do tempo</sub></td>
-    <td width="50%"><img src="docs/capturas/pets.png" alt="Painel: Meus pets"><br><sub>Meus pets: o que já está no seu computador</sub></td>
+    <td width="50%"><img src="docs/capturas/home.png" alt="Panel: Home"><br><sub>Home: your pet, your day, your week and the weather forecast</sub></td>
+    <td width="50%"><img src="docs/capturas/pets.png" alt="Panel: My pets"><br><sub>My pets: the ones already on your computer</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/capturas/pets-tab2.png" alt="Painel: Baixar pets"><br><sub>Baixar pets: com a prévia e o tamanho de cada um</sub></td>
-    <td><img src="docs/capturas/pets-detail.png" alt="Detalhe de um pet"><br><sub>O detalhe do pet, com as animações e os sons</sub></td>
+    <td><img src="docs/capturas/pets-tab2.png" alt="Panel: Download pets"><br><sub>Download pets: with a preview and the size of each one</sub></td>
+    <td><img src="docs/capturas/pets-detail.png" alt="A pet's details"><br><sub>A pet's details, with its animations and sounds</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/capturas/chat.png" alt="Conversa com o pet"><br><sub>A conversa, no balão sobre o pet</sub></td>
-    <td><img src="docs/capturas/reminders.png" alt="Lembretes"><br><sub>Lembretes: água, alongamento e as suas anotações</sub></td>
+    <td><img src="docs/capturas/chat.png" alt="Chatting with the pet"><br><sub>The conversation, in a bubble above the pet</sub></td>
+    <td><img src="docs/capturas/reminders.png" alt="Reminders"><br><sub>Reminders: water, stretching and your own notes</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/capturas/plugins.png" alt="Plugins"><br><sub>Plugins: agenda, clima, foco e os outros</sub></td>
-    <td><img src="docs/capturas/application.png" alt="Configurações"><br><sub>Configurações: som, tema, idioma e atalhos</sub></td>
+    <td><img src="docs/capturas/plugins.png" alt="Plugins"><br><sub>Plugins: calendar, weather, focus and the rest</sub></td>
+    <td><img src="docs/capturas/application.png" alt="Settings"><br><sub>Settings: sound, theme, language and shortcuts</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/capturas/ai.png" alt="Assistente"><br><sub>Assistente: a IA que responde quando você pergunta</sub></td>
-    <td><img src="docs/capturas/editor.png" alt="Editor de Pets"><br><sub>Editor de Pets: as suas imagens viram um bichinho, com prévia ao vivo</sub></td>
+    <td><img src="docs/capturas/ai.png" alt="Assistant"><br><sub>Assistant: the AI that answers when you ask</sub></td>
+    <td><img src="docs/capturas/editor.png" alt="Pet Editor"><br><sub>Pet Editor: your images become a pet, with a live preview</sub></td>
   </tr>
 </table>
 
-## Instalar
+## Install
 
-| Arquivo | Para quem |
+| File | Who it's for |
 | --- | --- |
-| **[DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe)** | **Recomendado.** Confere o .NET 10 (e oferece o instalador oficial da Microsoft se faltar), instala o programa e o Editor de Pets em Arquivos de Programas e cria os atalhos. |
-| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-completo.exe) | Abre direto, sem instalar nada: o .NET vem dentro (arquivo maior, cerca de 50 MB). |
-| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
-| [PetEditor.exe](https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/PetEditor.exe) | Só o Editor de Pets (o programa também o baixa sozinho na primeira vez que você abre o editor). |
+| **[DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet-Instalador.exe)** | **Recommended.** Checks for .NET 10 (and offers Microsoft's official installer if it's missing), installs the app and the Pet Editor in Program Files and creates the shortcuts. |
+| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet-completo.exe) | Runs directly without installing anything: .NET is included (bigger file, about 50 MB). |
+| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet.exe) | Just the app, for those who already have the [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
+| [PetEditor.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/PetEditor.exe) | Just the Pet Editor (the app also downloads it on its own the first time you open the editor). |
 
-Precisa de **Windows 10 ou 11, 64 bits**. O instalador pede permissão de administrador uma vez (para gravar em
-Arquivos de Programas); o programa roda como usuário comum. O ícone aparece perto do relógio: clique com o botão direito e escolha
-**Abrir Painel** para adotar um pet. Para desinstalar, use **Aplicativos** nas Configurações do Windows — ele pergunta
-se você quer apagar também seus pets e configurações. O passo a passo está em
-[Instalação](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Instalacao.html).
+Requires **Windows 10 or 11, 64-bit**. The installer asks for administrator permission once (to write to Program
+Files); the app itself runs as a regular user. The icon appears next to the clock: right-click it and choose
+**Open Panel** to adopt a pet. To uninstall, use **Apps** in Windows Settings — it asks whether you also want to delete
+your pets and settings.
 
-> Os arquivos não têm assinatura digital, então o Windows pode avisar que o editor é desconhecido. Cada versão
-> publica o `SHA256SUMS` para conferir o download, e o atualizador do programa confere tudo sozinho.
+> The files aren't digitally signed, so Windows may warn that the publisher is unknown. Every release publishes
+> `SHA256SUMS` so you can verify the download, and the app's updater checks everything on its own.
 
-## Privacidade
+## Privacy
 
-- **Nada de conta, anúncio ou telemetria.** Seus pets, lembretes, notas e preferências ficam no seu computador.
-- O programa só usa a internet para baixar **pets, idiomas e atualizações** deste repositório.
-- A **previsão do tempo** envia só o nome da cidade que você escolheu ao Open-Meteo.
-- A **IA** só é usada se você configurar um serviço; com o Ollama, tudo fica no seu computador.
-- A chave da IA fica criptografada para o seu usuário do Windows e **nunca** entra no backup.
+- **No account, no ads, no telemetry.** Your pets, reminders, notes and preferences stay on your computer.
+- The app only uses the internet to download **pets, languages and updates** from this repository.
+- The **weather forecast** sends only the name of the city you chose to Open-Meteo.
+- **AI** is only used if you set up a service; with Ollama, everything stays on your computer.
+- The AI key is encrypted for your Windows user and **never** goes into the backup.
 
-## Perguntas rápidas
+## Quick questions
 
-**É grátis?** Sim, e de código aberto (licença MIT).
+**Is it free?** Yes, and open source (MIT license).
 
-**Pesa no computador?** Não: o programa tem cerca de 3 MB e usa menos de 1% do processador.
+**Will it slow my computer down?** No: the app is about 3 MB and uses less than 1% of the CPU.
 
-**Funciona sem internet?** Sim. A ovelha clássica vem dentro do programa, e os pets já baixados continuam funcionando.
+**Does it work offline?** Yes. The classic sheep is built into the app, and pets you've already downloaded keep working.
 
-**Dá para usar em reunião?** **Ctrl + Alt + P** esconde todos os pets e os sons; aperte de novo para voltar.
+**Can I use it during meetings?** **Ctrl + Alt + P** hides all pets and sounds; press it again to bring them back.
 
-**Posso fazer o meu pet?** Sim, com o Editor de Pets — e mandar para a galeria pelo próprio editor.
+**Can I make my own pet?** Yes, with the Pet Editor — and send it to the gallery from the editor itself.
 
-Mais respostas em [Perguntas frequentes](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Perguntas-frequentes.html).
+## The manual
 
-## O manual
+The full manual is in the [project wiki](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Home.html) (written in Portuguese):
 
-O manual inteiro está no [Wiki do projeto](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Home.html):
-
-| Página | O que tem |
+| Page | What's in it |
 | --- | --- |
-| [Instalação](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Instalacao.html) | Os downloads, o que o instalador confere, como atualizar e desinstalar |
-| [Primeiros passos](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Primeiros-passos.html) | O que fazer depois de instalar, em ordem |
-| [Demo no navegador](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Demo-no-navegador.html) | O pet de verdade rodando dentro da página, sem instalar nada |
-| [Painel de pets](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Painel-de-pets.html) | Baixar, adotar, remover, exportar e importar pets |
-| [Pergunte ao pet](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Pergunte-ao-pet.html) | A conversa, os serviços de IA e onde fica a chave |
-| [Lembretes e Pomodoro](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Lembretes-e-Pomodoro.html) | Os lembretes escritos em português e o foco que silencia o pet |
-| [Agenda e e-mails](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Agenda-e-e-mails.html) | A agenda do Google e do Outlook e os avisos de e-mail |
-| [Pet virtual e brincadeiras](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Pet-virtual-e-brinquedos.html) | Fome, carinho, sono e as brincadeiras |
-| [Plugins e integrações](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Plugins-e-integracoes.html) | Os 22 plugins e a ponte com o Claude Code |
-| [Crie o seu pet](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Crie-o-seu-pet.html) | O Editor de Pets e o formato do arquivo do pet |
-| [Atalhos e comandos](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Atalhos-e-comandos.html) | Teclado, mouse e os argumentos do executável |
-| [Para desenvolvedores](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Para-desenvolvedores.html) | Compilar, testar e publicar uma versão |
-| [Perguntas frequentes](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Perguntas-frequentes.html) | Dúvidas comuns, respondidas |
-| [Changelog](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Changelog.html) | O que mudou em cada versão |
+| [Installation](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Instalacao.html) | The downloads, what the installer checks, how to update and uninstall |
+| [Getting started](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Primeiros-passos.html) | What to do after installing, in order |
+| [Browser demo](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Demo-no-navegador.html) | The real pet running inside the page, nothing to install |
+| [Pets panel](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Painel-de-pets.html) | Downloading, adopting, removing, exporting and importing pets |
+| [Ask the pet](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Pergunte-ao-pet.html) | Chatting, the AI services and where the key is kept |
+| [Reminders and Pomodoro](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Lembretes-e-Pomodoro.html) | Written reminders and the focus mode that keeps the pet quiet |
+| [Calendar and email](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Agenda-e-e-mails.html) | Google and Outlook calendars and the email alerts |
+| [Virtual pet and games](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Pet-virtual-e-brinquedos.html) | Hunger, attention, sleep and the games |
+| [Plugins and integrations](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Plugins-e-integracoes.html) | The 22 plugins and the Claude Code bridge |
+| [Make your pet](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Crie-o-seu-pet.html) | The Pet Editor and the pet file format |
+| [Shortcuts and commands](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Atalhos-e-comandos.html) | Keyboard, mouse and the executable's arguments |
+| [For developers](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Para-desenvolvedores.html) | Building, testing and publishing a release |
+| [FAQ](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Perguntas-frequentes.html) | Common questions, answered |
+| [Changelog](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Changelog.html) | What changed in each version |
 
-## Contribuir
+## Contributing
 
-- **Um pet novo:** faça no Editor de Pets e use **Publicar na galeria** — ele prepara o .zip e abre o
-  [formulário de pet](https://github.com/lfeliipeadv-stack/meu-pet/issues/new?template=new_pet.md) já preenchido.
-- **Uma tradução** nova ou corrigida: veja [Languages/README.md](Languages/README.md).
-- **Um problema ou uma ideia:** abra uma [issue](https://github.com/lfeliipeadv-stack/meu-pet/issues/new/choose).
+- **A new pet:** make it in the Pet Editor and use **Publish to gallery** — it prepares the .zip and opens the
+  [pet form](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new?template=new_pet.md) already filled in.
+- **A new or improved translation:** see [Languages/README.md](Languages/README.md).
+- **A bug or an idea:** open an [issue](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new/choose).
 
-O passo a passo está em [CONTRIBUTING.md](CONTRIBUTING.md).
+The step-by-step guide is in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Para desenvolvedores
+## For developers
 
 <details>
-<summary>Compilar, testar e publicar</summary>
+<summary>Build, test and publish</summary>
 
 <br>
 
-O programa é C# (Windows Forms) sobre **.NET 10**; o Editor de Pets é um programa à parte, na pasta `editor/`.
+The app is C# (Windows Forms) on **.NET 10**; the Pet Editor is a separate program in the `editor/` folder.
 
 ```bash
 dotnet build src/DesktopPet.Net.csproj -c Release
 dotnet build editor/PetEditor.csproj -c Release
 ```
 
-Autoteste com o código de verdade (o resultado vai para o arquivo; o código de saída é o número de falhas;
-`--only=nome` roda só os testes com esse nome):
+Self-test with the real code (results go to the file; the exit code is the number of failures;
+`--only=name` runs only the tests with that name):
 
 ```bash
-DesktopPet.exe --selftest=resultado.txt
+DesktopPet.exe --selftest=result.txt
 PetEditor.exe --devtests=Pets
 ```
 
-| Ferramenta | O que faz |
+| Tool | What it does |
 | --- | --- |
-| [`Tools/PetGen`](Tools/PetGen) | Desenha Rex, Pingo, Boo, Mago, Nuvi e Claude pixel a pixel e sintetiza os sons |
-| [`Tools/PetPack`](Tools/PetPack) | Monta pets a partir de quadros PNG |
-| [`Tools/clippy-agents-to-pets.ps1`](Tools/clippy-agents-to-pets.ps1) | Converte os assistentes do Office do ClippyJS em pets sem gravidade |
-| [`Tools/update-pets-json.ps1`](Tools/update-pets-json.ps1) | Atualiza tamanho, animações e sons de cada pet no `Pets/pets.json` |
-| [`Tools/make-previews.ps1`](Tools/make-previews.ps1) | Gera a prévia animada (`preview.gif`) de cada pet com o ffmpeg |
-| [`Tools/make-readme-banner.ps1`](Tools/make-readme-banner.ps1) | Gera o banner deste README com os pets da galeria |
-| [`Tools/update-languages-json.ps1`](Tools/update-languages-json.ps1) | Atualiza a lista dos idiomas para baixar (`Languages/languages.json`) |
-| [`Tools/Setup`](Tools/Setup) | O instalador (.NET Framework 4.8, confere o .NET 10) |
-| [`Tools/release.ps1`](Tools/release.ps1) | Compila tudo, roda os testes do editor e publica a versão com o `SHA256SUMS` |
+| [`Tools/PetGen`](Tools/PetGen) | Draws Rex, Pingo, Boo, Mago, Nuvi and Claude pixel by pixel and synthesizes their sounds |
+| [`Tools/PetPack`](Tools/PetPack) | Builds pets from PNG frames |
+| [`Tools/clippy-agents-to-pets.ps1`](Tools/clippy-agents-to-pets.ps1) | Converts the ClippyJS Office assistants into gravity-free pets |
+| [`Tools/update-pets-json.ps1`](Tools/update-pets-json.ps1) | Updates each pet's size, animations and sounds in `Pets/pets.json` |
+| [`Tools/make-previews.ps1`](Tools/make-previews.ps1) | Generates each pet's animated preview (`preview.gif`) with ffmpeg |
+| [`Tools/make-readme-banner.ps1`](Tools/make-readme-banner.ps1) | Generates this README's banner with the gallery pets |
+| [`Tools/update-languages-json.ps1`](Tools/update-languages-json.ps1) | Updates the list of downloadable languages (`Languages/languages.json`) |
+| [`Tools/Setup`](Tools/Setup) | The installer (.NET Framework 4.8, checks for .NET 10) |
+| [`Tools/release.ps1`](Tools/release.ps1) | Builds everything, runs the editor tests and publishes the release with `SHA256SUMS` |
 
 ```bash
-pwsh Tools/release.ps1 -Version 1.0.1 -NoUpload    # só monta e confere, sem publicar
+pwsh Tools/release.ps1 -Version 1.0.1 -NoUpload    # build and check only, don't publish
 ```
 
-Segure **CTRL** ao abrir o programa (ou use Configurações → Janela de depuração) para ver ao vivo o que o pet está
-fazendo. Os detalhes estão em [Para desenvolvedores](https://lfeliipeadv-stack.github.io/meu-pet/wiki/Para-desenvolvedores.html).
+Hold **CTRL** while opening the app (or use Settings → Debug window) to see live what the pet is doing.
+More details in [For developers](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Para-desenvolvedores.html) (in Portuguese).
 
 </details>
 
-## Créditos
+## Credits
 
-- **Ideia e arte originais da ovelha:** Tatsutoshi Nomura (Stray Sheep, Fuji TV, 1994).
-- **Programa original:** [desktopPet](https://github.com/Adrianotiger/desktopPet) de Adriano Petrucci, a versão para Windows moderno da ovelhinha clássica do eSheep (licença MIT).
-- **Ícone na bandeja do sistema:** Sergi Fumanya Grunwaldt.
-- **Arremesso do pet e colisões com janelas e outros pets:** Zecheriah.
-- **Versão .NET 10, tradução, pets novos e Editor de Pets:** Luan Felipe.
-- **Pets da comunidade:** Oliver B. (gSheep), TheSuperCat e Oliver B. (eSheep Mate), Adriano Petrucci e Zecheriah (Pingus). Cada pet mostra o autor no painel.
-- **Pingus:** arte e sons do jogo livre [Pingus](https://pingus.seul.org/), sob a licença GNU GPL.
-- **Assistentes do Office:** Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links e Rocky são personagens da Microsoft, e o Bonzi é da BONZI Software (personagens, arte e sons). Foram convertidos do [ClippyJS](https://github.com/pithings/clippy), cujo código é MIT. Não oficiais: sem vínculo com essas empresas.
-- **Previsão do tempo:** dados do [Open-Meteo.com](https://open-meteo.com/); nomes das cidades do [GeoNames.org](https://www.geonames.org/). Os dois sob a licença Creative Commons Atribuição 4.0 (CC BY 4.0).
+- **Original sheep idea and art:** Tatsutoshi Nomura (Stray Sheep, Fuji TV, 1994).
+- **Original app:** [desktopPet](https://github.com/Adrianotiger/desktopPet) by Adriano Petrucci, the modern Windows version of the classic eSheep (MIT license).
+- **System tray icon:** Sergi Fumanya Grunwaldt.
+- **Pet throwing and collisions with windows and other pets:** Zecheriah.
+- **.NET 10 version, translation, new pets and Pet Editor:** Luan Felipe.
+- **Community pets:** Oliver B. (gSheep), TheSuperCat and Oliver B. (eSheep Mate), Adriano Petrucci and Zecheriah (Pingus). Each pet shows its author in the panel.
+- **Pingus:** art and sounds from the free game [Pingus](https://pingus.seul.org/), under the GNU GPL.
+- **Office assistants:** Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links and Rocky are Microsoft characters, and Bonzi belongs to BONZI Software (characters, art and sounds). They were converted from [ClippyJS](https://github.com/pithings/clippy), whose code is MIT. Unofficial: not affiliated with these companies.
+- **Weather forecast:** data from [Open-Meteo.com](https://open-meteo.com/); city names from [GeoNames.org](https://www.geonames.org/). Both under the Creative Commons Attribution 4.0 license (CC BY 4.0).
 
-O Claude é uma homenagem de fã: o nome, o mascote e o logotipo pertencem à Anthropic PBC, que não tem vínculo com este
-projeto. O logotipo do Claude só identifica a integração com o Claude Code. No programa, os créditos e as licenças
-ficam em **Sobre**.
+Claude is a fan tribute: the name, mascot and logo belong to Anthropic PBC, which is not affiliated with this
+project. The Claude logo only identifies the Claude Code integration. In the app, credits and licenses are under **About**.
 
-## Licença
+## License
 
-[MIT](LICENSE.md) — use, modifique e distribua à vontade, mantendo o aviso de copyright.
+[MIT](LICENSE.md) — use, modify and distribute freely, keeping the copyright notice.

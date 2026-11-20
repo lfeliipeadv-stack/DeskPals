@@ -9,7 +9,7 @@ namespace DesktopPet
         /// <summary>GitHub owner of the repository.</summary>
         public const string RepoOwner = "lfeliipeadv-stack";
         /// <summary>GitHub repository.</summary>
-        public const string RepoName = "meu-pet";
+        public const string RepoName = "Desktop-Pet";
         /// <summary>Branch holding the pet gallery (Pets folder).</summary>
         public const string Branch = "master";
 

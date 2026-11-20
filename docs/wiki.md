@@ -27,7 +27,7 @@ enviar para o `master` atualiza as duas cópias. As imagens ficam em
 
 ## A cópia no site: `site/wiki/`
 
-Já está no ar em **<https://lfeliipeadv-stack.github.io/meu-pet/wiki/>**.
+Já está no ar em **<https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/>**.
 
 O `site/gerar-wiki.sh` transforma cada `.md` em uma página HTML com a mesma
 aparência do Wiki do GitHub (usa a API de markdown do próprio GitHub) e monta
@@ -40,16 +40,16 @@ fonte de estilo.
 ## A cópia no Wiki do GitHub
 
 O Wiki nativo do repositório fica em
-**<https://github.com/lfeliipeadv-stack/meu-pet/wiki>**.
+**<https://github.com/lfeliipeadv-stack/Desktop-Pet/wiki>**.
 
-Ele ainda não existe. O GitHub cria o repositório do Wiki (o `meu-pet.wiki.git`)
+Ele ainda não existe. O GitHub cria o repositório do Wiki (o `Desktop-Pet.wiki.git`)
 **somente quando a primeira página é criada pela interface do site** — não há
 API pública para isso, e o próprio `gh` retorna "the wiki has no pages yet;
 create its first page on GitHub, then try again".
 
 Para ligar:
 
-1. Abra <https://github.com/lfeliipeadv-stack/meu-pet/wiki/_new>.
+1. Abra <https://github.com/lfeliipeadv-stack/Desktop-Pet/wiki/_new>.
 2. Escreva qualquer coisa e salve. Isso cria o repositório do Wiki.
 3. Pronto: o workflow *Wiki* roda de hora em hora e publica as quatorze
    páginas com as imagens assim que o repositório existir.

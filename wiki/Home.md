@@ -85,12 +85,12 @@ O programa tem duas partes:
 
 ## Este Wiki é feito pela comunidade
 
-Este Wiki não é uma documentação oficial da Microsoft nem do autor do programa: **foi escrito pela comunidade**, a partir do código-fonte do repositório [`lfeliipeadv-stack/meu-pet`](https://github.com/lfeliipeadv-stack/meu-pet) e do que dá para ver funcionando no programa. Qualquer pessoa pode corrigir, completar e ampliar.
+Este Wiki não é uma documentação oficial da Microsoft nem do autor do programa: **foi escrito pela comunidade**, a partir do código-fonte do repositório [`lfeliipeadv-stack/Desktop-Pet`](https://github.com/lfeliipeadv-stack/Desktop-Pet) e do que dá para ver funcionando no programa. Qualquer pessoa pode corrigir, completar e ampliar.
 
 Como contribuir:
 
 - **Corrigir ou completar uma página** — no topo de cada página do Wiki há o botão *Edit*; a alteração vai como *pull request* no repositório do Wiki e é revisada antes de publicar.
-- **Sugerir uma mudança no programa** — abra uma *issue* em [github.com/lfeliipeadv-stack/meu-pet/issues](https://github.com/lfeliipeadv-stack/meu-pet/issues) descrevendo o que você esperava e o que aconteceu.
+- **Sugerir uma mudança no programa** — abra uma *issue* em [github.com/lfeliipeadv-stack/Desktop-Pet/issues](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues) descrevendo o que você esperava e o que aconteceu.
 - **Publicar um pet na galeria** — o pet é uma pasta em `Pets/` com `animations.xml`, `icon.png`, `preview.gif` e o `README.md`; depois rode `Tools/update-pets-json.ps1` para que ele entre no `Pets/pets.json` e apareça na aba "Baixar pets".
 - **Traduzir ou ajustar um texto** — os textos vivem em `src/lang/*.json` (`pt-BR.json` e `es.json` hoje); o inglês embutido no código é a reserva para qualquer chave que falte.
 - **Ajudar nas capturas de tela** — o comando `DesktopPet.exe --snapshot=<pasta>` grava as telas do programa para uso nas páginas.

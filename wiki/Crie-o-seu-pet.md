@@ -8,7 +8,7 @@ O Desktop-Pet vem com o **Editor de Pets** (`PetEditor.exe`), um programa à par
 
 - **Pelo programa:** **Configurações › Programa › Editor de Pets › Abrir…**. Se o editor ainda não estiver no computador (quem baixou só o `DesktopPet.exe`), o programa baixa o `PetEditor.exe` da última versão publicada, confere o SHA-256 dele contra o `SHA256SUMS` e abre.
 - **Pelo instalador:** o `DesktopPet-Instalador.exe` já instala o editor ao lado do programa, com atalho próprio.
-- **Direto:** o `PetEditor.exe` também está na página de versões: <https://github.com/lfeliipeadv-stack/meu-pet/releases/latest>. Ele precisa do .NET 10 Desktop Runtime, como o `DesktopPet.exe`.
+- **Direto:** o `PetEditor.exe` também está na página de versões: <https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest>. Ele precisa do .NET 10 Desktop Runtime, como o `DesktopPet.exe`.
 
 O editor abre na página **Projeto**, sem nenhum pet carregado. Ali ficam as ações (Assistente de pet novo, Novo pet, Abrir arquivo, Abrir pasta, Salvar como, Exportar como .zip e Publicar na galeria), os pets **abertos recentemente** e os **pets baixados no DesktopPet**, em cartões com a imagem de cada um. Um clique num cartão abre o pet. Quem prefere o jeito antigo liga **Abrir o último pet ao iniciar** nas Configurações do editor.
 

@@ -1,6 +1,6 @@
 name: Wiki
 
-# Publica o conteudo da pasta wiki/ no Wiki do repositório (https://github.com/lfeliipeadv-stack/meu-pet/wiki).
+# Publica o conteudo da pasta wiki/ no Wiki do repositório (https://github.com/lfeliipeadv-stack/Desktop-Pet/wiki).
 # A pasta wiki/ é a fonte da verdade: editar lá e enviar para o master atualiza o Wiki.
 on:
   push:
