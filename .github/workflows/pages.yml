@@ -41,7 +41,7 @@ jobs:
       - name: Montar o site
         run: |
           mkdir -p _site/pets _site/img/capturas
-          cp -r site/index.html site/site.css site/style.css site/demo.html _site/
+          cp -r site/index.html site/site.css site/textos.js site/style.css site/demo.html _site/
           cp -r site/demo _site/
           # As fontes ficam no proprio repositorio: a pagina abre sem
           # internet e sem pedir nada a servidor de terceiro.
