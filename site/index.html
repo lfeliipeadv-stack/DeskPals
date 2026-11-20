@@ -3,226 +3,505 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Meu Pet — bichinhos que vivem na área de trabalho do Windows</title>
-<meta name="description" content="Um bichinho que anda pelas suas janelas, conversa com você, lembra de pausas e reuniões e responde perguntas. Grátis, para Windows 10 e 11.">
-<link rel="icon" href="img/icon.png">
-<link rel="stylesheet" href="style.css">
+<title>Meu Pet — o bichinho que mora na sua área de trabalho do Windows</title>
+<meta name="description" content="Meu Pet: um bichinho que anda pelas suas janelas, conversa com você, lembra das pausas e avisa da agenda. 26 pets, Editor de Pets e 23 idiomas. Grátis e de código aberto, para Windows 10 e 11.">
+<meta name="theme-color" content="#12804b">
+<link rel="canonical" href="https://lfeliipeadv-stack.github.io/meu-pet/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meu Pet — o bichinho que mora na sua área de trabalho">
+<meta property="og:description" content="Anda pelas janelas, conversa com você, lembra das pausas e avisa da agenda. Grátis para Windows 10 e 11.">
+<meta property="og:url" content="https://lfeliipeadv-stack.github.io/meu-pet/">
+<meta property="og:image" content="https://lfeliipeadv-stack.github.io/meu-pet/img/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/meupet.png">
+<link rel="stylesheet" href="site.css">
+<script>
+  // O tema vem antes de desenhar a página: sem piscar no escuro.
+  (function () {
+    var salvo = null;
+    try { salvo = localStorage.getItem("meupet.site.tema"); } catch (e) {}
+    var pedido = /[?&]tema=(claro|escuro)/.exec(location.search);
+    if (pedido) salvo = pedido[1];
+    var escuro = salvo ? salvo === "escuro" : (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.dataset.tema = escuro ? "escuro" : "claro";
+  })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Meu Pet",
+  "operatingSystem": "Windows 10, Windows 11",
+  "applicationCategory": "DesktopEnhancementApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+  "downloadUrl": "https://github.com/lfeliipeadv-stack/meu-pet/releases/latest",
+  "license": "https://opensource.org/licenses/MIT",
+  "inLanguage": "pt-BR"
+}
+</script>
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-<!-- Barra de título: a navegação do site é a de uma janela do Windows. -->
-<header class="titlebar">
-  <img class="tb-icon" src="img/icon.png" alt="">
-  <span class="tb-name">desktopPet</span>
-  <nav>
-    <a href="#pets">Pets</a>
-    <a href="#recursos">Recursos</a>
-    <a href="#telas">Telas</a>
-    <a href="demo.html" title="Ver o pet funcionando no navegador, antes de instalar">Ver o pet</a>
-    <a href="#wiki">Wiki</a>
-    <a href="https://github.com/lfeliipeadv-stack/meu-pet">Código</a>
-  </nav>
-  <span class="tb-tag" id="tb-version">v1.0.0</span>
-</header>
-
-<!-- Herói: a área de trabalho, com o pet andando sobre a janela. -->
-<section class="hero" style="border-top:0">
+<header class="topo" id="topo">
   <div class="wrap">
-    <div class="window">
-      <img class="walker" src="pets/rex.gif" alt="O Rex andando sobre o topo da janela" width="64" height="64">
-      <div class="window-title">
-        <span class="dot min"></span><span class="dot max"></span><span class="dot close"></span>
-        <span class="wtitle">Meu Pet — Painel</span>
-      </div>
-      <div class="window-body">
-        <p class="eyebrow">bichinho de área de trabalho para Windows</p>
-        <h1>Um bicho que mora <em>na sua área de trabalho</em>.</h1>
-        <p class="lead">Ele anda pelo topo das suas janelas, cai na barra de tarefas, dorme, dança e é arremessado com o mouse. Fica de olho na sua agenda, lembra de pausas e ainda responde perguntas — de graça, sem conta, no seu Windows 10 ou 11.</p>
-        <div class="cta">
-          <a class="btn btn-main" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe">⬇ Baixar o instalador</a>
-          <a class="btn btn-ghost" href="#recursos">Ver o que ele faz</a>
-        </div>
-        <p class="version-line" id="version">versão mais recente</p>
-      </div>
+    <a class="marca" href="#"><img src="img/meupet.png" alt="">Meu Pet</a>
+    <nav aria-label="Seções">
+      <a href="#pets">Pets</a>
+      <a href="#recursos">Recursos</a>
+      <a href="demo.html">Demo</a>
+      <a href="#baixar">Baixar</a>
+      <a href="#perguntas">Perguntas</a>
+      <a href="wiki/Home.html">Manual</a>
+      <a href="https://github.com/lfeliipeadv-stack/meu-pet">GitHub</a>
+    </nav>
+    <div class="topo-acoes">
+      <button class="icone-btn" id="tema-btn" type="button" aria-label="Trocar o tema claro ou escuro" title="Tema claro ou escuro"></button>
+      <a class="btn btn-main" href="#baixar"><span class="ico-baixar"></span><span>Baixar</span></a>
+      <button class="icone-btn menu-celular" id="menu-btn" type="button" aria-label="Abrir o menu" aria-expanded="false"></button>
     </div>
   </div>
-</section>
+</header>
 
-<main>
-  <!-- Os pets -->
-  <section id="pets">
+<main id="conteudo">
+
+  <!-- O herói: o convite e uma área de trabalho com os pets andando -->
+  <section class="heroi">
     <div class="wrap">
-      <h2>Dezesseis bichinhos, e contando.</h2>
-      <p class="section-intro">Cada um foi desenhado quadro a quadro em pixel art, com dezenas de animações e sons próprios. Você adota quantos quiser — todos de graça.</p>
-      <div class="pets-grid" id="pets-grid"></div>
+      <div>
+        <a class="selo" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest"><b id="selo-versao">1.0.0</b> Grátis para Windows 10 e 11</a>
+        <h1>Um bichinho que mora <em>na sua área de trabalho</em>.</h1>
+        <p class="lead">Ele anda pelo topo das suas janelas, cai na barra de tarefas, dorme, dança e pode ser arremessado com o mouse. Também conversa com você, lembra das pausas e avisa antes das reuniões.</p>
+        <div class="cta">
+          <a class="btn btn-main btn-grande" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe"><span class="ico-baixar"></span>Baixar o instalador</a>
+          <a class="btn btn-grande" href="demo.html"><span class="ico-tela"></span>Testar no navegador</a>
+        </div>
+        <ul class="confianca">
+          <li><span class="ico-ok"></span>Sem conta e sem anúncios</li>
+          <li><span class="ico-ok"></span>Código aberto (MIT)</li>
+          <li><span class="ico-ok"></span>23 idiomas</li>
+          <li><span class="ico-ok"></span>Leve: cerca de 3 MB</li>
+        </ul>
+      </div>
+
+      <div class="tela" aria-hidden="true">
+        <div class="tela-janela">
+          <div class="tela-titulo"><img src="img/meupet.png" alt="">Meu Pet — Painel<i>– ▢ ✕</i></div>
+          <div class="tela-corpo">
+            <div class="tela-linha"></div>
+            <div class="tela-barra"></div>
+            <div class="tela-linha curta"></div>
+            <div class="tela-barra" style="--x: 50%"></div>
+            <div class="tela-linha"></div>
+          </div>
+        </div>
+        <div class="tela-janela tela-janela-2">
+          <div class="tela-titulo"><img src="img/meupet.png" alt="">Foco — 25:00<i>✕</i></div>
+          <div class="tela-corpo"><div class="tela-linha"></div><div class="tela-linha curta"></div></div>
+        </div>
+        <div class="tela-balao">Oi! Quer uma pausa? ☕</div>
+        <div class="andando pet-1"><img src="pets/rex.gif" alt=""></div>
+        <div class="andando pet-3"><img src="pets/pingo.gif" alt=""></div>
+        <div class="andando pet-2"><img src="pets/boo.gif" alt=""></div>
+        <div class="andando pet-4"><img src="pets/clippy.gif" alt=""></div>
+        <div class="tela-taskbar"><span><img src="img/meupet.png" alt=""></span><span class="busca"></span><span></span><span></span><span></span></div>
+      </div>
     </div>
   </section>
 
-  <!-- Recursos, com os prints reais do programa -->
-  <section id="recursos">
+  <!-- Os números -->
+  <section class="numeros" aria-label="Em números">
     <div class="wrap">
-      <h2>Um bichinho, muitas coisas para fazer.</h2>
-      <p class="section-intro">Tudo opcional, tudo em português, inglês ou espanhol, e desligado até você querer.</p>
-      <div class="feature-rows">
-        <div class="feature">
-          <div class="feature-copy">
+      <ul>
+        <li><b>26</b><span>pets para adotar</span></li>
+        <li><b>23</b><span>idiomas</span></li>
+        <li><b>22</b><span>plugins</span></li>
+        <li><b>~3 MB</b><span>o programa</span></li>
+        <li><b>R$ 0</b><span>para sempre</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Alguns pets -->
+  <section class="bloco alt" id="pets">
+    <div class="wrap">
+      <div class="cabeca">
+        <span class="rotulo">Os pets</span>
+        <h2>Escolha um bichinho. Ou vários.</h2>
+        <p>Desenhados quadro a quadro, com dezenas de animações e sons. O painel do programa mostra a galeria inteira, com a prévia e o tamanho de cada um antes de baixar.</p>
+      </div>
+      <div class="pets" id="pets-lista"></div>
+      <p class="nota">E mais 18 na galeria: as ovelhas coloridas da comunidade, o Pingus e os outros assistentes do Office.
+        <a href="https://github.com/lfeliipeadv-stack/meu-pet/tree/master/Pets">Ver todos os pets</a></p>
+    </div>
+  </section>
+
+  <!-- Os recursos -->
+  <section class="bloco" id="recursos">
+    <div class="wrap">
+      <div class="cabeca">
+        <span class="rotulo">Recursos</span>
+        <h2>Um bichinho, muita coisa para fazer.</h2>
+        <p>Tudo opcional e desligado até você querer. Ligue só o que fizer sentido para o seu dia.</p>
+      </div>
+      <div class="recursos" id="recursos-lista"></div>
+
+      <div class="linhas">
+        <div class="linha">
+          <div class="linha-texto">
             <h3>Ele conversa com você</h3>
-            <p>Passe o mouse sobre o pet e clique em Perguntar. A resposta aparece no balão em cima dele.</p>
+            <p>Passe o mouse sobre o pet e clique em <b>Perguntar</b>. A resposta aparece no balão em cima dele.</p>
             <ul>
-              <li>Funciona com Ollama, no seu próprio computador, sem enviar nada para a internet</li>
-              <li>Ou com Gemini, Groq e OpenRouter, se você preferir</li>
-              <li>Lembra da conversa e aceita ditado por voz</li>
+              <li>Com o Ollama, a IA roda no seu computador e nada sai dele</li>
+              <li>Ou com Gemini, Groq e OpenRouter, que têm planos gratuitos</li>
+              <li>Lembra da conversa, tem personalidades e aceita ditado por voz</li>
             </ul>
           </div>
-          <figure class="feature-shot">
-            <img src="img/capturas/chat.png" alt="A conversa com o pet, em um balão sobre ele" loading="lazy">
-          </figure>
+          <figure><img src="img/capturas/chat.png" alt="A conversa com o pet, num balão sobre ele" loading="lazy" width="560" height="480"></figure>
         </div>
-
-        <div class="feature">
-          <div class="feature-copy">
+        <div class="linha">
+          <div class="linha-texto">
             <h3>Lembra das suas pausas</h3>
-            <p>Água, alongamento e pausa. Você também escreve o lembrete como falaria com um amigo:</p>
+            <p>Água, alongamento e pausa, o Pomodoro com o pet em silêncio durante o foco — e lembretes escritos como você falaria com um amigo:</p>
             <ul>
               <li>“me lembra de ligar para a Ana às 15h”</li>
               <li>“daqui a 20 minutos”, “todo dia às 8”</li>
-              <li>O tempo em português é lido no seu computador, sem internet</li>
+              <li>Entendido no seu computador, sem internet</li>
             </ul>
           </div>
-          <figure class="feature-shot">
-            <img src="img/capturas/reminders.png" alt="A página de lembretes do painel" loading="lazy">
-          </figure>
+          <figure><img src="img/capturas/reminders.png" alt="A página de lembretes do painel" loading="lazy" width="980" height="640"></figure>
         </div>
-
-        <div class="feature">
-          <div class="feature-copy">
+        <div class="linha">
+          <div class="linha-texto">
             <h3>Avisa antes da reunião</h3>
-            <p>Ligue a agenda do Google ou do Outlook por um link iCal e o pet avisa antes de cada encontro. No Outlook clássico, ele avisa quantos e-mails novos chegaram — nunca o conteúdo deles.</p>
+            <p>Ligue a agenda do Google ou do Outlook e o pet avisa antes de cada encontro. Ele também mostra a previsão do tempo, avisa da chuva e sugere uma pausa depois de muito tempo sem parar.</p>
             <ul>
-              <li>Ele também sugere uma pausa depois de muito tempo sem parar</li>
-              <li>Fica feliz quando você volta, e comemora quando você fecha um programa aberto há horas</li>
+              <li>No Outlook clássico, avisa quantos e-mails chegaram — nunca o conteúdo</li>
+              <li>Fica feliz quando você volta e comemora o fim de um dia longo</li>
             </ul>
           </div>
-          <figure class="feature-shot">
-            <img src="img/capturas/plugins.png" alt="A página de plugins do painel, com agenda e lembretes" loading="lazy">
-          </figure>
+          <figure><img src="img/capturas/plugins.png" alt="A página de plugins do painel" loading="lazy" width="980" height="640"></figure>
         </div>
-
-        <div class="feature">
-          <div class="feature-copy">
-            <h3>Você também pode fazer o seu</h3>
-            <p>O <strong>Editor de Pets</strong> transforma as suas imagens ou um GIF num pet que anda, vira, dorme, cai e pode ser arremessado. Cada animação tem prévia ao vivo, e o botão <em>Testar no desktop</em> solta o pet na sua tela sem mexer no que você já tem.</p>
+        <div class="linha">
+          <div class="linha-texto">
+            <h3>Faça o seu pet</h3>
+            <p>O <b>Editor de Pets</b> transforma as suas imagens ou um GIF num pet que anda, vira, dorme, cai e pode ser arremessado — com prévia ao vivo de cada animação.</p>
             <ul>
-              <li>Assistente de pet novo em três passos, ou abra um pet da galeria para estudar e criar uma variação</li>
-              <li>Exporte em .zip para mandar a alguém ou publique na galeria direto do editor</li>
-              <li>Vem com o instalador; quem baixou só o programa recebe o editor na primeira vez que abrir <em>Configurações › Editor de Pets</em> — ou <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/PetEditor.exe">baixe o PetEditor.exe</a></li>
+              <li>Assistente de pet novo em três passos</li>
+              <li><i>Testar no desktop</i> solta o pet na sua tela sem mexer no que você já tem</li>
+              <li>Exporte em .zip ou publique na galeria direto do editor</li>
             </ul>
           </div>
-          <figure class="feature-shot">
-            <img src="img/capturas/editor.png" alt="O Editor de Pets, na página de animações, com a prévia ao vivo" loading="lazy">
-          </figure>
+          <figure><img src="img/capturas/editor.png" alt="O Editor de Pets, na página de animações, com a prévia ao vivo" loading="lazy" width="1280" height="707"></figure>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Telas -->
-  <section id="telas">
+  <!-- A demo -->
+  <section class="bloco alt" id="demo">
     <div class="wrap">
-      <h2>O programa por dentro.</h2>
-      <p class="section-intro">O painel tem oito páginas, todas em português: Início, Pets, Lembretes, Assistente, Plugins, Integrações, Configurações e Sobre.</p>
-      <div class="shots">
-        <figure class="shot"><img src="img/capturas/home.png" alt="A página Início do painel, com o pet e o resumo do dia" loading="lazy"><figcaption>Início: seu pet, o que vem por aí e como foi o dia.</figcaption></figure>
-        <figure class="shot"><img src="img/capturas/pets.png" alt="A aba Meus pets do painel" loading="lazy"><figcaption>Meus pets: o que já está no seu computador.</figcaption></figure>
-        <figure class="shot"><img src="img/capturas/pets-tab2.png" alt="A aba Baixar pets do painel" loading="lazy"><figcaption>Baixar pets: com o tamanho de cada um antes de baixar.</figcaption></figure>
-        <figure class="shot"><img src="img/capturas/pets-detail.png" alt="O detalhe de um pet, com as animações e os sons" loading="lazy"><figcaption>Detalhe de um pet: as animações e os sons dele.</figcaption></figure>
-        <figure class="shot"><img src="img/capturas/ai.png" alt="A página do assistente de IA" loading="lazy"><figcaption>Assistente: a IA que responde quando você pergunta.</figcaption></figure>
-        <figure class="shot"><img src="img/capturas/application.png" alt="A página de configurações do programa" loading="lazy"><figcaption>Configurações: som, tema, idioma, multmonitor e atalhos.</figcaption></figure>
+      <div class="demo-cartao">
+        <div class="texto">
+          <span class="cabeca"><span class="rotulo">Sem instalar nada</span></span>
+          <h2>Teste agora, no navegador.</h2>
+          <p>A demo é uma área de trabalho com a cara do Windows 11 e o pet de verdade andando por ela: os mesmos desenhos, as mesmas animações e a mesma lógica do programa. Arraste, arremesse, converse, troque de pet e use o Iniciar.</p>
+          <p><a class="btn btn-main" href="demo.html"><span class="ico-tela"></span>Abrir a demo</a></p>
+        </div>
+        <a class="foto" href="demo.html" aria-label="Abrir a demo no navegador"><img src="wiki/images/demo.png" alt="A demo: uma área de trabalho do Windows 11 com o painel do pet, o Pomodoro, o bloco de notas e o pet em cima de uma janela" loading="lazy" width="1440" height="900"></a>
       </div>
     </div>
   </section>
 
-  <!-- Wiki -->
-  <section id="wiki">
+  <!-- As telas -->
+  <section class="bloco" id="telas">
     <div class="wrap">
-      <h2>O Wiki tem o manual inteiro.</h2>
-      <p class="section-intro">Instalação, primeiros passos, cada recurso passo a passo, os atalhos de teclado, os comandos de linha de comando e o guia para quem quiser compilar.</p>
-      <div class="wiki-index">
-        <a href="wiki/Instalacao.html"><span><span class="wtitle">Instalação</span><span class="wdesc">Os três downloads, o que o instalador confere e como desinstalar.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Primeiros-passos.html"><span><span class="wtitle">Primeiros passos</span><span class="wdesc">O que fazer depois de instalar, em ordem.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Demo-no-navegador.html"><span><span class="wtitle">Ver o pet funcionando</span><span class="wdesc">O pet de verdade rodando dentro da página, antes de instalar.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Painel-de-pets.html"><span><span class="wtitle">Painel de pets</span><span class="wdesc">Baixar, adotar, remover, exportar e importar pets.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Pergunte-ao-pet.html"><span><span class="wtitle">Pergunte ao pet</span><span class="wdesc">A conversa, os provedores de IA e onde fica a chave.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Lembretes-e-Pomodoro.html"><span><span class="wtitle">Lembretes e Pomodoro</span><span class="wdesc">Os lembretes em português e o foco que silencia o pet.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Plugins-e-integracoes.html"><span><span class="wtitle">Plugins e integrações</span><span class="wdesc">Os 22 plugins e a ponte com o Claude Code.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Para-desenvolvedores.html"><span><span class="wtitle">Para desenvolvedores</span><span class="wdesc">Compilar, testar e publicar uma versão.</span></span><span class="arrow">ver</span></a>
-        <a href="wiki/Perguntas-frequentes.html"><span><span class="wtitle">Perguntas frequentes</span><span class="wdesc">Dúvidas comuns, respondidas.</span></span><span class="arrow">ver</span></a>
+      <div class="cabeca">
+        <span class="rotulo">Por dentro</span>
+        <h2>O painel do programa.</h2>
+        <p>Início, Pets, Lembretes, Assistente, Plugins, Integrações, Configurações e Sobre. Clique numa tela para ampliar.</p>
       </div>
-      <p style="margin-top:26px"><a class="btn btn-ghost" href="wiki/Home.html">Abrir o Wiki completo</a></p>
+      <div class="capturas">
+        <figure><img src="img/capturas/home.png" alt="Início: seu pet, o dia e a semana" loading="lazy"><figcaption>Início: seu pet, o dia, a semana e a previsão do tempo.</figcaption></figure>
+        <figure><img src="img/capturas/pets.png" alt="Meus pets" loading="lazy"><figcaption>Meus pets: o que já está no seu computador.</figcaption></figure>
+        <figure><img src="img/capturas/pets-tab2.png" alt="Baixar pets" loading="lazy"><figcaption>Baixar pets: com a prévia e o tamanho de cada um.</figcaption></figure>
+        <figure><img src="img/capturas/pets-detail.png" alt="O detalhe de um pet" loading="lazy"><figcaption>O detalhe de um pet, com as animações e os sons.</figcaption></figure>
+        <figure><img src="img/capturas/ai.png" alt="O assistente de IA" loading="lazy"><figcaption>Assistente: a IA que responde quando você pergunta.</figcaption></figure>
+        <figure><img src="img/capturas/application.png" alt="As configurações" loading="lazy"><figcaption>Configurações: som, tema, idioma, atalhos e backup.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- O download -->
+  <section class="bloco alt" id="baixar">
+    <div class="wrap">
+      <div class="cabeca">
+        <span class="rotulo">Baixar</span>
+        <h2>Grátis, para Windows 10 e 11.</h2>
+        <p id="versao-texto">A versão mais recente, direto do GitHub.</p>
+      </div>
+      <div class="downloads">
+        <div class="download principal">
+          <span class="tag">Recomendado</span>
+          <h3>Instalador</h3>
+          <p>Confere o .NET 10 (e oferece o instalador oficial da Microsoft se faltar), instala o programa e o Editor de Pets e cria os atalhos.</p>
+          <a class="btn btn-main btn-grande" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe"><span class="ico-baixar"></span>DesktopPet-Instalador.exe</a>
+          <span class="peso" data-asset="DesktopPet-Instalador.exe">cerca de 4 MB</span>
+        </div>
+        <div class="download">
+          <h3>Sem instalar</h3>
+          <p>Abre direto de qualquer pasta, sem instalar nada: o .NET vem dentro.</p>
+          <a class="btn" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-completo.exe"><span class="ico-baixar"></span>DesktopPet-completo.exe</a>
+          <span class="peso" data-asset="DesktopPet-completo.exe">cerca de 50 MB</span>
+        </div>
+        <div class="download">
+          <h3>Só o programa</h3>
+          <p>Para quem já tem o <a href="https://dotnet.microsoft.com/download/dotnet/10.0">.NET 10 Desktop Runtime</a>.</p>
+          <a class="btn" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet.exe"><span class="ico-baixar"></span>DesktopPet.exe</a>
+          <span class="peso" data-asset="DesktopPet.exe">cerca de 3 MB</span>
+        </div>
+      </div>
+      <div class="extras">
+        <div class="extra"><span class="ico-pincel"></span><div><b>Editor de Pets</b><span>Vem com o instalador. Também dá para <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/PetEditor.exe">baixar só o PetEditor.exe</a>.</span></div></div>
+        <div class="extra"><span class="ico-escudo"></span><div><b>Download conferido</b><span>Cada versão publica o <code>SHA256SUMS</code>; o atualizador confere tudo sozinho.</span></div></div>
+        <div class="extra"><span class="ico-atualizar"></span><div><b>Sempre atualizado</b><span>A versão nova é baixada em segundo plano e instalada quando você fecha o programa.</span></div></div>
+      </div>
+      <p class="nota">Os arquivos não têm assinatura digital, então o Windows pode avisar que o editor é desconhecido: clique em <i>Mais informações › Executar assim mesmo</i>. Veja <a href="wiki/Instalacao.html">Instalação</a>.</p>
+    </div>
+  </section>
+
+  <!-- Privacidade -->
+  <section class="bloco" id="privacidade">
+    <div class="wrap">
+      <div class="cabeca">
+        <span class="rotulo">Privacidade</span>
+        <h2>O seu pet é só seu.</h2>
+        <p>O Meu Pet não tem conta, não tem anúncio e não manda estatísticas de uso.</p>
+      </div>
+      <div class="privacidade">
+        <div><span class="ico-casa"></span><p><b>Tudo fica no seu computador</b><span>Pets, lembretes, notas e preferências moram na sua pasta de usuário.</span></p></div>
+        <div><span class="ico-nuvem"></span><p><b>Internet só para o que você pediu</b><span>Baixar pets, idiomas e atualizações deste projeto — e a previsão do tempo, que envia só o nome da cidade.</span></p></div>
+        <div><span class="ico-chave"></span><p><b>A IA é escolha sua</b><span>Só funciona se você configurar. Com o Ollama, nada sai do computador; a chave fica criptografada e nunca vai no backup.</span></p></div>
+        <div><span class="ico-codigo"></span><p><b>Código aberto</b><span>Qualquer pessoa pode ler o que o programa faz, linha por linha, no GitHub.</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perguntas -->
+  <section class="bloco alt" id="perguntas">
+    <div class="wrap">
+      <div class="cabeca">
+        <span class="rotulo">Perguntas</span>
+        <h2>Perguntas rápidas.</h2>
+      </div>
+      <div class="perguntas">
+        <details><summary>É grátis mesmo?</summary><p>Sim, para sempre. O Meu Pet é de código aberto, com licença MIT: sem versão paga, sem anúncio e sem conta.</p></details>
+        <details><summary>Vai deixar o meu computador lento?</summary><p>Não. O programa tem cerca de 3 MB e usa menos de 1% do processador. Em jogos ou vídeos em tela cheia, o pet sai da frente sozinho.</p></details>
+        <details><summary>Funciona sem internet?</summary><p>Sim. A ovelha clássica vem dentro do programa, e os pets que você já baixou continuam funcionando. A internet só é usada para baixar pets, idiomas e atualizações — e para a IA ou a previsão do tempo, se você ligar.</p></details>
+        <details><summary>E nas reuniões?</summary><p><b>Ctrl + Alt + P</b> esconde todos os pets e os sons na hora. Aperte de novo para eles voltarem. O modo Não perturbe também deixa o pet quieto.</p></details>
+        <details><summary>O Windows avisou que o arquivo é desconhecido. É seguro?</summary><p>O aviso aparece porque os arquivos não têm assinatura digital paga. Cada versão publica o SHA-256 de todos os arquivos para conferir, e o código inteiro está no GitHub. Clique em <i>Mais informações › Executar assim mesmo</i>.</p></details>
+        <details><summary>Posso criar o meu próprio pet?</summary><p>Pode. O Editor de Pets transforma as suas imagens ou um GIF num pet completo, e o botão <i>Publicar na galeria</i> manda ele para todo mundo. Veja <a href="wiki/Crie-o-seu-pet.html">Crie o seu pet</a>.</p></details>
+        <details><summary>Como levo tudo para outro computador?</summary><p>Em Configurações, <b>Backup</b> exporta pets, lembretes, notas e preferências num arquivo só. A <b>Cópia automática</b> grava esse arquivo todo dia numa pasta do OneDrive ou do Google Drive.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- O manual -->
+  <section class="bloco" id="manual">
+    <div class="wrap">
+      <div class="cabeca">
+        <span class="rotulo">Manual</span>
+        <h2>Tudo explicado, passo a passo.</h2>
+      </div>
+      <div class="manual">
+        <a href="wiki/Instalacao.html"><b>Instalação</b><span>Os downloads e o que o instalador confere</span></a>
+        <a href="wiki/Primeiros-passos.html"><b>Primeiros passos</b><span>O que fazer depois de instalar</span></a>
+        <a href="wiki/Painel-de-pets.html"><b>Painel de pets</b><span>Baixar, adotar, exportar e importar</span></a>
+        <a href="wiki/Pergunte-ao-pet.html"><b>Pergunte ao pet</b><span>A conversa e os serviços de IA</span></a>
+        <a href="wiki/Lembretes-e-Pomodoro.html"><b>Lembretes e Pomodoro</b><span>Os lembretes escritos e o foco</span></a>
+        <a href="wiki/Agenda-e-e-mails.html"><b>Agenda e e-mails</b><span>Google, Outlook e os avisos</span></a>
+        <a href="wiki/Plugins-e-integracoes.html"><b>Plugins e integrações</b><span>Os 22 plugins e o Claude Code</span></a>
+        <a href="wiki/Crie-o-seu-pet.html"><b>Crie o seu pet</b><span>O Editor de Pets</span></a>
+        <a href="wiki/Perguntas-frequentes.html"><b>Perguntas frequentes</b><span>As dúvidas mais comuns</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- A chamada final -->
+  <section class="final">
+    <div class="wrap">
+      <div class="pets-fila" aria-hidden="true">
+        <img src="pets/esheep64.gif" alt=""><img src="pets/rex.gif" alt=""><img src="pets/pingo.gif" alt=""><img src="pets/boo.gif" alt=""><img src="pets/mago.gif" alt="">
+      </div>
+      <h2>Adote o seu hoje.</h2>
+      <p>Leva menos de um minuto para instalar. O primeiro pet chega do céu e se apresenta.</p>
+      <div class="cta">
+        <a class="btn btn-main btn-grande" href="https://github.com/lfeliipeadv-stack/meu-pet/releases/latest/download/DesktopPet-Instalador.exe"><span class="ico-baixar"></span>Baixar grátis</a>
+        <a class="btn btn-grande" href="demo.html"><span class="ico-tela"></span>Testar no navegador</a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap foot-grid">
+  <div class="wrap rodape">
     <div>
-      <p>Código aberto, licença MIT. Feito por Luan Felipe, a partir do <a href="https://github.com/Adrianotiger/desktopPet">desktopPet</a> de Adriano Petrucci — a versão para Windows moderno da ovelhinha clássica do eSheep.</p>
-      <p>Os pets da comunidade pertencem aos seus autores, indicados no painel do programa. O Claude é uma homenagem de fã: o mascote e o nome pertencem à Anthropic PBC, sem vínculo com este projeto.</p>
+      <h3>Meu Pet</h3>
+      <p>Código aberto, licença MIT. Feito por Luan Felipe a partir do <a href="https://github.com/Adrianotiger/desktopPet">desktopPet</a> de Adriano Petrucci; a ovelha original é de Tatsutoshi Nomura.</p>
+      <p>Os pets da comunidade pertencem aos seus autores. Os assistentes do Office são da Microsoft e o Bonzi é da BONZI Software, convertidos do <a href="https://github.com/pithings/clippy">ClippyJS</a>. O Claude é uma homenagem de fã, sem vínculo com a Anthropic. Previsão do tempo: <a href="https://open-meteo.com/">Open-Meteo.com</a>.</p>
     </div>
-    <div class="foot-links">
-      <a href="https://github.com/lfeliipeadv-stack/meu-pet">Código</a>
-      <a href="wiki/Home.html">Wiki</a>
-      <a href="https://github.com/lfeliipeadv-stack/meu-pet/releases">Versões</a>
-      <a href="https://github.com/lfeliipeadv-stack/meu-pet/issues">Problemas</a>
+    <div>
+      <h3>Programa</h3>
+      <ul>
+        <li><a href="#baixar">Baixar</a></li>
+        <li><a href="demo.html">Demo no navegador</a></li>
+        <li><a href="https://github.com/lfeliipeadv-stack/meu-pet/releases">Todas as versões</a></li>
+        <li><a href="wiki/Changelog.html">O que mudou</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Projeto</h3>
+      <ul>
+        <li><a href="wiki/Home.html">Manual</a></li>
+        <li><a href="https://github.com/lfeliipeadv-stack/meu-pet">Código no GitHub</a></li>
+        <li><a href="https://github.com/lfeliipeadv-stack/meu-pet/blob/master/CONTRIBUTING.md">Contribuir</a></li>
+        <li><a href="https://github.com/lfeliipeadv-stack/meu-pet/issues/new/choose">Relatar um problema</a></li>
+      </ul>
     </div>
   </div>
 </footer>
 
-<script>
-// Os pets do repositório: nome, quantas animações, quantos sons e de quem é.
-const PETS = [
-  "rex", "pingo", "boo", "mago", "nuvi", "claude", "pingus", "esheep64",
-  "blue_sheep", "green_sheep", "yellow_sheep", "orange_sheep", "red_sheep", "pink_sheep", "purple_sheep"
-];
-const NOME = { esheep64: "eSheep", blue_sheep: "gSheep azul", green_sheep: "gSheep verde",
-  yellow_sheep: "gSheep amarelo", orange_sheep: "gSheep laranja", red_sheep: "gSheep vermelho",
-  pink_sheep: "gSheep rosa", purple_sheep: "gSheep roxo" };
+<dialog class="zoom" id="zoom" aria-label="Tela ampliada">
+  <img id="zoom-img" alt="">
+  <p id="zoom-texto"></p>
+  <button type="button" id="zoom-fechar" aria-label="Fechar">✕</button>
+</dialog>
 
-fetch("pets.json").then(r => r.json()).then(data => {
-  const byFolder = Object.fromEntries((data.pets || []).map(p => [p.folder, p]));
-  const grid = document.getElementById("pets-grid");
-  for (const folder of PETS) {
-    const p = byFolder[folder] || {};
-    const card = document.createElement("div");
-    card.className = "pet-card";
-    const stage = document.createElement("div");
-    stage.className = "pet-stage";
-    const img = document.createElement("img");
-    img.src = "pets/" + folder + ".gif";
-    img.alt = "Animação do pet " + (NOME[folder] || p.name || folder);
-    img.loading = "lazy";
-    stage.appendChild(img);
-    const nome = document.createElement("b");
-    nome.textContent = NOME[folder] || p.name || folder;
-    const info = document.createElement("small");
-    info.textContent = p.animations ? p.animations + " animações e " + p.sounds + " sons" : "";
-    const by = document.createElement("span");
-    by.className = "by";
-    by.textContent = p.author ? "de " + p.author : "";
-    card.append(stage, nome, info, by);
-    grid.appendChild(card);
+<script type="module">
+import { iconeApp, glifo } from "./demo/icons.js";
+
+/* Os ícones do Windows 11 (os mesmos da demo). */
+const G = (nome) => glifo(nome);
+const OK = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8"/></svg>';
+const TELA = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="10" rx="1.6"/><path d="M7 17h6M10 13.5V17"/></svg>';
+const ESCUDO = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5l6 2.2v4.6c0 3.9-2.6 6.7-6 8.2-3.4-1.5-6-4.3-6-8.2V4.7z"/><path d="M7.3 10l1.9 1.9 3.6-3.8"/></svg>';
+const CASA = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l7-5.5L17 9v7.5a1 1 0 0 1-1 1h-3.5v-5h-5v5H4a1 1 0 0 1-1-1z"/></svg>';
+const NUVEM = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15.5h8.5a3.5 3.5 0 0 0 .3-7 5 5 0 0 0-9.6 1.4A2.9 2.9 0 0 0 6 15.5z"/></svg>';
+const CHAVE = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="12.5" r="3.5"/><path d="M9.5 10l7-7M14 5.5l2 2M12 7.5l1.6 1.6"/></svg>';
+const CODIGO = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 6l-4 4 4 4M13 6l4 4-4 4M11 4l-2 12"/></svg>';
+const PINCEL = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.5l-8 8M10 12.5c-1-1-3-1-4 0s-1 3-3 4c3 1 6 0 7-1s1-2 0-3z"/></svg>';
+const MENU = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg>';
+const pinta = (classe, svg) => document.querySelectorAll("." + classe).forEach((el) => { el.innerHTML = svg; });
+pinta("ico-baixar", G("download"));
+pinta("ico-tela", TELA);
+pinta("ico-ok", OK);
+pinta("ico-escudo", ESCUDO);
+pinta("ico-casa", CASA);
+pinta("ico-nuvem", NUVEM);
+pinta("ico-chave", CHAVE);
+pinta("ico-codigo", CODIGO);
+pinta("ico-pincel", PINCEL);
+pinta("ico-atualizar", G("refresh"));
+document.getElementById("menu-btn").innerHTML = MENU;
+
+/* O tema claro ou escuro, como no Windows 11 (fica guardado neste navegador). */
+const temaBtn = document.getElementById("tema-btn");
+const pintaTema = () => { temaBtn.innerHTML = G(document.documentElement.dataset.tema === "escuro" ? "sun" : "moon"); };
+pintaTema();
+temaBtn.addEventListener("click", () => {
+  const escuro = document.documentElement.dataset.tema !== "escuro";
+  document.documentElement.dataset.tema = escuro ? "escuro" : "claro";
+  try { localStorage.setItem("meupet.site.tema", escuro ? "escuro" : "claro"); } catch (e) {}
+  pintaTema();
+});
+
+/* O menu no celular. */
+const topo = document.getElementById("topo");
+const menuBtn = document.getElementById("menu-btn");
+menuBtn.addEventListener("click", () => {
+  const aberto = topo.classList.toggle("aberto");
+  menuBtn.setAttribute("aria-expanded", String(aberto));
+});
+topo.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", () => {
+  topo.classList.remove("aberto");
+  menuBtn.setAttribute("aria-expanded", "false");
+}));
+
+/* Os recursos, com os ícones coloridos da demo. */
+const RECURSOS = [
+  ["painel", "Anda pela sua tela", "Pelo topo das janelas e pela barra de tarefas. Arraste, solte, arremesse — ou escolha qualquer animação dele."],
+  ["sobre", "Conversa com você", "Pergunte qualquer coisa: a resposta vem no balão. Com IA no seu computador ou nos serviços gratuitos."],
+  ["pomodoro", "Cuida do seu foco", "Pomodoro, lembretes de água e pausa e lembretes escritos em português, do jeito que você fala."],
+  ["notas", "Avisa da sua agenda", "Google e Outlook: o pet avisa antes de cada reunião. E mostra a previsão do tempo no Início."],
+  ["animacoes", "Faz o seu próprio pet", "O Editor de Pets transforma as suas imagens num pet completo, com prévia ao vivo e teste no desktop."],
+  ["site", "Fala a sua língua", "Português, inglês e espanhol já vêm no programa; mais 20 idiomas se baixam nas configurações."]
+];
+document.getElementById("recursos-lista").innerHTML = RECURSOS.map(([icone, titulo, texto]) =>
+  `<div class="recurso"><div class="ic">${iconeApp(icone)}</div><h3>${titulo}</h3><p>${texto}</p></div>`).join("");
+
+/* Alguns pets (o resto está na galeria do programa). */
+const PETS = [
+  { folder: "rex", sobre: "O dinossauro que ruge, joga bola e vira super-herói" },
+  { folder: "pingo", sobre: "O pinguim que desliza de barriga e patina" },
+  { folder: "boo", sobre: "O fantasminha que voa, dá sustos e some" },
+  { folder: "mago", sobre: "Faz feitiços e voa de vassoura" },
+  { folder: "nuvi", sobre: "A nuvem que programa e faz trovão" },
+  { folder: "claude", sobre: "Homenagem de fã ao mascote do Claude Code" },
+  { folder: "esheep64", nome: "eSheep", sobre: "A ovelhinha clássica, que vem no programa" },
+  { folder: "clippy", sobre: "O clipe do Office. Flutua: fica onde você soltar", selo: "Sem gravidade" }
+];
+const lista = document.getElementById("pets-lista");
+function desenhaPets(info) {
+  lista.innerHTML = "";
+  for (const pet of PETS) {
+    const dados = info[pet.folder] || {};
+    const card = document.createElement("article");
+    card.className = "pet";
+    const nome = pet.nome || dados.name || pet.folder;
+    card.innerHTML = `
+      ${pet.selo ? `<span class="marca-pet">${pet.selo}</span>` : ""}
+      <div class="pet-palco"><img src="pets/${pet.folder}.gif" alt="${nome} andando" loading="lazy"></div>
+      <b></b><small></small><span class="autor"></span>`;
+    card.querySelector("b").textContent = nome;
+    card.querySelector("small").textContent = pet.sobre;
+    card.querySelector(".autor").textContent = dados.animations
+      ? `${dados.animations} animações · ${dados.sounds} sons` : "";
+    lista.appendChild(card);
   }
+}
+desenhaPets({});
+fetch("pets.json").then((r) => r.json()).then((data) => {
+  desenhaPets(Object.fromEntries((data.pets || []).map((p) => [p.folder, p])));
 }).catch(() => {});
 
-// A versão publicada e o tamanho do instalador, direto do GitHub.
+/* A versão publicada e o tamanho de cada download, direto do GitHub. */
 fetch("https://api.github.com/repos/lfeliipeadv-stack/meu-pet/releases/latest")
-  .then(r => r.ok ? r.json() : null).then(rel => {
+  .then((r) => (r.ok ? r.json() : null)).then((rel) => {
     if (!rel) return;
     const v = String(rel.tag_name || "").replace(/^v/, "");
-    const data = rel.published_at ? new Date(rel.published_at).toLocaleDateString("pt-BR") : "";
-    document.getElementById("version").textContent = "versão " + v + (data ? " · " + data : "");
-    document.getElementById("tb-version").textContent = "v" + v;
+    const quando = rel.published_at ? new Date(rel.published_at).toLocaleDateString("pt-BR") : "";
+    document.getElementById("selo-versao").textContent = v;
+    document.getElementById("versao-texto").textContent =
+      "Versão " + v + (quando ? ", de " + quando : "") + ". A mais recente, direto do GitHub.";
+    for (const asset of rel.assets || []) {
+      const el = document.querySelector(`[data-asset="${asset.name}"]`);
+      if (el) el.textContent = (asset.size / 1048576).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " MB";
+    }
   }).catch(() => {});
+
+/* As telas ampliadas. */
+const zoom = document.getElementById("zoom");
+document.querySelectorAll(".capturas img, .linha figure img").forEach((img) => {
+  img.addEventListener("click", () => {
+    document.getElementById("zoom-img").src = img.src;
+    document.getElementById("zoom-img").alt = img.alt;
+    const legenda = img.closest("figure").querySelector("figcaption");
+    document.getElementById("zoom-texto").textContent = legenda ? legenda.textContent : img.alt;
+    if (zoom.showModal) zoom.showModal();
+  });
+});
+document.getElementById("zoom-fechar").addEventListener("click", () => zoom.close());
+zoom.addEventListener("click", (e) => { if (e.target === zoom) zoom.close(); });
 </script>
 </body>
 </html>
