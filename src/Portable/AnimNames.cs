@@ -998,6 +998,78 @@ tummy rumble|barriga roncando|tripa que ruge
 walk and blink|andar piscando|caminar parpadeando
 windy hat|chapéu no vento|sombrero al viento
 worm|minhoca|lombriz
+akira_outfit1_a|Akira, roupa 1|Akira, ropa 1
+akira_outfit2_a|Akira, roupa 2|Akira, ropa 2
+akira_outfit3_a|Akira, roupa 3|Akira, ropa 3
+annoyed|irritado|molesto
+asuna_outfit1_a|Asuna, roupa 1|Asuna, ropa 1
+asuna_outfit2_a|Asuna, roupa 2|Asuna, ropa 2
+asuna_outfit3_a|Asuna, roupa 3|Asuna, ropa 3
+begin|começar|empezar
+border2_rotate|girar na borda|girar en el borde
+busy|ocupado|ocupado
+chair ride|passeio de cadeira|paseo en silla
+delay|esperar|esperar
+fall_akira|Akira caindo|Akira cayendo
+fall_asuna|Asuna caindo|Asuna cayendo
+fall_fast|cair rápido|caer rápido
+fall2a|cair 2|caer 2
+flip|virar|voltear
+floatUp|flutuar para cima|flotar hacia arriba
+Flying_Down|voar para baixo|volar hacia abajo
+Flying_Side|voar de lado|volar de lado
+Flying_Up|voar para cima|volar hacia arriba
+heavenA|subir ao céu|subir al cielo
+Impressed|impressionado|impresionado
+Instant_Transmission_Start|teletransporte|teletransportación
+Invisible_Fall|queda invisível|caída invisible
+joy|alegria|alegría
+jumpUp|pular para cima|saltar hacia arriba
+meet wait|esperar o encontro|esperar el encuentro
+rotate-rtl|girar (direita para esquerda)|girar (derecha a izquierda)
+rotate1|girar|girar
+run_catcha|correr e pegar|correr y atrapar
+run_dl|correr (baixo, esquerda)|correr (abajo, izquierda)
+run_down|correr para baixo|correr hacia abajo
+run_dr|correr (baixo, direita)|correr (abajo, derecha)
+run_left|correr para a esquerda|correr a la izquierda
+run_right|correr para a direita|correr a la derecha
+run_ul|correr (cima, esquerda)|correr (arriba, izquierda)
+run_up|correr para cima|correr hacia arriba
+run_ur|correr (cima, direita)|correr (arriba, derecha)
+runA|correr|correr
+scratcha|coçar|rascarse
+shoot_start|começar a atirar|empezar a disparar
+Shy|tímido|tímido
+skip|saltitar|saltar
+sleepa|dormir|dormir
+slide|escorregar|deslizarse
+spawn|aparecer|aparecer
+spawnA|aparecer|aparecer
+Sparkle|brilho|brillo
+Sprint Burn|arrancada|arrancada
+Sprint End|fim da corrida|fin del sprint
+Sprint Loop|correr muito|correr a toda velocidad
+superman|super-herói|superhéroe
+toilet|banheiro|baño
+turn_forward|virar de frente|girar de frente
+turn_side|virar de lado|girar de lado
+Twerk|rebolar|perrear
+typing|digitando|escribiendo
+walk burger|andar com hambúrguer|caminar con hamburguesa
+walk down|andar para baixo|caminar hacia abajo
+Walk Down Left|andar (baixo, esquerda)|caminar (abajo, izquierda)
+Walk Down Right|andar (baixo, direita)|caminar (abajo, derecha)
+Walk Left|andar para a esquerda|caminar a la izquierda
+Walk Right|andar para a direita|caminar a la derecha
+Walk Up|andar para cima|caminar hacia arriba
+Walk Up Left|andar (cima, esquerda)|caminar (arriba, izquierda)
+Walk Up Right|andar (cima, direita)|caminar (arriba, derecha)
+walk_fallB_shootB|andar, cair e atirar|caminar, caer y disparar
+walk_in|entrar andando|entrar caminando
+walk_jump|andar e pular|caminar y saltar
+walk_out|sair andando|salir caminando
+walk_shootA|andar atirando|caminar disparando
 ";
 	}
 }

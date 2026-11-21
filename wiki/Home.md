@@ -26,7 +26,7 @@ O programa tem duas partes:
 
 ### No painel
 
-- A galeria tem duas abas: **Meus pets** (o que já está no computador) e **Baixar pets** (o que está publicado no repositório). O `Pets/pets.json` do repositório lista hoje 26 pets, entre eles o eSheep original, o Pingus, as sete ovelhas coloridas, os dez assistentes do Office (que não têm gravidade e ficam onde você soltar) e os pets criados pelo autor.
+- A galeria tem duas abas: **Meus pets** (o que já está no computador) e **Baixar pets** (o que está publicado no repositório). O `Pets/pets.json` do repositório lista hoje 64 pets, entre eles o eSheep original, o Pingus, as sete ovelhas coloridas, os dez assistentes do Office (que não têm gravidade e ficam onde você soltar), os pets criados pelo autor e os pets da comunidade do repositório original de Adriano Petrucci (Neko, Pikachu, Grian, Ano Nym, SSJ Goku e outros).
 - Antes de baixar, o programa mostra o tamanho do arquivo; durante o download, o botão vira barra de progresso e pode ser cancelado ou repetido.
 - O **Editor de Pets** (`PetEditor.exe`, aberto em Configurações › Editor de Pets) cria um pet a partir das suas imagens ou GIF, ou muda um que já existe, com prévia ao vivo, teste no desktop e publicação na galeria. Veja [Crie o seu pet](Crie-o-seu-pet.md).
 - Exportar e importar pets, tema claro/escuro/automático, idioma, inicialização com o Windows e tamanho 1×, 2× ou 4×.

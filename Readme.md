@@ -59,7 +59,7 @@ the wallpapers. The demo itself is in Portuguese.
 
 ## The pets
 
-The gallery has **26 pets**, downloaded straight from this repository (the [`Pets`](Pets) folder) through the app's
+The gallery has **64 pets**, downloaded straight from this repository (the [`Pets`](Pets) folder) through the app's
 panel, with an animated preview and the size of each one before you download it. The ones made for Desktop-Pet, in pixel art:
 
 <table>

@@ -332,6 +332,249 @@
       "size" : 2033403,
       "animations" : 76,
       "sounds" : 7
+    },
+    {
+      "folder" : "ano",
+      "name" : "Ano Nym (Active)",
+      "author" : "Gregor Biswanger",
+      "lastupdate" : "2026-11-06",
+      "size" : 909714,
+      "animations" : 45,
+      "sounds" : 0
+    },
+    {
+      "folder" : "ano_xl",
+      "name" : "Ano Nym XL (Active)",
+      "author" : "Gregor Biswanger",
+      "lastupdate" : "2026-11-06",
+      "size" : 2598600,
+      "animations" : 45,
+      "sounds" : 0
+    },
+    {
+      "folder" : "ano_calm",
+      "name" : "Ano Nym (Don't distract)",
+      "author" : "Gregor Biswanger",
+      "lastupdate" : "2026-11-06",
+      "size" : 485857,
+      "animations" : 15,
+      "sounds" : 0
+    },
+    {
+      "folder" : "ano_xl_calm",
+      "name" : "Ano Nym XL (Don't distract)",
+      "author" : "Gregor Biswanger",
+      "lastupdate" : "2026-11-06",
+      "size" : 1373224,
+      "animations" : 15,
+      "sounds" : 0
+    },
+    {
+      "folder" : "bbunny",
+      "name" : "Buster Bunny",
+      "author" : "Adriano",
+      "lastupdate" : "2019-02-25",
+      "size" : 34836,
+      "animations" : 8,
+      "sounds" : 0
+    },
+    {
+      "folder" : "blue_ham_ham",
+      "name" : "Blue Ham Ham",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 40483,
+      "animations" : 17,
+      "sounds" : 0
+    },
+    {
+      "folder" : "fox",
+      "name" : "fox mate",
+      "author" : "Michelle!",
+      "lastupdate" : "2022-08-03",
+      "size" : 227054,
+      "animations" : 27,
+      "sounds" : 5
+    },
+    {
+      "folder" : "foxy_jumpscare",
+      "name" : "Foxy Jumpscare",
+      "author" : "Zecheriah",
+      "lastupdate" : "2026-10-26",
+      "size" : 239211,
+      "animations" : 7,
+      "sounds" : 2
+    },
+    {
+      "folder" : "grian",
+      "name" : "Grian - Minecraft",
+      "author" : "RedSparr0w",
+      "lastupdate" : "2026-08-14",
+      "size" : 49310,
+      "animations" : 14,
+      "sounds" : 0
+    },
+    {
+      "folder" : "jerma",
+      "name" : "Jerma985",
+      "author" : "Zecheriah",
+      "lastupdate" : "2026-10-20",
+      "size" : 3976053,
+      "animations" : 41,
+      "sounds" : 28
+    },
+    {
+      "folder" : "jerma_compact",
+      "name" : "Jerma985 Compact",
+      "author" : "Zecheriah",
+      "lastupdate" : "2026-10-20",
+      "size" : 2542432,
+      "animations" : 41,
+      "sounds" : 28
+    },
+    {
+      "folder" : "mareep",
+      "name" : "mareep",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 19406,
+      "animations" : 13,
+      "sounds" : 0
+    },
+    {
+      "folder" : "mimiko",
+      "name" : "Black Neko Mate",
+      "author" : "Madnuttah",
+      "lastupdate" : "2022-08-25",
+      "size" : 181771,
+      "animations" : 27,
+      "sounds" : 5
+    },
+    {
+      "folder" : "mumbojumbo",
+      "name" : "MumboJumbo - Minecraft",
+      "author" : "RedSparr0w",
+      "lastupdate" : "2026-08-14",
+      "size" : 55558,
+      "animations" : 14,
+      "sounds" : 0
+    },
+    {
+      "folder" : "negima",
+      "name" : "Negima",
+      "author" : "Adriano",
+      "lastupdate" : "2019-10-16",
+      "size" : 93486,
+      "animations" : 15,
+      "sounds" : 1
+    },
+    {
+      "folder" : "neko",
+      "name" : "Neko mate",
+      "author" : "Adriano",
+      "lastupdate" : "2019-06-28",
+      "size" : 163462,
+      "animations" : 27,
+      "sounds" : 5
+    },
+    {
+      "folder" : "pikachu",
+      "name" : "Pikachu",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 18920,
+      "animations" : 13,
+      "sounds" : 0
+    },
+    {
+      "folder" : "pingus_expansion",
+      "name" : "Pingus Expansion",
+      "author" : "Zecheriah",
+      "lastupdate" : "2026-10-20",
+      "size" : 1244483,
+      "animations" : 69,
+      "sounds" : 30
+    },
+    {
+      "folder" : "pink_fox",
+      "name" : "pink fox mate",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 223326,
+      "animations" : 27,
+      "sounds" : 5
+    },
+    {
+      "folder" : "pink_neko",
+      "name" : "pink neko",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 152998,
+      "animations" : 27,
+      "sounds" : 5
+    },
+    {
+      "folder" : "shiny_sylveon",
+      "name" : "Shiny Sylveon",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 22274,
+      "animations" : 13,
+      "sounds" : 0
+    },
+    {
+      "folder" : "skeleton",
+      "name" : "Skeleton - Minecraft",
+      "author" : "RedSparr0w",
+      "lastupdate" : "2026-08-14",
+      "size" : 47072,
+      "animations" : 14,
+      "sounds" : 0
+    },
+    {
+      "folder" : "skywire_bean",
+      "name" : "Skywire Beans",
+      "author" : "Zecheriah",
+      "lastupdate" : "2026-09-15",
+      "size" : 304791,
+      "animations" : 17,
+      "sounds" : 12
+    },
+    {
+      "folder" : "ssj-goku",
+      "name" : "SSJ Goku",
+      "author" : "RedSparr0w",
+      "lastupdate" : "2019-03-04",
+      "size" : 54991,
+      "animations" : 24,
+      "sounds" : 0
+    },
+    {
+      "folder" : "twin_shot",
+      "name" : "Twin Shot",
+      "author" : "Zecheriah",
+      "lastupdate" : "2026-10-26",
+      "size" : 172455,
+      "animations" : 36,
+      "sounds" : 11
+    },
+    {
+      "folder" : "yellow_neko",
+      "name" : "yellow neko",
+      "author" : "Michelle!",
+      "lastupdate" : "2025-12-08",
+      "size" : 152271,
+      "animations" : 27,
+      "sounds" : 5
+    },
+    {
+      "folder" : "zombie",
+      "name" : "Zombie - Minecraft",
+      "author" : "RedSparr0w",
+      "lastupdate" : "2026-08-14",
+      "size" : 62610,
+      "animations" : 14,
+      "sounds" : 0
     }
   ]
 }

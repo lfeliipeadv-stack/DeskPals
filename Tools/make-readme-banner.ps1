@@ -4,11 +4,11 @@
 #
 #   pwsh -File Tools/make-readme-banner.ps1      (English, for Readme.md)
 #   pwsh -File Tools/make-readme-banner.ps1 -Subtitle 'Bichinhos que vivem na sua área de trabalho do Windows' `
-#     -Chips 'Windows 10 e 11','Grátis e código aberto','26 pets','23 idiomas','Editor de pets' -Out .github/readme/banner.pt-BR.png
+#     -Chips 'Windows 10 e 11','Grátis e código aberto','64 pets','23 idiomas','Editor de pets' -Out .github/readme/banner.pt-BR.png
 #   (PowerShell 7: the Portuguese texts have accents)
 param(
   [string[]]$Pets = @('esheep64', 'rex', 'pingo', 'boo', 'mago', 'nuvi', 'claude', 'clippy'),
-  [string[]]$Chips = @('Windows 10 and 11', 'Free and open source', '26 pets', '23 languages', 'Pet editor'),
+  [string[]]$Chips = @('Windows 10 and 11', 'Free and open source', '64 pets', '23 languages', 'Pet editor'),
   [string]$Subtitle = 'Little pets that live on your Windows desktop',
   [string]$Out = ''
 )

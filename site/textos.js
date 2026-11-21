@@ -24,7 +24,7 @@ export const IDIOMAS = [
 export const TEXTOS = {
   pt: {
     titulo: "Desktop-Pet — o bichinho que mora na sua área de trabalho do Windows",
-    descricao: "Desktop-Pet: um bichinho que anda pelas suas janelas, conversa com você, lembra das pausas e avisa da agenda. 26 pets, Editor de Pets e 23 idiomas. Grátis e de código aberto, para Windows 10 e 11.",
+    descricao: "Desktop-Pet: um bichinho que anda pelas suas janelas, conversa com você, lembra das pausas e avisa da agenda. 64 pets, Editor de Pets e 23 idiomas. Grátis e de código aberto, para Windows 10 e 11.",
     idioma: "Idioma da página",
     tema: "Trocar o tema claro ou escuro",
     menu: "Abrir o menu",
@@ -157,7 +157,7 @@ export const TEXTOS = {
 
   en: {
     titulo: "Desktop-Pet — the little pet that lives on your Windows desktop",
-    descricao: "Desktop-Pet: a little pet that walks on your windows, chats with you, reminds you to take breaks and tells you about your meetings. 26 pets, a Pet Editor and 23 languages. Free and open source, for Windows 10 and 11.",
+    descricao: "Desktop-Pet: a little pet that walks on your windows, chats with you, reminds you to take breaks and tells you about your meetings. 64 pets, a Pet Editor and 23 languages. Free and open source, for Windows 10 and 11.",
     idioma: "Page language",
     tema: "Switch between light and dark theme",
     menu: "Open the menu",
@@ -276,7 +276,7 @@ export const TEXTOS = {
 
   es: {
     titulo: "Desktop-Pet — la mascota que vive en tu escritorio de Windows",
-    descricao: "Desktop-Pet: una mascota que camina por tus ventanas, conversa contigo, te recuerda hacer pausas y te avisa de tu agenda. 26 mascotas, Editor de mascotas y 23 idiomas. Gratis y de código abierto, para Windows 10 y 11.",
+    descricao: "Desktop-Pet: una mascota que camina por tus ventanas, conversa contigo, te recuerda hacer pausas y te avisa de tu agenda. 64 mascotas, Editor de mascotas y 23 idiomas. Gratis y de código abierto, para Windows 10 y 11.",
     idioma: "Idioma de la página",
     tema: "Cambiar entre tema claro y oscuro",
     menu: "Abrir el menú",

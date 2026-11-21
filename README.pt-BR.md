@@ -59,7 +59,7 @@ papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/Deskt
 
 ## Os pets
 
-A galeria tem **26 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
+A galeria tem **64 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
 com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o Desktop-Pet, em pixel art:
 
 <table>
