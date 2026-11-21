@@ -49,9 +49,38 @@ namespace DesktopPet
                 watcher.Changed += changed;
                 watcher.Created += changed;
                 watcher.Renamed += (s, e) => changed(s, null);
+                if (VisitKinds != null) StartVisits();
                 Application.Run();
                 watcher.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Developer: "--visit=all" (or butterfly, bird, bee, ladybug) together with --test-pet calls the visitors of the
+        /// Visitors plugin to the pet one after the other, and writes what happened to %TEMP%\desktoppet-visit-test.txt
+        /// (a pet with "catch visitor", the frog, eats them).
+        /// </summary>
+        public static Visitors.Kind[] VisitKinds;
+
+        static void StartVisits()
+        {
+            string log = Path.Combine(Path.GetTempPath(), "desktoppet-visit-test.txt");
+            File.WriteAllText(log, "");
+            int i = 0, waited = 0;
+            var started = DateTime.Now;
+            var clock = new System.Windows.Forms.Timer { Interval = 6000 };   // the pet on screen first
+            clock.Tick += (s, e) =>
+            {
+                clock.Interval = 500;
+                if (i > 0 && Visitors.Flying != null && ++waited < 120) return;   // this visit is still going on (up to a minute)
+                // the visit before this one: how it ended
+                if (i > 0) File.AppendAllText(log, $"{VisitKinds[i - 1]}: caught={Visitors.CaughtLast} still flying={Visitors.Flying != null} seconds={(DateTime.Now - started).TotalSeconds:0}\r\n");
+                if (i >= VisitKinds.Length) { clock.Stop(); File.AppendAllText(log, "done\r\n"); return; }
+                waited = 0; started = DateTime.Now;
+                Visitors.Visit(VisitKinds[i++]);
+                File.AppendAllText(log, $"{VisitKinds[i - 1]}: called, on screen={Visitors.Flying != null}\r\n");
+            };
+            clock.Start();
         }
 
         /// <summary>The file as the editor left it (it may still be writing it: a few tries).</summary>

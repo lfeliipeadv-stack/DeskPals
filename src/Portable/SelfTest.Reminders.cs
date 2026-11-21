@@ -44,6 +44,12 @@ namespace DesktopPet
 			Check("snooze wins", snoozed.Next(wed.AddHours(10)) == wed.AddHours(10.25));
 			Check("disabled → never", new Reminder { Enabled = false }.Next(wed) == null);
 			Check("summary text", !string.IsNullOrEmpty(r.Summary()) && !r.Summary().StartsWith("rem."), r.Summary());
+			// the pet acts out the reminder, read from its words
+			Check("animation: water → drink", Reminders.AnimationsFor("Hora de beber água 💧")?[0] == "drink");
+			Check("animation: stretch → stretch", Reminders.AnimationsFor("Time to stretch")?[0] == "stretch");
+			Check("animation: eyes → look around", Reminders.AnimationsFor("Descanse os olhos")?[0] == "look around");
+			Check("animation: other text → none", Reminders.AnimationsFor("Ligar para a Ana") == null);
+			Check("animation: only whole words", Reminders.AnimationsFor("Aguardar o relatório e create the report") == null);
 		}
 
 		static void Reminders_Json()

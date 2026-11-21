@@ -33,6 +33,13 @@ namespace DesktopPet
 				("pink_sheep",   "color.pink",   Color.FromArgb(242, 122, 181)),
 				("purple_sheep", "color.purple", Color.FromArgb(155, 109, 214)),
 			}),
+			// the three bats: the cute purple one, the little vampire (red-lined cape) and the fruit bat (orange chest)
+			("Morceguinho", new[]
+			{
+				("morcego_roxo",    "color.purple", Color.FromArgb(122, 100, 168)),
+				("morcego_vampiro", "color.red",    Color.FromArgb(180, 32, 44)),
+				("morcego_frutas",  "color.orange", Color.FromArgb(224, 148, 68)),
+			}),
 		};
 
 		// ------------------------------------------------------------------ "New" badge

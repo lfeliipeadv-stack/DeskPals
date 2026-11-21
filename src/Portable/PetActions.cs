@@ -13,6 +13,14 @@ namespace DesktopPet
 	{
 		public enum Act { Feed, Pet, Play, Sleep }
 
+		static readonly Dictionary<Act, string[]> Bat = new Dictionary<Act, string[]>
+		{
+			[Act.Feed] = new[] { "eat", "favourite food", "juice", "drink" },
+			[Act.Pet] = new[] { "hug", "hearts", "love" },
+			[Act.Play] = new[] { "loop the loop", "dance", "candy rain", "fireflies" },
+			[Act.Sleep] = new[] { "sleep", "fly to the top" },
+		};
+
 		static readonly Dictionary<string, Dictionary<Act, string[]>> ByPet = new Dictionary<string, Dictionary<Act, string[]>>(StringComparer.OrdinalIgnoreCase)
 		{
 			["rex"] = new Dictionary<Act, string[]>
@@ -55,6 +63,50 @@ namespace DesktopPet
 				[Act.Feed] = new[] { "eat", "coffee", "chef" },
 				[Act.Pet] = new[] { "flower", "wave" },
 				[Act.Play] = new[] { "dance", "skate", "music", "confetti", "spin" },
+				[Act.Sleep] = new[] { "sleep" },
+			},
+			["arara"] = new Dictionary<Act, string[]>
+			{
+				[Act.Feed] = new[] { "mango", "brazil nut", "eat", "drink" },
+				[Act.Pet] = new[] { "hug", "hearts", "love", "blow kiss" },
+				[Act.Play] = new[] { "soccer ball", "samba", "pandeiro", "kite", "dance" },
+				[Act.Sleep] = new[] { "sleep" },
+			},
+			["arara_azul"] = new Dictionary<Act, string[]>
+			{
+				[Act.Feed] = new[] { "mango", "brazil nut", "eat", "drink" },
+				[Act.Pet] = new[] { "hug", "hearts", "love", "blow kiss" },
+				[Act.Play] = new[] { "soccer ball", "samba", "pandeiro", "kite", "dance" },
+				[Act.Sleep] = new[] { "sleep" },
+			},
+			["pipoca"] = new Dictionary<Act, string[]>
+			{
+				[Act.Feed] = new[] { "eat", "corn kernel", "drink" },
+				[Act.Pet] = new[] { "hug", "hearts", "love" },
+				[Act.Play] = new[] { "balloon", "dandelion", "dance", "chase butterfly" },
+				[Act.Sleep] = new[] { "sleep", "nap in shell" },
+			},
+			["sapo"] = new Dictionary<Act, string[]>
+			{
+				[Act.Feed] = new[] { "eat", "catch fly", "catch mosquito", "drink" },
+				[Act.Pet] = new[] { "hug", "hearts", "frog prince", "love" },
+				[Act.Play] = new[] { "bubbles", "long jump", "rain dance", "dance" },
+				[Act.Sleep] = new[] { "sleep" },
+			},
+			// the three bats (Morceguinho) share their animations
+			["morcego_roxo"] = Bat, ["morcego_vampiro"] = Bat, ["morcego_frutas"] = Bat,
+			["cacto_vaso"] = new Dictionary<Act, string[]>
+			{
+				[Act.Feed] = new[] { "eat", "drink", "cookie", "ice cream" },
+				[Act.Pet] = new[] { "hug", "hearts", "love", "watering can" },
+				[Act.Play] = new[] { "balloon", "bubbles", "dance", "roll" },
+				[Act.Sleep] = new[] { "sleep" },
+			},
+			["mandacaru"] = new Dictionary<Act, string[]>
+			{
+				[Act.Feed] = new[] { "cuscuz", "eat", "tapioca", "rapadura", "drink", "cookie" },
+				[Act.Pet] = new[] { "hug", "hearts", "love", "tip hat" },
+				[Act.Play] = new[] { "forró", "dance", "triangle", "hat trick", "spinning top", "music" },
 				[Act.Sleep] = new[] { "sleep" },
 			},
 			["esheep64"] = new Dictionary<Act, string[]>

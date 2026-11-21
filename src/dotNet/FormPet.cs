@@ -1693,6 +1693,10 @@ namespace DesktopPet
         internal int SpawnCount;
         /// <summary>Self-test: turn the pet to one side (as the end of a turn-around does).</summary>
         internal void TestFace(bool left) { if (left != IsMovingLeft) { IsMovingLeft = left; spritesFlipped = !spritesFlipped; } }
+        /// <summary>The pet looks to the left (its drawings face left); false when it was turned to the right.</summary>
+        internal bool FacingLeft => IsMovingLeft;
+        /// <summary>Turn the pet to that side now (the frog turns towards a visitor before catching it).</summary>
+        internal void Face(bool left) => TestFace(left);
         /// <summary>Self-test: the windows this pet opened (tub, balloon…) that are still on screen.</summary>
         internal List<FormPet> LiveChildren =>childs.Where(c => c != null && !c.IsDisposed && c.Visible).ToList();
 

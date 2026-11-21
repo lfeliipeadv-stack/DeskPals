@@ -199,8 +199,12 @@ namespace DesktopPet
 					}
 					Check(who + ": reaches the pet", nearest < 80, $"closest {nearest:0} px");
 					Check(who + ": goes away and closes", Visitors.Flying == null, $"{clock.Elapsed.TotalSeconds:0} s");
-					Check(who + ": leaves on the other side of the screen", fromRight ? lastLeft < area.Left + 40 : lastLeft > area.Right - 80,
-						$"came from the {(fromRight ? "right" : "left")}, last seen at x={lastLeft}");
+					if (Visitors.CaughtLast)
+						// the frog caught it with its tongue: it ends inside the pet, not on the other side
+						Check(who + ": caught by the pet, gone inside it", lastLeft > pet.Left - fly.Width && lastLeft < pet.Right, $"last seen at x={lastLeft}, pet {pet.Left}-{pet.Right}");
+					else
+						Check(who + ": leaves on the other side of the screen", fromRight ? lastLeft < area.Left + 40 : lastLeft > area.Right - 80,
+							$"came from the {(fromRight ? "right" : "left")}, last seen at x={lastLeft}");
 				}
 
 				// ---- full screen: something filling the screen hides the pets, and it comes back after

@@ -130,6 +130,12 @@ namespace DesktopPet
             {
                 if (s.StartsWith("--test-pet=", StringComparison.OrdinalIgnoreCase))
                 {
+                    // developer: "--visit=all|butterfly|bird|bee|ladybug" calls the visitors to the tested pet
+                    var visit = args.FirstOrDefault(a => a.StartsWith("--visit=", StringComparison.OrdinalIgnoreCase))?.Substring(8);
+                    if (visit != null)
+                        TestPet.VisitKinds = visit.Equals("all", StringComparison.OrdinalIgnoreCase)
+                            ? (Visitors.Kind[])Enum.GetValues(typeof(Visitors.Kind))
+                            : new[] { (Visitors.Kind)Enum.Parse(typeof(Visitors.Kind), visit, true) };
                     TestPet.Run(s.Substring("--test-pet=".Length).Trim('"'));
                     return;
                 }

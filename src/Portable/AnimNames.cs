@@ -553,6 +553,423 @@ surprised|surpreso|sorprendido
 travel|viagem|viaje
 uncertain|em dúvida|indeciso
 writing|escrevendo|escribiendo
+angry steam|vapor de raiva|vapor de enojo
+ball bounce|bola quicando|pelota rebotando
+ball bounce up|bola subindo|pelota subiendo
+ball drop|bola caindo|pelota cayendo
+ball roll|bola rolando|pelota rodando
+bath|banho|baño
+brazil nut|castanha-do-pará|nuez de Brasil
+butterfly away|borboleta indo embora|mariposa alejándose
+butterfly flies off|borboleta voa|la mariposa vuela
+carnival|carnaval|carnaval
+chick flutter down|filhote descendo|polluelo bajando
+chick hatches|filhote nasce|nace el polluelo
+chick walk|filhote andando|polluelo caminando
+climb|escalar|escalar
+cloud leaves|nuvem vai embora|la nube se va
+cloud rains|nuvem chovendo|la nube llueve
+coconut|coco|coco
+coconut falls|coco caindo|coco cayendo
+coconut rests|coco no chão|coco en el suelo
+code floats|código flutuando|código flotando
+coffee steam|vapor do café|vapor del café
+confetti 2|confete 2|confeti 2
+confetti pop|estouro de confete|estallido de confeti
+cookie|biscoito da sorte|galleta de la suerte
+curious|curiosa|curiosa
+download box|caixa de download|caja de descarga
+drag|arrastar|arrastrar
+dust|poeira|polvo
+fall fast|cair rápido|caer rápido
+fall hard|cair com força|caer fuerte
+feather|pena|pluma
+feather rests|pena no chão|pluma en el suelo
+flower grows|flor crescendo|flor creciendo
+flower wilts|flor murchando|flor marchitándose
+fly|voar|volar
+fly turn|virar voando|girar volando
+fortune|sorte|fortuna
+fortune slip|papel da sorte|papel de la suerte
+friend flies by|amiga passa voando|una amiga pasa volando
+friend flight|voo da amiga|vuelo de la amiga
+glide|planar|planear
+heart up|coração subindo|corazón subiendo
+heart up 2|coração subindo 2|corazón subiendo 2
+hi bubble|balão de oi|globo de hola
+hop up|subir pulando|subir saltando
+hug|abraço|abrazo
+idea bulb|lâmpada da ideia|bombilla de la idea
+kick ball|chutar a bola|patear la pelota
+kill|ir embora|irse
+kiss heart|coração do beijo|corazón del beso
+kite away|pipa indo embora|cometa alejándose
+land|pousar|aterrizar
+let the kite go|soltar a pipa|soltar la cometa
+lose a feather|perder uma pena|perder una pluma
+mango|manga|mango
+mango seed|caroço de manga|hueso de mango
+nod|acenar com a cabeça|asentir
+note up|nota subindo|nota subiendo
+note up 2|nota subindo 2|nota subiendo 2
+nut arc|castanha voando|nuez volando
+nut fall|castanha caindo|nuez cayendo
+nut in the beak|castanha no bico|nuez en el pico
+nut rests|castanha no chão|nuez en el suelo
+ok|ok|ok
+pandeiro|pandeiro|pandero
+plant a flower|plantar uma flor|plantar una flor
+preen|arrumar as penas|acicalarse
+review|revisar|revisar
+samba|samba|samba
+say hi|dizer oi|decir hola
+scoop|bola de sorvete|bola de helado
+scoop falls|sorvete cai|se cae el helado
+scoop splat|sorvete no chão|helado en el suelo
+seed arc|caroço voando|hueso volando
+seed fall|caroço caindo|hueso cayendo
+seed rests|caroço no chão|hueso en el suelo
+shake|chacoalhar|sacudirse
+shout hi|gritar oi|gritar hola
+sing samba|cantar samba|cantar samba
+sleepy|com sono|con sueño
+snowfall|neve caindo|nevada
+snowfall 2|neve caindo 2|nevada 2
+soccer ball|bola de futebol|pelota de fútbol
+spit seed|cuspir o caroço|escupir el hueso
+splash|respingo|salpicadura
+splash left|respingo à esquerda|salpicadura a la izquierda
+splash right|respingo à direita|salpicadura a la derecha
+squawk|gritar|graznar
+sweat|suar|sudar
+sweep|varrer|barrer
+sync|sincronizar|sincronizar
+throw nut|jogar a castanha|lanzar la nuez
+toss|arremessar|lanzar
+upside down|de cabeça para baixo|boca abajo
+wake up|acordar|despertar
+warning up|aviso subindo|aviso subiendo
+whistle|assobiar|silbar
+work|trabalhar|trabajar
+ant|formiga|hormiga
+ant walks|formiga andando|hormiga caminando
+balloon away|balão indo embora|globo alejándose
+butterfly flutters|borboleta voando|mariposa revoloteando
+butterfly got away|a borboleta fugiu|la mariposa se escapó
+bye mom|tchau, mamãe|adiós, mamá
+chase butterfly|correr atrás da borboleta|perseguir la mariposa
+confetti falls|confete caindo|confeti cayendo
+confetti falls 2|confete caindo 2|confeti cayendo 2
+corn kernel|grão de milho|grano de maíz
+crow|cantar como galo|cantar como gallo
+dandelion|dente-de-leão|diente de león
+dust 2|poeira 2|polvo 2
+dust bath|banho de terra|baño de tierra
+eat worm|comer a minhoca|comer el gusano
+egg rolls|ovo rolando|huevo rodando
+follow mom|seguir a mamãe|seguir a mamá
+footprints|pegadas|huellas
+frog hops|sapo pulando|rana saltando
+hawk|gavião|halcón
+hawk arrives|gavião chegando|llega el halcón
+hawk circles|gavião rondando|el halcón da vueltas
+hawk circles back|gavião rondando de volta|el halcón vuelve
+hawk gives up|gavião desiste|el halcón se rinde
+hawk leaves|gavião vai embora|el halcón se va
+hawk turns|gavião virando|el halcón gira
+hawk turns again|gavião virando de novo|el halcón gira otra vez
+hen walks|galinha andando|gallina caminando
+hide in shell|esconder no ovo|esconderse en el huevo
+ladybug|joaninha|mariquita
+ladybug walk|joaninha andando|mariquita caminando
+let the balloon go|soltar o balão|soltar el globo
+mother hen|mamãe galinha|mamá gallina
+nap in shell|cochilo no ovo|siesta en el huevo
+peck|bicar|picotear
+peek out|espiar|asomarse
+peep|piar|piar
+phew|ufa|uf
+piu bubble|balão de piu|globo de pío
+popcorn falls|pipoca caindo|palomita cayendo
+popcorn rests|pipoca no chão|palomita en el suelo
+popcorn up|pipoca subindo|palomita subiendo
+rolling egg|ovo rolando|huevo rodando
+run to worm|correr até a minhoca|correr hacia el gusano
+seed floats|semente voando|semilla flotando
+seed floats 2|semente voando 2|semilla flotando 2
+snail|caracol|caracol
+snail crawls|caracol andando|caracol arrastrándose
+spot worm|avistar uma minhoca|ver un gusano
+sweep dust|poeira da vassoura|polvo de la escoba
+worm eaten|minhoca comida|gusano comido
+worm pops out|minhoca saindo da terra|el gusano sale de la tierra
+worm wiggles|minhoca se mexendo|el gusano se retuerce
+z floats|z flutuando|z flotando
+bee sting|ferroada da abelha|picadura de abeja
+bubble pop|bolha estoura|la burbuja estalla
+bubble up|bolha subindo|burbuja subiendo
+bubble up 2|bolha subindo 2|burbuja subiendo 2
+catch bee|pegar uma abelha|atrapar una abeja
+catch bee prey|abelha|abeja
+catch cricket|pegar um grilo|atrapar un grillo
+catch cricket prey|grilo|grillo
+catch dragonfly|pegar uma libélula|atrapar una libélula
+catch dragonfly prey|libélula|libélula
+catch dragonfly tongue 1|língua (libélula)|lengua (libélula)
+catch firefly|pegar um vaga-lume|atrapar una luciérnaga
+catch firefly prey|vaga-lume|luciérnaga
+catch firefly tongue 1|língua (vaga-lume)|lengua (luciérnaga)
+catch fly|pegar uma mosca|atrapar una mosca
+catch fly prey|mosca|mosca
+catch fly tongue 1|língua (mosca)|lengua (mosca)
+catch mosquito|pegar um pernilongo|atrapar un mosquito
+catch mosquito prey|pernilongo|mosquito
+catch mosquito tongue 1|língua (pernilongo)|lengua (mosquito)
+catch mosquito tongue 2|língua (pernilongo) 2|lengua (mosquito) 2
+catch moth|pegar uma mariposa|atrapar una polilla
+catch moth prey|mariposa|polilla
+catch visitor|pegar a visita|atrapar la visita
+cookie prey|biscoito|galleta
+croak|coaxar|croar
+croak bubble|balão de croac|globo de croac
+crown falls|coroa caindo|corona cayendo
+drink prey|gota d'água|gota de agua
+eat prey|mosca|mosca
+eat tongue 1|língua|lengua
+firefly glow|barriga acesa|panza brillante
+friend croaks|amigo coaxa|el amigo croa
+friend hops away|amigo vai embora pulando|el amigo se va saltando
+frog chorus|coral de sapos|coro de ranas
+frog prince|sapo príncipe|rana príncipe
+gulp|engolir|tragar
+lick eye|lamber o olho|lamerse el ojo
+long jump|salto longo|salto largo
+miss a fly|errar a mosca|fallar la mosca
+miss a fly prey|mosca que escapa|mosca que escapa
+miss a fly tongue 1|língua (errou)|lengua (falló)
+missed|errou|falló
+rain dance|dança da chuva|danza de la lluvia
+tadpoles|girinos|renacuajos
+tadpoles swim|girinos nadando|renacuajos nadando
+hop prepare|preparar o pulo|prepararse para saltar
+hop land|aterrissar do pulo|aterrizar del salto
+hop bump|bater no meio do pulo|chocar en el salto
+long jump prepare|preparar o salto longo|prepararse para el salto largo
+bat friends|amigos morcegos|amigos murciélagos
+candy falls|doce caindo|caramelo cayendo
+candy falls 2|doce caindo 2|caramelo cayendo 2
+candy rain|chuva de doces|lluvia de caramelos
+catch a snack|pegar um lanche|atrapar un bocadillo
+chase moth|perseguir a mariposa|perseguir la polilla
+eat moth|comer a mariposa|comer la polilla
+fireflies|vaga-lumes|luciérnagas
+fireflies glow|vaga-lumes piscando|luciérnagas brillando
+fly away from garlic|fugir do alho|huir del ajo
+fly down|voar para baixo|volar hacia abajo
+fly to the top|voar até o alto|volar hasta arriba
+fly up|voar para cima|volar hacia arriba
+friends fly by|amigos passando|amigos pasando
+garlic|alho|ajo
+hang|pendurar-se|colgarse
+hang sleep|dormir pendurado|dormir colgado
+juice|suco|jugo
+let go|soltar-se|soltarse
+loop|cambalhota no ar|voltereta en el aire
+moon|lua|luna
+moon rises|lua nascendo|sale la luna
+moth flies away|mariposa fugindo|polilla escapando
+moth flutters|mariposa voando|polilla revoloteando
+pumpkin glows|abóbora acesa|calabaza encendida
+snack falls|lanche caindo|bocadillo cayendo
+sonar|sonar|sonar
+sonar ring|onda do sonar|onda del sonar
+spider comes down|aranha descendo|araña bajando
+spider goes up|aranha subindo|araña subiendo
+spot moth|achar uma mariposa|encontrar una polilla
+squeak|guinchar|chillar
+squeak bubble|balão de guincho|globo de chillido
+baby cactus|cactinho bebê|cactus bebé
+baby cactus fades|cactinho bebê some|el cactus bebé desaparece
+baby cactus grows|cactinho bebê cresce|el cactus bebé crece
+baby cactus waves|cactinho bebê acena|el cactus bebé saluda
+balloon drifts in|balão chegando|llega el globo
+balloon pieces fall|pedaços do balão caindo|caen los trozos del globo
+balloon pops|balão estoura|el globo explota
+balloon wobbles|balão balançando|el globo se balancea
+bee|abelha|abeja
+bee arrives|abelha chega|llega la abeja
+bee leaves|abelha vai embora|se va la abeja
+bee visits|abelha visita|la abeja visita
+bird|passarinho|pajarito
+bird flies in|passarinho chega voando|llega volando el pajarito
+bird flies off|passarinho vai embora|el pajarito se va volando
+bird lands|passarinho pousa|el pajarito se posa
+bird pricked|passarinho espetado|el pajarito se pincha
+bloom|desabrochar|florecer
+boing|boing|boing
+bubble floats|bolha flutuando|burbuja flotando
+bubble floats 2|bolha flutuando 2|burbuja flotando 2
+bubble pops|bolha estoura|la burbuja explota
+bubble wait|bolha esperando|burbuja esperando
+butterfly arrives|borboleta chega|llega la mariposa
+butterfly leaves|borboleta vai embora|se va la mariposa
+butterfly rests|borboleta descansa|la mariposa descansa
+calango|calango|lagartija
+calango arrives|calango chega|llega la lagartija
+calango push-ups|calango faz flexões|la lagartija hace flexiones
+calango runs away|calango foge|la lagartija huye
+can arrives|regador chega|llega la regadera
+can leaves|regador vai embora|se va la regadera
+can pours|regador rega|la regadera riega
+comb spines|pentear os espinhos|peinar las espinas
+crack pot|vaso rachado|maceta rajada
+dizzy roll|tonto de rolar|mareado de rodar
+flower closes|flor fecha|la flor se cierra
+flower rain|chuva de flores|lluvia de flores
+hug heart|coração do abraço|corazón del abrazo
+hug heart 2|coração do abraço 2|corazón del abrazo 2
+hug heart 3|coração do abraço 3|corazón del abrazo 3
+hug heart wait|coração do abraço esperando|corazón del abrazo esperando
+hug heart wait 2|coração do abraço esperando 2|corazón del abrazo esperando 2
+hug heart wait 3|coração do abraço esperando 3|corazón del abrazo esperando 3
+kick pebble|chutar pedrinha|patear una piedrita
+party confetti|confete da festa|confeti de la fiesta
+patch pot|consertar o vaso|arreglar la maceta
+pebble rolls|pedrinha rolando|la piedrita rueda
+peek|espiar|espiar
+petals fall|pétalas caindo|pétalos que caen
+petals rain|chuva de pétalas|lluvia de pétalos
+petals rain 2|chuva de pétalas 2|lluvia de pétalos 2
+settle|se ajeitar|acomodarse
+spines fall|espinhos caindo|espinas cayendo
+spines fly|espinhos voando|espinas volando
+spines wait|espinhos esperando|espinas esperando
+stand up|levantar|levantarse
+start walking|começar a andar|empezar a caminar
+stop walking|parar de andar|dejar de caminar
+sun shines|sol brilhando|el sol brilla
+tumbleweed|bola de feno|planta rodadora
+tumbleweed rolls|bola de feno rolando|la planta rodadora rueda
+z floats up|zzz subindo|zzz subiendo
+back away|recuar|retroceder
+candies fall|doces caindo|caramelos cayendo
+candies fall 2|doces caindo 2|caramelos cayendo 2
+dance party|festa dançante|fiesta de baile
+dizzy flight|voo tonto|vuelo mareado
+favourite food|comida preferida|comida favorita
+fireflies blink|vaga-lumes piscando|luciérnagas parpadeando
+garlic rests|alho no chão|ajo en el suelo
+gulp moth|engolir a mariposa|tragar la polilla
+hang upside down|de cabeça para baixo pendurado|colgado boca abajo
+loop down|descer do looping|bajar del rizo
+loop the loop|looping|rizo
+moth|mariposa|polilla
+moth flies|mariposa voando|polilla volando
+sleep hanging|dormir pendurado|dormir colgado
+sonar rings|ondas do sonar|ondas del sonar
+spider dangles|aranha pendurada|araña colgando
+asa-branca flies|asa-branca voa|vuela la asa-branca
+asa-branca|asa-branca|asa-branca
+balloon drifts|balão flutua|el globo flota
+balloon pop|estourar balão|reventar globo
+bandeirinhas|bandeirinhas|banderitas
+bat (wait)|morcego (espera)|murciélago (espera)
+bat flies by|morcego passa|pasa un murciélago
+bird on arm|passarinho no braço|pajarito en el brazo
+bump|trombada|choque
+bye bird|tchau, passarinho|adiós, pajarito
+calango runs in|calango chega correndo|el calango llega corriendo
+calango runs off|calango foge|el calango huye
+carcará arrives|carcará chega|llega el carcará
+carcará circles again|carcará rodeia de novo|el carcará vuelve a rondar
+carcará circles back|carcará rodeia de volta|el carcará ronda de vuelta
+carcará circles|carcará rodeia|el carcará ronda
+carcará leaves|carcará vai embora|el carcará se va
+carcará turns again|carcará vira de novo|el carcará vuelve a girar
+carcará turns|carcará vira|el carcará gira
+carcará|carcará|carcará
+chase hat|correr atrás do chapéu|perseguir el sombrero
+cloud goes away|nuvem vai embora|la nube se va
+cordel|cordel|cordel
+crumbs (wait)|farelos (espera)|migas (espera)
+crumbs fall|farelos caem|caen migas
+cuscuz steam|vapor do cuscuz|vapor del cuscús
+cuscuz|cuscuz|cuscús
+dust devil|redemoinho de poeira|remolino de polvo
+far star|estrela distante|estrella lejana
+fire burns|fogo queima|el fuego arde
+fire dies|fogo apaga|el fuego se apaga
+fire lights|fogo acende|el fuego se enciende
+flags fade 2|bandeirinhas somem 2|las banderitas desaparecen 2
+flags fade|bandeirinhas somem|las banderitas desaparecen
+fogueira|fogueira|hoguera
+forró note (wait)|nota do forró (espera)|nota del forró (espera)
+forró note 2 (wait)|nota do forró 2 (espera)|nota del forró 2 (espera)
+forró|forró|forró
+full moon|lua cheia|luna llena
+galo-de-campina arrives|galo-de-campina chega|llega el cardenal
+galo-de-campina flies off|galo-de-campina voa embora|el cardenal se va volando
+galo-de-campina sings|galo-de-campina canta|el cardenal canta
+galo-de-campina|galo-de-campina|cardenal
+goat comes|bode chega|llega la cabra
+goat jumps|bode pula|la cabra salta
+goat nibbles|bode mordisca|la cabra mordisquea
+goat runs away|bode foge|la cabra huye
+goat|bode|cabra
+hat (wait)|chapéu (espera)|sombrero (espera)
+hat back|chapéu de volta|sombrero de vuelta
+hat blown|chapéu voou|se voló el sombrero
+hat falls|chapéu cai|cae el sombrero
+hat flies|chapéu voa|vuela el sombrero
+hat on the ground|chapéu no chão|sombrero en el suelo
+hat trick|truque com o chapéu|truco con el sombrero
+heart floats 2|coração flutua 2|el corazón flota 2
+heart floats|coração flutua|el corazón flota
+heat waves|ondas de calor|ondas de calor
+jegue walks by|jegue passa|pasa el burrito
+jegue|jegue|burrito
+moon sets|lua se põe|la luna se pone
+moon shines|lua brilha|la luna brilla
+music note (wait)|nota da música (espera)|nota de la música (espera)
+music note 2 (wait)|nota da música 2 (espera)|nota de la música 2 (espera)
+night bloom|flor da noite|flor de noche
+note floats 2|nota flutua 2|nota flota 2
+note floats|nota flutua|nota flota
+party flags 2|bandeirinhas 2|banderitas 2
+party flags|bandeirinhas|banderitas
+push-ups|flexões|flexiones
+rain arrives|a chuva chega|llega la lluvia
+rain cloud comes|nuvem de chuva chega|llega la nube de lluvia
+rapadura|rapadura|panela
+sertão sun|sol do sertão|sol del sertón
+sparks (wait)|faíscas (espera)|chispas (espera)
+sparks 2 (wait)|faíscas 2 (espera)|chispas 2 (espera)
+sparks rise|faíscas sobem|suben chispas
+spines (wait)|espinhos (espera)|espinas (espera)
+spines 2 (wait)|espinhos 2 (espera)|espinas 2 (espera)
+spines fly 2|espinhos voam 2|las espinas vuelan 2
+star (wait)|estrela (espera)|estrella (espera)
+star streaks by|estrela risca o céu|la estrella cruza el cielo
+start walk|começar a andar|empezar a caminar
+stop walk|parar de andar|dejar de caminar
+sun fades|sol se apaga|el sol se apaga
+sway|balançar ao vento|mecerse al viento
+tapioca|tapioca|tapioca
+tip hat|tirar o chapéu|quitarse el sombrero
+top (wait)|pião (espera)|trompo (espera)
+top falls|pião cai|el trompo cae
+top spins|pião gira|el trompo gira
+top wobbles|pião bambeia|el trompo se tambalea
+triangle note (wait)|nota do triângulo (espera)|nota del triángulo (espera)
+triangle note 2 (wait)|nota do triângulo 2 (espera)|nota del triángulo 2 (espera)
+triangle|triângulo|triángulo
+warning floats|aviso flutua|el aviso flota
+xote back|xote de volta|xote de vuelta
+xote note 2 (wait)|nota do xote 2 (espera)|nota del xote 2 (espera)
+xote|xote|xote
+zabumba note (wait)|nota da zabumba (espera)|nota de la zabumba (espera)
+zabumba note 2 (wait)|nota da zabumba 2 (espera)|nota de la zabumba 2 (espera)
+zabumba|zabumba|zabumba
 ";
 	}
 }

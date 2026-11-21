@@ -210,8 +210,29 @@ namespace DesktopPet
 					Save();
 				}),
 			};
+			var anims = AnimationsFor(r.Text);
+			if (anims != null) Program.Mainthread?.ReactAll(anims);
 			if (automatic) SpeechBubble.Notify(r.Text, 0, choices);
 			else SpeechBubble.Say(r.Text, 0, choices);
+		}
+
+		/// <summary>
+		/// What the pet does when a reminder fires, read from the reminder's own words (Portuguese, English, Spanish):
+		/// water → drinks, stretch → stretches, eyes → looks around, lunch → eats, break → coffee. Null when nothing fits.
+		/// The pet plays the first of these names it has.
+		/// </summary>
+		internal static string[] AnimationsFor(string text)
+		{
+			string t = (text ?? "").ToLowerInvariant();
+			// whole words ("agua" is not "aguardar", "eat" is not "create"); a trailing * is a word stem ("along*")
+			bool Any(params string[] words) => words.Any(w => System.Text.RegularExpressions.Regex.IsMatch(t,
+				@"(^|[^\p{L}])" + System.Text.RegularExpressions.Regex.Escape(w.TrimEnd('*')) + (w.EndsWith("*") ? "" : @"($|[^\p{L}])")));
+			if (Any("água", "agua", "water", "beber", "drink*", "hidrat*")) return new[] { "drink", "eat", "happy" };
+			if (Any("along*", "stretch*", "estir*", "postura", "posture")) return new[] { "stretch", "yawn", "wave" };
+			if (Any("olhos", "olho", "eyes", "ojos", "vista")) return new[] { "look around", "look up", "blink" };
+			if (Any("almoço", "almoçar", "lunch", "comer", "comida", "almuerzo", "eat")) return new[] { "eat", "mango", "cookie", "drink" };
+			if (Any("pausa", "break", "descans*", "café", "coffee")) return new[] { "coffee", "stretch", "yawn" };
+			return null;
 		}
 	}
 }

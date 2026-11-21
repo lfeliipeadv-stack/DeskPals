@@ -7,9 +7,16 @@ using PetGen;
 //   args[0] = output folder for the pets      (default: pets)
 //   args[1] = optional folder for preview PNGs (not shipped)
 string outDir = args.Length > 0 ? args[0] : "pets";
-string previewDir = args.Length > 1 ? args[1] : null;
+string previewDir = args.Length > 1 && !args[1].StartsWith("--") ? args[1] : null;
+// --only=folder,folder: build just these pets
+var only = args.FirstOrDefault(a => a.StartsWith("--only="))?.Substring(7).Split(',');
 
-foreach (var pet in new[] { ClaudePet.Build(), MagoPet.Build(), NuviPet.Build(), BooPet.Build(), PingoPet.Build(), RexPet.Build() })
+var builders = new (string folder, Func<PetDef> build)[]
+{
+	("claude", ClaudePet.Build), ("mago", MagoPet.Build), ("nuvi", NuviPet.Build), ("boo", BooPet.Build),
+	("pingo", PingoPet.Build), ("rex", RexPet.Build), ("arara", AraraPet.Build), ("arara_azul", AraraPet.BuildAzul), ("pipoca", PintinhoPet.Build), ("sapo", SapoPet.Build), ("cacto_vaso", CactoVasoPet.Build), ("mandacaru", MandacaruPet.Build), ("morcego_roxo", BatPet.Purple), ("morcego_vampiro", BatPet.Vampire), ("morcego_frutas", BatPet.FruitBat),
+};
+foreach (var pet in builders.Where(b => only == null || only.Contains(b.folder)).Select(b => b.build()))
 {
 	pet.Liven();
 	pet.Sounds = PetSounds.For(pet.Folder);
@@ -34,6 +41,8 @@ foreach (var pet in new[] { ClaudePet.Build(), MagoPet.Build(), NuviPet.Build(),
 		Directory.CreateDirectory(previewDir);
 		using var prev = Art.Preview(pet);
 		prev.Save(Path.Combine(previewDir, pet.Folder + "-frames.png"), ImageFormat.Png);
+		// the 48 x 48 icon the original desktopPet gallery asks for
+		using (var icon48 = Art.Render(pet, pet.IconFrame, 48)) icon48.Save(Path.Combine(previewDir, pet.Folder + "-icon48.png"), ImageFormat.Png);
 	}
 	Console.WriteLine($"{pet.Folder}: {pet.Frames.Count} frames, {pet.Anims.Count} animations, {pet.Sounds.Count} sounds, sheet {sheet.Length / 1024} KB");
 }

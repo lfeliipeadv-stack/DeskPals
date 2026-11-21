@@ -170,6 +170,8 @@ public sealed class PetDef
 	public List<(int anim, string x, string y, int next)> Childs = new();
 	/// <summary>Sound effects: played when the animation starts (see Sfx and PetSounds).</summary>
 	public List<PetSound> Sounds = new();
+	/// <summary>No gravity (header "floating"): the pet stays where it is dropped and flies anywhere (Clippy, the bats).</summary>
+	public bool Floating;
 	public int Scale = 3;          // 16 px art drawn 3x = 48 px on screen
 	public int TilesX = 8;
 
@@ -286,6 +288,7 @@ public sealed class PetDef
 		sb.AppendLine($"    <version>{Esc(Version)}</version>");
 		sb.AppendLine($"    <info>{Esc(Info)}</info>");
 		sb.AppendLine("    <application>1</application>");
+		if (Floating) sb.AppendLine("    <floating>yes</floating>");
 		sb.AppendLine($"    <icon><![CDATA[{Convert.ToBase64String(ico)}]]></icon>");
 		sb.AppendLine("  </header>");
 		sb.AppendLine("  <image>");

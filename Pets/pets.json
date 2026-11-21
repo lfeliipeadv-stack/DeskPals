@@ -19,6 +19,87 @@
       "sounds" : 16
     },
     {
+      "folder" : "arara",
+      "name" : "Pitanga",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-20 17:41",
+      "size" : 642862,
+      "animations" : 164,
+      "sounds" : 56
+    },
+    {
+      "folder" : "arara_azul",
+      "name" : "Açaí",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-20 19:10",
+      "size" : 643525,
+      "animations" : 164,
+      "sounds" : 56
+    },
+    {
+      "folder" : "pipoca",
+      "name" : "Pipoca",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-20 19:48",
+      "size" : 507970,
+      "animations" : 154,
+      "sounds" : 46
+    },
+    {
+      "folder" : "sapo",
+      "name" : "Cururu",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-20 20:28",
+      "size" : 563762,
+      "animations" : 144,
+      "sounds" : 39
+    },
+    {
+      "folder" : "morcego_roxo",
+      "name" : "Morceguinho Roxo",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 05:05",
+      "size" : 469134,
+      "animations" : 130,
+      "sounds" : 42
+    },
+    {
+      "folder" : "morcego_vampiro",
+      "name" : "Morceguinho Vampiro",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 05:05",
+      "size" : 469908,
+      "animations" : 130,
+      "sounds" : 42
+    },
+    {
+      "folder" : "morcego_frutas",
+      "name" : "Morceguinho das Frutas",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 05:05",
+      "size" : 469834,
+      "animations" : 130,
+      "sounds" : 42
+    },
+    {
+      "folder" : "cacto_vaso",
+      "name" : "Xiquinho",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 05:14",
+      "size" : 1334134,
+      "animations" : 171,
+      "sounds" : 80
+    },
+    {
+      "folder" : "mandacaru",
+      "name" : "Mandacaru",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 10:26",
+      "size" : 1334668,
+      "animations" : 205,
+      "sounds" : 68
+    },
+    {
       "folder" : "boo",
       "name" : "Boo",
       "author" : "Luan Felipe",

@@ -32,6 +32,11 @@ namespace DesktopPet
 
 		public enum Kind { Butterfly, Bird, Bee, Ladybug }
 
+		/// <summary>A pet with one of these animations (the frog) catches the visitor with its tongue instead of being visited.</summary>
+		internal static readonly string[] CatchNames = { "catch visitor" };
+		/// <summary>The last visitor was caught by the pet (self-test).</summary>
+		internal static bool CaughtLast;
+
 		public static bool Enabled
 		{
 			get => Program.MyData.GetSettingBool("Visitors", false);
@@ -269,7 +274,8 @@ namespace DesktopPet
 			readonly Rectangle screen;
 			readonly int side;          // +1 came in from the right (leaves to the left), -1 the other way
 			double x, y, t, phaseT, lastX;
-			int phase;                  // 0 flying in, 1 the visit, 2 flying on to the other side
+			int phase;                  // 0 flying in, 1 the visit, 2 flying on to the other side, 3 caught by the tongue
+			readonly bool catcher;      // the pet catches visitors with its tongue (the frog)
 			int frame;
 			bool faceLeft;
 
@@ -290,6 +296,9 @@ namespace DesktopPet
 				y = Math.Max(screen.Top + 10, pet.Top - 70);
 				lastX = x;
 				Location = new Point((int)x, (int)y);
+				// the frog turns towards the side the visitor comes from: it will catch it in front of him
+				catcher = pet.FindAnimation(CatchNames) >= 0;
+				if (catcher) pet.Face(side < 0);
 				tick.Tick += (s, e) => Step();
 				tick.Start();
 			}
@@ -324,6 +333,14 @@ namespace DesktopPet
 				e.Graphics.DrawImageUnscaled(img, (Width - img.Width) / 2, Height - img.Height);
 			}
 
+			// The frog (Pets/sapo, PetGen SapoPet): the tongue tip ends at the front top corner of his window, frame (1, -11) of
+			// 36 x 50, and his mouth is at (6, 27). The visitor waits there with its middle on the tip, then comes back with it.
+			double Front(double f) => pet.FacingLeft ? pet.Left + pet.Width * f : pet.Left + pet.Width * (1 - f);
+			double TipX => Front(1.5 / 36) - Width / 2.0;
+			double TipY => pet.Top + pet.Height * (3.5 / 50) - Height / 2.0;
+			double MouthX => Front(6.5 / 36) - Width / 2.0;
+			double MouthY => pet.Top + pet.Height * (41.5 / 50) - Height / 2.0;
+
 			// where the visitor stands on the head, and a point above it
 			double HeadX => pet.Left + pet.Width / 2.0 - Width / 2.0;
 			double HeadY => pet.Top + pet.Height * 0.35 - Height;
@@ -335,11 +352,33 @@ namespace DesktopPet
 				double hx = HeadX, hy = HeadY;
 				switch (phase)
 				{
+					case 0 when catcher:   // the frog: fly to the spot in front of him where his tongue will reach
+					{
+						double tx = TipX, ty = TipY;
+						double near = Math.Min(1, Math.Abs(tx - x) / 60);   // calmer when close
+						x += Math.Sign(tx - x) * Math.Min(What == Kind.Bee ? 6 : 4.5, Math.Abs(tx - x));
+						y += (ty - y) * 0.08 + Math.Sin(t * (What == Kind.Bee ? 14 : 6)) * 1.5 * near;
+						if (Math.Abs(tx - x) < 3 && Math.Abs(ty - y) < 5)
+						{
+							x = tx; y = ty;
+							if (pet.React(CatchNames)) { phase = 3; phaseT = 0; CaughtLast = true; }
+							else { phase = 1; phaseT = 0; pet.React("look around", "happy", "wave"); }   // busy now: an ordinary visit
+						}
+						break;
+					}
 					case 0:   // fly to the pet, bobbing
 						x += Math.Sign(hx - x) * Math.Min(What == Kind.Bee ? 6 : 4.5, Math.Abs(hx - x));
 						y += (hy - 30 - y) * 0.06 + Math.Sin(t * (What == Kind.Bee ? 14 : 6)) * 1.5;
 						if (Math.Abs(hx - x) < 6) { phase = 1; phaseT = 0; pet.React("look around", "happy", "wave"); }
 						break;
+					case 3:   // caught: the tongue reaches it at 0.32 s and holds; from 0.56 s it comes back along the tongue into the mouth
+					{
+						double k = Math.Max(0, Math.Min(1, (phaseT - 0.56) / 0.24));
+						x = TipX + (MouthX - TipX) * k;
+						y = TipY + (MouthY - TipY) * k;
+						if (phaseT > 0.82) { Close(); return; }
+						break;
+					}
 					case 1:
 						if (Visit(hx, hy)) { phase = 2; phaseT = 0; pet.React("happy", "laugh", "wave"); }
 						break;
