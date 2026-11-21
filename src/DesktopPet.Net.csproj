@@ -110,6 +110,7 @@
     <Compile Include="Portable\SelfTest.Reminders.cs" />
     <Compile Include="Portable\SelfTest.Windows.cs" />
     <Compile Include="Portable\SelfTest.Integrations.cs" />
+    <Compile Include="Portable\SelfTest.Sounds.cs" />
     <Compile Include="Portable\AgentBridge.cs" />
     <Compile Include="Portable\ClaudeHooks.cs" />
     <Compile Include="Portable\Companions.cs" />

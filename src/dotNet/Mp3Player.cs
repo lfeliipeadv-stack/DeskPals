@@ -57,9 +57,61 @@ namespace DesktopPet
             }
 
             var player = new Mp3Player("dpsnd" + (++nextId));
-            Check(Send("open \"" + file + "\" type mpegvideo alias " + player.alias));
+            int error = Send("open \"" + file + "\" type mpegvideo alias " + player.alias);
+            if (error != 0)
+            {
+                // Windows refuses an MP3 of only a few frames (the clicks of 0.1 s of Pingus and of the Office
+                // assistants): the same sound followed by a moment of silence opens and plays the same.
+                byte[] padded = PadWithSilence(mp3);
+                if (padded != null)
+                {
+                    string paddedFile = Path.Combine(folder, hash + "-padded.mp3");
+                    if (!File.Exists(paddedFile) || new FileInfo(paddedFile).Length != padded.Length) File.WriteAllBytes(paddedFile, padded);
+                    error = Send("open \"" + paddedFile + "\" type mpegvideo alias " + player.alias);
+                }
+            }
+            Check(error);
             cache[hash] = player;
             return player;
+        }
+
+        /// <summary>
+        /// The MP3 followed by silent frames of the same format (a frame whose side information is all zero decodes
+        /// to silence), about <paramref name="seconds"/> long. Null when no MPEG Layer III frame is found.
+        /// </summary>
+        internal static byte[] PadWithSilence(byte[] mp3, double seconds = 0.5)
+        {
+            int i = 0;
+            if (mp3.Length > 10 && mp3[0] == 'I' && mp3[1] == 'D' && mp3[2] == '3')
+                i = 10 + ((mp3[6] & 0x7F) << 21 | (mp3[7] & 0x7F) << 14 | (mp3[8] & 0x7F) << 7 | (mp3[9] & 0x7F)) + ((mp3[5] & 0x10) != 0 ? 10 : 0);
+            int[] kbps1 = { 0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 };
+            int[] kbps2 = { 0, 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160 };
+            int[] rates = { 44100, 48000, 32000 };
+            for (; i + 4 <= mp3.Length; i++)
+            {
+                if (mp3[i] != 0xFF || (mp3[i + 1] & 0xE0) != 0xE0) continue;
+                int version = (mp3[i + 1] >> 3) & 3;     // 3 MPEG 1, 2 MPEG 2, 0 MPEG 2.5 (1 is reserved)
+                int layer = (mp3[i + 1] >> 1) & 3;       // 1 = Layer III
+                int bitIndex = (mp3[i + 2] >> 4) & 15, rateIndex = (mp3[i + 2] >> 2) & 3;
+                if (version == 1 || layer != 1 || bitIndex == 0 || bitIndex == 15 || rateIndex == 3) continue;
+                int rate = rates[rateIndex] / (version == 3 ? 1 : version == 2 ? 2 : 4);
+                int kbps = (version == 3 ? kbps1 : kbps2)[bitIndex];
+                int samples = version == 3 ? 1152 : 576;
+                int length = samples / 8 * kbps * 1000 / rate;
+                var frame = new byte[length];
+                frame[0] = 0xFF;
+                frame[1] = (byte)(mp3[i + 1] | 1);       // no CRC
+                frame[2] = (byte)(mp3[i + 2] & 0xFD);    // no padding byte
+                frame[3] = mp3[i + 3];
+                int count = (int)Math.Ceiling(seconds * rate / samples);
+                using (var ms = new MemoryStream())
+                {
+                    ms.Write(mp3, 0, mp3.Length);
+                    for (int k = 0; k < count; k++) ms.Write(frame, 0, frame.Length);
+                    return ms.ToArray();
+                }
+            }
+            return null;
         }
 
         /// <summary>

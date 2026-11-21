@@ -194,22 +194,24 @@ namespace DesktopPet
 			}
 			else if (jsonString != cached)
 			{
-				// a pet whose date changed is downloaded again (icon, animations, readme)
-				if (cached != null)
+				// a pet whose date changed is downloaded again (icon, animations, readme). So is a pet that is new in
+				// the list: its folder name may have belonged to an older pet of the gallery, whose files are still
+				// saved here (the old "tico" folder held Rex the Dino, and the new Tico showed the dino's icon).
+				try
 				{
-					try
-					{
-						var online = JsonText.Deserialize<OptionsPets>(jsonString).pets;
-						var local = JsonText.Deserialize<OptionsPets>(cached).pets;
-						foreach (var lp in local)
-						{
-							if (!online.Any(op => op.folder == lp.folder && op.lastupdate != lp.lastupdate)) continue;
-							foreach (var ext in new[] { ".png", ".xml", ".md", ".gif", ".pt-BR.md", ".pt-BR.none" })
-								File.Delete(Path.Combine(BaseLocalPath, lp.folder + ext));
-						}
-					}
+					var online = JsonText.Deserialize<OptionsPets>(jsonString).pets;
+					List<OptionsPet> local = null;
+					try { if (cached != null) local = JsonText.Deserialize<OptionsPets>(cached).pets; }
 					catch (Exception skipped) { LogFile.Ignored(skipped); }   // a broken saved copy is simply replaced
+					local = local ?? new List<OptionsPet>();
+					foreach (var op in online)
+					{
+						if (local.Any(lp => lp.folder == op.folder && lp.lastupdate == op.lastupdate)) continue;
+						foreach (var ext in new[] { ".png", ".xml", ".md", ".gif", ".pt-BR.md", ".pt-BR.none" })
+							File.Delete(Path.Combine(BaseLocalPath, op.folder + ext));
+					}
 				}
+				catch (Exception skipped) { LogFile.Ignored(skipped); }
 				File.WriteAllText(jsonFile, jsonString);
 			}
 

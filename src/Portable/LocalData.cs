@@ -307,7 +307,28 @@ namespace DesktopPet
                 }
             }
             AppSettings = AppConfiguration.AppSettings.Settings;
+            RepairVolumeOnce();
         }
+
+		/// <summary>
+		/// Version 1.0.0 set the volume to 0 for good when Windows could not open one sound of a pet (the short clicks
+		/// of Pingus and of the Office assistants), and from then on no pet made a sound. Give the sound back once.
+		/// </summary>
+		private void RepairVolumeOnce()
+		{
+			try
+			{
+				if (AppSettings["SoundRepair1"] != null) return;
+				AppSettings.Add("SoundRepair1", "1");
+				if (AppSettings[SettingName.Volume].Value == "0")
+				{
+					AppSettings[SettingName.Volume].Value = Properties.Settings.Default.Properties[SettingName.Volume].DefaultValue.ToString();
+					LogFile.Important("volume was 0 (set by the old sound error): back to the default");
+				}
+				Save();
+			}
+			catch (Exception skipped) { LogFile.Ignored(skipped); }
+		}
 
 		/// <summary>
 		/// Set FX-Sound volume (0.0 - 1.0)

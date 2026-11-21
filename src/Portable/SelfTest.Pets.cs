@@ -499,8 +499,18 @@ namespace DesktopPet
 				var ser = new System.Xml.Serialization.XmlSerializer(typeof(XmlData.RootNode));
 				XmlData.RootNode root;
 				using (var r = File.OpenRead(file)) root = (XmlData.RootNode)ser.Deserialize(r);
-				bool has = root.Animations.Animation.Any(a => FormPet.StillNames.Contains(a.Name, StringComparer.OrdinalIgnoreCase)
-					&& a.Start.X == "0" && a.End.X == "0" && a.Start.Y == "0" && a.End.Y == "0");
+				bool Still(XmlData.AnimationNode a) => a.Start.X == "0" && a.End.X == "0" && a.Start.Y == "0" && a.End.Y == "0";
+				bool has = root.Animations.Animation.Any(a => FormPet.StillNames.Contains(a.Name, StringComparer.OrdinalIgnoreCase) && Still(a));
+				// the pets of other authors (copied from the original gallery) are not changed here: for them the
+				// program's second choice counts, any still animation that is not a drag, fall, sleep…
+				// (Foxy Jumpscare uses "delay", Negima its standing poses)
+				bool ours = string.Equals(root.Header?.Author?.Trim(), "Luan Felipe", StringComparison.OrdinalIgnoreCase);
+				if (!has && !ours)
+				{
+					var withChild = new HashSet<int>((root.Childs?.Child ?? new XmlData.ChildNode[0]).Select(c => c.Id));
+					has = root.Animations.Animation.Any(a => a.Name != null && Still(a) && !withChild.Contains(a.Id)
+						&& !FormPet.StillAvoid.Any(w => a.Name.IndexOf(w, StringComparison.OrdinalIgnoreCase) >= 0));
+				}
 				if (!has) noTalk.Add(Path.GetFileName(petDir));
 			}
 			Check("talk: every gallery pet has a still animation for talking", noTalk.Count == 0, string.Join(", ", noTalk));

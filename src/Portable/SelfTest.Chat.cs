@@ -68,7 +68,9 @@ namespace DesktopPet
 				{
 					bool opened = false;
 					var (rec, _) = await VoiceRecorder.Record(() => opened = true, stop.Token);
-					Check("hover chat: the pet's recorder opens the microphone", opened && rec == VoiceRecorder.Result.Canceled, $"{rec} {VoiceRecorder.LastError} peak {VoiceRecorder.LastPeak}");
+					// a computer without a microphone (the GitHub build machine) has nothing to open
+					if (rec == VoiceRecorder.Result.NoMicrophone) lines.Add("SKIP  hover chat: the pet's recorder opens the microphone: no microphone on this computer");
+					else Check("hover chat: the pet's recorder opens the microphone", opened && rec == VoiceRecorder.Result.Canceled, $"{rec} {VoiceRecorder.LastError} peak {VoiceRecorder.LastPeak}");
 				}
 				// the microphone choice: the AI or the Windows dictation (the test listens with the AI's way)
 				var mode = VoiceInput.Current;

@@ -107,6 +107,7 @@ namespace DesktopPet
 			await TryAsync("gsheep ground bath", GSheepGroundBath);
 			await TryAsync("gsheep abduction", GSheepAbduction);
 			Try("picker all pets", PickerAllPets);
+			Try("sounds all pets", SoundsAllPets);
 			await TryAsync("tour", Onboard);
 			await TryAsync("talking pet", TalkingPet);
 			await TryAsync("quiet time", QuietTime);

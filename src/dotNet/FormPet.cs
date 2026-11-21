@@ -1798,6 +1798,8 @@ namespace DesktopPet
 
         /// <summary>Names of the animations a pet uses while it talks, in order of preference (only ones that stay in place count).</summary>
         internal static readonly string[] StillNames = { "talk", "talking", "speak", "idle", "sit", "look around", "think", "blink", "wait", "busy", "stand", "look_down", "look down" };
+        /// <summary>Without one of <see cref="StillNames"/>, any still animation whose name has none of these words.</summary>
+        internal static readonly string[] StillAvoid = { "sleep", "drag", "fall", "kill", "toss", "sync", "poof", "teleport", "cat", "jump", "run", "walk", "climb", "fly" };
 
         /// <summary>
         /// The animation the pet uses while a speech bubble is open: one that does not move ("talk", "sit", "idle"…,
@@ -1813,9 +1815,8 @@ namespace DesktopPet
                     .Where(n => { int i = FindAnimation(n); return i >= 0 && IsStill(Animations.GetAnimation(i)); }).ToArray());
                 if (stillId < 0 && Animations?.SheepAnimations != null)
                 {
-                    string[] avoid = { "sleep", "drag", "fall", "kill", "toss", "sync", "poof", "teleport", "cat", "jump", "run", "walk", "climb", "fly" };
                     var a = Animations.SheepAnimations.Values.FirstOrDefault(x => x.Name != null
-                        && !avoid.Any(w => x.Name.IndexOf(w, StringComparison.OrdinalIgnoreCase) >= 0)
+                        && !StillAvoid.Any(w => x.Name.IndexOf(w, StringComparison.OrdinalIgnoreCase) >= 0)
                         && !Animations.HasAnimationChild(x.ID) && IsStill(x));
                     stillId = a.Name != null ? a.ID : -1;
                 }

@@ -394,18 +394,22 @@ namespace DesktopPet
         /// <summary>
         /// Load a sound for the animation from a byte array.
         /// </summary>
-        /// <remarks>If this function fails, no sound will be played for this pet.</remarks>
-        public void Load(byte[] buff)
+        /// <remarks>
+        /// If it fails, only this sound is left out: the pet's other sounds, and the other pets, still play. (It used
+        /// to set the volume to 0 for good, so one sound Windows could not open silenced every pet.)
+        /// </remarks>
+        /// <returns>The error, or null when the sound can be played.</returns>
+        public string Load(byte[] buff)
         {
             try
             {
                 Audio = Mp3Player.Load(buff);
+                return null;
             }
             catch (Exception e)
             {
-                // Failed to open the sound, reset volume
-                Program.MyData.SetVolume(0.0);
-                Program.Mainthread.ErrorMessages.AudioErrorMessage = e.Message;
+                if (Program.Mainthread != null) Program.Mainthread.ErrorMessages.AudioErrorMessage = e.Message;
+                return e.Message;
             }
         }
 
@@ -425,9 +429,9 @@ namespace DesktopPet
                 }
                 catch (Exception e)
                 {
-                    // Failed to play the sound, reset volume
-                    Program.MyData.SetVolume(0.0);
-                    Program.Mainthread.ErrorMessages.AudioErrorMessage = e.Message;
+                    // this sound could not play this time: the volume stays as the user set it
+                    StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.error, "can't play sound: " + e.Message);
+                    if (Program.Mainthread != null) Program.Mainthread.ErrorMessages.AudioErrorMessage = e.Message;
                 }
             }
         }
@@ -453,7 +457,7 @@ namespace DesktopPet
             /// <summary>
             /// Each Sound must have a unique animation ID.
             /// </summary>
-        public Dictionary<int, TSound> SheepSound;
+        public Dictionary<int, List<TSound>> SheepSound;
 
             /// <summary>
             /// Random used for the "random" key value in the xml.
@@ -515,7 +519,7 @@ namespace DesktopPet
             SheepAnimations = new Dictionary<int, TAnimation>(64);  // Reserve space for 64 animations, more are added automatically
             SheepSpawn = new Dictionary<int, TSpawn>(8);            // Reserve space for 8 spawns
             SheepChild = new Dictionary<int, List<TChild>>(8);      // Reserve space for 8 child
-            SheepSound = new Dictionary<int, TSound>(8);            // Reserve space for 8 sounds
+            SheepSound = new Dictionary<int, List<TSound>>(8);            // Reserve space for 8 sounds
             rand = new Random();
             Xml = xml;
         }
@@ -623,11 +627,18 @@ namespace DesktopPet
                     Base64 = Base64.Substring(Base64.IndexOf(";base64,") + 8);
 
                 TSound sound = new TSound();
-                sound.Load(Convert.FromBase64String(Base64));
+                string error = sound.Load(Convert.FromBase64String(Base64));
+                if (error != null)
+                {
+                    StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.error, "can't open sound (ani." + ID + "): " + error);
+                    return;
+                }
                 sound.AnimationID = ID;
                 sound.Probability = Probability;
                 sound.Loop = Loop;
-                SheepSound.Add(ID, sound);
+                // an animation may have several sounds (the Neko pets have three meows): one is picked each time
+                if (!SheepSound.TryGetValue(ID, out var list)) SheepSound[ID] = list = new List<TSound>(1);
+                list.Add(sound);
             }
             catch(Exception ex)
             {
@@ -895,11 +906,12 @@ namespace DesktopPet
             /// <param name="id">The animation ID</param>
         public void StartSound(int id)
         {
-            if (SheepSound.ContainsKey(id))
+            if (SheepSound.TryGetValue(id, out var sounds) && sounds.Count > 0)
             {
-                if (rand.Next(0, 100) < SheepSound[id].Probability)
+                var sound = sounds[rand.Next(sounds.Count)];
+                if (rand.Next(0, 100) < sound.Probability)
                 {
-                    SheepSound[id].Play(SheepSound[id].Loop);
+                    sound.Play(sound.Loop);
                 }
             }
         }
