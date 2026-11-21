@@ -100,6 +100,24 @@
       "sounds" : 68
     },
     {
+      "folder" : "tico",
+      "name" : "Tico",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 17:30",
+      "size" : 620711,
+      "animations" : 156,
+      "sounds" : 50
+    },
+    {
+      "folder" : "pato",
+      "name" : "Pato",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-21 17:30",
+      "size" : 546362,
+      "animations" : 150,
+      "sounds" : 48
+    },
+    {
       "folder" : "boo",
       "name" : "Boo",
       "author" : "Luan Felipe",

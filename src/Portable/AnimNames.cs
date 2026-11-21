@@ -970,6 +970,34 @@ xote|xote|xote
 zabumba note (wait)|nota da zabumba (espera)|nota de la zabumba (espera)
 zabumba note 2 (wait)|nota da zabumba 2 (espera)|nota de la zabumba 2 (espera)
 zabumba|zabumba|zabumba
+airplane|aviãozinho|avioncito
+apple|maçã|manzana
+ball|bola|pelota
+banana|banana|plátano
+big quack|quá bem alto|cuac bien fuerte
+blocks|blocos de montar|bloques de construcción
+bread|pão|pan
+cartwheel|estrela (ginástica)|voltereta lateral
+crayon|giz de cera|crayón
+crumbs|migalhas|migas
+ear wiggle|mexer as orelhinhas|mover las orejitas
+falling star|estrela cadente|estrella fugaz
+fish|peixe|pez
+jump up high|pular bem alto|saltar bien alto
+no|não|no
+plop|ploft (sentar de bumbum)|plof (sentarse de golpe)
+quack|quá-quá|cuac cuac
+somersault|cambalhota|voltereta
+spin around|dar uma volta|dar una vuelta
+tantrum|birra|berrinche
+teddy|ursinho de pelúcia|osito de peluche
+tiptoe|ponta dos pés|de puntillas
+toy car|carrinho|cochecito
+try to fly|tentar voar|intentar volar
+tummy rumble|barriga roncando|tripa que ruge
+walk and blink|andar piscando|caminar parpadeando
+windy hat|chapéu no vento|sombrero al viento
+worm|minhoca|lombriz
 ";
 	}
 }
