@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Instalação](Instalacao.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md)
 
-Esta página reúne as versões do **Desktop-Pet** em ordem decrescente, com a data de cada uma e o que ela trouxe. As versões publicadas também ficam na página de releases do repositório: <https://github.com/lfeliipeadv-stack/Desktop-Pet/releases>.
+Esta página reúne as versões do **Desktop-Pet** em ordem decrescente, com a data de cada uma e o que ela trouxe. As versões publicadas também ficam na página de releases do repositório: <https://github.com/lfeliipeadv-stack/DeskPals/releases>.
 
 ## Como as versões são publicadas
 
@@ -53,7 +53,7 @@ O Desktop-Pet é uma continuação do projeto desktopPet de Adrianotiger, que j�
 
 - `Changelog.md` (raiz do repositório) — o changelog completo, do 0.1 (dezembro de 2015) ao 2.0.0 (novembro de 2026), com as 40 versões do projeto original.
 - `Changelog.txt` (raiz do repositório) — o mesmo histórico no formato antigo, até a 1.0.6.
-- As notas completas de cada versão do Desktop-Pet estão nas *releases* do GitHub: <https://github.com/lfeliipeadv-stack/Desktop-Pet/releases>.
+- As notas completas de cada versão do Desktop-Pet estão nas *releases* do GitHub: <https://github.com/lfeliipeadv-stack/DeskPals/releases>.
 
 ## Ver também
 

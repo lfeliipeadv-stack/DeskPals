@@ -23,7 +23,8 @@ namespace DesktopPet
 
 		/// <summary>This program's own repository (always first, cannot be removed).</summary>
 		public bool IsOfficial => FixedUrl != null
-			|| (string.Equals(Owner, AppInfo.RepoOwner, StringComparison.OrdinalIgnoreCase) && string.Equals(Repo, AppInfo.RepoName, StringComparison.OrdinalIgnoreCase));
+			|| (string.Equals(Owner, AppInfo.RepoOwner, StringComparison.OrdinalIgnoreCase)
+				&& (string.Equals(Repo, AppInfo.RepoName, StringComparison.OrdinalIgnoreCase) || string.Equals(Repo, AppInfo.OldRepoName, StringComparison.OrdinalIgnoreCase)));
 
 		/// <summary>"owner/repo" (and "@branch" when it is not master), as the settings save it.</summary>
 		public string Key => FixedUrl ?? (Owner + "/" + Repo + (string.Equals(Branch, "master", StringComparison.OrdinalIgnoreCase) ? "" : "@" + Branch));
@@ -73,6 +74,7 @@ namespace DesktopPet
 			{
 				var parts = line.Trim().Split('|');
 				var s = Parse(parts[0]);
+				if (s != null && s.FixedUrl == null && s.IsOfficial) s.Repo = AppInfo.RepoName;   // saved before the repository was renamed
 				if (s == null || list.Any(x => x.Key.Equals(s.Key, StringComparison.OrdinalIgnoreCase))) continue;
 				s.Enabled = parts.Length < 2 || parts[1].Trim() != "0";
 				list.Add(s);

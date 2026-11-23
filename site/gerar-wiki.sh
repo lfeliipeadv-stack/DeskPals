@@ -101,7 +101,7 @@ $corpo
 </div>
 <footer class="rodape">
   <p>O <strong>DeskPals</strong> é um bichinho de área de trabalho para Windows 10 e 11.
-  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet">Ver no GitHub</a></p>
+  <a href="https://github.com/lfeliipeadv-stack/DeskPals">Ver no GitHub</a></p>
 </footer>
 </body>
 </html>

@@ -22,4 +22,4 @@ As animações foram revisadas uma a uma:
 
 Criado por Oliver B. (gSheep 8.0, 2021), a partir da eSheep original.
 
-[Ver histórico do autor (em inglês)](https://github.com/lfeliipeadv-stack/Desktop-Pet/blob/master/Pets/orange_sheep/README.md)
+[Ver histórico do autor (em inglês)](https://github.com/lfeliipeadv-stack/DeskPals/blob/master/Pets/orange_sheep/README.md)

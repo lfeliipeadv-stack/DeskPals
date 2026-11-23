@@ -57,7 +57,7 @@ namespace DesktopPetSetup
 	{
 		const string AppName = "DesktopPet";
 		const string RuntimeUrl = "https://aka.ms/dotnet/10.0/windowsdesktop-runtime-win-x64.exe";
-		const string Webpage = "https://github.com/lfeliipeadv-stack/Desktop-Pet";
+		const string Webpage = "https://github.com/lfeliipeadv-stack/DeskPals";
 
 		static readonly bool Pt = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "pt";
 		static string T(string pt, string en) => Pt ? pt : en;

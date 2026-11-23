@@ -6,7 +6,7 @@ O DeskPals roda em Windows 10 e 11 de 64 bits. O instalador coloca o programa em
 
 ## Escolha o download
 
-Os arquivos ficam na aba **Releases** do repositório: <https://github.com/lfeliipeadv-stack/Desktop-Pet/releases>. A página do projeto (<https://lfeliipeadv-stack.github.io/Desktop-Pet/>) tem um botão que aponta sempre para a versão mais recente.
+Os arquivos ficam na aba **Releases** do repositório: <https://github.com/lfeliipeadv-stack/DeskPals/releases>. A página do projeto (<https://lfeliipeadv-stack.github.io/DeskPals/>) tem um botão que aponta sempre para a versão mais recente.
 
 Cada release publica estes arquivos. Na versão 1.0.0:
 

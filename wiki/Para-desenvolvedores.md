@@ -178,7 +178,7 @@ Cada release `vX.Y.Z` publica estes arquivos. Os tamanhos abaixo são os reais d
 | `SHA256SUMS` | 418 bytes | o hash de cada um dos cinco arquivos acima |
 | `LICENSE.md` | — | a licença MIT |
 
-O atualizador do programa (`src/Portable/Updater.cs`) consulta `https://api.github.com/repos/lfeliipeadv-stack/Desktop-Pet/releases/latest`, mostra as novidades (limite de 1500 caracteres) e só troca o executável depois de conferir o SHA-256 de cada arquivo contra o `SHA256SUMS` da própria release. Hash ausente ou divergente cancela a atualização (`inst.hashMissing` / `inst.hashMismatch`). Só depois disso o executável em uso é renomeado para `DesktopPet_old.exe` e o programa se reinicia. A release não é assinada digitalmente: a garantia é o hash publicado junto dos arquivos.
+O atualizador do programa (`src/Portable/Updater.cs`) consulta `https://api.github.com/repos/lfeliipeadv-stack/DeskPals/releases/latest`, mostra as novidades (limite de 1500 caracteres) e só troca o executável depois de conferir o SHA-256 de cada arquivo contra o `SHA256SUMS` da própria release. Hash ausente ou divergente cancela a atualização (`inst.hashMissing` / `inst.hashMismatch`). Só depois disso o executável em uso é renomeado para `DesktopPet_old.exe` e o programa se reinicia. A release não é assinada digitalmente: a garantia é o hash publicado junto dos arquivos.
 
 Depois de publicar, comite a mudança de versão — o `release.ps1` avisa quando o `Pets/pets.json` mudou e ainda não foi enviado, porque a galeria lê esse arquivo do GitHub.
 
@@ -247,7 +247,7 @@ Ainda existem três workflows legados (`build_nosign.yml`, `dotnet-desktop-signp
 
 Os campos `size`, `animations` e `sounds` são reescritos pelo `Tools/update-pets-json.ps1` — não edite esses números à mão.
 
-O programa lê a galeria de `https://raw.githubusercontent.com/lfeliipeadv-stack/Desktop-Pet/master/Pets/` (constantes em `src/Portable/AppInfo.cs`) e, de cada pasta, baixa `animations.xml`, `icon.png`, `preview.gif` e o `README.md` (ou `README.pt-BR.md`, quando o programa está em português). O tamanho vem de uma requisição `HEAD` antes do download, e o arquivo recebido é descartado se não tiver o tamanho anunciado.
+O programa lê a galeria de `https://raw.githubusercontent.com/lfeliipeadv-stack/DeskPals/master/Pets/` (constantes em `src/Portable/AppInfo.cs`) e, de cada pasta, baixa `animations.xml`, `icon.png`, `preview.gif` e o `README.md` (ou `README.pt-BR.md`, quando o programa está em português). O tamanho vem de uma requisição `HEAD` antes do download, e o arquivo recebido é descartado se não tiver o tamanho anunciado.
 
 ### Publicar um pet novo
 

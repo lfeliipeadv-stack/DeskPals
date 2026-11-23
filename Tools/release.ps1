@@ -21,7 +21,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$Version,
     [string]$Notes = "",
-    [string]$Repo = "lfeliipeadv-stack/Desktop-Pet",
+    [string]$Repo = "lfeliipeadv-stack/DeskPals",
     [switch]$NoUpload
 )
 $ErrorActionPreference = 'Stop'

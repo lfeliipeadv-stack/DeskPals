@@ -5,8 +5,8 @@
 <p align="center"><a href="Readme.md">English</a> · <b>Português</b></p>
 
 <p align="center">
-  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest"><img src="https://img.shields.io/github/v/release/lfeliipeadv-stack/Desktop-Pet?label=vers%C3%A3o&color=1f7a4d" alt="Versão"></a>
-  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet/releases"><img src="https://img.shields.io/github/downloads/lfeliipeadv-stack/Desktop-Pet/total?label=downloads&color=1f7a4d" alt="Downloads"></a>
+  <a href="https://github.com/lfeliipeadv-stack/DeskPals/releases/latest"><img src="https://img.shields.io/github/v/release/lfeliipeadv-stack/DeskPals?label=vers%C3%A3o&color=1f7a4d" alt="Versão"></a>
+  <a href="https://github.com/lfeliipeadv-stack/DeskPals/releases"><img src="https://img.shields.io/github/downloads/lfeliipeadv-stack/DeskPals/total?label=downloads&color=1f7a4d" alt="Downloads"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-1f7a4d" alt="Windows 10 e 11">
   <img src="https://img.shields.io/badge/.NET-10-1f7a4d" alt=".NET 10">
   <img src="https://img.shields.io/badge/idiomas-23-1f7a4d" alt="23 idiomas">
@@ -20,13 +20,13 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet-Instalador.exe"><b>⬇️ Baixar para Windows (grátis)</b></a>
+  <a href="https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-Instalador.exe"><b>⬇️ Baixar para Windows (grátis)</b></a>
   &nbsp;·&nbsp;
-  <a href="https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html">🖥️ Testar no navegador</a>
+  <a href="https://lfeliipeadv-stack.github.io/DeskPals/demo.html">🖥️ Testar no navegador</a>
   &nbsp;·&nbsp;
-  <a href="https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Home.html">📖 Manual</a>
+  <a href="https://lfeliipeadv-stack.github.io/DeskPals/wiki/Home.html">📖 Manual</a>
   &nbsp;·&nbsp;
-  <a href="https://lfeliipeadv-stack.github.io/Desktop-Pet/">🌐 Página do projeto</a>
+  <a href="https://lfeliipeadv-stack.github.io/DeskPals/">🌐 Página do projeto</a>
 </p>
 
 ---
@@ -48,14 +48,14 @@
 ## Teste antes de instalar
 
 A demo roda o pet de verdade dentro do navegador, numa área de trabalho com a cara do Windows 11:
-**[lfeliipeadv-stack.github.io/Desktop-Pet/demo.html](https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html)**
+**[lfeliipeadv-stack.github.io/DeskPals/demo.html](https://lfeliipeadv-stack.github.io/DeskPals/demo.html)**
 
-[![A demo no navegador: uma área de trabalho do Windows 11 com o painel do pet, o Pomodoro, o bloco de notas e a janela "Sobre a demo", o pet em cima de uma janela e a barra de tarefas centralizada](wiki/images/demo.png)](https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html)
+[![A demo no navegador: uma área de trabalho do Windows 11 com o painel do pet, o Pomodoro, o bloco de notas e a janela "Sobre a demo", o pet em cima de uma janela e a barra de tarefas centralizada](wiki/images/demo.png)](https://lfeliipeadv-stack.github.io/DeskPals/demo.html)
 
 Não é vídeo: são os mesmos desenhos, o mesmo `animations.xml` e a mesma lógica de movimento do programa. O pet
 chega do céu, pousa numa janela, anda por ela e cai quando ela some. Dá para arrastar e arremessar, conversar,
 trocar de pet (inclusive o Clippy, que flutua), usar o Iniciar, o Pomodoro, o bloco de notas, o tema escuro e os
-papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Demo-no-navegador.html).
+papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Demo-no-navegador.html).
 
 ## Os pets
 
@@ -189,16 +189,16 @@ Tiradas do próprio programa.
 
 | Arquivo | Para quem |
 | --- | --- |
-| **[DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet-Instalador.exe)** | **Recomendado.** Confere o .NET 10 (e oferece o instalador oficial da Microsoft se faltar), instala o programa e o Editor de Pets em Arquivos de Programas e cria os atalhos. |
-| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet-completo.exe) | Abre direto, sem instalar nada: o .NET vem dentro (arquivo maior, cerca de 50 MB). |
-| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/DesktopPet.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
-| [PetEditor.exe](https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest/download/PetEditor.exe) | Só o Editor de Pets (o programa também o baixa sozinho na primeira vez que você abre o editor). |
+| **[DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-Instalador.exe)** | **Recomendado.** Confere o .NET 10 (e oferece o instalador oficial da Microsoft se faltar), instala o programa e o Editor de Pets em Arquivos de Programas e cria os atalhos. |
+| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-completo.exe) | Abre direto, sem instalar nada: o .NET vem dentro (arquivo maior, cerca de 50 MB). |
+| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
+| [PetEditor.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/PetEditor.exe) | Só o Editor de Pets (o programa também o baixa sozinho na primeira vez que você abre o editor). |
 
 Precisa de **Windows 10 ou 11, 64 bits**. O instalador pede permissão de administrador uma vez (para gravar em
 Arquivos de Programas); o programa roda como usuário comum. O ícone aparece perto do relógio: clique com o botão direito e escolha
 **Abrir Painel** para adotar um pet. Para desinstalar, use **Aplicativos** nas Configurações do Windows — ele pergunta
 se você quer apagar também seus pets e configurações. O passo a passo está em
-[Instalação](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Instalacao.html).
+[Instalação](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Instalacao.html).
 
 > Os arquivos não têm assinatura digital, então o Windows pode avisar que o editor é desconhecido. Cada versão
 > publica o `SHA256SUMS` para conferir o download, e o atualizador do programa confere tudo sozinho.
@@ -223,35 +223,35 @@ se você quer apagar também seus pets e configurações. O passo a passo está 
 
 **Posso fazer o meu pet?** Sim, com o Editor de Pets — e mandar para a galeria pelo próprio editor.
 
-Mais respostas em [Perguntas frequentes](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Perguntas-frequentes.html).
+Mais respostas em [Perguntas frequentes](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Perguntas-frequentes.html).
 
 ## O manual
 
-O manual inteiro está no [Wiki do projeto](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Home.html):
+O manual inteiro está no [Wiki do projeto](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Home.html):
 
 | Página | O que tem |
 | --- | --- |
-| [Instalação](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Instalacao.html) | Os downloads, o que o instalador confere, como atualizar e desinstalar |
-| [Primeiros passos](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Primeiros-passos.html) | O que fazer depois de instalar, em ordem |
-| [Demo no navegador](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Demo-no-navegador.html) | O pet de verdade rodando dentro da página, sem instalar nada |
-| [Painel de pets](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Painel-de-pets.html) | Baixar, adotar, remover, exportar e importar pets |
-| [Pergunte ao pet](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Pergunte-ao-pet.html) | A conversa, os serviços de IA e onde fica a chave |
-| [Lembretes e Pomodoro](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Lembretes-e-Pomodoro.html) | Os lembretes escritos em português e o foco que silencia o pet |
-| [Agenda e e-mails](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Agenda-e-e-mails.html) | A agenda do Google e do Outlook e os avisos de e-mail |
-| [Pet virtual e brincadeiras](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Pet-virtual-e-brinquedos.html) | Fome, carinho, sono e as brincadeiras |
-| [Plugins e integrações](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Plugins-e-integracoes.html) | Os 22 plugins e a ponte com o Claude Code |
-| [Crie o seu pet](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Crie-o-seu-pet.html) | O Editor de Pets e o formato do arquivo do pet |
-| [Atalhos e comandos](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Atalhos-e-comandos.html) | Teclado, mouse e os argumentos do executável |
-| [Para desenvolvedores](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Para-desenvolvedores.html) | Compilar, testar e publicar uma versão |
-| [Perguntas frequentes](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Perguntas-frequentes.html) | Dúvidas comuns, respondidas |
-| [Changelog](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Changelog.html) | O que mudou em cada versão |
+| [Instalação](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Instalacao.html) | Os downloads, o que o instalador confere, como atualizar e desinstalar |
+| [Primeiros passos](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Primeiros-passos.html) | O que fazer depois de instalar, em ordem |
+| [Demo no navegador](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Demo-no-navegador.html) | O pet de verdade rodando dentro da página, sem instalar nada |
+| [Painel de pets](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Painel-de-pets.html) | Baixar, adotar, remover, exportar e importar pets |
+| [Pergunte ao pet](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Pergunte-ao-pet.html) | A conversa, os serviços de IA e onde fica a chave |
+| [Lembretes e Pomodoro](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Lembretes-e-Pomodoro.html) | Os lembretes escritos em português e o foco que silencia o pet |
+| [Agenda e e-mails](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Agenda-e-e-mails.html) | A agenda do Google e do Outlook e os avisos de e-mail |
+| [Pet virtual e brincadeiras](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Pet-virtual-e-brinquedos.html) | Fome, carinho, sono e as brincadeiras |
+| [Plugins e integrações](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Plugins-e-integracoes.html) | Os 22 plugins e a ponte com o Claude Code |
+| [Crie o seu pet](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Crie-o-seu-pet.html) | O Editor de Pets e o formato do arquivo do pet |
+| [Atalhos e comandos](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Atalhos-e-comandos.html) | Teclado, mouse e os argumentos do executável |
+| [Para desenvolvedores](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Para-desenvolvedores.html) | Compilar, testar e publicar uma versão |
+| [Perguntas frequentes](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Perguntas-frequentes.html) | Dúvidas comuns, respondidas |
+| [Changelog](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Changelog.html) | O que mudou em cada versão |
 
 ## Contribuir
 
 - **Um pet novo:** faça no Editor de Pets e use **Publicar na galeria** — ele prepara o .zip e abre o
-  [formulário de pet](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new?template=new_pet.md) já preenchido.
+  [formulário de pet](https://github.com/lfeliipeadv-stack/DeskPals/issues/new?template=new_pet.md) já preenchido.
 - **Uma tradução** nova ou corrigida: veja [Languages/README.md](Languages/README.md).
-- **Um problema ou uma ideia:** abra uma [issue](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new/choose).
+- **Um problema ou uma ideia:** abra uma [issue](https://github.com/lfeliipeadv-stack/DeskPals/issues/new/choose).
 
 O passo a passo está em [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -294,7 +294,7 @@ pwsh Tools/release.ps1 -Version 1.0.1 -NoUpload    # só monta e confere, sem pu
 ```
 
 Segure **CTRL** ao abrir o programa (ou use Configurações → Janela de depuração) para ver ao vivo o que o pet está
-fazendo. Os detalhes estão em [Para desenvolvedores](https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Para-desenvolvedores.html).
+fazendo. Os detalhes estão em [Para desenvolvedores](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Para-desenvolvedores.html).
 
 </details>
 

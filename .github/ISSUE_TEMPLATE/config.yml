@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: Manual (Wiki)
-    url: https://lfeliipeadv-stack.github.io/Desktop-Pet/wiki/Home.html
+    url: https://lfeliipeadv-stack.github.io/DeskPals/wiki/Home.html
     about: Installation, every feature step by step and the FAQ (in Portuguese).
   - name: Try it in the browser
-    url: https://lfeliipeadv-stack.github.io/Desktop-Pet/demo.html
+    url: https://lfeliipeadv-stack.github.io/DeskPals/demo.html
     about: The real pet running on a web page, nothing to install.
