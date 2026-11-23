@@ -23,6 +23,13 @@ namespace DesktopPet
 			base.OnFormClosed(e);
 		}
 
+		/// <summary>A window disposed while open (a "using" around Show, a parent going away) never raises FormClosed: it lets go here, or every pet would stay still for good.</summary>
+		protected override void Dispose(bool disposing)
+		{
+			if (holding) { holding = false; FormPet.Hold(false); }
+			base.Dispose(disposing);
+		}
+
 		/// <summary>Self-test: the windows of this kind that are open.</summary>
 		internal static int OpenCount { get { int n = 0; foreach (Form f in Application.OpenForms) if (f is PetDialog) n++; return n; } }
 	}

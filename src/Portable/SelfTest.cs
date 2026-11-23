@@ -37,6 +37,7 @@ namespace DesktopPet
 		static void Try(string name, Action test)
 		{
 			if (Only != null && name.IndexOf(Only, StringComparison.OrdinalIgnoreCase) < 0) return;
+			Progress(name);
 			try { test(); }
 			catch (Exception ex) { Check(name, false, ex.GetType().Name + ": " + ex.Message); }
 		}
@@ -169,8 +170,26 @@ namespace DesktopPet
 		static async Task TryAsync(string name, Func<Task> test)
 		{
 			if (Only != null && name.IndexOf(Only, StringComparison.OrdinalIgnoreCase) < 0) return;
-			try { await test(); }
+			Progress(name);
+			try
+			{
+				// a test that never ends would hold the whole self-test (and write no result): after 3 minutes it fails
+				Task run = test();
+				if (await Task.WhenAny(run, Task.Delay(TimeSpan.FromMinutes(3))) != run) Check(name, false, "did not finish in 3 minutes");
+				else await run;
+			}
 			catch (Exception ex) { Check(name, false, ex.GetType().Name + ": " + ex.Message); }
+		}
+
+		static bool heldNoted;
+
+		/// <summary>"result.txt.progress": the test running now, to know where a self-test stopped.</summary>
+		static void Progress(string name)
+		{
+			// a hold left by the test before (a bubble or a window that never let go) keeps every pet still in the next ones
+			if (FormPet.Held && !heldNoted) { heldNoted = true; lines.Add("INFO  pets already held when \"" + name + "\" started"); }
+			else if (!FormPet.Held) heldNoted = false;
+			try { File.WriteAllText(resultFile + ".progress", DateTime.Now.ToString("HH:mm:ss") + "  " + name + "  (" + lines.Count + " checks so far, " + failures + " failure(s))"); } catch (Exception) { }
 		}
 
 		// ------------------------------------------------------------------ reminders
