@@ -48,7 +48,7 @@ namespace DesktopPet
             ni.MouseClick += new MouseEventHandler(Ni_MouseClick);
             ni.MouseDoubleClick += new MouseEventHandler(Ni_MouseDoubleClick);
 
-            ni.Text = Lang.T("tray.tooltip", "desktopPet");
+            ni.Text = Lang.T("tray.tooltip", "DeskPals");
             ni.Icon = AppIcon();   // always the program's own icon, whatever pet is on screen
             ni.Visible = true;
 
@@ -79,7 +79,7 @@ namespace DesktopPet
         }
 
         bool testMode;
-        string petNameShown = "desktopPet";
+        string petNameShown = "DeskPals";
 
         /// <summary>Tray tooltips are limited to 127 characters.</summary>
         static string Truncate(string s) => s.Length > 127 ? s.Substring(0, 127) : s;
@@ -91,7 +91,7 @@ namespace DesktopPet
         {
             // The tray icon stays the program's icon; the pet's icon only appears next to
             // "Add another <pet>" in the menu, and its name in the tooltip.
-            petNameShown = string.IsNullOrEmpty(petName) ? "desktopPet" : petName;
+            petNameShown = string.IsNullOrEmpty(petName) ? "DeskPals" : petName;
             Icon petIcon;
             try
             {

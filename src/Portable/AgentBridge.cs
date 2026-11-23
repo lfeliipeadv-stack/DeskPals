@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -144,6 +145,10 @@ namespace DesktopPet
 					if (path.StartsWith("/hook/", StringComparison.Ordinal)) OnHook(path.Substring(6), body);
 					else if (path == "/say") { if (DevListen) DevNote("say " + body); Post(() => Say(body)); }
 					else if (path == "/react") { var a = ReactionByName(body); if (a != Activity.None) Post(() => React(a)); }
+					// for plugins written as programs: animations by name, a show on the screen, a note
+					else if (path == "/play") { var names = PlayNames(body); if (names.Length > 0) Post(() => Program.Mainthread?.ReactAll(names)); }
+					else if (path == "/effect") { if (Enum.TryParse(body.Trim(), true, out ScreenEffects.Kind k)) Post(() => ScreenEffects.Start(k, 20, true)); }
+					else if (path == "/note") { string text = body.Trim(); if (text.Length > 300) text = text.Substring(0, 299) + "…"; if (IsSafeToSay(text)) Post(() => NoteDelivery.Bring("🔌", Lang.T("note.fromApp"), text)); }
 				}
 				catch (Exception skipped) { LogFile.Ignored(skipped); }
 			}
@@ -332,6 +337,11 @@ namespace DesktopPet
 
 		/// <summary>Reactions a local tool (the MCP server) may ask for.</summary>
 		public static readonly string[] ReactionNames = { "thinking", "working", "editing", "running", "reading", "searching", "waiting", "success", "error", "celebrating", "waving" };
+
+		/// <summary>"/play": animation names, separated by commas or lines (at most 10, each one short and plain).</summary>
+		internal static string[] PlayNames(string body) =>
+			(body ?? "").Split(new[] { ',', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim())
+				.Where(s => s.Length > 0 && s.Length <= 30 && s.All(c => char.IsLetterOrDigit(c) || c == ' ' || c == '_' || c == '-')).Take(10).ToArray();
 
 		public static Activity ReactionByName(string name)
 		{

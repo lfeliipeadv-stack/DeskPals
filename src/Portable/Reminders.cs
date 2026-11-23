@@ -202,7 +202,7 @@ namespace DesktopPet
 		{
 			var choices = new[]
 			{
-				new SpeechBubble.Choice(Lang.T("rem.done"), null, true),
+				new SpeechBubble.Choice(Lang.T("rem.done"), () => PetLevel.Add(PetLevel.ReminderPoints), true),
 				new SpeechBubble.Choice(Lang.T("rem.snooze"), () =>
 				{
 					r.SnoozedUntil = DateTime.Now.AddMinutes(10);
@@ -212,7 +212,7 @@ namespace DesktopPet
 			};
 			var anims = AnimationsFor(r.Text);
 			if (anims != null) Program.Mainthread?.ReactAll(anims);
-			if (automatic) SpeechBubble.Notify(r.Text, 0, choices);
+			if (automatic) { SpeechBubble.Notify(r.Text, 0, choices); NoteDelivery.Reminder(r.Text); }
 			else SpeechBubble.Say(r.Text, 0, choices);
 		}
 

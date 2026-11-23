@@ -117,6 +117,8 @@ namespace DesktopPet
 				Item(cm.Items, next == null ? Lang.T("menu.agendaNone")
 					: Lang.T("menu.agendaNext", next.Start.ToString("t", System.Globalization.CultureInfo.CurrentCulture), next.Title.Length > 40 ? next.Title.Substring(0, 39) + "…" : next.Title), null, false);
 			}
+			// DeskPals Weather: clear what piles up on the windows (the snow, the leaves, the blossom), only while it does
+			if (WeatherExtension.Piling is string pile) Item(cm.Items, WeatherExtension.ClearText(pile), () => WeatherExtension.ClearSnow(pet));
 			Item(cm.Items, Lang.T("menu.mood"), Mood.Ask);
 			var mon = Item(cm.Items, Lang.T("menu.monitor"), () => PcMonitor.Enabled = !PcMonitor.Enabled);
 			mon.Checked = PcMonitor.Enabled;

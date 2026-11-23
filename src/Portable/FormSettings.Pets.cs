@@ -40,6 +40,32 @@ namespace DesktopPet
 				("morcego_vampiro", "color.red",    Color.FromArgb(180, 32, 44)),
 				("morcego_frutas",  "color.orange", Color.FromArgb(224, 148, 68)),
 			}),
+			// the cats of the original gallery: the white Neko and its pink, yellow and black (Mimiko) colors
+			("Neko", new[]
+			{
+				("neko",        "color.white",  Color.FromArgb(236, 236, 240)),
+				("pink_neko",   "color.pink",   Color.FromArgb(242, 122, 181)),
+				("yellow_neko", "color.yellow", Color.FromArgb(242, 201, 76)),
+				("mimiko",      "color.black",  Color.FromArgb(58, 58, 64)),
+			}),
+			("Fox", new[]
+			{
+				("fox",      "color.orange", Color.FromArgb(240, 146, 58)),
+				("pink_fox", "color.pink",   Color.FromArgb(242, 122, 181)),
+			}),
+			// versions of one pet rather than colors ("variant." keys: the card says versions)
+			("Ano Nym", new[]
+			{
+				("ano",         "variant.active", Color.FromArgb(214, 64, 64)),
+				("ano_calm",    "variant.calm",   Color.FromArgb(90, 140, 220)),
+				("ano_xl",      "variant.xl",     Color.FromArgb(170, 40, 40)),
+				("ano_xl_calm", "variant.xlCalm", Color.FromArgb(60, 100, 180)),
+			}),
+			("Jerma985", new[]
+			{
+				("jerma",         "variant.normal",  Color.FromArgb(120, 150, 90)),
+				("jerma_compact", "variant.compact", Color.FromArgb(160, 190, 120)),
+			}),
 		};
 
 		// ------------------------------------------------------------------ "New" badge
@@ -111,6 +137,16 @@ namespace DesktopPet
 		}
 
 		private bool loadingPets;
+
+		/// <summary>The repositories the gallery reads; when they changed, the gallery is read again.</summary>
+		public void OpenSources()
+		{
+			using (var d = new FormGallerySources())
+			{
+				d.ShowDialog(this);
+				if (d.Changed) ReloadPets();
+			}
+		}
 
 		/// <summary>Fetch the gallery again (the "Try again" of the no-internet notice).</summary>
 		public async void ReloadPets()
@@ -203,10 +239,17 @@ namespace DesktopPet
 		/// </summary>
 		private void ForgetRemovedPets(HashSet<string> listed)
 		{
+			var answered = OptionsGit.FetchedSources ?? new List<string>();
+			string official = GallerySources.Official.Key;
 			foreach (var folder in PetStore.Folders())
 			{
 				if (listed.Contains(folder) || BuiltInPets.IsBuiltIn(folder)) continue;
 				if (folder.StartsWith(PetStore.LocalPrefix, StringComparison.OrdinalIgnoreCase)) continue;   // made on this computer
+				// only when its own source answered and no longer lists it: a source turned off, removed or offline
+				// keeps its pets on this computer (they show as "not in the gallery")
+				string from = PetStore.SourceKey(folder);
+				if (from.Length == 0) from = official;
+				if (!answered.Contains(from, StringComparer.OrdinalIgnoreCase)) { AddLocalPet(folder); continue; }
 				if (string.Equals(folder, petsView.CurrentPet, StringComparison.OrdinalIgnoreCase)) { AddLocalPet(folder); continue; }
 				try { PetStore.Delete(folder); } catch (Exception skipped) { LogFile.Ignored(skipped); }
 			}
@@ -290,6 +333,7 @@ namespace DesktopPet
 					|| xml.DocumentElement.SelectSingleNode("*[local-name()='animations']") == null)
 					throw new System.IO.InvalidDataException(Lang.T("pets.errNotPet"));
 				PetStore.Save(pet.folder, xml.OuterXml, pet.lastupdate ?? "");
+				PetStore.SaveSource(pet.folder, (pet.Source ?? OptionsGit.SourceOf(pet.folder)).Key);
 				pet.Detail = xml;                           // real counts for the detail panel
 				if (card != pet && card.folder == pet.folder) card.SelectVariant(pet);   // the card still shows this color
 				MarkSeen(pet);
@@ -341,28 +385,10 @@ namespace DesktopPet
 			}
 		}
 
-		/// <summary>
-		/// The Pet Editor: next to DesktopPet.exe (installed together), in a developer build the one of the repository,
-		/// otherwise the copy downloaded from the latest release into the user's folder (downloaded now if missing).
-		/// </summary>
+		/// <summary>The Pet Editor: opened when it is on this computer, otherwise the user is asked whether to download it.</summary>
 		private async void OpenPetEditor()
 		{
-			string here = AppContext.BaseDirectory;
-			var candidates = new List<string> { System.IO.Path.Combine(here, Updater.EditorAsset) };
-			var dir = new System.IO.DirectoryInfo(here);
-			for (int i = 0; i < 6 && dir != null; i++, dir = dir.Parent)
-				candidates.Add(System.IO.Path.Combine(dir.FullName, "editor", "bin", "Release", "net10.0-windows", "win-x64", Updater.EditorAsset));
-			string exe = candidates.FirstOrDefault(System.IO.File.Exists);
-			if (exe == null)
-			{
-				StatusText = Lang.T("opt.editor.downloading");
-				try { exe = await Updater.GetEditorAsync(); }
-				catch (Exception ex) { StatusText = Lang.T("opt.editor.downloadFail", ex.Message); return; }
-				if (exe == null) { StatusText = Lang.T("opt.editor.missing"); return; }
-				StatusText = "";
-			}
-			try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(exe) { UseShellExecute = true, WorkingDirectory = System.IO.Path.GetDirectoryName(exe) }); }
-			catch (Exception ex) { StatusText = ex.Message; }
+			await PetEditorApp.OpenAsync(this, null, text => StatusText = text);
 		}
 
 		/// <summary>Bring the pets of an exported file to this computer.</summary>

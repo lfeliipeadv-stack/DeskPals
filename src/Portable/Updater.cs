@@ -48,6 +48,8 @@ namespace DesktopPet
             public Version Version;
             public string Notes = "";
             public Dictionary<string, string> Assets = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            /// <summary>Size in bytes of each asset (0 when GitHub did not say).</summary>
+            public Dictionary<string, long> Sizes = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>Version of the running application (major.minor.build).</summary>
@@ -58,6 +60,22 @@ namespace DesktopPet
                 var v = Assembly.GetEntryAssembly()?.GetName().Version ?? new Version(0, 0, 0);
                 return new Version(v.Major, v.Minor, Math.Max(0, v.Build));
             }
+        }
+
+        /// <summary>
+        /// The builds made while the program was being written were numbered 2.x (2.0 to 2.8); the first public version
+        /// started again at 1.0. Those 2.x builds are older than any 1.x release. When the public numbering grows, it goes
+        /// from 1.x straight to 3.0, so a 2.x always means one of those old builds.
+        /// </summary>
+        internal static bool OldNumbering(Version v) => v != null && v.Major == 2;
+
+        /// <summary>True when <paramref name="release"/> is newer than <paramref name="current"/> (the running version by default).</summary>
+        internal static bool IsNewer(Version release, Version current = null)
+        {
+            current ??= CurrentVersion;
+            if (release == null) return false;
+            if (OldNumbering(current) != OldNumbering(release)) return OldNumbering(current);
+            return release > current;
         }
 
         /// <summary>"v2.1.0", "2.1", "release-2.1.0" → 2.1.0. Returns null if there is no version in the text.</summary>
@@ -82,7 +100,11 @@ namespace DesktopPet
                 };
                 if (root.TryGetProperty("assets", out var assets))
                     foreach (var asset in assets.EnumerateArray())
-                        release.Assets[asset.GetProperty("name").GetString()] = asset.GetProperty("browser_download_url").GetString();
+                    {
+                        string name = asset.GetProperty("name").GetString();
+                        release.Assets[name] = asset.GetProperty("browser_download_url").GetString();
+                        release.Sizes[name] = asset.TryGetProperty("size", out var size) && size.TryGetInt64(out long n) ? n : 0;
+                    }
                 return release.Version == null ? null : release;
             }
         }
@@ -129,7 +151,7 @@ namespace DesktopPet
             try
             {
                 var release = await GetLatestAsync();
-                if (release == null || release.Version <= CurrentVersion)
+                if (release == null || !IsNewer(release.Version))
                 {
                     if (!silent) PetMessage.Show(owner, Lang.T("upd.upToDate", CurrentVersion.ToString(3)));
                     return;
@@ -239,7 +261,7 @@ namespace DesktopPet
                 string versionFile = Path.Combine(StageDir, "version.txt");
                 if (!File.Exists(versionFile)) return;
                 var v = ParseTag(File.ReadAllText(versionFile));
-                if (v == null || v <= CurrentVersion || !File.Exists(Path.Combine(StageDir, "DesktopPet.exe"))) { Directory.Delete(StageDir, true); return; }
+                if (v == null || !IsNewer(v) || !File.Exists(Path.Combine(StageDir, "DesktopPet.exe"))) { Directory.Delete(StageDir, true); return; }
                 string notes = Path.Combine(StageDir, "notes.txt");
                 Staged = new Release { Version = v, Notes = File.Exists(notes) ? File.ReadAllText(notes) : "" };
             }
@@ -321,7 +343,7 @@ namespace DesktopPet
             {
                 var release = await GetLatestAsync();
                 LastCheck = DateTime.Now;
-                if (release == null || release.Version <= CurrentVersion || !release.Assets.ContainsKey(ExeAsset) || !release.Assets.ContainsKey(SumsAsset)) return;
+                if (release == null || !IsNewer(release.Version) || !release.Assets.ContainsKey(ExeAsset) || !release.Assets.ContainsKey(SumsAsset)) return;
                 Available = release;
                 // in the background: downloaded now, installed when the program closes
                 if (Silent)
@@ -501,6 +523,23 @@ namespace DesktopPet
             {
                 return EditorPath;   // offline: the copy already here still works
             }
+        }
+
+        /// <summary>An asset of a release (an extension), downloaded, checked against SHA256SUMS and saved here.</summary>
+        public static async Task GetAssetAsync(Release release, string asset, string path)
+        {
+            var sums = ParseSums(await http.GetStringAsync(release.Assets[SumsAsset]));
+            byte[] bytes = await DownloadVerifiedAsync(release, asset, sums);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllBytes(path, bytes);
+        }
+
+        /// <summary>The SHA-256 of an asset as the release's SHA256SUMS gives it (null when it is not there).</summary>
+        public static async Task<string> AssetHashAsync(Release release, string asset)
+        {
+            if (release == null || !release.Assets.ContainsKey(SumsAsset)) return null;
+            var sums = ParseSums(await http.GetStringAsync(release.Assets[SumsAsset]));
+            return sums.TryGetValue(asset, out var hash) ? hash : null;
         }
 
         private static async Task<byte[]> DownloadVerifiedAsync(Release release, string name, Dictionary<string, string> sums)

@@ -1,0 +1,12 @@
+{
+  "id": "musica",
+  "name": { "pt": "Hora da música", "en": "Music time", "es": "Hora de la música" },
+  "description": { "pt": "Quando o Spotify vem para a frente, o pet dança.", "en": "When Spotify comes to the front, the pet dances.", "es": "Cuando Spotify pasa al frente, la mascota baila." },
+  "author": "Luan Felipe",
+  "version": "1.0",
+  "emoji": "🎶",
+  "rules": [
+    { "when": { "app": "spotify" }, "play": ["dance", "music", "happy"],
+      "say": { "pt": ["Solta o som! 🎶", "Essa é boa!"], "en": ["Turn it up! 🎶", "Great song!"], "es": ["¡Dale al sonido! 🎶", "¡Esa es buena!"] } }
+  ]
+}

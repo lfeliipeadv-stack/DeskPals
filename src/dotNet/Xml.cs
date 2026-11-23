@@ -443,10 +443,21 @@ namespace DesktopPet
             parsingText = parsingText.Replace("randS", iRandomSpawn.ToString(CultureInfo.InvariantCulture));
 			parsingText = parsingText.Replace("scale", Program.MyData.GetScale().ToString());
 
-			var v = dt.Compute(parsingText, "");
-			if (double.TryParse(v.ToString(), out double dv))
+			// A pet file may come from any gallery: a broken expression ("2+", "abc", "1/0") must never stop the pet.
+			// It is logged and counts as 0, like a value that is not a number.
+			object v;
+			try { v = dt.Compute(parsingText, ""); }
+			catch (Exception ex)
 			{
-				iRet = (int)dv;
+				StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.error, "Unable to compute: " + parsingText + " - " + debugInfo + " (" + ex.Message + ")");
+				return 0;
+			}
+			if (v != null && v != DBNull.Value && double.TryParse(Convert.ToString(v, CultureInfo.InvariantCulture), NumberStyles.Float, CultureInfo.InvariantCulture, out double dv)
+				&& !double.IsNaN(dv) && !double.IsInfinity(dv))
+			{
+				// a value far outside any screen (or a repeat of millions of steps) is a mistake: it is held at a sane size
+				const double Limit = 1000000;
+				iRet = (int)Math.Max(-Limit, Math.Min(Limit, dv));
 			}
 			else
 			{

@@ -28,6 +28,7 @@ namespace DesktopPet
 				(Page.Ai, "nav.ai", "\uE8BD"),                // chat
 				(Page.Plugins, "nav.plugins", "\uEA86"),      // puzzle
 				(Page.Integrations, "nav.integrations", "\uE71B"), // link
+				(Page.Extensions, "nav.extensions", "\uECAA"),   // apps
 				(Page.Application, "nav.application", "\uE713"), // settings
 				(Page.About, "nav.about", "\uE946"),          // info
 			};
@@ -58,7 +59,7 @@ namespace DesktopPet
 
 				// app logo + name
 				Theme.DrawPixelImage(g, Resources.logo, new Rectangle(24, 26, 32, 32));   // 64 px art at exactly 1/2: crisp pixels
-				Theme.DrawText(g, "desktopPet", form.fontBold, new Rectangle(68, 24, Width - 70, 20), Theme.Text, TextFormatFlags.Left | TextFormatFlags.SingleLine);
+				Theme.DrawText(g, "DeskPals", form.fontBold, new Rectangle(68, 24, Width - 70, 20), Theme.Text, TextFormatFlags.Left | TextFormatFlags.SingleLine);
 				Theme.DrawText(g, Lang.T("nav.subtitle"), form.fontSmall, new Rectangle(68, 44, Width - 70, 18), Theme.TextMuted, TextFormatFlags.Left | TextFormatFlags.SingleLine);
 
 				for (int i = 0; i < items.Length; i++)

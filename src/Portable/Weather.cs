@@ -238,6 +238,11 @@ namespace DesktopPet
 
 		static bool Rainy(int code) => (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
 
+		/// <summary>Rain, drizzle, showers or a storm (WMO code).</summary>
+		internal static bool IsRain(int code) => Rainy(code);
+		/// <summary>Snow, snow grains or snow showers (WMO code).</summary>
+		internal static bool IsSnow(int code) => (code >= 71 && code <= 77) || code == 85 || code == 86;
+
 		/// <summary>
 		/// The forecast in one or two sentences: when the rain should start (or that it rains now), a storm, and whether
 		/// tomorrow gets cooler or warmer. Empty when there is nothing worth saying.

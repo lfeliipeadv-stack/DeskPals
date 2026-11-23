@@ -1,0 +1,16 @@
+{
+  "id": "bom-dia",
+  "name": { "pt": "Bom dia e até amanhã", "en": "Good morning and see you tomorrow", "es": "Buenos días y hasta mañana" },
+  "description": { "pt": "O pet dá bom dia no começo do dia e lembra de descansar no fim do expediente.", "en": "The pet says good morning at the start of the day and reminds you to rest at the end of the workday.", "es": "La mascota da los buenos días al empezar el día y recuerda descansar al final de la jornada." },
+  "author": "Luan Felipe",
+  "version": "1.0",
+  "emoji": "☀️",
+  "rules": [
+    { "when": { "at": "09:00", "days": "weekdays" }, "play": ["wave", "hello", "happy"],
+      "say": { "pt": ["Bom dia! Bora fazer um dia bom?", "Bom dia! Um café e a gente começa ☕"], "en": ["Good morning! Ready for a good day?", "Good morning! A coffee and off we go ☕"], "es": ["¡Buenos días! ¿Hacemos un buen día?", "¡Buenos días! Un café y empezamos ☕"] } },
+    { "when": { "at": "18:00", "days": "weekdays" }, "play": ["yawn", "stretch", "wave"],
+      "say": { "pt": "Fim do expediente! Hora de descansar um pouco.", "en": "End of the workday! Time to rest a little.", "es": "¡Fin de la jornada! Hora de descansar un poco." } },
+    { "when": { "at": "17:00", "days": "fri" }, "play": ["dance", "party", "happy"],
+      "say": { "pt": "Sextou! 🎉", "en": "It's Friday! 🎉", "es": "¡Es viernes! 🎉" } }
+  ]
+}

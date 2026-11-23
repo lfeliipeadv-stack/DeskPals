@@ -130,7 +130,7 @@ namespace DesktopPet
 			}
 			catch (Exception ex)
 			{
-				return ToolText(id, "The desktop pet is not listening (" + ex.Message + "). Open desktopPet and turn on Settings → Extras → \"React to Claude Code\".", true);
+				return ToolText(id, "The desktop pet is not listening (" + ex.Message + "). Open DeskPals and turn on Settings → Extras → \"React to Claude Code\".", true);
 			}
 		}
 

@@ -108,6 +108,13 @@ namespace DesktopPet
 			await TryAsync("gsheep abduction", GSheepAbduction);
 			Try("picker all pets", PickerAllPets);
 			Try("sounds all pets", SoundsAllPets);
+			Try("pets deep", PetsDeep);
+			await TryAsync("pet safety", PetSafety);
+			await TryAsync("gallery features", GalleryFeatures);
+			await TryAsync("pet editor", PetEditorOpen);
+			await TryAsync("plugins 1.1", Plugins11);
+			await TryAsync("weather extension", WeatherExtensionTests);
+			await TryAsync("pets live", PetsLive);
 			await TryAsync("tour", Onboard);
 			await TryAsync("talking pet", TalkingPet);
 			await TryAsync("quiet time", QuietTime);

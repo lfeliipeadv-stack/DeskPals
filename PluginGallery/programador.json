@@ -1,0 +1,14 @@
+{
+  "id": "programador",
+  "name": { "pt": "Companheiro de código", "en": "Coding buddy", "es": "Compañero de código" },
+  "description": { "pt": "Quando o VS Code ou o Visual Studio vem para a frente, o pet anima a sessão de código.", "en": "When VS Code or Visual Studio comes to the front, the pet cheers the coding session.", "es": "Cuando VS Code o Visual Studio pasa al frente, la mascota anima la sesión de código." },
+  "author": "Luan Felipe",
+  "version": "1.0",
+  "emoji": "💻",
+  "rules": [
+    { "when": { "app": "code" }, "chance": 50, "play": ["laptop", "typing", "think"],
+      "say": { "pt": ["Bora codar! 💻", "Sem bugs hoje, combinado?"], "en": ["Let's code! 💻", "No bugs today, deal?"], "es": ["¡A programar! 💻", "Hoy sin bugs, ¿trato?"] } },
+    { "when": { "app": "devenv" }, "chance": 50, "play": ["laptop", "typing", "think"],
+      "say": { "pt": "Visual Studio aberto: modo foco! 💻", "en": "Visual Studio open: focus mode! 💻", "es": "Visual Studio abierto: ¡modo concentración! 💻" } }
+  ]
+}

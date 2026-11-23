@@ -258,10 +258,16 @@ namespace DesktopPet
 			Check("bubble: a pet is on screen", pet != null);
 			if (pet == null) return;
 			var before = GetForegroundWindow();
-			SpeechBubble.Say("self-test", 3);
-			await Task.Delay(300);
+			// the bubble is created at once; on a busy machine (the GitHub one) the pet may be between two lives at that
+			// moment (then the line becomes a notification), so it is said again until a bubble shows
+			SpeechBubble b = null;
+			for (int i = 0; i < 40 && b == null; i++)
+			{
+				if (i % 10 == 0) SpeechBubble.Say("self-test", 3);
+				await Task.Delay(100);
+				b = Application.OpenForms.OfType<SpeechBubble>().FirstOrDefault(x => !x.IsDisposed && x.Visible);
+			}
 			Check("bubble: the window in front stays in front", GetForegroundWindow() == before);
-			var b = Application.OpenForms.OfType<SpeechBubble>().FirstOrDefault();
 			Check("bubble: shown", b != null);
 			if (b == null) return;
 			var wa = Screen.FromControl(pet).WorkingArea;
@@ -564,7 +570,10 @@ namespace DesktopPet
 			await Task.Delay(1700);   // walking on its own (not an action that just started, which would finish first)
 			SpeechBubble.Say("parado enquanto falo", 4);
 			await Task.Delay(500);
-			Check("talk: the pet stands still while talking", pet.StillAnimation < 0 || pet.StandingStill || pet.Busy || InAir(pet), pet.CurrentAnimationName);
+			// a pet walking in from the edge of the screen stops as soon as it is wholly in (not half outside): up to 3 s
+			bool StillNow() => pet.StillAnimation < 0 || pet.StandingStill || pet.Busy || InAir(pet);
+			for (int i = 0; i < 25 && !StillNow(); i++) await Task.Delay(100);
+			Check("talk: the pet stands still while talking", StillNow(), $"{pet.CurrentAnimationName} at {pet.Bounds}, screen {Screen.FromControl(pet).WorkingArea}");
 			CloseBubbles();
 
 			// the games of the pet menu: the pet stays in place while it says the fortune / answer / joke
@@ -572,6 +581,9 @@ namespace DesktopPet
 			{
 				pet.React("walk");
 				await Task.Delay(1700);
+				// wherever it is (even walking in from the edge of the screen: the hold stops it at every step now, see
+				// FormPet.Timer1_Tick), the pet stays in place while it says it
+				await PetWalkingOnGround(pet);
 				game();
 				await Task.Delay(700);
 				var x1 = pet.Left;

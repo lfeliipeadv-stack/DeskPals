@@ -1,0 +1,44 @@
+name: Pets ao vivo
+
+# Uma vez por semana (e quando pedido): adota cada pet da galeria e toca todas as animações dele na tela, com as
+# janelas extras das cenas. Um passo que dá erro é contado (sem janela de erro) e o pet tem de voltar ao fim.
+# Leva cerca de 40 minutos, por isso não roda a cada envio (o "Build e autoteste" já lê todos os pets a cada envio).
+on:
+  schedule:
+    - cron: "0 6 * * 0"   # domingo, 6h UTC
+  workflow_dispatch:
+
+jobs:
+  live:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Compilar
+        run: dotnet build src/DesktopPet.Net.csproj -c Release --nologo
+
+      - name: Todas as animações de todos os pets
+        shell: pwsh
+        env:
+          PETS_DIR: ${{ github.workspace }}/Pets
+          PETS_LIVE: "1"
+        run: |
+          $exe = Resolve-Path "src/bin/Release/net10.0-windows/win-x64/DesktopPet.exe"
+          $result = Join-Path $env:RUNNER_TEMP "pets-live.txt"
+          $p = Start-Process $exe -ArgumentList "--selftest=$result", '--only="pets live"' -PassThru
+          if (-not $p.WaitForExit(4800000)) { $p.Kill(); throw "O teste ao vivo não terminou em 80 minutos" }
+          if (Test-Path $result) { Get-Content $result } else { throw "O teste ao vivo não gerou resultado" }
+          if ($p.ExitCode -ne 0) { throw "$($p.ExitCode) verificação(ões) falharam" }
+
+      - name: Guardar o resultado
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pets-ao-vivo
+          path: ${{ runner.temp }}/pets-live.txt
+          if-no-files-found: ignore

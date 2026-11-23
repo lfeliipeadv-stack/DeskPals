@@ -64,11 +64,11 @@ namespace DesktopPet
 			using (var key = hk.CreateSubKey(UninstallKey))
 			{
 				key.SetValue("DisplayIcon", exe);
-				key.SetValue("DisplayName", "desktopPet");
+				key.SetValue("DisplayName", "DeskPals");
 				key.SetValue("DisplayVersion", version ?? "");
 				key.SetValue("InstallDate", DateTime.Now.ToString("yyyyMMdd"));
 				key.SetValue("InstallLocation", Path.GetDirectoryName(exe));
-				key.SetValue("Publisher", "desktopPet");
+				key.SetValue("Publisher", "DeskPals");
 				key.SetValue("QuietUninstallString", uninstallCmd);
 				key.SetValue("UninstallString", uninstallCmd);
 				key.SetValue("URLInfoAbout", webpage);
@@ -102,7 +102,7 @@ namespace DesktopPet
 			string ask = pt
 				? "Apagar tambem seus pets, lembretes, humor, atalhos e configuracoes? [S]im / [N]ao (em 30 s: Nao) "
 				: "Also delete your pets, reminders, mood, shortcuts and settings? [Y]es / [N]o (in 30 s: No) ";
-			string bye = pt ? "O desktopPet foi desinstalado." : "desktopPet was uninstalled.";
+			string bye = pt ? "O DeskPals foi desinstalado." : "DeskPals was uninstalled.";
 			string kept = pt ? "Seus pets e configuracoes ficaram guardados: instale de novo e eles voltam." : "Your pets and settings were kept: install again and they come back.";
 			var s = new StringBuilder();
 			s.AppendLine("@echo off");

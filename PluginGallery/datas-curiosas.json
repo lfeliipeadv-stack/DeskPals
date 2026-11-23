@@ -1,0 +1,16 @@
+{
+  "id": "datas-curiosas",
+  "name": { "pt": "Datas curiosas", "en": "Fun days", "es": "Días curiosos" },
+  "description": { "pt": "O pet lembra de dias divertidos: dia do Pi, da Terra, do gato, do cachorro, do livro e outros.", "en": "The pet remembers fun days: Pi day, Earth day, cat day, dog day, book day and more.", "es": "La mascota recuerda días divertidos: el día de Pi, de la Tierra, del gato, del perro, del libro y más." },
+  "author": "Luan Felipe",
+  "version": "1.0",
+  "emoji": "📅",
+  "rules": [
+    { "when": { "date": "03-14" }, "play": ["think", "happy"], "say": { "pt": "Hoje é o dia do Pi: 3,14159… 🥧", "en": "Today is Pi day: 3.14159… 🥧", "es": "Hoy es el día de Pi: 3,14159… 🥧" } },
+    { "when": { "date": "04-22" }, "play": ["happy", "wave"], "say": { "pt": "Dia da Terra! Cuide do nosso planeta 🌍", "en": "Earth day! Take care of our planet 🌍", "es": "¡Día de la Tierra! Cuida nuestro planeta 🌍" } },
+    { "when": { "date": "04-23" }, "play": ["read", "happy"], "say": { "pt": "Dia mundial do livro: que tal ler um pouco hoje? 📚", "en": "World book day: how about reading a little today? 📚", "es": "Día del libro: ¿y si lees un poco hoy? 📚" } },
+    { "when": { "date": "08-08" }, "play": ["happy", "love"], "say": { "pt": "Dia internacional do gato! 🐱", "en": "International cat day! 🐱", "es": "¡Día internacional del gato! 🐱" } },
+    { "when": { "date": "08-26" }, "play": ["happy", "love"], "say": { "pt": "Dia do cachorro! 🐶", "en": "Dog day! 🐶", "es": "¡Día del perro! 🐶" } },
+    { "when": { "date": "10-01" }, "play": ["coffee", "happy"], "say": { "pt": "Dia internacional do café ☕", "en": "International coffee day ☕", "es": "Día internacional del café ☕" } }
+  ]
+}

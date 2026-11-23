@@ -22,6 +22,18 @@ namespace DesktopPet
 
 			string dir = Environment.GetEnvironmentVariable("PETS_DIR");
 			if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir)) { lines.Add("SKIP  sounds all pets: PETS_DIR not set"); return; }
+			// a computer without any sound device (the GitHub build machine) opens no sound at all: nothing to check there
+			var probe = Directory.GetDirectories(dir).Select(d => Path.Combine(d, "animations.xml")).Where(File.Exists)
+				.Select(f => Regex.Match(File.ReadAllText(f), @"<sound animationid=""\d+""[\s\S]*?<base64>\s*(?:<!\[CDATA\[)?\s*([^<\]]{2000,})"))
+				.FirstOrDefault(m => m.Success);
+			if (probe != null)
+			{
+				string b = probe.Groups[1].Value.Trim();
+				int at = b.IndexOf(";base64,");
+				if (at > 0) b = b.Substring(at + 8);
+				string err = new TSound().Load(Convert.FromBase64String(b));
+				if (err != null) { lines.Add("SKIP  sounds all pets: this computer opens no sound (" + err + ")"); return; }
+			}
 			int total = 0;
 			foreach (var folder in Directory.GetDirectories(dir).OrderBy(d => d))
 			{

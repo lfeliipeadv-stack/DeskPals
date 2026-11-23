@@ -111,7 +111,12 @@ namespace DesktopPet
 				Head("notes.tasks");
 				tasks = new CheckedListBox { Font = fSmall, Location = new Point(Pad, y), Size = new Size(W - Pad * 2, 130), CheckOnClick = true, IntegralHeight = false, BorderStyle = BorderStyle.FixedSingle };
 				foreach (var t in Notes.Tasks) tasks.Items.Add(t.Text, t.Done);
-				tasks.ItemCheck += (s, e) => { Notes.Tasks[e.Index].Done = e.NewValue == CheckState.Checked; Save(); };
+				tasks.ItemCheck += (s, e) =>
+				{
+					bool done = e.NewValue == CheckState.Checked;
+					if (done && !Notes.Tasks[e.Index].Done) PetLevel.Add(PetLevel.TaskPoints);
+					Notes.Tasks[e.Index].Done = done; Save();
+				};
 				Controls.Add(tasks);
 				y = tasks.Bottom + 8;
 				newTask = new TextBox { Font = fSmall, Location = new Point(Pad, y), Width = W - Pad * 2 - 250, PlaceholderText = Lang.T("notes.newTask") };

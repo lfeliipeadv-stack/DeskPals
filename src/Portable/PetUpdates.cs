@@ -40,15 +40,12 @@ namespace DesktopPet
         {
             try
             {
-                string json;
-                using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(15) })
-                {
-                    client.DefaultRequestHeaders.Add("User-Agent", "DesktopPet");
-                    json = await client.GetStringAsync(OptionsGit.BaseGitUrl + "pets.json");
-                }
-                gallery = JsonText.Deserialize<OptionsPets>(json).pets ?? new List<OptionsPet>();
+                // every source turned on (see GallerySources); nothing answered: offline, try again later
+                var pets = await OptionsGit.LoadLists();
+                if (!OptionsGit.Online) return;
+                gallery = pets;
             }
-            catch (Exception) { return; }   // offline: try again later
+            catch (Exception) { return; }
             Recount(notify);
         }
 

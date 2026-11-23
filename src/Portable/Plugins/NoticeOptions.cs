@@ -61,7 +61,7 @@ namespace DesktopPet
 		public static bool ToToast(string text)
 		{
 			if (!HideHotkey.Hidden || FullScreenWatch.Active || InQuietHours || !ToastsWhenHidden) return false;
-			ProcessIcon.Current?.Notify(Program.Mainthread?.CurrentHeader?.Petname ?? "desktopPet", text, () => HideHotkey.SetHidden(false));
+			ProcessIcon.Current?.Notify(Program.Mainthread?.CurrentHeader?.Petname ?? "DeskPals", text, () => HideHotkey.SetHidden(false));
 			return true;
 		}
 	}

@@ -68,6 +68,27 @@ namespace DesktopPet
 			if (System.IO.Directory.Exists(dir)) System.IO.Directory.Delete(dir, true);
 		}
 
+		/// <summary>
+		/// The gallery source a downloaded pet came from ("owner/repo", see <see cref="GallerySource.Key"/>), kept next to
+		/// it: a pet leaves the computer only when its own source says it left, never because a source was turned off.
+		/// Empty for pets downloaded before there were sources (they came from the official gallery).
+		/// </summary>
+		public static string SourceKey(string folder)
+		{
+			try
+			{
+				string p = System.IO.Path.Combine(Dir(folder), "source.txt");
+				return System.IO.File.Exists(p) ? System.IO.File.ReadAllText(p).Trim() : "";
+			}
+			catch (Exception) { return ""; }
+		}
+
+		public static void SaveSource(string folder, string key)
+		{
+			try { System.IO.File.WriteAllText(System.IO.Path.Combine(Dir(folder), "source.txt"), key ?? ""); }
+			catch (Exception skipped) { LogFile.Ignored(skipped); }
+		}
+
 		public static void Save(string folder, string xml, string version)
 		{
 			string dir = Dir(folder);

@@ -1,0 +1,14 @@
+{
+  "id": "agua-e-postura",
+  "name": { "pt": "Água e postura", "en": "Water and posture", "es": "Agua y postura" },
+  "description": { "pt": "De hora em hora, no horário de trabalho, uma dica rápida: beber água, ajeitar a postura, piscar os olhos.", "en": "Every hour during working hours, a quick tip: drink water, sit up straight, blink your eyes.", "es": "Cada hora, en horario de trabajo, un consejo rápido: beber agua, enderezar la postura, parpadear." },
+  "author": "Luan Felipe",
+  "version": "1.0",
+  "emoji": "💧",
+  "rules": [
+    { "when": { "every": 60, "between": "09:00-18:00" }, "play": ["drink", "stretch", "look around"],
+      "say": { "pt": ["Um gole de água? 💧", "Costas retas e ombros relaxados!", "Olha para longe por 20 segundos 👀", "Que tal levantar e esticar as pernas?"],
+               "en": ["A sip of water? 💧", "Straight back, relaxed shoulders!", "Look far away for 20 seconds 👀", "How about standing up and stretching your legs?"],
+               "es": ["¿Un sorbo de agua? 💧", "¡Espalda recta y hombros relajados!", "Mira a lo lejos 20 segundos 👀", "¿Y si te levantas y estiras las piernas?"] } }
+  ]
+}

@@ -34,7 +34,7 @@ namespace DesktopPet
 			var pet = MainPet();
 			if (pet == null)
 			{
-				ProcessIcon.Current?.Notify(Program.Mainthread?.CurrentHeader?.Petname ?? "desktopPet", text, null);
+				ProcessIcon.Current?.Notify(Program.Mainthread?.CurrentHeader?.Petname ?? "DeskPals", text, null);
 				return;
 			}
 			if (current != null && !current.IsDisposed) current.Close();

@@ -111,6 +111,8 @@ namespace DesktopPet
 			{
 				Completed++;
 				DayStats.Add("focusMin", FocusMinutes);
+				PetLevel.Add(PetLevel.FocusPoints);
+				CommunityPlugins.Event("focusDone");
 				bool longBreak = Completed % 4 == 0;
 				Begin(longBreak ? Phase.LongBreak : Phase.ShortBreak, longBreak ? LongBreakMinutes : BreakMinutes);
 				SpeechBubble.Say(Lang.T(longBreak ? "pomo.longBreak" : "pomo.break", longBreak ? LongBreakMinutes : BreakMinutes), 0,

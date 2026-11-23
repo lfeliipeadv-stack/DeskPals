@@ -1,0 +1,22 @@
+{
+  "plugins": [
+    { "id": "bom-dia", "file": "bom-dia.json", "emoji": "☀️", "author": "Luan Felipe", "version": "1.0",
+      "name": { "pt": "Bom dia e até amanhã", "en": "Good morning and see you tomorrow", "es": "Buenos días y hasta mañana" },
+      "description": { "pt": "Bom dia no começo do dia, descanso no fim do expediente, e sextou!", "en": "Good morning at the start of the day, rest at the end, and Friday!", "es": "Buenos días al empezar, descanso al final, ¡y viernes!" } },
+    { "id": "agua-e-postura", "file": "agua-e-postura.json", "emoji": "💧", "author": "Luan Felipe", "version": "1.0",
+      "name": { "pt": "Água e postura", "en": "Water and posture", "es": "Agua y postura" },
+      "description": { "pt": "De hora em hora, no horário de trabalho, uma dica rápida de saúde.", "en": "Every hour during working hours, a quick health tip.", "es": "Cada hora, en horario de trabajo, un consejo rápido de salud." } },
+    { "id": "musica", "file": "musica.json", "emoji": "🎶", "author": "Luan Felipe", "version": "1.0",
+      "name": { "pt": "Hora da música", "en": "Music time", "es": "Hora de la música" },
+      "description": { "pt": "Quando o Spotify vem para a frente, o pet dança.", "en": "When Spotify comes to the front, the pet dances.", "es": "Cuando Spotify pasa al frente, la mascota baila." } },
+    { "id": "programador", "file": "programador.json", "emoji": "💻", "author": "Luan Felipe", "version": "1.0",
+      "name": { "pt": "Companheiro de código", "en": "Coding buddy", "es": "Compañero de código" },
+      "description": { "pt": "Anima a sessão quando o VS Code ou o Visual Studio vem para a frente.", "en": "Cheers you on when VS Code or Visual Studio comes to the front.", "es": "Te anima cuando VS Code o Visual Studio pasa al frente." } },
+    { "id": "foco-comemorado", "file": "foco-comemorado.json", "emoji": "🎊", "author": "Luan Felipe", "version": "1.0",
+      "name": { "pt": "Foco comemorado", "en": "Focus celebrated", "es": "Concentración celebrada" },
+      "description": { "pt": "Confete na tela a cada Pomodoro terminado.", "en": "Confetti on the screen for every finished Pomodoro.", "es": "Confeti en la pantalla por cada Pomodoro terminado." } },
+    { "id": "datas-curiosas", "file": "datas-curiosas.json", "emoji": "📅", "author": "Luan Felipe", "version": "1.0",
+      "name": { "pt": "Datas curiosas", "en": "Fun days", "es": "Días curiosos" },
+      "description": { "pt": "Dia do Pi, da Terra, do gato, do cachorro, do livro, do café…", "en": "Pi day, Earth day, cat day, dog day, book day, coffee day…", "es": "Día de Pi, de la Tierra, del gato, del perro, del libro, del café…" } }
+  ]
+}

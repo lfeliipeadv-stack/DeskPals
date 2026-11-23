@@ -110,6 +110,13 @@ namespace DesktopPet
 		{
 			string dir = Environment.GetEnvironmentVariable("PETS_DIR");
 			if (string.IsNullOrEmpty(dir) || !System.IO.Directory.Exists(dir)) { lines.Add("SKIP  picker all pets: PETS_DIR not set"); return; }
+			var running = Animations.Xml;   // "new Animations" below takes it: the pet on the screen gets it back
+			try { PickerAllPetsIn(dir); }
+			finally { Animations.Xml = running; }
+		}
+
+		static void PickerAllPetsIn(string dir)
+		{
 			foreach (var folder in System.IO.Directory.GetDirectories(dir).OrderBy(d => d))
 			{
 				string file = System.IO.Path.Combine(folder, "animations.xml");

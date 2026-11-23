@@ -1,0 +1,11 @@
+{
+  "id": "foco-comemorado",
+  "name": { "pt": "Foco comemorado", "en": "Focus celebrated", "es": "Concentración celebrada" },
+  "description": { "pt": "Cada Pomodoro terminado ganha confete na tela. Precisa do plugin Foco (Pomodoro).", "en": "Every finished Pomodoro gets confetti on the screen. Needs the Focus (Pomodoro) plugin.", "es": "Cada Pomodoro terminado tiene confeti en la pantalla. Necesita el plugin Concentración (Pomodoro)." },
+  "author": "Luan Felipe",
+  "version": "1.0",
+  "emoji": "🎊",
+  "rules": [
+    { "when": { "event": "focusDone" }, "effect": "confetti", "play": ["cheer", "party", "happy"] }
+  ]
+}

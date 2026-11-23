@@ -21,7 +21,7 @@ namespace DesktopPet
 	{
 		/// <summary>Pages of the window (sidebar entries).</summary>
 		/// <remarks>Behaviour now lives in Application (Settings) and Extras in Plugins; the names stay for old links.</remarks>
-		public enum Page { Pets, Behaviour, Application, About, Reminders, Extras, Ai, Home, Plugins, Integrations }
+		public enum Page { Pets, Behaviour, Application, About, Reminders, Extras, Ai, Home, Plugins, Integrations, Extensions }
 
 		private static FormSettings openInstance;
 
@@ -58,6 +58,7 @@ namespace DesktopPet
 		private readonly RemindersView remindersView;
 		private readonly HomeView homeView;
 		private readonly CardsView pluginsView;
+		private readonly CardsView extensionsView;
 		private readonly CardsView integrationsView;
 		private readonly OptionsView aiView;
 
@@ -148,6 +149,7 @@ namespace DesktopPet
 			homeView = new HomeView(this) { Dock = DockStyle.Fill };
 			pluginsView = new CardsView(this, BuildPlugins, "day", "care", "fun", "pc") { Dock = DockStyle.Fill };
 			integrationsView = new CardsView(this, BuildIntegrations) { Dock = DockStyle.Fill };
+			extensionsView = new CardsView(this, BuildExtensions) { Dock = DockStyle.Fill };
 			aiView = new OptionsView(this) { Dock = DockStyle.Fill };
 			applicationView.AddHeader("set.petSection");
 			BuildBehaviourOptions();
@@ -204,7 +206,7 @@ namespace DesktopPet
 			header.BackColor = Theme.Background; content.BackColor = Theme.Background;
 			headerTitle.ForeColor = Theme.Text; headerSubtitle.ForeColor = Theme.TextMuted;
 			searchField.Recolor();
-			foreach (Control c in new Control[] { sidebar, petsView, applicationView, aboutView, remindersView, aiView, homeView, pluginsView, integrationsView })
+			foreach (Control c in new Control[] { sidebar, petsView, applicationView, aboutView, remindersView, aiView, homeView, pluginsView, integrationsView, extensionsView })
 			{
 				c.BackColor = Theme.Background;
 				c.Invalidate();
@@ -222,7 +224,7 @@ namespace DesktopPet
 			searchBox.PlaceholderText = Lang.T("pets.search");
 			StatusText = Lang.T("status.available", WebPets.pets.Count);
 			SelectPage(page);
-			foreach (Control c in new Control[] { sidebar, petsView, applicationView, aboutView, remindersView, aiView, homeView, pluginsView, integrationsView }) c.Invalidate();
+			foreach (Control c in new Control[] { sidebar, petsView, applicationView, aboutView, remindersView, aiView, homeView, pluginsView, integrationsView, extensionsView }) c.Invalidate();
 		}
 
 		private void CreateFonts()
@@ -286,6 +288,12 @@ namespace DesktopPet
 					headerSubtitle.Text = Lang.T("page.plugins.subtitle");
 					pluginsView.Reload();
 					content.Controls.Add(pluginsView);
+					break;
+				case Page.Extensions:
+					headerTitle.Text = Lang.T("page.extensions.title");
+					headerSubtitle.Text = Lang.T("page.extensions.subtitle");
+					extensionsView.Reload();
+					content.Controls.Add(extensionsView);
 					break;
 				case Page.Integrations:
 					headerTitle.Text = Lang.T("page.integrations.title");

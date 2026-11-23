@@ -13,6 +13,22 @@ namespace DesktopPet
 	// The self-test, part: chat. Check, Try and the list of tests are in SelfTest.cs.
 	internal static partial class SelfTest
 	{
+		/// <summary>True once the mouse has not moved for <paramref name="quiet"/>; false if that does not happen within <paramref name="limit"/>.</summary>
+		static async Task<bool> MouseStill(TimeSpan quiet, TimeSpan limit)
+		{
+			var clock = System.Diagnostics.Stopwatch.StartNew();
+			var still = System.Diagnostics.Stopwatch.StartNew();
+			var at = Cursor.Position;
+			while (clock.Elapsed < limit)
+			{
+				await Task.Delay(100);
+				var now = Cursor.Position;
+				if (now != at) { at = now; still.Restart(); }
+				else if (still.Elapsed >= quiet) return true;
+			}
+			return false;
+		}
+
 		/// <summary>
 		/// Mouse on the pet: the message and voice buttons; the message button opens the small balloon over the head,
 		/// its balloon button opens the whole conversation, and a message sent from it is answered in the pet's bubble.
@@ -22,6 +38,9 @@ namespace DesktopPet
 			foreach (var b in Application.OpenForms.OfType<SpeechBubble>().ToList()) b.Close();
 			var pet = Pet();
 			if (pet == null || !HoverAsk.Enabled) { lines.Add("SKIP  hover chat: no pet, or the buttons are turned off"); return; }
+			// the test points at the pet with the mouse: someone using the mouse now would move it away. It waits until
+			// the mouse has been still for a moment (up to 20 s), and leaves the test for later if it never is.
+			if (!await MouseStill(TimeSpan.FromSeconds(1.5), TimeSpan.FromSeconds(20))) { lines.Add("SKIP  hover chat: the mouse is being used (it never stood still for 1.5 s)"); return; }
 			var mouse = Cursor.Position;
 			for (int i = 0; i < 60 && !(pet.OnGround && Screen.FromControl(pet).WorkingArea.Contains(pet.Bounds)); i++) await Task.Delay(150);   // arriving, or in a scene below the taskbar
 			FormPet.Hold(true);   // a pet walking away cannot be pointed at
@@ -64,10 +83,12 @@ namespace DesktopPet
 				var (heard, _) = await VoiceInput.ListenWindows(null, System.Threading.CancellationToken.None);
 				Check("hover chat: the Windows recognizer answers", heard != VoiceInput.Outcome.Failed, $"{heard} in {clock.Elapsed.TotalSeconds:0.0} s {VoiceInput.LastError}");
 				// voice for the AI: the pet's own recorder opens the microphone (stopped after a moment)
+				bool noMicrophone = false;
 				using (var stop = new System.Threading.CancellationTokenSource(1500))
 				{
 					bool opened = false;
 					var (rec, _) = await VoiceRecorder.Record(() => opened = true, stop.Token);
+					noMicrophone = rec == VoiceRecorder.Result.NoMicrophone;
 					// a computer without a microphone (the GitHub build machine) has nothing to open
 					if (rec == VoiceRecorder.Result.NoMicrophone) lines.Add("SKIP  hover chat: the pet's recorder opens the microphone: no microphone on this computer");
 					else Check("hover chat: the pet's recorder opens the microphone", opened && rec == VoiceRecorder.Result.Canceled, $"{rec} {VoiceRecorder.LastError} peak {VoiceRecorder.LastPeak}");
@@ -81,8 +102,11 @@ namespace DesktopPet
 				VoiceInput.Current = VoiceInput.Mode.Ai;
 				QuickChat.Open(voice: true);
 				VoiceInput.Current = mode;
-				await Task.Delay(300);
-				Check("hover chat: the microphone button listens in the balloon", QuickChat.Current?.TestListening == true);
+				// without a microphone the listening ends at once (nothing to hear): nothing to check then
+				bool listening = false;
+				for (int i = 0; i < 15 && !listening; i++) { await Task.Delay(100); listening = QuickChat.Current?.TestListening == true; }
+				if (noMicrophone) lines.Add("SKIP  hover chat: the microphone button listens in the balloon: no microphone on this computer");
+				else Check("hover chat: the microphone button listens in the balloon", listening);
 				await Task.Delay(1500);
 				if (QuickChat.Current != null) Shot("5-ouvindo", Rectangle.Union(QuickChat.Current.Bounds, pet.Bounds));
 				for (int i = 0; i < 150 && QuickChat.Current?.TestListening == true; i++) await Task.Delay(100);

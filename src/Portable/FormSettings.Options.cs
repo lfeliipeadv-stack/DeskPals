@@ -49,6 +49,9 @@ namespace DesktopPet
 				Invalidate(true);
 			});
 
+			// where the gallery's pets come from: this repository, the original desktopPet and others the user adds
+			applicationView.AddAction("", /* package */ "opt.sources", "opt.sources.button", () => OpenSources());
+
 			// Theme: automatic (Windows), light or dark — applied at once to every window.
 			var themeModes = new[] { "auto", "light", "dark" };
 			applicationView.AddChoice("", /* color palette */ "opt.theme",

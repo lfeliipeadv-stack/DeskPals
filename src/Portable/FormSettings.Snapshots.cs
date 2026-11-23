@@ -114,6 +114,7 @@ namespace DesktopPet
 			f.Close();
 
 			// animation picker (middle-click on the pet), built from the current pet
+			var running = Animations.Xml;   // shared by every value the pet on the screen computes: given back below
 			try
 			{
 				var xml = new Xml(1);
@@ -137,6 +138,7 @@ namespace DesktopPet
 				}
 			}
 			catch (Exception ex) { StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.warning, "picker snapshot: " + ex.Message); }
+			finally { Animations.Xml = running; }
 
 			// the small windows: shortcuts, create my pet, install, a message, the text question, the whole answer
 			try

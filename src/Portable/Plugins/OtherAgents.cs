@@ -215,6 +215,7 @@ namespace DesktopPet
 			if (!Enabled) return;
 			int before = Level;
 			Program.MyData.SetSetting("AgentTasks", Tasks + 1);
+			PetLevel.Add(PetLevel.AgentPoints);
 			if (Level > before)
 			{
 				Program.Mainthread?.ReactAll("cheer", "happy", "jump", "dance");

@@ -33,6 +33,16 @@ namespace DesktopPet
         /// </summary>
         static readonly Mutex mutex2 = new Mutex(false, "eSheep_Running2");
 
+        /// <summary>
+        /// The lock of a running copy, waited for a second. One left behind by a copy that ended without letting go of it
+        /// (closed by force, or crashed) is ours now: the program opens as usual instead of saying it cannot.
+        /// </summary>
+        internal static bool Take(Mutex m)
+        {
+            try { return m.WaitOne(TimeSpan.FromSeconds(1), false); }
+            catch (AbandonedMutexException) { LogFile.Important("the previous copy ended without closing: going on"); return true; }
+        }
+
 		public static LocalData MyData = new LocalData();
 
 
@@ -145,12 +155,12 @@ namespace DesktopPet
             // shutting down
             try
             {
-                if (!mutex.WaitOne(TimeSpan.FromSeconds(1), false))
+                if (!Take(mutex))
                 {
                     iMutexIndex = 1;
                     try
                     {
-                        if (!mutex2.WaitOne(TimeSpan.FromSeconds(1), false))
+                        if (!Take(mutex2))
                         {
                             PetMessage.Show(Lang.T("msg.alreadyRunning"), Lang.T("msg.information"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;

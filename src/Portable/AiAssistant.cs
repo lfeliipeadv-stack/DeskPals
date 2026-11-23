@@ -91,7 +91,7 @@ namespace DesktopPet
 			http.DefaultRequestHeaders.Add("User-Agent", "DesktopPet");
 			if (!string.IsNullOrEmpty(key)) http.DefaultRequestHeaders.Add("Authorization", "Bearer " + key);
 			http.DefaultRequestHeaders.Add("HTTP-Referer", "https://github.com/lfeliipeadv-stack/Desktop-Pet");   // OpenRouter: shows the app name
-			http.DefaultRequestHeaders.Add("X-Title", "desktopPet");
+			http.DefaultRequestHeaders.Add("X-Title", "DeskPals");
 			return http;
 		}
 

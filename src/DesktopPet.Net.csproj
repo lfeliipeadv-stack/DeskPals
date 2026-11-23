@@ -70,6 +70,12 @@
     <Compile Include="Portable\FormHelp.cs" />
     <Compile Include="Portable\FormHelp.designer.cs" />
     <Compile Include="Portable\OptionsPet.cs" />
+    <Compile Include="Portable\GallerySources.cs" />
+    <Compile Include="Portable\PetEditorApp.cs" />
+    <Compile Include="Portable\SelfTest.Editor.cs" />
+    <Compile Include="Portable\SelfTest.Plugins11.cs" />
+    <Compile Include="Portable\SelfTest.Weather.cs" />
+    <Compile Include="Portable\FormGallerySources.cs" />
     <!-- Portable\FormOptions*.cs: the Windows 95-style settings window, only for the .NET Framework build (DesktopPet_Portable.csproj); FormSettings replaces it here -->
 
     <Compile Include="Portable\Install.cs" />
@@ -111,6 +117,8 @@
     <Compile Include="Portable\SelfTest.Windows.cs" />
     <Compile Include="Portable\SelfTest.Integrations.cs" />
     <Compile Include="Portable\SelfTest.Sounds.cs" />
+    <Compile Include="Portable\SelfTest.Gallery.cs" />
+    <Compile Include="Portable\SelfTest.PetsDeep.cs" />
     <Compile Include="Portable\AgentBridge.cs" />
     <Compile Include="Portable\ClaudeHooks.cs" />
     <Compile Include="Portable\Companions.cs" />
@@ -141,6 +149,16 @@
     <Compile Include="Portable\FormSettings.Home.cs" />
     <!-- one file per plugin -->
     <Compile Include="Portable\Plugins\FullScreenWatch.cs" />
+    <Compile Include="Portable\Plugins\PetLevel.cs" />
+    <Compile Include="Portable\Plugins\PetHats.cs" />
+    <Compile Include="Portable\Plugins\Seasons.cs" />
+    <Compile Include="Portable\Plugins\ScreenEffects.cs" />
+    <Compile Include="Portable\Plugins\NoteDelivery.cs" />
+    <Compile Include="Portable\Plugins\LiveChat.cs" />
+    <Compile Include="Portable\Plugins\CommunityPlugins.cs" />
+    <Compile Include="Portable\Plugins\WindowRules.cs" />
+    <Compile Include="Portable\Plugins\WeatherExtension.cs" />
+    <Compile Include="Portable\FormCommunityPlugins.cs" />
     <Compile Include="Portable\Plugins\NoticeOptions.cs" />
     <Compile Include="Portable\Plugins\ClipboardWatch.cs" />
     <Compile Include="Portable\Plugins\OtherAgents.cs" />

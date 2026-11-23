@@ -105,7 +105,7 @@ namespace DesktopPet
 		/// <summary>
 		/// Double buffered, custom painted surface with a slim overlay scrollbar and smooth wheel scrolling.
 		/// </summary>
-		private abstract class ScrollSurface : Control
+		internal abstract class ScrollSurface : Control
 		{
 			protected const int ScrollBarWidth = 10;
 			private int contentHeight;

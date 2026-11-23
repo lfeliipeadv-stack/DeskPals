@@ -16,7 +16,7 @@ namespace DesktopPet
 		internal static List<(string name, Func<Form> make)> TestWindows() => new List<(string, Func<Form>)>
 		{
 			("win-message", () => new PetMessage(Lang.T("pets.removeConfirm", "Rex"), Lang.T("pets.remove"), MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)),
-			("win-error", () => new PetMessage(Lang.T("agenda.error", "404"), "desktopPet", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)),
+			("win-error", () => new PetMessage(Lang.T("agenda.error", "404"), "DeskPals", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)),
 			("win-prompt", () => new PromptDialog(Lang.T("weather.askCity"), "Curitiba")),
 			("win-answer", () => new AnswerWindow(Lang.T("chat.sugHelp"), Lang.T("chat.help"))),
 			("win-languages", () => new FormLanguages()),
@@ -160,7 +160,7 @@ namespace DesktopPet
 
 		public PetMessage(string text, string caption, MessageBoxButtons kind, MessageBoxIcon icon, MessageBoxDefaultButton def)
 		{
-			this.text = text ?? ""; this.caption = string.IsNullOrEmpty(caption) ? "desktopPet" : caption;
+			this.text = text ?? ""; this.caption = string.IsNullOrEmpty(caption) ? "DeskPals" : caption;
 			Text = this.caption;
 			(iconEmoji, iconBack) = icon == MessageBoxIcon.Question ? ("❓", Theme.AccentSoft)
 				: icon == MessageBoxIcon.Warning ? ("⚠️", Color.FromArgb(50, 255, 170, 0))
@@ -254,7 +254,7 @@ namespace DesktopPet
 		public PromptDialog(string question, string value)
 		{
 			this.question = question ?? "";
-			Text = "desktopPet";
+			Text = "DeskPals";
 			iconEmoji = "✏️";
 			var ok = AddButton("OK", DialogResult.OK, true);
 			AddButton(Lang.T("rem.cancel"), DialogResult.Cancel, false);

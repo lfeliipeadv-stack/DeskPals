@@ -423,8 +423,13 @@ namespace DesktopPet
         /// <summary>Pets on the screen now.</summary>
         public int PetCount => iSheeps;
 
+        /// <summary>Self-test: how many errors were logged so far, and the last one.</summary>
+        internal static int ErrorCount;
+        internal static string LastError;
+
         public static void AddDebugInfo(DEBUG_TYPE type, string text)
         {
+            if (type == DEBUG_TYPE.error) { ErrorCount++; LastError = text; }
             lock (log)
             {
                 log.Add(new LogLine { Time = DateTime.Now, Type = type, Text = text ?? "" });

@@ -486,14 +486,68 @@ namespace DesktopPet
                 {
 					AnimationStep++;
                     timer1.Enabled = true;
+                    if (!IsChildWindow)
+                    {
+                        // a bubble holds the pets: one that was walking in from the edge stops as soon as it is fully in
+                        if (Held) StopNow();
+                        RescueIfLost();
+                    }
                 }
             }
             catch(Exception ex) // if form is closed timer could continue to tick (why?)
             {
                 LogFile.Important("pet step failed: " + ex);
+                StepErrors++;
+                LastStepError = (CurrentAnimation.Name ?? "") + " (" + CurrentAnimation.ID + "): " + ex.GetType().Name + " " + ex.Message;
+                // the self-test that plays every animation of every pet counts the errors instead of stopping at a window
+                if (QuietStepErrors) { if (!IsDisposed) { AnimationStep++; timer1.Enabled = true; } return; }
                 FatalStep(ex);
             }
         }
+
+        /// <summary>Since when the pet is (almost) out of every screen; MinValue while it can be seen.</summary>
+        DateTime lostSince = DateTime.MinValue;
+        /// <summary>How long a pet may stay out of every screen before it comes back by itself.</summary>
+        internal static double LostSeconds = 8;
+        /// <summary>Self-test: how many times a lost pet was brought back.</summary>
+        internal static int Rescued;
+
+        /// <summary>
+        /// "My pet is gone": a walk off the screen cut by another animation (picked in the menu at that very moment), a
+        /// scene of another gallery that sinks under the taskbar and never comes up… A pet of which less than a tenth can
+        /// be seen on any screen for <see cref="LostSeconds"/> comes back the way it arrives (a new spawn). Walking off the
+        /// edge, arriving from the sky or diving for a moment take less than that.
+        /// </summary>
+        void RescueIfLost()
+        {
+            if (IsDragging || IsTossing || !Visible || Opacity <= 0.01 || CurrentAnimation.ID == Animations.AnimationKill)
+            {
+                lostSince = DateTime.MinValue;
+                return;
+            }
+            var bounds = new Rectangle(Left, Top, Width, Height);
+            long seen = 0;
+            foreach (var screen in Screen.AllScreens)
+            {
+                var r = Rectangle.Intersect(bounds, screen.Bounds);
+                if (r.Width > 0 && r.Height > 0) seen += (long)r.Width * r.Height;
+            }
+            // the whole picture, not the window: a pet walking out has its window cut to what is still on the screen
+            long whole = (long)Math.Max(1, pictureBox1.Width) * Math.Max(1, pictureBox1.Height);
+            if (seen * 10 >= whole) { lostSince = DateTime.MinValue; return; }
+            if (lostSince == DateTime.MinValue) { lostSince = DateTime.Now; return; }
+            if ((DateTime.Now - lostSince).TotalSeconds < LostSeconds) return;
+            lostSince = DateTime.MinValue;
+            Rescued++;
+            LogFile.Important($"pet out of the screen at {bounds} ({CurrentAnimation.Name}) for {LostSeconds:0} s: it comes back");
+            IsLeaving = false;
+            Play(false);
+        }
+
+        /// <summary>Self-test: steps that failed (and the last one), and no error window while it plays every animation.</summary>
+        internal static int StepErrors;
+        internal static string LastStepError;
+        internal static bool QuietStepErrors;
 
         void FatalStep(Exception ex)
             {
@@ -1306,6 +1360,8 @@ namespace DesktopPet
                 if (hWnd == Handle) return true;    // form itself, don't parse
                 // its own props (the bathtub it dives into, a balloon…) are part of the scene, not a floor to land on
                 if (own.Contains(hWnd)) return true;
+                // a program the user keeps the pets away from (Plugins > Programs the pets avoid)
+                if (WindowRules.Ignored(hWnd)) return true;
 
                     // Enumerate only visible windows
                 if (NativeMethods.IsWindowVisible(hWnd))
@@ -1460,6 +1516,7 @@ namespace DesktopPet
                 // Enumerate only visible windows
                 if (NativeMethods.IsWindowVisible(hWnd))
                 {
+                    if (WindowRules.Ignored(hWnd)) return true;   // a program the pets stay away from
                     sTitle.Clear();
                     NativeMethods.GetWindowText(hWnd, sTitle, 128);
 
@@ -1688,6 +1745,8 @@ namespace DesktopPet
 
         /// <summary>Self-test: play an animation now.</summary>
         internal void TestPlay(int id) { SetNewAnimation(id); timer1.Interval = 1; timer1.Enabled = true; }
+        /// <summary>Self-test: put the pet somewhere (for example out of every screen) as its own movement would.</summary>
+        internal void TestPlaceAt(int x, int y) { PositionX = x; PositionY = y; CommitLogicalPosition(); }
 
         /// <summary>Self-test: how many times this pet (re)spawned.</summary>
         internal int SpawnCount;
@@ -1695,6 +1754,8 @@ namespace DesktopPet
         internal void TestFace(bool left) { if (left != IsMovingLeft) { IsMovingLeft = left; spritesFlipped = !spritesFlipped; } }
         /// <summary>The pet looks to the left (its drawings face left); false when it was turned to the right.</summary>
         internal bool FacingLeft => IsMovingLeft;
+        /// <summary>The picture shown now (a hat or another overlay follows the head drawn on it).</summary>
+        internal Image ShownImage => pictureBox1?.Image;
         /// <summary>Turn the pet to that side now (the frog turns towards a visitor before catching it).</summary>
         internal void Face(bool left) => TestFace(left);
         /// <summary>Self-test: the windows this pet opened (tub, balloon…) that are still on screen.</summary>

@@ -15,14 +15,33 @@ namespace DesktopPet
 		{
 			if (string.IsNullOrWhiteSpace(name)) return name;
 			int col = Lang.Current.StartsWith("pt", StringComparison.OrdinalIgnoreCase) ? 1 : Lang.Current.StartsWith("es", StringComparison.OrdinalIgnoreCase) ? 2 : 0;
-			if (col == 0) return name;
+			if (col == 0) return Readable(name);
 			if (Table.Value.TryGetValue(name.Trim(), out var t)) return t[col - 1];
 			// "look left return", "idle 1 2", "idle(3)": the known name, then what follows it
 			var (stem, suffixes, number) = Split(name);
-			if (stem == null) return name;
+			if (stem == null) return Readable(name);
 			string text = Table.Value[stem][col - 1];
 			foreach (var s in suffixes) text += " (" + Suffix[s][col - 1] + ")";
 			return number.Length > 0 ? text + " " + number : text;
+		}
+
+		/// <summary>
+		/// A name without a translation, written the way a person reads it: the technical names of pets of other
+		/// galleries ("run_dl", "Flying_Up", "walk_fallB_shootB", "jumpUp", "walk2") become "Run dl", "Flying up",
+		/// "Walk fall b shoot b", "Jump up", "Walk 2". A name that is already plain ("look around") stays as it is.
+		/// </summary>
+		public static string Readable(string name)
+		{
+			if (string.IsNullOrWhiteSpace(name)) return name;
+			string s = name.Trim();
+			bool technical = s.IndexOfAny(new[] { '_', '-' }) >= 0 || System.Text.RegularExpressions.Regex.IsMatch(s, "[a-z][A-Z]|[A-Za-z][0-9]");
+			if (!technical) return s;
+			s = System.Text.RegularExpressions.Regex.Replace(s, "([a-z])([A-Z])", "$1 $2");
+			s = System.Text.RegularExpressions.Regex.Replace(s, "([A-Za-z])([0-9])", "$1 $2");
+			s = System.Text.RegularExpressions.Regex.Replace(s.Replace('_', ' ').Replace('-', ' '), @"\s+", " ").Trim();
+			if (s.Length == 0) return name;
+			s = s.ToLowerInvariant();
+			return char.ToUpperInvariant(s[0]) + s.Substring(1);
 		}
 
 		/// <summary>True when the name has a translation (the self-test lists the ones of the gallery that do not).</summary>

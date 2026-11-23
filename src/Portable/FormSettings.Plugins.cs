@@ -359,7 +359,109 @@ namespace DesktopPet
 					Get = () => PluginSwitch.On("timer"), Set = on => { PluginSwitch.Set("timer", on); if (!on) SimpleTimer.Close(); },
 					Status = () => SimpleTimer.Active ? "⏱ " + (SimpleTimer.Finished ? Lang.T("timer.doneShort") : SimpleTimer.LeftText) : null,
 					ConfigureKey = "plug.timer.button", Configure = () => { if (!PluginSwitch.On("timer")) PluginSwitch.Set("timer", true); SimpleTimer.AskAndStart(); } },
+
+				// ---- added in 1.1
+				new Card { Id = "community", Emoji = "🧩", Key = "plug.community", Category = "fun",
+					Get = () => CommunityPlugins.Enabled, Set = on => CommunityPlugins.Enabled = on,
+					Status = () => CommunityPlugins.Installed.Count > 0 ? Lang.T("cp.count", CommunityPlugins.Installed.Count(p => CommunityPlugins.IsOn(p.Id))) : null,
+					ConfigureKey = "plugins.open", Configure = () => { using (var f = new FormCommunityPlugins()) f.ShowDialog(this); } },
+				new Card { Id = "level", Emoji = "🏆", Key = "plug.level", Category = "care",
+					Get = () => PetLevel.Enabled, Set = on => PetLevel.Enabled = on,
+					Status = () => PetLevel.Enabled ? Lang.T("level.status", PetLevel.Level, PetLevel.Points) : null,
+					Configure = () => ShowPluginOptions("plug.level.title", v =>
+					{
+						// the hats won so far (and none)
+						var won = PetHats.All.Where(h => h.Level > 0 && h.Level <= PetLevel.Level).ToList();
+						int[] values = Enumerable.Range(-1, won.Count + 1).ToArray();
+						v.AddChoice("", /* emoji */ "level.hat", () => won.FindIndex(h => h.Id == PetLevel.Hat), x => PetLevel.Hat = x < 0 ? "" : won[x].Id,
+							values, new[] { Lang.T("level.noHat") }.Concat(won.Select(h => Lang.T("hat." + h.Id))).ToArray());
+					}) },
+				new Card { Id = "seasons", Emoji = "🎄", Key = "plug.seasons", Category = "fun",
+					Get = () => Seasons.Enabled, Set = on => Seasons.Enabled = on,
+					Status = () => Seasons.HatDay(DateTime.Now) != Seasons.Day.None ? Lang.T("season.now") : null,
+					Configure = () => ShowPluginOptions("plug.seasons.title", v =>
+					{
+						v.AddToggle("", /* emoji */ "season.hats", () => Seasons.Hats, on => Seasons.Hats = on);
+						v.AddToggle("", /* sparkle */ "season.effects", () => Seasons.Effects, on => Seasons.Effects = on);
+						v.AddAction("", /* gift */ "season.birthday", "season.birthday.button", () =>
+						{
+							string text = PromptDialog.Ask(Lang.T("season.birthdayAsk"), Seasons.Birthday);
+							if (text == null) return;
+							if (text.Trim().Length == 0) { Seasons.Birthday = ""; return; }
+							var b = Seasons.ParseBirthday(text);
+							if (b == null) { PetMessage.Show(this, Lang.T("season.birthdayBad", text.Trim()), Lang.T("plug.seasons.title"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+							Seasons.Birthday = b.Value.day.ToString("00") + "/" + b.Value.month.ToString("00");
+							PetHats.Apply();
+						});
+						v.AddButtons("", /* play */ Lang.T("season.try.title"), Lang.T("season.try.desc"), null,
+							("🎄", () => Seasons.Preview(Seasons.Day.Christmas)), ("🎆", () => Seasons.Preview(Seasons.Day.NewYear)),
+							("🎭", () => Seasons.Preview(Seasons.Day.Carnival)), ("🐰", () => Seasons.Preview(Seasons.Day.Easter)),
+							("🌽", () => Seasons.Preview(Seasons.Day.Junina)), ("🎃", () => Seasons.Preview(Seasons.Day.Halloween)),
+							("🎂", () => Seasons.Preview(Seasons.Day.Birthday)));
+					}) },
+				new Card { Id = "bring", Emoji = "📬", Key = "plug.bring", Category = "day",
+					Get = () => NoteDelivery.Enabled, Set = on => NoteDelivery.Enabled = on,
+					Status = () => NoteDelivery.Open.Count > 0 ? Lang.T("bring.open", NoteDelivery.Open.Count) : null,
+					Configure = () => ShowPluginOptions("plug.bring.title", v =>
+					{
+						v.AddToggle("", /* alarm */ "bring.reminders", () => NoteDelivery.Reminders, on => NoteDelivery.Reminders = on);
+						v.AddToggle("", /* photo */ "bring.photo", () => NoteDelivery.Photo, on => NoteDelivery.Photo = on);
+						v.AddChoice("", /* clock */ "bring.hour", () => NoteDelivery.PhotoHour, x => NoteDelivery.PhotoHour = x, NoteDelivery.HourChoices, NoteDelivery.HourChoices.Select(h => h + "h").ToArray());
+						v.AddAction("", /* mail */ "bring.now", "bring.now.button", async () => await NoteDelivery.BringNow());
+					}) },
+				new Card { Id = "live", Emoji = "📺", Key = "plug.live", Category = "fun",
+					Get = () => LiveChat.Enabled, Set = on => { if (on && LiveChat.Channel.Length == 0 && !AskChannel()) return; LiveChat.Enabled = on; },
+					Status = () => LiveChat.Channel.Length == 0 ? null : "#" + LiveChat.Channel + " · " + Lang.T("live.state." + LiveChat.Now.ToString().ToLowerInvariant()),
+					Configure = () => ShowPluginOptions("plug.live.title", v =>
+					{
+						v.AddAction("", /* video */ "live.channel", "live.channel.button", () => { AskChannel(); v.Invalidate(); });
+						v.AddToggle("", /* chat */ "live.commands", () => LiveChat.Commands, on => LiveChat.Commands = on);
+						v.AddToggle("", /* heart */ "live.alerts", () => LiveChat.Alerts, on => LiveChat.Alerts = on);
+						v.AddToggle("", /* contact */ "live.names", () => LiveChat.ShowNames, on => LiveChat.ShowNames = on);
+					}) },
+				new Card { Id = "apps", Emoji = "🪟", Key = "plug.apps", Category = "pc",
+					Get = () => WindowRules.Enabled, Set = on => WindowRules.Enabled = on,
+					Status = () => WindowRules.Apps.Count > 0 ? Lang.T("apps.count", WindowRules.Apps.Count) : null,
+					ConfigureKey = "plugins.open", Configure = () => { using (var f = new FormIgnoredApps()) f.ShowDialog(this); } },
 			};
+		}
+
+		// ------------------------------------------------------------------ extensions
+
+		/// <summary>
+		/// Extensions: separate programs DeskPals downloads when asked and runs as part of itself (each with its own
+		/// license): the snow of Snowhush, which follows the local weather, and the Pet Editor.
+		/// </summary>
+		private List<Card> BuildExtensions()
+		{
+			return new List<Card>
+			{
+				// DeskPals Weather, a program of its own: its switch starts it with DeskPals, its button opens its settings
+				new Card { Id = "weather", Emoji = "🌦️", Key = "ext.snow", TitleKey = "ext.title",
+					Get = () => WeatherExtension.Enabled && WeatherExtension.IsInstalled,
+					Set = async on =>
+					{
+						if (on && !await WeatherExtension.InstallAsync(this, s => StatusText = s)) { extensionsView?.Reload(); return; }
+						WeatherExtension.Enabled = on;
+						extensionsView?.Reload();
+					},
+					Status = WeatherExtension.Status,
+					ConfigureKey = "opt.editor.button", Configure = async () => { await WeatherExtension.OpenAsync(this, s => StatusText = s); extensionsView?.Reload(); } },
+				new Card { Id = "editor", Emoji = "✏️", Key = "opt.editor",
+					Status = () => Lang.T(PetEditorApp.IsInstalled ? "ext.state.installed" : "ext.state.missing"),
+					ConfigureKey = "opt.editor.button", Configure = () => OpenPetEditor() },
+			};
+		}
+
+		/// <summary>Ask the Twitch channel; false when nothing usable was given.</summary>
+		private bool AskChannel()
+		{
+			string text = PromptDialog.Ask(Lang.T("live.channelAsk"), LiveChat.Channel.Length > 0 ? "https://www.twitch.tv/" + LiveChat.Channel : "https://www.twitch.tv/");
+			if (text == null) return false;
+			string channel = LiveChat.CleanChannel(text);
+			if (channel.Length == 0) { PetMessage.Show(this, Lang.T("live.channelBad", text.Trim()), Lang.T("plug.live.title"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return false; }
+			LiveChat.Channel = channel;
+			return true;
 		}
 
 		/// <summary>Ask the city, find it on Open-Meteo, turn the weather on.</summary>

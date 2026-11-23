@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -23,13 +23,17 @@ jobs:
       - name: Compilar
         run: dotnet build src/DesktopPet.Net.csproj -c Release --nologo
 
+      # PETS_DIR: a galeria inteira entra no autoteste (cada pet lido como o programa lê, quadros, ligações e
+      # valores das animações; os nomes no seletor; os sons; as fontes da galeria)
       - name: Autoteste
         shell: pwsh
+        env:
+          PETS_DIR: ${{ github.workspace }}/Pets
         run: |
           $exe = Resolve-Path "src/bin/Release/net10.0-windows/win-x64/DesktopPet.exe"
           $result = Join-Path $env:RUNNER_TEMP "selftest.txt"
           $p = Start-Process $exe -ArgumentList "--selftest=$result" -PassThru
-          if (-not $p.WaitForExit(300000)) { $p.Kill(); throw "O autoteste não terminou em 5 minutos" }
+          if (-not $p.WaitForExit(900000)) { $p.Kill(); throw "O autoteste não terminou em 15 minutos" }
           if (Test-Path $result) { Get-Content $result } else { throw "O autoteste não gerou resultado" }
           if ($p.ExitCode -ne 0) { throw "$($p.ExitCode) verificação(ões) falharam" }
 

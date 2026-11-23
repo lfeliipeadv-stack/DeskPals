@@ -396,6 +396,12 @@ namespace DesktopPet
 
 			// updates: on by default, nothing found while the repository is private
 			Check("updates: automatic by default", Program.MyData.GetSetting("AutoUpdate").Length > 0 || Updater.Auto);
+			// the old development builds (2.x) get the public versions (1.x, then 3.x); the normal order stays
+			Check("updates: an old 2.x build is offered 1.0.1", Updater.IsNewer(new Version(1, 0, 1), new Version(2, 8, 2)));
+			Check("updates: 1.0.1 is not offered 2.8.2", !Updater.IsNewer(new Version(2, 8, 2), new Version(1, 0, 1)));
+			Check("updates: 1.1.0 is newer than 1.0.1, not the other way", Updater.IsNewer(new Version(1, 1, 0), new Version(1, 0, 1)) && !Updater.IsNewer(new Version(1, 0, 1), new Version(1, 1, 0)));
+			Check("updates: the same version is not offered", !Updater.IsNewer(new Version(1, 0, 1), new Version(1, 0, 1)));
+			Check("updates: 3.0 is newer than an old 2.x build", Updater.IsNewer(new Version(3, 0, 0), new Version(2, 8, 2)));
 		}
 
 		/// <summary>The timer with the pet: reading the time, the panel, pause, +5 min, the end and closing.</summary>

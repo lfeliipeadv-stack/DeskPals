@@ -111,6 +111,13 @@ namespace DesktopPet
             manage.Click += (s, e) => FormSettings.ShowPage(FormSettings.Page.Reminders);
             remindersMenuItem.DropDownItems.Add(manage);
             menu.Items.Add(remindersMenuItem);
+            // Item: the Pet Editor (opens it, or offers to download it when it is not on this computer)
+            editorMenuItem = new ToolStripMenuItem { Text = PetEditorApp.MenuText(), Image = PetEditorApp.MenuIcon() };
+            editorMenuItem.Click += async (s, e) => await PetEditorApp.OpenAsync(null);
+            menu.Items.Add(editorMenuItem);
+            // Item: DeskPals Weather (while it runs): on or off, its scenes, a test, its settings
+            weatherMenuItem = new ToolStripMenuItem { Visible = false };
+            menu.Items.Add(weatherMenuItem);
             PluginSwitch.KeepOldDefaults();   // before any plugin starts
             Reminders.Start();
             Pomodoro.Changed += SpeechBubble.QuietChanged;   // notices held during focus or Ctrl+Alt+P
@@ -131,6 +138,12 @@ namespace DesktopPet
             AppTime.Apply();
             DaySummary.Apply();
             DoNotDisturb.Apply();
+            Seasons.Apply();          // also puts on the hats (of a date or of the level)
+            NoteDelivery.Apply();
+            LiveChat.Apply();
+            CommunityPlugins.Apply();
+            ScreenEffects.Apply();
+            WeatherExtension.Apply();   // the DeskPals Weather extension (started when on) and the pets reacting to its weather
             Updater.StartAuto();
             PetBackup.StartAuto();
             Activity.Apply();
@@ -201,7 +214,7 @@ namespace DesktopPet
             }
 
             Theme.ApplyTo(menu);
-            menu.Opening += (s, e) => Theme.ApplyTo(menu); // follow light/dark changes
+            menu.Opening += (s, e) => { Theme.ApplyTo(menu); UpdateTexts(); }; // follow light/dark changes, and what changed meanwhile (the editor downloaded…)
             UpdateTexts();
             Lang.Changed += UpdateTexts;     // follow language changes
             Program.MyData.PetSoundChanged += UpdateTexts;   // sound switched in the panel
@@ -211,7 +224,7 @@ namespace DesktopPet
         }
 
         static ToolStripMenuItem hideMenuItem, remindersMenuItem;
-        static ToolStripMenuItem optionsMenuItem, installMenuItem, soundMenuItem, aboutMenuItem, helpMenuItem;
+        static ToolStripMenuItem optionsMenuItem, installMenuItem, soundMenuItem, aboutMenuItem, helpMenuItem, editorMenuItem, weatherMenuItem;
         static string currentPetName;
 
         /// <summary>
@@ -246,6 +259,12 @@ namespace DesktopPet
             soundMenuItem.Image = muted ? Resources.audiooff : Resources.audioon;
             aboutMenuItem.Text = Lang.T("tray.about");
             helpMenuItem.Text = Lang.T("tray.help");
+            if (editorMenuItem != null)
+            {
+                editorMenuItem.Text = PetEditorApp.MenuText();
+                if (editorMenuItem.Image == null) editorMenuItem.Image = PetEditorApp.MenuIcon();   // downloaded meanwhile
+            }
+            WeatherExtension.FillMenu(weatherMenuItem);
             if (installMenuItem != null)
                 installMenuItem.Text = Program.IsApplicationInstalled() ? Lang.T("tray.repair") : Lang.T("tray.install");
         }
