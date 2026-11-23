@@ -208,6 +208,7 @@ namespace PetEditor
 				var menu = new ContextMenuStrip();
 				Theme.ApplyTo(menu);
 				menu.Items.Add(L.T("proj.wizard"), null, (o, e) => Wizard.Show(this));
+				menu.Items.Add(L.T("proj.character"), null, (o, e) => CharacterDialog.Show(this));
 				menu.Items.Add(L.T("proj.new"), null, (o, e) => NewPet());
 				menu.Show(newBtn, new Point(0, newBtn.Height));
 			});
@@ -509,6 +510,7 @@ namespace PetEditor
 			var steps = new (string key, Action open)[]
 			{
 				("wizard", () => Wizard.Show(this, files.ToArray())),
+				("character", () => CharacterDialog.Show(this)),
 				("behaviors", () => BehaviorDialog.Show(this, Doc)),
 				("import", () => { if (Doc.FilePath != null) ImportDialog.Show(this, Doc, Doc.FilePath); }),
 				("gallery", () => GalleryDialog.Show(this, Doc)),

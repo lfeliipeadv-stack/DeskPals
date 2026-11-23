@@ -3,24 +3,24 @@ using System.Globalization;
 namespace PetEditor
 {
 	/// <summary>
-	/// The texts of the editor ("key|pt|en|es", \n = new line). For now the editor offers Portuguese and English only:
-	/// the Spanish column is kept for later, but not used.
+	/// The texts of the editor ("key|pt|en|es", \n = new line): Portuguese, English and Spanish.
 	/// </summary>
 	internal static class L
 	{
-		static int col = 0;   // 0 pt, 1 en
+		static int col = 0;   // 0 pt, 1 en, 2 es
 		static Dictionary<string, string[]> table;
 
-		public static string Current => col == 1 ? "en" : "pt";
+		public static string Current => col switch { 1 => "en", 2 => "es", _ => "pt" };
 
-		/// <summary>"pt", "en", or "auto" (as Windows: Portuguese in a Portuguese Windows, English in any other).</summary>
+		/// <summary>"pt", "en", "es", or "auto" (as Windows: Portuguese or Spanish in a Windows in those languages, English in any other).</summary>
 		public static void Use(string lang)
 		{
 			col = lang switch
 			{
 				"pt" => 0,
 				"en" => 1,
-				_ => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "pt" ? 0 : 1,   // "auto", and "es" saved before
+				"es" => 2,
+				_ => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch { "pt" => 0, "es" => 2, _ => 1 },
 			};
 		}
 
@@ -364,7 +364,7 @@ set.browse|Procurar|Browse|Buscar
 set.found|Usando {0}|Using {0}|Usando {0}
 set.notFound|DesktopPet.exe não encontrado|DesktopPet.exe not found|DesktopPet.exe no encontrado
 set.about|Sobre|About|Acerca de
-set.aboutText|Editor de Pets {0}, do Desktop-Pet. Software livre (licença MIT), baseado no desktopPet de Adriano Petrucci e inspirado no editor online dele, o desktopPet-Editor; ovelha original de Tatsutoshi Nomura.|Pet Editor {0}, from Desktop-Pet. Free software (MIT license), based on desktopPet by Adriano Petrucci and inspired by his online editor, desktopPet-Editor; original sheep by Tatsutoshi Nomura.|Editor de Mascotas {0}, de Desktop-Pet. Software libre (licencia MIT), basado en desktopPet de Adriano Petrucci e inspirado en su editor en línea, desktopPet-Editor; oveja original de Tatsutoshi Nomura.
+set.aboutText|Editor de Pets {0}, do DeskPals. Software livre (licença MIT), baseado no desktopPet de Adriano Petrucci e inspirado no editor online dele, o desktopPet-Editor; ovelha original de Tatsutoshi Nomura.|Pet Editor {0}, from DeskPals. Free software (MIT license), based on desktopPet by Adriano Petrucci and inspired by his online editor, desktopPet-Editor; original sheep by Tatsutoshi Nomura.|Editor de Mascotas {0}, de DeskPals. Software libre (licencia MIT), basado en desktopPet de Adriano Petrucci e inspirado en su editor en línea, desktopPet-Editor; oveja original de Tatsutoshi Nomura.
 set.keys|Atalhos: Ctrl+N novo · Ctrl+O abrir · Ctrl+S salvar · Ctrl+Shift+S salvar como · Ctrl+Z desfazer · Ctrl+Y refazer · F5 testar no desktop · Delete exclui o item escolhido da lista · Na prévia: Espaço pausa, → avança um passo, R recomeça. Arraste imagens, um GIF ou um animations.xml para a janela.|Shortcuts: Ctrl+N new · Ctrl+O open · Ctrl+S save · Ctrl+Shift+S save as · Ctrl+Z undo · Ctrl+Y redo · F5 test on the desktop · Delete removes the chosen item of a list · In the preview: Space pauses, → one step, R restarts. Drag pictures, a GIF or an animations.xml onto the window.|Atajos: Ctrl+N nuevo · Ctrl+O abrir · Ctrl+S guardar · Ctrl+Shift+S guardar como · Ctrl+Z deshacer · Ctrl+Y rehacer · F5 probar en el escritorio · Supr elimina el elemento elegido de una lista · En la vista previa: Espacio pausa, → avanza un paso, R reinicia. Arrastre imágenes, un GIF o un animations.xml a la ventana.
 
 chk.intro|Tudo o que pode atrapalhar o pet no DesktopPet. Erros fazem o pet travar ou sumir; avisos são coisas que funcionam, mas provavelmente não como você quer. Clique num item para ir até ele.|Everything that can get in the pet's way in DesktopPet. Errors stop or hide the pet; warnings work, but probably not as you mean. Click an item to go there.|Todo lo que puede estorbar a la mascota en DesktopPet. Los errores la detienen o la ocultan; los avisos funcionan, pero probablemente no como quieres. Haz clic en un elemento para ir allí.
@@ -495,6 +495,41 @@ wiz.needPictures|Escolha as imagens primeiro.|Choose the pictures first.|Elige l
 wiz.needRole|“{0}” precisa de pelo menos {1} quadro(s).|“{0}” needs at least {1} frame(s).|“{0}” necesita al menos {1} cuadro(s).
 proj.wizard|Assistente de pet novo|New pet assistant|Asistente de mascota nueva
 proj.wizardHint|A partir das suas imagens ou de um GIF: em três passos o pet já anda.|From your pictures or a GIF: in three steps the pet already walks.|A partir de tus imágenes o de un GIF: en tres pasos la mascota ya camina.
+proj.character|Criar um personagem|Create a character|Crear un personaje
+proj.characterHint|Sem desenhar nada: escolha o bicho, as cores e um acessório, e o pet sai pronto, com sombra e contorno, andando e cheio de animações.|No drawing needed: pick the animal, the colors and an accessory, and the pet comes out ready, shaded and outlined, walking and full of animations.|Sin dibujar nada: elige el animal, los colores y un accesorio, y la mascota sale lista, con sombra y contorno, caminando y llena de animaciones.
+char.title|Criar um personagem|Create a character|Crear un personaje
+char.intro|Escolha o bicho, as cores e um acessório. O pet já sai com as poses que o programa usa (acenar, pensar, ler, comer, café, guarda-chuva, frio, calor, festa, música…). A prévia mostra ele andando num fundo claro e num escuro, e as poses. Depois de criado, dá para mudar tudo no editor.|Pick the animal, the colors and an accessory. The pet comes with the poses the program uses (wave, think, read, eat, coffee, umbrella, cold, hot, party, music…). The preview shows it walking on a light and a dark background, and the poses. Once created, everything can be changed in the editor.|Elige el animal, los colores y un accesorio. La mascota ya sale con las poses que usa el programa (saludar, pensar, leer, comer, café, paraguas, frío, calor, fiesta, música…). La vista previa la muestra caminando sobre un fondo claro y uno oscuro, y las poses. Una vez creada, todo se puede cambiar en el editor.
+char.kind|Bicho|Animal|Animal
+char.duck|Pato|Duck|Pato
+char.cat|Gato|Cat|Gato
+char.bear|Urso|Bear|Oso
+char.bunny|Coelho|Bunny|Conejo
+char.blob|Bolinha|Blob|Bolita
+char.body|Corpo|Body|Cuerpo
+char.detail|Detalhes|Details|Detalles
+char.accent|Acessório|Accessory|Accesorio
+char.dice|Sortear cores|Shuffle colors|Sortear colores
+char.extra|Acessório|Accessory|Accesorio
+char.none|Nenhum|None|Ninguno
+char.hat|Chapéu|Hat|Sombrero
+char.bow|Laço|Bow|Lazo
+char.scarf|Cachecol|Scarf|Bufanda
+char.size|Tamanho|Size|Tamaño
+char.small|Pequeno (40 px, como a ovelha)|Small (40 px, like the sheep)|Pequeño (40 px, como la oveja)
+char.medium|Médio (80 px)|Medium (80 px)|Mediano (80 px)
+char.large|Grande (120 px)|Large (120 px)|Grande (120 px)
+char.sizeHint|O tamanho do pet na tela (o programa ainda pode aumentar nas configurações).|The size of the pet on the screen (the program can still enlarge it in its settings).|El tamaño de la mascota en la pantalla (el programa aún puede agrandarla en su configuración).
+char.defaultName|Amiguinho|Buddy|Amiguito
+char.create|Criar o pet|Create the pet|Crear la mascota
+char.dog|Cachorro|Dog|Perro
+char.bird|Passarinho (voa)|Bird (flies)|Pajarito (vuela)
+char.dragon|Dragão (voa)|Dragon (flies)|Dragón (vuela)
+char.glasses|Óculos|Glasses|Gafas
+char.backpack|Mochila|Backpack|Mochila
+char.sounds|Sons nas animações|Sounds with the animations|Sonidos en las animaciones
+char.soundsHint|Uma voz do bicho (mais fina se for pequeno), passinhos, ronco, música para dançar, a chuva no guarda-chuva… Tudo feito aqui, nada gravado.|A voice of the animal (higher if it is small), steps, snoring, music to dance, the rain on the umbrella… All made here, nothing recorded.|Una voz del animal (más aguda si es pequeño), pasitos, ronquidos, música para bailar, la lluvia en el paraguas… Todo hecho aquí, nada grabado.
+char.listen|Ouvir a voz|Hear the voice|Oír la voz
+char.noEncoder|Este Windows não tem o codificador de MP3 (as edições “N” precisam do Pacote de Recursos de Mídia): o pet sai sem sons.|This Windows has no MP3 encoder (the “N” editions need the Media Feature Pack): the pet comes out without sounds.|Este Windows no tiene el codificador de MP3 (las ediciones “N” necesitan el Paquete de características multimedia): la mascota sale sin sonidos.
 proj.gallery|Preparar para a galeria|Prepare for the gallery|Preparar para la galería
 proj.galleryHint|A pasta completa do pet: README, ícone, prévia animada e a linha no pets.json.|The pet's complete folder: README, icon, animated preview and its pets.json line.|La carpeta completa: README, icono, vista previa animada y su línea en pets.json.
 

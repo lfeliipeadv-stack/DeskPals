@@ -100,7 +100,7 @@ namespace PetEditor
 		}
 
 		/// <summary>
-		/// "Publish to the gallery": the pet in a .zip (in Documents\Desktop-Pet\galeria) and the GitHub page to send it,
+		/// "Publish to the gallery": the pet in a .zip (in Documents\DeskPals\galeria) and the GitHub page to send it,
 		/// already filled in (name, author, numbers). GitHub can't receive a file through a link: the .zip is shown
 		/// selected in Explorer, to drag onto the page. Whoever looks after the gallery checks the pet before it is listed.
 		/// </summary>
@@ -116,7 +116,7 @@ namespace PetEditor
 			try
 			{
 				Cursor.Current = Cursors.WaitCursor;
-				string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Desktop-Pet", "galeria");
+				string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DeskPals", "galeria");
 				Directory.CreateDirectory(dir);
 				string zip = Path.Combine(dir, slug + ".zip");
 				WriteZip(doc, zip, slug);

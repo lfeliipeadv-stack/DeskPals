@@ -31,6 +31,7 @@ namespace PetEditor
 			// actions
 			var actions = Ui.Wrap(new FlowLayoutPanel { AutoSize = true, WrapContents = true, BackColor = Theme.Background, Margin = new Padding(0, 6, 0, 10) }, 1200);
 			actions.Controls.Add(Action("proj.wizard", "proj.wizardHint", () => Wizard.Show(Main)));
+			actions.Controls.Add(Action("proj.character", "proj.characterHint", () => CharacterDialog.Show(Main)));
 			actions.Controls.Add(Action("proj.new", "proj.newHint", Main.NewPet));
 			actions.Controls.Add(Action("proj.gallery", "proj.galleryHint", () => GalleryDialog.Show(Main, Doc)));
 			actions.Controls.Add(Action("proj.openFile", "proj.openFileHint", () => Main.OpenDialog(false)));

@@ -15,7 +15,10 @@ namespace PetEditor
 		static readonly string[] Keys = { "drag", "fall", "kill", "sync", "toss", "fall soft", "fall hard" };
 
 		/// <summary>Names DesktopPet looks for (its own animations, reactions, the still pose while talking).</summary>
-		static readonly HashSet<string> Looked = new(Keys.Concat(new[] { "talk", "talking", "speak", "idle", "sit", "look around", "think", "blink", "wait", "busy", "stand", "walk", "run", "wave", "hello", "happy", "laugh", "scared", "surprised", "sleep", "eat", "love", "in love", "dance", "jump", "spin", "play", "cheer", "drink", "hearts", "purr", "nap", "rest", "yawn" }));
+		static readonly HashSet<string> Looked = new(Keys.Concat(new[] { "talk", "talking", "speak", "idle", "sit", "look around", "think", "blink", "wait", "busy", "stand", "walk", "run", "wave", "hello", "happy", "laugh", "scared", "surprised", "sleep", "eat", "love", "in love", "dance", "jump", "spin", "play", "cheer", "drink", "hearts", "purr", "nap", "rest", "yawn",
+			// the reactions to the program's features (weather, reminders, the assistant, errors…)
+			"idea", "dizzy", "read", "coffee", "umbrella", "cold", "shiver", "hot", "sweat", "party", "music", "cry", "angry", "look up",
+			"tired", "stretch", "review", "work", "shocked", "surprise", "error", "thumbs up", "nod", "ok", "hug", "sleepy" }));
 
 		public static (int errors, int warnings) Count(PetDoc d)
 		{
@@ -109,7 +112,8 @@ namespace PetEditor
 					W(L.T("chk.noBorder", name), "animations", a.Id);
 			}
 			foreach (var a in anims)
-				if (!reached.Contains(a.Id) && !Keys.Contains((a.Name ?? "").ToLowerInvariant()))
+				// an animation the program plays by its name (talk while a bubble is open, love, dance… as reactions) is reached
+				if (!reached.Contains(a.Id) && !Looked.Contains((a.Name ?? "").ToLowerInvariant()))
 					W(L.T("chk.unreached", $"“{a.Name}” (#{a.Id})"), "animations", a.Id);
 			foreach (var k in new[] { "drag", "fall" })
 				if (!anims.Any(a => string.Equals(a.Name, k, StringComparison.OrdinalIgnoreCase))) W(L.T("chk.noKey", k), "animations");

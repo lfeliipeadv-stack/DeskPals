@@ -37,4 +37,9 @@
     <Compile Include="..\src\dotNet\Mp3Player.cs" Link="Shared\Mp3Player.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- the MP3 encoder that comes with Windows (Media Foundation), for the sounds of the character maker -->
+    <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
+  </ItemGroup>
+
 </Project>

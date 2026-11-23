@@ -133,6 +133,78 @@ namespace PetEditor
 				// 9. publish: the folder name of a pet
 				Check("publish: folder name without accents or signs", GalleryDialog.Slug("Gato Preto!") == "gato_preto" && GalleryDialog.Slug("") == "pet", GalleryDialog.Slug("Gato Preto!"));
 
+				// 10. "Create a character": every kind, accessory and size gives a pet that passes the check of the editor,
+				// with the animations the program looks for and its sounds; a picture of every kind's poses is saved to look at
+				{
+					var kinds = Enum.GetValues<CharacterMaker.Kind>();
+					var extras = Enum.GetValues<CharacterMaker.Extra>();
+					foreach (var kind in kinds)
+					{
+						var (body, detail, accent) = CharacterMaker.Palette(kind);
+						var look = new CharacterMaker.Look { Kind = kind, Body = body, Detail = detail, Accent = accent, Extra = extras[(int)kind % extras.Length], Scale = 1 + (int)kind % 3 };
+						var doc = CharacterMaker.Create(look, "Teste " + kind, "self-test");
+						var errors = Validator.Run(doc).Where(p => p.Error).Select(p => p.Text).ToList();
+						var names = doc.Root.Animations.Animation.Select(a => a.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+						var needed = new[] { "walk", "turn", "fall", "drag", "kill", "idle", "blink", "sleep", "happy", "jump", "talk", "dance", "sit", "love" }
+							.Concat(CharacterMaker.Extras.Select(x => x.name))
+							.Concat(CharacterMaker.Flies(kind) ? new[] { "fly" } : Array.Empty<string>())
+							.Concat(kind == CharacterMaker.Kind.Dragon ? new[] { "fire" } : Array.Empty<string>()).ToList();
+						Check($"character: {kind} is a pet without errors", errors.Count == 0, string.Join("; ", errors.Take(4)));
+						var warnings = Validator.Run(doc).Where(p => !p.Error).Select(p => p.Text).ToList();
+						Check($"character: {kind} without warnings", warnings.Count == 0, string.Join("; ", warnings.Take(4)));
+						Check($"character: {kind} has its animations", needed.All(names.Contains), string.Join(", ", needed.Where(n => !names.Contains(n))));
+						Check($"character: {kind} frames at the chosen size", doc.FrameW == 40 * look.Scale && doc.FrameH == 46 * look.Scale, $"{doc.FrameW}x{doc.FrameH} at {look.Scale}x");
+						// every frame an animation uses has the pet drawn on it (the sheet's spare cells are empty by nature)
+						int empty = 0;
+						var used = doc.Root.Animations.Animation.SelectMany(a => a.Sequence.Frame).Distinct().ToList();
+						foreach (int i in used)
+						{
+							var fr = doc.Frame(i);
+							int opaque = 0;
+							for (int y = 0; y < fr.Height; y += look.Scale) for (int x = 0; x < fr.Width; x += look.Scale) if (fr.GetPixel(x, y).A > 128) opaque++;
+							if (opaque < 200) empty++;
+						}
+						Check($"character: {kind} draws every frame", empty == 0, $"{empty} of {used.Count} almost empty");
+						// the sounds: MP3s that Windows opens, on the animations they belong to, light enough to download
+						if (Synth.CanEncode)
+						{
+							var snd = doc.Root.Sounds.Sound;
+							long bytes = snd.Sum(x => (long)(x.Base64?.Length ?? 0) * 3 / 4);
+							Check($"character: {kind} has sounds", snd.Length >= 25, $"{snd.Length} sounds, {bytes / 1024} KB");
+							Check($"character: {kind} sounds are light", bytes < 400 * 1024, $"{bytes / 1024} KB");
+							string bad = null;
+							foreach (var x in snd)
+								try { DesktopPet.Mp3Player.Load(Convert.FromBase64String(x.Base64)); }
+								catch (Exception ex) { bad = $"{doc.Anim(x.Id)?.Name}: {ex.Message}"; break; }
+							Check($"character: {kind} sounds open in Windows", bad == null, bad ?? "");
+							var silent = new CharacterMaker.Look { Kind = kind, Sounds = false };
+							Check($"character: {kind} without sounds when asked", CharacterMaker.Create(silent, "x", "x").Root.Sounds.Sound.Length == 0);
+						}
+						else log.Add("SKIP  character sounds: this Windows has no MP3 encoder");
+					}
+					// a picture of each kind to look at: every pose, on a light and a dark row, with the accessories by turn
+					int z = 3, picCols = 14, cw = 40 * z + 6, ch = 46 * z + 6;
+					foreach (var k in kinds)
+					{
+						var (b, d, a) = CharacterMaker.Palette(k);
+						var kindFrames = CharacterMaker.Frames(new CharacterMaker.Look { Kind = k, Body = b, Detail = d, Accent = a, Extra = extras[((int)k + 1) % extras.Length] }).frames;
+						int picRows = (kindFrames.Count + picCols - 1) / picCols;
+						using (var pic = new Bitmap(picCols * cw, picRows * ch * 2))
+						using (var g = Graphics.FromImage(pic))
+						{
+							g.Clear(Color.FromArgb(240, 238, 232));
+							g.FillRectangle(new SolidBrush(Color.FromArgb(32, 33, 36)), 0, picRows * ch, pic.Width, picRows * ch);
+							g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+							g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+							for (int half = 0; half < 2; half++)
+								for (int i = 0; i < kindFrames.Count; i++)
+									g.DrawImage(kindFrames[i], new Rectangle(i % picCols * cw + 3, (half * picRows + i / picCols) * ch + 3, 40 * z, 46 * z));
+							pic.Save(Path.Combine(tmp, $"character-{k}.png"));
+						}
+						foreach (var f in kindFrames) f.Dispose();
+					}
+				}
+
 				// 6. scale of the window (Windows zoom): sizes written at 100% grow, fonts too
 				Check("zoom: a size at 100% grows with the zoom of Windows", Ui.S(100) == (int)Math.Round(100 * Ui.Scale), $"zoom {Ui.Scale}");
 			}

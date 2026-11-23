@@ -39,8 +39,7 @@ namespace PetEditor
 			}
 			look.Controls.Add(Ui.Labeled(L.T("set.accent"), swatches));
 			var lang = Ui.Combo(220);
-			// Portuguese and English for now (the Spanish texts are kept for later)
-			var langs = new[] { ("auto", L.T("set.langAuto")), ("pt", "Português"), ("en", "English") };
+			var langs = new[] { ("auto", L.T("set.langAuto")), ("pt", "Português"), ("en", "English"), ("es", "Español") };
 			foreach (var l in langs) lang.Items.Add(l.Item2);
 			lang.SelectedIndex = Math.Max(0, Array.FindIndex(langs, l => l.Item1 == s.Language));
 			lang.SelectedIndexChanged += (o, e) => { s.Language = langs[lang.SelectedIndex].Item1; EditorSettings.Save(); L.Use(s.Language); Main.Retranslate(); };
