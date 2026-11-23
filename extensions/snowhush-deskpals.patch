@@ -1,0 +1,718 @@
+diff --git a/windows/build.rs b/windows/build.rs
+index cc57948..2367787 100644
+--- a/windows/build.rs
++++ b/windows/build.rs
+@@ -1,155 +1,217 @@
+-//! Writes the Windows resources (icon, version information and manifest) into a .res file the linker takes
+-//! directly, so building needs no resource compiler.
+-
+-use std::path::Path;
+-
+-const ICON: &str = "assets/Snowhush.ico";
+-const RT_ICON: u16 = 3;
+-const RT_GROUP_ICON: u16 = 14;
+-const RT_VERSION: u16 = 16;
+-const RT_MANIFEST: u16 = 24;
+-const ENGLISH: u16 = 0x0409;
+-
+-fn main() {
+-    println!("cargo:rerun-if-changed=build.rs");
+-    println!("cargo:rerun-if-changed={ICON}");
+-    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
+-        return;
+-    }
+-    let version = env!("CARGO_PKG_VERSION");
+-    let icon_file = std::fs::read(ICON).expect("icon");
+-    for (binary, description) in [("Snowhush", "Snowhush"), ("Snowhush-Setup", "Snowhush Setup")] {
+-        // A .res file opens with an empty entry.
+-        let mut res = vec![0, 0, 0, 0, 32, 0, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0];
+-        res.extend([0; 16]);
+-        icon(&mut res, &icon_file);
+-        entry(&mut res, RT_VERSION, 1, ENGLISH, &version_info(version, description, &format!("{binary}.exe")));
+-        entry(&mut res, RT_MANIFEST, 1, ENGLISH, manifest(version).as_bytes());
+-
+-        let path = Path::new(&std::env::var("OUT_DIR").unwrap()).join(format!("{binary}.res"));
+-        std::fs::write(&path, res).expect("resources");
+-        println!("cargo:rustc-link-arg-bin={binary}={}", path.display());
+-    }
+-}
+-
+-/// One resource: a header naming its type and id, then the data, padded to a 32-bit boundary.
+-fn entry(res: &mut Vec<u8>, kind: u16, name: u16, language: u16, data: &[u8]) {
+-    res.extend((data.len() as u32).to_le_bytes());
+-    res.extend(32u32.to_le_bytes());
+-    for word in [0xFFFF, kind, 0xFFFF, name] {
+-        res.extend(word.to_le_bytes());
+-    }
+-    res.extend(0u32.to_le_bytes());
+-    res.extend(0x1030u16.to_le_bytes());
+-    res.extend(language.to_le_bytes());
+-    res.extend([0u8; 8]);
+-    res.extend(data);
+-    pad(res);
+-}
+-
+-/// Each image of the .ico becomes an icon resource; a group lists them with resource ids in place of file offsets.
+-fn icon(res: &mut Vec<u8>, file: &[u8]) {
+-    let count = u16::from_le_bytes([file[4], file[5]]) as usize;
+-    let mut group = file[..6].to_vec();
+-    for i in 0..count {
+-        let record = &file[6 + 16 * i..6 + 16 * (i + 1)];
+-        let length = u32::from_le_bytes(record[8..12].try_into().unwrap()) as usize;
+-        let offset = u32::from_le_bytes(record[12..16].try_into().unwrap()) as usize;
+-        let id = i as u16 + 1;
+-        entry(res, RT_ICON, id, ENGLISH, &file[offset..offset + length]);
+-        group.extend(&record[..12]);
+-        group.extend(id.to_le_bytes());
+-    }
+-    entry(res, RT_GROUP_ICON, 1, ENGLISH, &group);
+-}
+-
+-fn version_info(version: &str, description: &str, filename: &str) -> Vec<u8> {
+-    let parts: Vec<u32> = version.split('.').map(|part| part.parse().unwrap_or(0)).chain([0; 4]).take(4).collect();
+-    let (high, low) = (parts[0] << 16 | parts[1], parts[2] << 16 | parts[3]);
+-    let mut fixed = Vec::new();
+-    for value in [0xFEEF04BD, 0x0001_0000, high, low, high, low, 0x3F, 0, 0x0004_0004, 1, 0, 0, 0] {
+-        fixed.extend((value as u32).to_le_bytes());
+-    }
+-    let strings = [
+-        ("CompanyName", "Mykhailo Bezruchko"),
+-        ("FileDescription", description),
+-        ("FileVersion", version),
+-        ("InternalName", "Snowhush"),
+-        ("LegalCopyright", "© 2026 Mykhailo Bezruchko"),
+-        ("OriginalFilename", filename),
+-        ("ProductName", "Snowhush"),
+-        ("ProductVersion", version),
+-    ]
+-    .map(|(key, text)| {
+-        let value = wide(text);
+-        block(key, &value, (value.len() / 2) as u16, true, &[])
+-    });
+-    let table = block("040904B0", &[], 0, true, &strings);
+-    let string_info = block("StringFileInfo", &[], 0, true, &[table]);
+-    let translation = block("Translation", &[0x09, 0x04, 0xB0, 0x04], 4, false, &[]);
+-    let var_info = block("VarFileInfo", &[], 0, true, &[translation]);
+-    block("VS_VERSION_INFO", &fixed, fixed.len() as u16, false, &[string_info, var_info])
+-}
+-
+-/// A version-information block: its length, value length and type, its key, its value and its children,
+-/// each starting on a 32-bit boundary.
+-fn block(key: &str, value: &[u8], value_length: u16, text: bool, children: &[Vec<u8>]) -> Vec<u8> {
+-    let mut block = vec![0, 0];
+-    block.extend(value_length.to_le_bytes());
+-    block.extend((text as u16).to_le_bytes());
+-    block.extend(wide(key));
+-    pad(&mut block);
+-    block.extend(value);
+-    for child in children {
+-        pad(&mut block);
+-        block.extend(child);
+-    }
+-    let length = (block.len() as u16).to_le_bytes();
+-    block[..2].copy_from_slice(&length);
+-    block
+-}
+-
+-fn manifest(version: &str) -> String {
+-    let parts: Vec<&str> = version.split('.').chain(["0"; 4]).take(4).collect();
+-    format!(
+-        r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+-<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+-  <assemblyIdentity type="win32" name="Snowhush" version="{}"/>
+-  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+-    <application>
+-      <supportedOS Id="{{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}}"/>
+-    </application>
+-  </compatibility>
+-  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+-    <windowsSettings>
+-      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/pm</dpiAware>
+-      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
+-    </windowsSettings>
+-  </application>
+-  <dependency>
+-    <dependentAssembly>
+-      <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*"/>
+-    </dependentAssembly>
+-  </dependency>
+-  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+-    <security>
+-      <requestedPrivileges>
+-        <requestedExecutionLevel level="asInvoker" uiAccess="false"/>
+-      </requestedPrivileges>
+-    </security>
+-  </trustInfo>
+-</assembly>
+-"#,
+-        parts.join(".")
+-    )
+-}
+-
+-fn wide(text: &str) -> Vec<u8> {
+-    text.encode_utf16().chain([0]).flat_map(u16::to_le_bytes).collect()
+-}
+-
+-fn pad(bytes: &mut Vec<u8>) {
+-    while bytes.len() % 4 != 0 {
+-        bytes.push(0);
+-    }
+-}
++//! Writes the Windows resources (icon, version information and manifest) into a .res file the linker takes
++//! directly, so building needs no resource compiler.
++
++use std::path::Path;
++
++const ICON: &str = "assets/Snowhush.ico";
++const RT_ICON: u16 = 3;
++const RT_GROUP_ICON: u16 = 14;
++const RT_VERSION: u16 = 16;
++const RT_MANIFEST: u16 = 24;
++const ENGLISH: u16 = 0x0409;
++
++fn main() {
++    println!("cargo:rerun-if-changed=build.rs");
++    println!("cargo:rerun-if-changed={ICON}");
++    if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
++        return;
++    }
++    let version = env!("CARGO_PKG_VERSION");
++    // DeskPals: the .res is linked as is only by the MSVC linker. Built with the GNU toolchain, the icon and the
++    // manifest go through windres (MinGW's) instead: without the manifest Windows refuses the layered child window
++    // the snow needs to go behind the windows, and it falls back to the overlay in front of them.
++    if std::env::var("CARGO_CFG_TARGET_ENV").as_deref() != Ok("msvc") {
++        gnu_resources(version);
++        return;
++    }
++    let icon_file = std::fs::read(ICON).expect("icon");
++    for (binary, description) in [("Snowhush", "Snowhush"), ("Snowhush-Setup", "Snowhush Setup")] {
++        // A .res file opens with an empty entry.
++        let mut res = vec![0, 0, 0, 0, 32, 0, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0];
++        res.extend([0; 16]);
++        icon(&mut res, &icon_file);
++        entry(&mut res, RT_VERSION, 1, ENGLISH, &version_info(version, description, &format!("{binary}.exe")));
++        entry(&mut res, RT_MANIFEST, 1, ENGLISH, manifest(version).as_bytes());
++
++        let path = Path::new(&std::env::var("OUT_DIR").unwrap()).join(format!("{binary}.res"));
++        std::fs::write(&path, res).expect("resources");
++        println!("cargo:rustc-link-arg-bin={binary}={}", path.display());
++    }
++}
++
++/// DeskPals: the icon and the manifest for the GNU toolchain, as an object file made by windres.
++fn gnu_resources(version: &str) {
++    let out = Path::new(&std::env::var("OUT_DIR").unwrap()).to_path_buf();
++    let manifest_file = out.join("Snowhush.manifest");
++    std::fs::write(&manifest_file, manifest(version)).expect("manifest");
++    let icon_file = Path::new(env!("CARGO_MANIFEST_DIR")).join(ICON);
++    let slashes = |p: &Path| p.display().to_string().replace('\\', "/");
++    let rc = out.join("Snowhush.rc");
++    std::fs::write(&rc, format!("1 ICON \"{}\"\n1 24 \"{}\"\n", slashes(&icon_file), slashes(&manifest_file))).expect("rc");
++    let object = out.join("Snowhush-resources.o");
++    let windres = std::env::var("WINDRES").unwrap_or_else(|_| "windres".into());
++    let run = |rc: &Path, object: &Path| {
++        std::process::Command::new(&windres).arg("-i").arg(rc).arg("-O").arg("coff").arg("-o").arg(object).status().is_ok_and(|s| s.success())
++    };
++    if !run(&rc, &object) {
++        // Tools/release.ps1 looks for this line and stops: a Snowhush without its manifest is not published
++        println!("cargo:warning=SNOWHUSH-NO-MANIFEST: windres not found or failed, Snowhush built without its manifest (the snow cannot go behind the windows)");
++        return;
++    }
++    // gcc adds MinGW's own default manifest (default-manifest.o) to every program; with ours that makes two, and the
++    // linker warns ("multiple non-default manifests"). An empty default-manifest.o that gcc finds first (-B) leaves
++    // ours the only one. gcc splits -B at spaces, so the folder goes by its short name (when it has spaces).
++    let crt = out.join("crt");
++    std::fs::create_dir_all(&crt).expect("crt");
++    let mut empty = vec![0u8; 20];   // an object file with nothing in it: the COFF header of x86-64, no sections
++    empty[..2].copy_from_slice(&0x8664u16.to_le_bytes());
++    let crt_dir = (std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() == Ok("x86_64") && std::fs::write(crt.join("default-manifest.o"), empty).is_ok())
++        .then(|| short_path(&crt))
++        .flatten()
++        .filter(|p| !p.contains(' '));
++    for binary in ["Snowhush", "Snowhush-Setup"] {
++        println!("cargo:rustc-link-arg-bin={binary}={}", object.display());
++        if let Some(dir) = &crt_dir {
++            println!("cargo:rustc-link-arg-bin={binary}=-B{dir}/");
++        }
++    }
++}
++
++/// DeskPals: the short (8.3) name of a folder, which has no spaces, from cmd.
++fn short_path(path: &Path) -> Option<String> {
++    let path = path.display().to_string();
++    if !path.contains(' ') {
++        return Some(path.replace('\\', "/"));
++    }
++    let mut cmd = std::process::Command::new("cmd");
++    #[cfg(windows)]
++    {
++        use std::os::windows::process::CommandExt;
++        cmd.raw_arg(format!("/d /c for %I in (\"{path}\") do @echo %~sI"));
++    }
++    let out = cmd.output().ok()?;
++    let text = String::from_utf8_lossy(&out.stdout).trim().replace('\\', "/");
++    (!text.is_empty()).then_some(text)
++}
++
++/// One resource: a header naming its type and id, then the data, padded to a 32-bit boundary.
++fn entry(res: &mut Vec<u8>, kind: u16, name: u16, language: u16, data: &[u8]) {
++    res.extend((data.len() as u32).to_le_bytes());
++    res.extend(32u32.to_le_bytes());
++    for word in [0xFFFF, kind, 0xFFFF, name] {
++        res.extend(word.to_le_bytes());
++    }
++    res.extend(0u32.to_le_bytes());
++    res.extend(0x1030u16.to_le_bytes());
++    res.extend(language.to_le_bytes());
++    res.extend([0u8; 8]);
++    res.extend(data);
++    pad(res);
++}
++
++/// Each image of the .ico becomes an icon resource; a group lists them with resource ids in place of file offsets.
++fn icon(res: &mut Vec<u8>, file: &[u8]) {
++    let count = u16::from_le_bytes([file[4], file[5]]) as usize;
++    let mut group = file[..6].to_vec();
++    for i in 0..count {
++        let record = &file[6 + 16 * i..6 + 16 * (i + 1)];
++        let length = u32::from_le_bytes(record[8..12].try_into().unwrap()) as usize;
++        let offset = u32::from_le_bytes(record[12..16].try_into().unwrap()) as usize;
++        let id = i as u16 + 1;
++        entry(res, RT_ICON, id, ENGLISH, &file[offset..offset + length]);
++        group.extend(&record[..12]);
++        group.extend(id.to_le_bytes());
++    }
++    entry(res, RT_GROUP_ICON, 1, ENGLISH, &group);
++}
++
++fn version_info(version: &str, description: &str, filename: &str) -> Vec<u8> {
++    let parts: Vec<u32> = version.split('.').map(|part| part.parse().unwrap_or(0)).chain([0; 4]).take(4).collect();
++    let (high, low) = (parts[0] << 16 | parts[1], parts[2] << 16 | parts[3]);
++    let mut fixed = Vec::new();
++    for value in [0xFEEF04BD, 0x0001_0000, high, low, high, low, 0x3F, 0, 0x0004_0004, 1, 0, 0, 0] {
++        fixed.extend((value as u32).to_le_bytes());
++    }
++    let strings = [
++        ("CompanyName", "Mykhailo Bezruchko"),
++        ("FileDescription", description),
++        ("FileVersion", version),
++        ("InternalName", "Snowhush"),
++        ("LegalCopyright", "© 2026 Mykhailo Bezruchko"),
++        ("OriginalFilename", filename),
++        ("ProductName", "Snowhush"),
++        ("ProductVersion", version),
++    ]
++    .map(|(key, text)| {
++        let value = wide(text);
++        block(key, &value, (value.len() / 2) as u16, true, &[])
++    });
++    let table = block("040904B0", &[], 0, true, &strings);
++    let string_info = block("StringFileInfo", &[], 0, true, &[table]);
++    let translation = block("Translation", &[0x09, 0x04, 0xB0, 0x04], 4, false, &[]);
++    let var_info = block("VarFileInfo", &[], 0, true, &[translation]);
++    block("VS_VERSION_INFO", &fixed, fixed.len() as u16, false, &[string_info, var_info])
++}
++
++/// A version-information block: its length, value length and type, its key, its value and its children,
++/// each starting on a 32-bit boundary.
++fn block(key: &str, value: &[u8], value_length: u16, text: bool, children: &[Vec<u8>]) -> Vec<u8> {
++    let mut block = vec![0, 0];
++    block.extend(value_length.to_le_bytes());
++    block.extend((text as u16).to_le_bytes());
++    block.extend(wide(key));
++    pad(&mut block);
++    block.extend(value);
++    for child in children {
++        pad(&mut block);
++        block.extend(child);
++    }
++    let length = (block.len() as u16).to_le_bytes();
++    block[..2].copy_from_slice(&length);
++    block
++}
++
++fn manifest(version: &str) -> String {
++    let parts: Vec<&str> = version.split('.').chain(["0"; 4]).take(4).collect();
++    format!(
++        r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
++<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
++  <assemblyIdentity type="win32" name="Snowhush" version="{}"/>
++  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
++    <application>
++      <supportedOS Id="{{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}}"/>
++    </application>
++  </compatibility>
++  <application xmlns="urn:schemas-microsoft-com:asm.v3">
++    <windowsSettings>
++      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/pm</dpiAware>
++      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
++    </windowsSettings>
++  </application>
++  <dependency>
++    <dependentAssembly>
++      <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*"/>
++    </dependentAssembly>
++  </dependency>
++  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
++    <security>
++      <requestedPrivileges>
++        <requestedExecutionLevel level="asInvoker" uiAccess="false"/>
++      </requestedPrivileges>
++    </security>
++  </trustInfo>
++</assembly>
++"#,
++        parts.join(".")
++    )
++}
++
++fn wide(text: &str) -> Vec<u8> {
++    text.encode_utf16().chain([0]).flat_map(u16::to_le_bytes).collect()
++}
++
++fn pad(bytes: &mut Vec<u8>) {
++    while bytes.len() % 4 != 0 {
++        bytes.push(0);
++    }
++}
+diff --git a/windows/src/app.rs b/windows/src/app.rs
+index 7d3f59f..5684085 100644
+--- a/windows/src/app.rs
++++ b/windows/src/app.rs
+@@ -78,6 +78,10 @@ const NIN_BALLOONUSERCLICK: u32 = WM_USER + 5;
+ const DAY: u32 = 24 * 60 * 60 * 1000;
+ 
+ static TASKBAR_CREATED: AtomicU32 = AtomicU32::new(0);
++// DeskPals: the messages DeskPals posts when hosted (see hosted.rs).
++static HOSTED_RELOAD: AtomicU32 = AtomicU32::new(0);
++static HOSTED_CLEAR: AtomicU32 = AtomicU32::new(0);
++static HOSTED_PAUSE: AtomicU32 = AtomicU32::new(0);
+ type Checked = std::result::Result<Option<Release>, String>;
+ /// Finished update checks and whether someone asked for them, waiting for `WM_UPDATE` to pick them up.
+ static UPDATES: Mutex<Vec<(Checked, bool)>> = Mutex::new(Vec::new());
+@@ -180,6 +184,8 @@ struct App {
+     locked: bool,
+     display_off: bool,
+     away: bool,
++    /// DeskPals: paused by DeskPals Weather (an app in front, the battery).
++    held: bool,
+     /// The download of the update the tray last announced.
+     update: Option<String>,
+ }
+@@ -217,15 +223,25 @@ pub fn run() -> Result<()> {
+         let emblem = Emblem::of(&settings);
+         let light = light_taskbar();
+         let icon = tray_icon(emblem, light);
+-        add_tray_icon(window, icon);
++        // DeskPals: hosted, DeskPals shows the settings and brings the updates: no tray icon, welcome or update check
++        let hosted = crate::hosted::is();
++        if !hosted {
++            add_tray_icon(window, icon);
++        }
++        HOSTED_RELOAD.store(RegisterWindowMessageW(w!("DeskPalsSnowhushReload")), Ordering::Relaxed);
++        HOSTED_CLEAR.store(RegisterWindowMessageW(w!("DeskPalsSnowhushClear")), Ordering::Relaxed);
++        HOSTED_PAUSE.store(RegisterWindowMessageW(w!("DeskPalsSnowhushPause")), Ordering::Relaxed);
++        watch_parent(window);
+         let _ = WTSRegisterSessionNotification(window, NOTIFY_FOR_THIS_SESSION);
+         let _ = RegisterPowerSettingNotification(HANDLE(window.0), &GUID_CONSOLE_DISPLAY_STATE, DEVICE_NOTIFY_WINDOW_HANDLE);
+-        if !settings.welcomed {
++        if !settings.welcomed && !hosted {
+             SetTimer(Some(window), TIMER_WELCOME, 1200, None);
+         }
+-        SetTimer(Some(window), TIMER_UPDATES, 30_000, None);
++        if !hosted {
++            SetTimer(Some(window), TIMER_UPDATES, 30_000, None);
++        }
+         SetTimer(Some(window), TIMER_HALLOWEEN, 60_000, None);
+-        APP.set(Some(App { settings, commands, wake, snow, icon, emblem, light, locked: false, display_off: false, away: false, update: None }));
++        APP.set(Some(App { settings, commands, wake, snow, icon, emblem, light, locked: false, display_off: false, away: false, held: false, update: None }));
+ 
+         let mut message = MSG::default();
+         while GetMessageW(&mut message, None, 0, 0).as_bool() {
+@@ -322,10 +338,30 @@ unsafe extern "system" fn procedure(window: HWND, message: u32, wparam: WPARAM,
+             });
+             LRESULT(0)
+         }
++        _ if message != 0 && message == HOSTED_RELOAD.load(Ordering::Relaxed) => {
++            reload();
++            LRESULT(0)
++        }
++        _ if message != 0 && message == HOSTED_PAUSE.load(Ordering::Relaxed) => {
++            // DeskPals: wparam 1 pauses (the snow stops and waits), 0 goes on
++            let held = wparam.0 != 0;
++            update(|app| app.held = held);
++            LRESULT(0)
++        }
++        _ if message != 0 && message == HOSTED_CLEAR.load(Ordering::Relaxed) => {
++            APP.with_borrow(|app| {
++                if let Some(app) = app {
++                    send(app, Command::ClearSnow(!prefs::animations_enabled()));
++                }
++            });
++            LRESULT(0)
++        }
+         _ if message != 0 && message == TASKBAR_CREATED.load(Ordering::Relaxed) => {
+             APP.with_borrow(|app| {
+                 if let Some(app) = app {
+-                    add_tray_icon(window, app.icon);
++                    if !crate::hosted::is() {
++                        add_tray_icon(window, app.icon);
++                    }
+                     send(app, Command::ShellRestarted);
+                 }
+             });
+@@ -340,7 +376,7 @@ fn update(change: impl FnOnce(&mut App)) {
+     APP.with_borrow_mut(|app| {
+         let Some(app) = app else { return };
+         change(app);
+-        let active = !app.locked && !app.display_off && !app.away;
++        let active = !app.locked && !app.display_off && !app.away && !app.held;
+         send(app, Command::Active(active));
+     });
+ }
+@@ -811,3 +847,70 @@ fn remove_tray_icon(window: HWND) {
+         let _ = Shell_NotifyIconW(NIM_DELETE, &data);
+     }
+ }
++
++/// DeskPals: its settings changed (it wrote them under its own key): each one that changed goes to the snow, as the
++/// menu would send it.
++fn reload() {
++    crate::hosted::load_tint();
++    let new = Settings::load();
++    APP.with_borrow_mut(|app| {
++        let Some(app) = app else { return };
++        let old = app.settings;
++        app.settings = new;
++        if new.intensity != old.intensity {
++            send(app, Command::Intensity(new.intensity as f32 / 100.0));
++        }
++        if new.opacity != old.opacity {
++            send(app, Command::FallingOpacity(new.opacity as f32 / 100.0));
++        }
++        if new.ground != old.ground {
++            send(app, Command::Ground(new.ground));
++        }
++        if new.melt != old.melt {
++            send(app, Command::Melt(new.melt));
++        }
++        if new.snow_on_windows != old.snow_on_windows {
++            send(app, Command::SnowOnWindows(new.snow_on_windows));
++        }
++        if new.behind_windows != old.behind_windows {
++            send(app, Command::BehindWindows(new.behind_windows));
++        }
++        if new.over_full_screen != old.over_full_screen {
++            send(app, Command::OverFullScreen(new.over_full_screen));
++        }
++        if new.behind_taskbar != old.behind_taskbar {
++            send(app, Command::BehindTaskbar(new.behind_taskbar));
++        }
++        if new.show_in_screenshots != old.show_in_screenshots {
++            send(app, Command::ShowInScreenshots(new.show_in_screenshots));
++        }
++        if new.deep_interaction != old.deep_interaction {
++            send(app, Command::DeepInteraction(new.deep_interaction));
++        }
++        if new.max_performance != old.max_performance {
++            send(app, Command::Performance(new.max_performance));
++        }
++        if new.halloween.on != old.halloween.on || new.halloween.skipped != old.halloween.skipped {
++            send(app, Command::Halloween(new.halloween));
++        }
++        if new.picked != old.picked {
++            send(app, Command::SwitchMode { picked: new.picked, calm: !prefs::animations_enabled() });
++        }
++    });
++}
++
++/// DeskPals: when DeskPals goes away (closed, or ended), the snow goes with it.
++fn watch_parent(window: HWND) {
++    let pid = crate::hosted::parent();
++    if pid == 0 {
++        return;
++    }
++    let target = window.0 as isize;
++    thread::spawn(move || unsafe {
++        use windows::Win32::System::Threading::{INFINITE, OpenProcess, PROCESS_SYNCHRONIZE, WaitForSingleObject};
++        if let Ok(process) = OpenProcess(PROCESS_SYNCHRONIZE, false, pid) {
++            WaitForSingleObject(process, INFINITE);
++        }
++        let _ = PostMessageW(Some(HWND(target as _)), WM_CLOSE, WPARAM(0), LPARAM(0));
++    });
++}
+diff --git a/windows/src/hosted.rs b/windows/src/hosted.rs
+new file mode 100644
+index 0000000..61dba13
+--- /dev/null
++++ b/windows/src/hosted.rs
+@@ -0,0 +1,69 @@
++//! DeskPals: Snowhush running as an extension of DeskPals (a desktop pets program) instead of on its own.
++//! Started with `--hosted [--parent <pid>]`: no tray icon, no welcome window, no update checks; its settings live
++//! under `HKCU\Software\DeskPals\Snowhush`, written by DeskPals, which posts the registered message
++//! `DeskPalsSnowhushReload` to the controller window when they change (and `DeskPalsSnowhushClear` to clear the snow).
++//! It quits with DeskPals. Everything else (the snow, its physics and drawing) is Snowhush's own.
++
++use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
++
++static HOSTED: AtomicBool = AtomicBool::new(false);
++static PARENT: AtomicU32 = AtomicU32::new(0);
++
++pub fn is() -> bool {
++    HOSTED.load(Ordering::Relaxed)
++}
++
++/// Reads `--hosted` and `--parent <pid>` from the command line.
++pub fn read_arguments() {
++    let args: Vec<String> = std::env::args().skip(1).collect();
++    if args.iter().any(|a| a == "--hosted") {
++        HOSTED.store(true, Ordering::Relaxed);
++    }
++    if let Some(i) = args.iter().position(|a| a == "--parent")
++        && let Some(pid) = args.get(i + 1).and_then(|p| p.parse::<u32>().ok())
++    {
++        PARENT.store(pid, Ordering::Relaxed);
++    }
++}
++
++/// The process of DeskPals, 0 when not given.
++pub fn parent() -> u32 {
++    PARENT.load(Ordering::Relaxed)
++}
++
++/// DeskPals: how big the flakes are, in hundredths (100 = Snowhush's own; DeskPals Weather offers 100, 160, 230).
++static SCALE: AtomicU32 = AtomicU32::new(100);
++
++/// Makes what falls bigger (or keeps it), easier to see over a busy screen; the ghosts of Halloween keep their size.
++pub fn scale_sprites(sprites: &mut [snowhush_core::simulation::Sprite]) {
++    let scale = SCALE.load(Ordering::Relaxed);
++    if scale == 100 {
++        return;
++    }
++    let k = scale as f32 / 100.0;
++    for sprite in sprites.iter_mut().filter(|s| s.ghost[0] <= 0.0) {
++        sprite.size *= k;
++    }
++}
++
++/// DeskPals: a colour for what falls (DeskPals Weather's "colour per effect"), 0 = Snowhush's own; else 0x01RRGGBB.
++static TINT: AtomicU32 = AtomicU32::new(0);
++
++/// Reads the colour again (at the start and with every `DeskPalsSnowhushReload`).
++pub fn load_tint() {
++    if is() {
++        TINT.store(crate::prefs::tint(), Ordering::Relaxed);
++        SCALE.store(crate::prefs::flake_scale(), Ordering::Relaxed);
++    }
++}
++
++/// The light on what falls, times the colour chosen: white snow turns that colour, leaves and petals take its hue.
++pub fn tinted(light: [f32; 3]) -> [f32; 3] {
++    let tint = TINT.load(Ordering::Relaxed);
++    if tint & 0x0100_0000 == 0 {
++        return light;
++    }
++    let channel = |shift: u32| ((tint >> shift) & 0xff) as f32 / 255.0;
++    let color = [channel(16), channel(8), channel(0)];
++    std::array::from_fn(|i| light[i] * color[i])
++}
+diff --git a/windows/src/main.rs b/windows/src/main.rs
+index e4b3086..45f4dcb 100644
+--- a/windows/src/main.rs
++++ b/windows/src/main.rs
+@@ -3,6 +3,7 @@
+ mod app;
+ mod desktop;
+ mod halloween;
++mod hosted;
+ mod light;
+ mod log;
+ mod menu;
+@@ -25,8 +26,12 @@ fn main() {
+         snowhush::install::uninstall();
+         return;
+     }
++    // DeskPals: running as its extension (see hosted.rs)
++    hosted::read_arguments();
++    hosted::load_tint();
+     unsafe {
+-        let _instance = CreateMutexW(None, true, w!("Local\\Snowhush"));
++        // DeskPals: hosted, it has its own single instance (DeskPals warns when Snowhush itself is open too)
++        let _instance = CreateMutexW(None, true, if hosted::is() { w!("Local\\DeskPalsSnowhush") } else { w!("Local\\Snowhush") });
+         if GetLastError() == ERROR_ALREADY_EXISTS {
+             return;
+         }
+diff --git a/windows/src/prefs.rs b/windows/src/prefs.rs
+index c96eea0..6def83a 100644
+--- a/windows/src/prefs.rs
++++ b/windows/src/prefs.rs
+@@ -12,7 +12,10 @@ use snowhush_core::halloween::Choice;
+ use snowhush_core::modes::{self, Picked};
+ use snowhush_core::simulation::Mode;
+ 
+-const KEY: PCWSTR = w!("Software\\Snowhush");
++// DeskPals: hosted, the settings are DeskPals' own (see hosted.rs).
++fn key() -> PCWSTR {
++    if crate::hosted::is() { w!("Software\\DeskPals\\Snowhush") } else { w!("Software\\Snowhush") }
++}
+ const RUN: PCWSTR = w!("Software\\Microsoft\\Windows\\CurrentVersion\\Run");
+ const RUN_VALUE: PCWSTR = w!("Snowhush");
+ const STARTUP_APPROVED: PCWSTR = w!("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run");
+@@ -153,11 +156,21 @@ fn command() -> Option<Vec<u16>> {
+     Some(format!("\"{}\"", path.display()).encode_utf16().chain([0]).collect())
+ }
+ 
++/// DeskPals: how big DeskPals Weather wants the flakes, in hundredths (100 = as Snowhush draws them).
++pub fn flake_scale() -> u32 {
++    read(w!("flakeScale")).map_or(100, |v| v.clamp(50, 400))
++}
++
++/// DeskPals: the colour DeskPals Weather chose for what falls (see hosted.rs), 0 = none.
++pub fn tint() -> u32 {
++    read(w!("tint")).unwrap_or(0)
++}
++
+ fn read(name: PCWSTR) -> Option<u32> {
+     let mut value = 0u32;
+     let mut size = 4u32;
+     let status =
+-        unsafe { RegGetValueW(HKEY_CURRENT_USER, KEY, name, RRF_RT_REG_DWORD, None, Some((&raw mut value).cast::<c_void>()), Some(&mut size)) };
++        unsafe { RegGetValueW(HKEY_CURRENT_USER, key(), name, RRF_RT_REG_DWORD, None, Some((&raw mut value).cast::<c_void>()), Some(&mut size)) };
+     (status == ERROR_SUCCESS).then_some(value)
+ }
+ 
+@@ -167,7 +180,7 @@ fn now() -> u32 {
+ 
+ fn write(name: PCWSTR, value: u32) {
+     unsafe {
+-        let _ = RegSetKeyValueW(HKEY_CURRENT_USER, KEY, name, REG_DWORD.0, Some((&raw const value).cast::<c_void>()), 4);
++        let _ = RegSetKeyValueW(HKEY_CURRENT_USER, key(), name, REG_DWORD.0, Some((&raw const value).cast::<c_void>()), 4);
+     }
+ }
+ 
+diff --git a/windows/src/render.rs b/windows/src/render.rs
+index 00450cb..d8afe03 100644
+--- a/windows/src/render.rs
++++ b/windows/src/render.rs
+@@ -494,6 +494,8 @@ impl Surface {
+             let mut mapped = D3D11_MAPPED_SUBRESOURCE::default();
+             context.Map(sprite_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, Some(&mut mapped))?;
+             let sprites = simulation.write_sprites(std::slice::from_raw_parts_mut(mapped.pData.cast::<Sprite>(), self.sprite_capacity));
++            // DeskPals: the size of the flakes chosen in DeskPals Weather (ghosts keep theirs)
++            crate::hosted::scale_sprites(std::slice::from_raw_parts_mut(mapped.pData.cast::<Sprite>(), sprites));
+             context.Unmap(sprite_buffer, 0);
+ 
+             context.Map(height_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, Some(&mut mapped))?;
+diff --git a/windows/src/screen.rs b/windows/src/screen.rs
+index fb08d1b..834c7e5 100644
+--- a/windows/src/screen.rs
++++ b/windows/src/screen.rs
+@@ -361,6 +361,8 @@ impl Screen {
+         }
+         // Halloween night: cold moonlight, violet shadows and a candle's glow along the drifts' edges.
+         let (light, shadow_tint) = moonlit(sky.daylight, self.shadow_tint, sky.night);
++        // DeskPals: the colour chosen for what falls
++        let light = crate::hosted::tinted(light);
+         let ambient = Ambient { light, shadow_tint, rim: [1.0, 0.56, 0.2, 0.3 * sky.night], lantern: (cursor, sky.night) };
+         self.surface.draw(gpu, &self.simulation, ambient, time)?;
+         Ok(true)

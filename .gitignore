@@ -238,3 +238,7 @@ Pets/thronglet/
 docs/capturas/meu-thronglet.png
 wiki/images/detalhe-meu-thronglet.png
 icones-claude/
+
+# Rust builds of the extensions
+extensions/*/windows/target/
+extensions/*/target/

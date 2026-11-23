@@ -1,0 +1,47 @@
+#![windows_subsystem = "windows"]
+
+mod app;
+mod desktop;
+mod halloween;
+mod hosted;
+mod light;
+mod log;
+mod menu;
+mod prefs;
+mod render;
+mod screen;
+mod snow;
+mod tracker;
+mod update;
+mod welcome;
+
+use windows::Win32::Foundation::{ERROR_ALREADY_EXISTS, GetLastError};
+use windows::Win32::System::Threading::CreateMutexW;
+use windows::Win32::UI::HiDpi::{DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2, SetProcessDpiAwarenessContext};
+use windows::core::w;
+
+fn main() {
+    // What "Uninstall" in Settings runs; it removes everything, even with Snowhush still running.
+    if std::env::args().skip(1).any(|argument| argument == "--uninstall") {
+        snowhush::install::uninstall();
+        return;
+    }
+    // DeskPals: running as its extension (see hosted.rs)
+    hosted::read_arguments();
+    hosted::load_tint();
+    unsafe {
+        // DeskPals: hosted, it has its own single instance (DeskPals warns when Snowhush itself is open too)
+        let _instance = CreateMutexW(None, true, if hosted::is() { w!("Local\\DeskPalsSnowhush") } else { w!("Local\\Snowhush") });
+        if GetLastError() == ERROR_ALREADY_EXISTS {
+            return;
+        }
+        let _ = SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    }
+    snowhush::language::choose();
+    log::start();
+    std::panic::set_hook(Box::new(|info| log!("panic on the {} thread: {info}", std::thread::current().name().unwrap_or("unnamed"))));
+    log!("Snowhush {}", env!("CARGO_PKG_VERSION"));
+    if let Err(error) = app::run() {
+        log!("failed: {error}");
+    }
+}

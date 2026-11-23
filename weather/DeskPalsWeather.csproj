@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    DeskPals Weather: an extension of DeskPals, a program of its own (like the Pet Editor). Snow, autumn leaves, rain
+    and cherry blossom come from Snowhush (extensions/snowhush-src, PolyForm Noncommercial, run with "hosted"); fog,
+    sun rays, grass and wind, the ambient sound, the scenes, the local weather, the pauses
+    and the shortcuts are its own. It tells DeskPals what falls (a small state file), so the pets react.
+    "DeskPalsWeather.exe devtests" runs its tests (the release does).
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>DeskPalsWeather</AssemblyName>
+    <RootNamespace>DeskPalsWeather</RootNamespace>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <Version>1.0.0</Version>
+    <Product>DeskPals Weather</Product>
+    <AssemblyTitle>DeskPals Weather</AssemblyTitle>
+    <Company>DeskPals</Company>
+    <NoWarn>$(NoWarn);CA1416;WFO1000</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\Portable\Theme.cs" Link="Shared\Theme.cs" />
+    <Compile Include="..\src\Portable\ColorText.cs" Link="Shared\ColorText.cs" />
+    <Compile Include="..\src\Portable\AppInfo.cs" Link="Shared\AppInfo.cs" />
+    <Compile Include="..\editor\Core\Shims.cs" Link="Shared\Shims.cs" />
+    <!-- the texts of the 23 languages, inside the program -->
+    <EmbeddedResource Include="lang\*.txt" LogicalName="DeskPalsWeather.lang.%(Filename)%(Extension)" WithCulture="false" />
+    <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
+    <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
+  </ItemGroup>
+
+</Project>

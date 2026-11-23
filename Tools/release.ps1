@@ -7,6 +7,7 @@
     1. Writes the version into src\Properties\AssemblyInfoPortable.cs
     2. Publishes the .NET 10 single-file exe
     3. Packs lang\*.json into lang.zip
+    2b. Builds the Pet Editor and DeskPals Weather (with its snow engine, Snowhush), runs their tests and packs them
     4. Writes SHA256SUMS (the updater refuses any file whose hash does not match)
     5. Creates the GitHub release "v<Version>" with the three files (needs the GitHub CLI, "gh auth login")
 
@@ -95,6 +96,39 @@ foreach ($z in @(@{ Scale = '1'; Size = '1000x660' }, @{ Scale = '1.5'; Size = '
 }
 Write-Output "Pet Editor: tests passed, no text cut off at 100% and 150%"
 
+# 2b4. DeskPals Weather, an extension (a program of its own): DeskPals downloads DeskPals-Weather.zip when the user
+# turns it on, and brings its new versions. Its snow engine is Snowhush (PolyForm Noncommercial, extensions\snowhush-src),
+# built here with Rust (GNU toolchain; MinGW-w64 in a folder without spaces, see extensions\README.md). Its own tests
+# run before it is packed; a failure stops the release.
+$weatherDir = Join-Path $out 'weather'
+dotnet publish (Join-Path $root 'weather\DeskPalsWeather.csproj') -c Release -o $weatherDir --nologo "-p:Version=$Version"
+if ($LASTEXITCODE -ne 0) { throw "dotnet publish (DeskPals Weather) failed" }
+$snowSrc = Join-Path $root 'extensions\snowhush-src\windows'
+foreach ($dir in @('C:\Users\Public\mingw64\bin', (Join-Path $env:USERPROFILE '.cargo\bin'))) { if ((Test-Path $dir) -and ($env:PATH -notlike "*$dir*")) { $env:PATH = "$dir;$env:PATH" } }
+if (-not (Get-Command cargo -ErrorAction SilentlyContinue)) { throw "Rust (cargo) not found: it builds the snow engine of DeskPals Weather (see extensions\README.md)" }
+Push-Location $snowSrc
+cargo build --release --bin Snowhush
+$cargoCode = $LASTEXITCODE
+Pop-Location
+if ($cargoCode -ne 0) { throw "cargo build (Snowhush) failed" }
+# Without its manifest (windres missing: see extensions\README.md) Windows refuses the window that keeps the snow and
+# the rain behind the windows, and they fall in front of them: such a build is not published.
+$snowText = [Text.Encoding]::GetEncoding(28591).GetString([IO.File]::ReadAllBytes((Join-Path $snowSrc 'target\release\Snowhush.exe')))
+$manifests = ([regex]::Matches($snowText, '<assembly xmlns=')).Count
+if ($snowText -notmatch '8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a' -or $snowText -notmatch 'PerMonitorV2') { throw "Snowhush.exe has no manifest (is windres, from MinGW, on the PATH?): the snow and the rain could not go behind the windows" }
+if ($manifests -ne 1) { throw "Snowhush.exe has $manifests manifests (one expected): see extensions\snowhush-src\windows\build.rs" }
+Copy-Item (Join-Path $snowSrc 'target\release\Snowhush.exe') (Join-Path $weatherDir 'DeskPals-Snowhush.exe') -Force
+Copy-Item (Join-Path $root 'extensions\snowhush-src\LICENSE') (Join-Path $weatherDir 'Snowhush-LICENSE.txt') -Force
+[IO.File]::WriteAllText((Join-Path $weatherDir 'NOTICE.txt'), "DeskPals Weather $Version`r`n`r`nSnow, autumn leaves, rain and cherry blossom: Snowhush (DeskPals-Snowhush.exe), changed to run inside DeskPals Weather (see extensions/README.md in the DeskPals repository).`r`nLicense: PolyForm Noncommercial 1.0.0 (Snowhush-LICENSE.txt). Free; it may not be sold.`r`n`r`nRequired Notice: Copyright 2026 Mykhailo Bezruchko (https://github.com/mbezruchko/Snowhush)`r`n`r`nThe rest of DeskPals Weather is part of DeskPals (MIT license). The weather comes from Open-Meteo (open-meteo.com).`r`n", $utf8)
+$weatherReport = Join-Path $env:TEMP 'DeskPalsWeather-devtests.txt'
+$wp = Start-Process (Join-Path $weatherDir 'DeskPalsWeather.exe') -ArgumentList "--devtests=`"$weatherReport`"" -PassThru
+if (-not $wp.WaitForExit(300000)) { Stop-Process -Id $wp.Id -Force; throw "DeskPals Weather: the tests did not finish in 5 minutes" }
+if ($wp.ExitCode -ne 0) { throw "DeskPals Weather: $($wp.ExitCode) test(s) failed (see $weatherReport)" }
+$weatherZip = Join-Path $out 'DeskPals-Weather.zip'
+Compress-Archive -Path (@('DeskPalsWeather.exe', 'DeskPals-Snowhush.exe', 'Snowhush-LICENSE.txt', 'NOTICE.txt') | ForEach-Object { Join-Path $weatherDir $_ }) -DestinationPath $weatherZip -Force
+Remove-Item $weatherDir -Recurse -Force
+Write-Output "DeskPals Weather: tests passed, packed in DeskPals-Weather.zip"
+
 # 2c. installer (.NET Framework 4.8, comes with Windows): checks the .NET 10 Desktop Runtime, then installs DesktopPet.exe (and the Pet Editor)
 dotnet build (Join-Path $root 'Tools\Setup\Setup.csproj') -c Release --nologo "-p:AppExe=$exe" "-p:EditorExe=$editorExe" "-p:Version=$Version"
 if ($LASTEXITCODE -ne 0) { throw "installer build failed" }
@@ -106,7 +140,7 @@ $langZip = Join-Path $out 'lang.zip'
 Compress-Archive -Path (Join-Path $src 'lang\*.json') -DestinationPath $langZip -Force
 
 # 4. hashes ("hash  name", LF, like sha256sum)
-$sums = foreach ($f in @($exe, $fullExe, $setupExe, $editorExe, $langZip)) {
+$sums = foreach ($f in @($exe, $fullExe, $setupExe, $editorExe, $weatherZip, $langZip)) {
     (Get-FileHash $f -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + (Split-Path $f -Leaf)
 }
 $sumsFile = Join-Path $out 'SHA256SUMS'
@@ -117,15 +151,16 @@ Write-Output ""
 Write-Output ("DesktopPet.exe: {0:N0} KB" -f ((Get-Item $exe).Length / 1KB))
 Write-Output ("DesktopPet-completo.exe: {0:N0} KB" -f ((Get-Item $fullExe).Length / 1KB))
 Write-Output ("PetEditor.exe: {0:N0} KB" -f ((Get-Item $editorExe).Length / 1KB))
+Write-Output ("DeskPals-Weather.zip: {0:N0} KB" -f ((Get-Item $weatherZip).Length / 1KB))
 
 if ($NoUpload) { Write-Output "Built in $out (not uploaded)."; return }
 
 # 5. GitHub release
 if (-not $Notes) { $Notes = "DesktopPet $Version" }
-$Notes += "`n`n**Qual baixar?**`n- ``DesktopPet-Instalador.exe`` (recomendado): verifica se o .NET 10 está no computador, instala se faltar e cria os atalhos.`n- ``DesktopPet-completo.exe``: funciona direto, sem instalar nada (arquivo maior).`n- ``DesktopPet.exe``: só o programa, precisa do [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).`n- ``PetEditor.exe``: o Editor de Pets (o instalador já traz; o DesktopPet também baixa sozinho na primeira vez que for aberto)."
+$Notes += "`n`n**Qual baixar?**`n- ``DesktopPet-Instalador.exe`` (recomendado): verifica se o .NET 10 está no computador, instala se faltar e cria os atalhos.`n- ``DesktopPet-completo.exe``: funciona direto, sem instalar nada (arquivo maior).`n- ``DesktopPet.exe``: só o programa, precisa do [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).`n- ``PetEditor.exe``: o Editor de Pets (o instalador já traz; o DesktopPet também baixa sozinho na primeira vez que for aberto).`n- ``DeskPals-Weather.zip``: a extensão DeskPals Weather (neve, chuva, neblina, sol, cenas…). Não precisa baixar à mão: o DeskPals baixa quando ela é ligada na aba Extensões."
 # notes go through a file: quotes or line breaks in the text would break the command line
 $notesFile = Join-Path $out 'NOTES.md'
 [IO.File]::WriteAllText($notesFile, $Notes, $utf8)
-gh release create "v$Version" $setupExe $fullExe $exe $editorExe $langZip $sumsFile (Join-Path $root 'LICENSE.md') --repo $Repo --title "Desktop-Pet $Version" --notes-file $notesFile --target master
+gh release create "v$Version" $setupExe $fullExe $exe $editorExe $weatherZip $langZip $sumsFile (Join-Path $root 'LICENSE.md') --repo $Repo --title "DeskPals $Version" --notes-file $notesFile --target master
 if ($LASTEXITCODE -ne 0) { throw "gh release create failed" }
 Write-Output "Release v$Version published on https://github.com/$Repo/releases"
