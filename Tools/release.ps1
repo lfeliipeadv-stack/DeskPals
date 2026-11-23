@@ -50,7 +50,9 @@ Write-Output "Version $Version written to AssemblyInfoPortable.cs"
 
 # 2. exe
 if (Test-Path $out) { Remove-Item $out -Recurse -Force }
-dotnet publish (Join-Path $src 'DesktopPet.Net.csproj') -c Release -o $out --nologo
+# built in a folder of its own: a DeskPals running from src\bin (the one used for development) locks its exe there
+$binDir = Join-Path $env:TEMP 'deskpals-release-bin\'
+dotnet publish (Join-Path $src 'DesktopPet.Net.csproj') -c Release -o $out --nologo "-p:BaseOutputPath=$binDir"
 if ($LASTEXITCODE -ne 0) { throw "dotnet publish failed" }
 $exe = Join-Path $out 'DesktopPet.exe'
 $built = (Get-Item $exe).VersionInfo.FileVersion
@@ -58,7 +60,7 @@ if ($built -ne "$Version.0") { throw "The exe reports version $built instead of 
 
 # 2b. "full" exe: .NET inside, nothing to install (bigger). It updates itself to the full exe of the next release.
 $fullDir = Join-Path $out 'full'
-dotnet publish (Join-Path $src 'DesktopPet.Net.csproj') -c Release -o $fullDir --nologo -p:SelfContained=true
+dotnet publish (Join-Path $src 'DesktopPet.Net.csproj') -c Release -o $fullDir --nologo -p:SelfContained=true "-p:BaseOutputPath=$binDir"
 if ($LASTEXITCODE -ne 0) { throw "dotnet publish (full) failed" }
 $fullExe = Join-Path $out 'DesktopPet-completo.exe'
 Copy-Item (Join-Path $fullDir 'DesktopPet.exe') $fullExe -Force
