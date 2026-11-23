@@ -2,7 +2,7 @@
 
 [Home](Home.md) · [Primeiros passos](Primeiros-passos.md) · [Painel de pets](Painel-de-pets.md) · [Pergunte ao pet](Pergunte-ao-pet.md) · [Lembretes e Pomodoro](Lembretes-e-pomodoro.md) · [Agenda e e-mails](Agenda-e-e-mails.md) · [Pet virtual e brincadeiras](Pet-virtual-e-brinquedos.md) · [Plugins e integrações](Plugins-e-integracoes.md) · [Crie o seu pet](Crie-o-seu-pet.md) · [Atalhos e comandos](Atalhos-e-comandos.md) · [Para desenvolvedores](Para-desenvolvedores.md) · [Perguntas frequentes](Perguntas-frequentes.md) · [Changelog](Changelog.md)
 
-O Desktop-Pet roda em Windows 10 e 11 de 64 bits. O instalador coloca o programa em `C:\Program Files\DesktopPet`, como os outros programas — por isso o Windows pede permissão de administrador uma vez, ao abrir o instalador. Os seus pets, lembretes, notas e configurações ficam na sua pasta de usuário (`%LocalAppData%\DesktopPet`), e o programa em si nunca pede administrador.
+O DeskPals roda em Windows 10 e 11 de 64 bits. O instalador coloca o programa em `C:\Program Files\DesktopPet`, como os outros programas — por isso o Windows pede permissão de administrador uma vez, ao abrir o instalador. Os seus pets, lembretes, notas e configurações ficam na sua pasta de usuário (`%LocalAppData%\DesktopPet`), e o programa em si nunca pede administrador.
 
 ## Escolha o download
 

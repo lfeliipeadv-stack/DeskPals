@@ -1,6 +1,6 @@
 # Downloads
 
-A versão mais recente do Desktop-Pet fica na página de versões do GitHub: <https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest>. A página do projeto, <https://lfeliipeadv-stack.github.io/Desktop-Pet/>, tem o botão de download e a demo no navegador.
+A versão mais recente do DeskPals fica na página de versões do GitHub: <https://github.com/lfeliipeadv-stack/Desktop-Pet/releases/latest>. A página do projeto, <https://lfeliipeadv-stack.github.io/Desktop-Pet/>, tem o botão de download e a demo no navegador.
 
 | Arquivo | Para quem |
 | --- | --- |

@@ -45,7 +45,7 @@ function Font([string[]]$names, [float]$size, [Drawing.FontStyle]$style) {
   return New-Object Drawing.Font 'Segoe UI', $size, $style, ([Drawing.GraphicsUnit]::Pixel)
 }
 $white = [Drawing.Brushes]::White
-$g.DrawString('Desktop-Pet', (Font @('Segoe UI Variable Display', 'Segoe UI') 68 'Bold'), $white, 206, 54)
+$g.DrawString('DeskPals', (Font @('Segoe UI Variable Display', 'Segoe UI') 68 'Bold'), $white, 206, 54)
 $g.DrawString($Subtitle, (Font @('Segoe UI Variable Text', 'Segoe UI') 25 'Regular'),
   (New-Object Drawing.SolidBrush ([Drawing.Color]::FromArgb(225, 255, 255, 255))), 212, 140)
 

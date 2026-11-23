@@ -32,7 +32,7 @@ Os endereços que o programa acessa na rede são estes:
 | Endereço | Para que serve | O que sai |
 | --- | --- | --- |
 | `api.github.com` e `raw.githubusercontent.com` | Conferir versão nova do programa e baixar pets da galeria | Nada sobre o que você faz |
-| `geocoding-api.open-meteo.com` e `api.open-meteo.com` | Plugin Clima | Só a sua cidade |
+| `geocoding-api.open-meteo.com` e `api.open-meteo.com` | Plugin Clima e a extensão DeskPals Weather (quando acompanha o clima) | Só a sua cidade |
 | O serviço de IA que você configurar (Gemini, Groq, OpenRouter ou outro compatível com a API da OpenAI) | Responder perguntas em modo livre | A sua pergunta e o histórico da conversa |
 | O link iCal da sua agenda | Ler os horários das reuniões | O link do calendário, para buscar o arquivo `.ics` |
 
@@ -143,6 +143,7 @@ O que precisa de internet:
 | Aba "Baixar pets" | A galeria é lida do repositório no GitHub |
 | Procurar versão nova do programa | A consulta vai para `api.github.com` |
 | Plugin Clima | Consulta o Open-Meteo |
+| Extensão DeskPals Weather | É baixada do GitHub quando você liga; acompanhando o clima, consulta o Open-Meteo |
 | Plugin Agenda | Busca o arquivo `.ics` da sua agenda |
 | Perguntas em modo livre com IA na nuvem | A pergunta vai para o provedor configurado |
 
@@ -234,7 +235,7 @@ As capturas de tela dos pets saem do próprio programa: `DesktopPet.exe --snapsh
 | Palavra | O que significa |
 | --- | --- |
 | **Claude Code** | O programa de terminal para se trabalhar com código com um assistente de IA. O pet se liga a ele de duas formas: por *hooks* (o pet reage: pensando, editando, rodando, pronto) e por MCP (o Claude fala pelo balão do pet). |
-| **MCP** (*Model Context Protocol*) | Protocolo aberto pelo qual um programa oferece ferramentas a um assistente de IA. Aqui o Desktop-Pet é o servidor MCP: ele fala JSON-RPC 2.0 (protocolo `2025-06-18`) e oferece três ferramentas — `pet_say`, `pet_react` e `pet_status`. |
+| **MCP** (*Model Context Protocol*) | Protocolo aberto pelo qual um programa oferece ferramentas a um assistente de IA. Aqui o DeskPals é o servidor MCP: ele fala JSON-RPC 2.0 (protocolo `2025-06-18`) e oferece três ferramentas — `pet_say`, `pet_react` e `pet_status`. |
 | **hook** | Comando que o Claude Code roda quando um evento acontece (sessão iniciada, pergunta enviada, arquivo editado, comando rodado, erro, fim do turno). Aqui cada hook é um `curl.exe` de um POST para `127.0.0.1`, e o pet transforma o evento em animação e balão. |
 | **iCal** | Formato de arquivo de calendário (`.ics`). O plugin Agenda lê o link secreto da agenda do Google ou do Outlook e avisa antes de cada reunião. O programa só aceita link que comece com `https://` ou `webcal://`. |
 | **Ollama** | Programa que roda modelos de IA dentro do seu próprio computador. Sem chave, sem conta e sem enviar pergunta para fora. Na página Assistente ele aparece com o selo **"Grátis · no seu computador"**. |

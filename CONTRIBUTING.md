@@ -1,6 +1,6 @@
 # How to contribute
 
-Thanks for wanting to help Desktop-Pet! There are three main ways. (Issues and pull requests are welcome in English or Portuguese.)
+Thanks for wanting to help DeskPals! There are three main ways. (Issues and pull requests are welcome in English or Portuguese.)
 
 ## A new pet for the gallery
 
@@ -8,7 +8,7 @@ Thanks for wanting to help Desktop-Pet! There are three main ways. (Issues and p
 2. Create the pet with the **New pet wizard** or change an existing one (use **Save as** to keep the original untouched).
 3. Test it with **Test on desktop** (F5): it opens a second DesktopPet with only your pet, without touching yours.
 4. Check the **Validator**: the gallery only accepts pets with no errors and with a name and author in the Header.
-5. Click **Publish to gallery**: the editor creates the .zip (in `Documents\Desktop-Pet\galeria`) and opens the
+5. Click **Publish to gallery**: the editor creates the .zip (in `Documents\DeskPals\galeria`) and opens the
    [pet form](https://github.com/lfeliipeadv-stack/Desktop-Pet/issues/new?template=new_pet.md) already filled in.
    Drag the .zip onto the page and submit.
 

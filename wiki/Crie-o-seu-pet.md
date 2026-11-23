@@ -1,6 +1,6 @@
 # Crie o seu pet
 
-O Desktop-Pet vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
+O DeskPals vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
 
 A ideia de um editor de pets vem do [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), o editor online de Adriano Petrucci, criador do desktopPet. Os dois usam o mesmo formato (`animations.xml`, validado pelo esquema `animations.xsd` dele), então um pet feito num abre no outro.
 
@@ -66,7 +66,7 @@ Em **Configurações › Programa › Backup dos meus pets e configurações ›
 ## Mandar o pet para alguém ou para a galeria
 
 - **Exportar como .zip** gera um arquivo só, pronto para mandar: a pasta do pet com `animations.xml`, `icon.png`, a prévia animada (`preview.gif`) e os READMEs em inglês e português.
-- **Publicar na galeria** confere o pet (precisa de nome, autor e nenhum erro no Verificador), cria o .zip em `Documentos\Desktop-Pet\galeria` e abre a página de envio do GitHub já preenchida. O GitHub não recebe arquivos por link: o .zip aparece selecionado no Explorador para você arrastar até a página e clicar em **Submit new issue**. Quem cuida da galeria confere o pet antes de ele aparecer para todos.
+- **Publicar na galeria** confere o pet (precisa de nome, autor e nenhum erro no Verificador), cria o .zip em `Documentos\DeskPals\galeria` e abre a página de envio do GitHub já preenchida. O GitHub não recebe arquivos por link: o .zip aparece selecionado no Explorador para você arrastar até a página e clicar em **Submit new issue**. Quem cuida da galeria confere o pet antes de ele aparecer para todos.
 
 ## Para ir além: o animations.xml, PetGen e PetPack
 

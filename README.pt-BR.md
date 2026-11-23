@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/readme/banner.pt-BR.png" alt="Desktop-Pet: bichinhos que vivem na sua área de trabalho do Windows" width="100%">
+  <img src=".github/readme/banner.pt-BR.png" alt="DeskPals: bichinhos que vivem na sua área de trabalho do Windows" width="100%">
 </p>
 
 <p align="center"><a href="Readme.md">English</a> · <b>Português</b></p>
@@ -60,7 +60,7 @@ papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/Deskt
 ## Os pets
 
 A galeria tem **64 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
-com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o Desktop-Pet, em pixel art:
+com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o DeskPals, em pixel art:
 
 <table>
   <tr>
@@ -302,7 +302,7 @@ fazendo. Os detalhes estão em [Para desenvolvedores](https://lfeliipeadv-stack.
 
 - **Ideia e arte originais da ovelha:** Tatsutoshi Nomura (Stray Sheep, Fuji TV, 1994).
 - **Programa original:** [desktopPet](https://github.com/Adrianotiger/desktopPet) de Adriano Petrucci, a versão para Windows moderno da ovelhinha clássica do eSheep (licença MIT).
-- **Ideia do Editor de Pets:** [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), o editor online de pets de Adriano Petrucci. O Editor de Pets do Desktop-Pet foi inspirado nele e usa o mesmo formato `animations.xml` e o mesmo esquema.
+- **Ideia do Editor de Pets:** [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), o editor online de pets de Adriano Petrucci. O Editor de Pets do DeskPals foi inspirado nele e usa o mesmo formato `animations.xml` e o mesmo esquema.
 - **Ícone na bandeja do sistema:** Sergi Fumanya Grunwaldt.
 - **Arremesso do pet e colisões com janelas e outros pets:** Zecheriah.
 - **Versão .NET 10, tradução, pets novos e Editor de Pets:** Luan Felipe.

@@ -1,4 +1,4 @@
-# O Wiki do Desktop-Pet
+# O Wiki do DeskPals
 
 O manual do projeto tem duas cópias, geradas a partir da mesma fonte.
 
@@ -42,7 +42,7 @@ fonte de estilo.
 O Wiki nativo do repositório fica em
 **<https://github.com/lfeliipeadv-stack/Desktop-Pet/wiki>**.
 
-Ele ainda não existe. O GitHub cria o repositório do Wiki (o `Desktop-Pet.wiki.git`)
+Ele ainda não existe. O GitHub cria o repositório do Wiki (o `DeskPals.wiki.git`)
 **somente quando a primeira página é criada pela interface do site** — não há
 API pública para isso, e o próprio `gh` retorna "the wiki has no pages yet;
 create its first page on GitHub, then try again".

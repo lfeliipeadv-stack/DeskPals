@@ -79,14 +79,14 @@ pagina() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>$titulo — Wiki do Desktop-Pet</title>
+<title>$titulo — Wiki do DeskPals</title>
 <link rel="icon" href="../img/icon.png">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body class="wiki">
 <header class="topo">
-  <a class="volta" href="../">&larr; Voltar para a página do Desktop-Pet</a>
-  <span class="marca">Wiki do Desktop-Pet</span>
+  <a class="volta" href="../">&larr; Voltar para a página do DeskPals</a>
+  <span class="marca">Wiki do DeskPals</span>
 </header>
 <div class="layout">
   <nav class="lateral">
@@ -100,7 +100,7 @@ $corpo
   </main>
 </div>
 <footer class="rodape">
-  <p>O <strong>Desktop-Pet</strong> é um bichinho de área de trabalho para Windows 10 e 11.
+  <p>O <strong>DeskPals</strong> é um bichinho de área de trabalho para Windows 10 e 11.
   <a href="https://github.com/lfeliipeadv-stack/Desktop-Pet">Ver no GitHub</a></p>
 </footer>
 </body>

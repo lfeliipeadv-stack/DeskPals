@@ -90,6 +90,25 @@ Os dados ficam em `%LocalAppData%\DesktopPet`, um arquivo por assunto:
 | `needs.json` | Fome, carinho e energia de cada pet |
 | `agent.json` | Porta e senha do canal local (usado pelas integrações) |
 
+## A página Extensões
+
+Extensões são programas à parte que o DeskPals baixa só quando você liga e roda junto com ele. Cada uma tem a sua janela de configurações e a sua licença. Hoje são duas: **DeskPals Weather** e o **Editor de Pets**.
+
+### DeskPals Weather
+
+O clima na sua área de trabalho. Ligue a chave do cartão e o DeskPals baixa a extensão (cerca de 1 MB); o botão **Configurar** abre a janela dela, no mesmo idioma e tema do DeskPals.
+
+| Página | O que tem |
+| --- | --- |
+| Clima | Neve, folhas de outono, chuva ou flores de cerejeira caindo e acumulando nas janelas; acompanhar o clima da sua cidade (com as estações nos dias secos, ou invertido: chuva lá fora vira sol aqui) |
+| Cenas | Oito cenas prontas (Inverno, Nevasca, Dia chuvoso, Outono…); salvar as suas, mandar para um amigo como código (`DPW1:…`) ou arquivo `.dpweather` e trazer as dele |
+| Efeitos | Neblina, raios de sol, grama em cima das janelas e vento; atrás da janela em uso ou por cima de todas; aparecer ou não em prints e gravações; uma cor para cada efeito |
+| Som | Chuva e vento feitos no próprio programa; abaixa sozinho durante chamadas |
+| Pausas | Tela cheia, bateria e programas escolhidos (para cada um: pausar tudo, só os efeitos ou só o som) |
+| Atalhos | Ligar e desligar o clima, abrir as configurações |
+
+Os pets reagem ao que cai na tela: guarda-chuva na chuva, frio na neve, dança nas folhas. A neve, as folhas, a chuva e as flores vêm do [Snowhush](https://github.com/mbezruchko/Snowhush), de Mykhailo Bezruchko, sob a licença PolyForm Noncommercial 1.0.0 (gratuito, não pode ser vendido). As configurações ficam em `%LocalAppData%\DesktopPet\extensions\weather.json`.
+
 ## A página Integrações
 
 Integrações são pontes com programas de fora do pet. A página tem três cartões: **Claude Code**, **Outros agentes de IA** e **API local**.

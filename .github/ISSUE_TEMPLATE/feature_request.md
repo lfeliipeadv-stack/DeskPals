@@ -1,6 +1,6 @@
 ---
 name: Ideia / Feature request
-about: Sugira algo novo para o Desktop-Pet / Suggest something new
+about: Sugira algo novo para o DeskPals / Suggest something new
 title: '[Ideia] '
 labels: enhancement
 assignees: ''
