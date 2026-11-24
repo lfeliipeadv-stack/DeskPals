@@ -8,7 +8,7 @@ namespace DesktopPet
 {
     /// <summary>
     /// "Start with Windows": an entry in HKCU\...\Run pointing to this exe (no admin rights needed).
-    /// The installer used to put a DesktopPet.url (DeskPals.url from 1.2.0) in the Startup folder instead; it counts as "on" too,
+    /// The installer used to put a DesktopPet.url (DeskPals.url from 1.1.1) in the Startup folder instead; it counts as "on" too,
     /// and is removed when the option is turned off, so the program never starts twice.
     /// </summary>
     internal static class WindowsStartup

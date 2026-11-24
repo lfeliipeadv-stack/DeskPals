@@ -9,7 +9,7 @@
     3. Packs lang\*.json into lang.zip
     2b. Builds the Pet Editor and DeskPals Weather (with its snow engine, Snowhush), runs their tests and packs them
     4. Writes SHA256SUMS (the updater refuses any file whose hash does not match)
-    5. Creates the GitHub release "v<Version>" with the files (and copies under the names before 1.2.0) (needs the GitHub CLI, "gh auth login")
+    5. Creates the GitHub release "v<Version>" with the files (and copies under the names before 1.1.1) (needs the GitHub CLI, "gh auth login")
 
     Commit the version change after the release.
 
@@ -139,7 +139,7 @@ if ($LASTEXITCODE -ne 0) { throw "installer build failed" }
 $setupExe = Join-Path $out 'DeskPals-Instalador.exe'
 Copy-Item (Join-Path $root 'Tools\Setup\bin\Release\net48\DeskPals-Instalador.exe') $setupExe -Force
 
-# 2d. the same files under their names before 1.2.0 (DesktopPet.exe, DesktopPet-completo.exe, PetEditor.exe,
+# 2d. the same files under their names before 1.1.1 (DesktopPet.exe, DesktopPet-completo.exe, PetEditor.exe,
 # DesktopPet-Instalador.exe): an installed 1.0.x or 1.1.x looks for those names to update itself (and to download
 # the editor), and old links point to them. Same bytes, in SHA256SUMS too.
 $legacyDir = Join-Path $out 'nomes-antigos'

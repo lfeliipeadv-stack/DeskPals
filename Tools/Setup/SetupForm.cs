@@ -207,8 +207,18 @@ namespace DesktopPetSetup
 			try
 			{
 				busy = true; install.Enabled = false;
-				// the program and the editor, also under their names before 1.2.0 (DesktopPet.exe, PetEditor.exe)
-				foreach (var p in DesktopPet.InstallPlace.ProcessNames.SelectMany(Process.GetProcessesByName)) { try { p.Kill(); p.WaitForExit(3000); } catch (Exception) { } }
+				// the program and the editor, also under their names before 1.1.1 (DesktopPet.exe, PetEditor.exe)
+				// only the installed copy (and the editor downloaded into the user's folder): a copy running from somewhere
+				// else (a download, a developer build) is left alone
+				foreach (var p in DesktopPet.InstallPlace.ProcessNames.SelectMany(Process.GetProcessesByName))
+				{
+					try
+					{
+						string dir = Path.GetDirectoryName(p.MainModule?.FileName ?? "");
+						if (string.Equals(dir, InstallPath, StringComparison.OrdinalIgnoreCase) || string.Equals(dir, DesktopPet.InstallPlace.DataDir, StringComparison.OrdinalIgnoreCase)) { p.Kill(); p.WaitForExit(3000); }
+					}
+					catch (Exception) { }
+				}
 				Directory.CreateDirectory(InstallPath);
 				string exe = Path.Combine(InstallPath, DesktopPet.InstallPlace.ExeName);
 				using (var s = typeof(SetupForm).Assembly.GetManifestResourceStream("DesktopPet.exe"))

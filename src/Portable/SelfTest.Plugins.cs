@@ -346,7 +346,7 @@ namespace DesktopPet
 			Check("install: older install keeps its settings file", string.Equals(LocalData.ConfigPath(InstallPlace.DataDir, Path.GetTempPath()), LocalData.ConfigPath(InstallPlace.ProgramDir, Path.GetTempPath()), StringComparison.OrdinalIgnoreCase));
 			string uninstall = UninstallScript.Build("DesktopPet", new[] { @"C:\x\DesktopPet.url" }, InstallPlace.UninstallKey, true);
 			Check("install: the uninstaller asks for administrator and cleans HKLM", uninstall.Contains("-Verb RunAs") && uninstall.Contains(@"reg delete ""HKLM\" + InstallPlace.UninstallKey) && uninstall.Contains(@"%LOCALAPPDATA%\DesktopPet"));
-			// the new names (1.2.0): DeskPals.exe; an install updated from before keeps DesktopPet.exe and is still found
+			// the new names (1.1.1): DeskPals.exe; an install updated from before keeps DesktopPet.exe and is still found
 			string names = UninstallScript.Build("DesktopPet", new[] { @"C:\x\DeskPals.url" }, InstallPlace.UninstallKey, true);
 			Check("names: the uninstaller closes the program under both names", names.Contains("taskkill /IM DeskPals.exe") && names.Contains("taskkill /IM DesktopPet.exe") && names.Contains("taskkill /IM DeskPals-Editor.exe"));
 			Check("names: the uninstaller removes the old shortcut too", names.Contains(@"del ""C:\x\DeskPals.url""") && names.Contains(@"del ""C:\x\DesktopPet.url"""));

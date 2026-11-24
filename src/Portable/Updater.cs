@@ -31,7 +31,7 @@ namespace DesktopPet
         private const string ExeAsset = "DeskPals.exe", OldExeAsset = "DesktopPet.exe";
 #endif
         /// <summary>
-        /// The program in a release: DeskPals.exe from 1.2.0 on (the releases also carry a copy named DesktopPet.exe,
+        /// The program in a release: DeskPals.exe from 1.1.1 on (the releases also carry a copy named DesktopPet.exe,
         /// for the versions before, which look for that name). The file on this computer keeps its own name.
         /// </summary>
         static string ExeAssetOf(Release release) => release.Assets.ContainsKey(ExeAsset) ? ExeAsset : OldExeAsset;
@@ -499,12 +499,12 @@ namespace DesktopPet
 
         /// <summary>Asset of the Pet Editor in the releases (a separate program, downloaded the first time it is opened).</summary>
         public const string EditorAsset = InstallPlace.EditorExeName;
-        /// <summary>Its name before 1.2.0 (the releases still carry a copy with it, for the versions before).</summary>
+        /// <summary>Its name before 1.1.1 (the releases still carry a copy with it, for the versions before).</summary>
         public const string OldEditorAsset = InstallPlace.OldEditorExeName;
 
         /// <summary>Where a downloaded Pet Editor is kept (the user's folder: Program Files is read-only).</summary>
         public static string EditorPath => Path.Combine(InstallPlace.DataDir, EditorAsset);
-        /// <summary>The editor a version before 1.2.0 downloaded (replaced by the new one the next time it is brought up to date).</summary>
+        /// <summary>The editor a version before 1.1.1 downloaded (replaced by the new one the next time it is brought up to date).</summary>
         public static string OldEditorPath => Path.Combine(InstallPlace.DataDir, OldEditorAsset);
 
         /// <summary>The editor in a release: the new name, or the old one in a release made before it.</summary>

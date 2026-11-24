@@ -23,7 +23,7 @@ namespace DesktopPet
 		public const string AppName = "DesktopPet";
 		public const string UninstallKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\" + AppName;
 
-		/// <summary>The program and its shortcuts are called DeskPals from 1.2.0 on; before, DesktopPet.</summary>
+		/// <summary>The program and its shortcuts are called DeskPals from 1.1.1 on; before, DesktopPet.</summary>
 		public const string ExeName = "DeskPals.exe", OldExeName = "DesktopPet.exe";
 		public const string EditorExeName = "DeskPals-Editor.exe", OldEditorExeName = "PetEditor.exe";
 		public const string ShortcutName = "DeskPals.url", OldShortcutName = "DesktopPet.url";

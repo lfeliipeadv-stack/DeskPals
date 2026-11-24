@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace DesktopPet
 {
 	/// <summary>
-	/// The Pet Editor (DeskPals-Editor.exe; PetEditor.exe before 1.2.0), a separate program to create and change pets. It is looked for where it can be:
+	/// The Pet Editor (DeskPals-Editor.exe; PetEditor.exe before 1.1.1), a separate program to create and change pets. It is looked for where it can be:
 	/// next to DeskPals.exe (installed together), the copy downloaded before into the user's folder, or in a developer
 	/// build the one of the repository. When it is found it opens; when it is not, the user is asked whether to download it
 	/// (the size is said), and only then it is downloaded from the latest release, checked against its SHA256 and opened.
@@ -32,7 +32,7 @@ namespace DesktopPet
 			string here = AppContext.BaseDirectory;
 			yield return Path.Combine(here, Updater.EditorAsset);
 			yield return Updater.EditorPath;
-			// the names before 1.2.0 (PetEditor.exe): an install updated from then, or a copy downloaded then
+			// the names before 1.1.1 (PetEditor.exe): an install updated from then, or a copy downloaded then
 			yield return Path.Combine(here, Updater.OldEditorAsset);
 			yield return Updater.OldEditorPath;
 			// a developer build: the editor built in the repository

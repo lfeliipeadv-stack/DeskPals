@@ -35,7 +35,7 @@ namespace PetEditor
 			return candidates.FirstOrDefault(c => File.Exists(c) && SupportsTest(c));
 		}
 
-		/// <summary>The program's name from 1.2.0 on, and before (an install updated from then keeps DesktopPet.exe).</summary>
+		/// <summary>The program's name from 1.1.1 on, and before (an install updated from then keeps DesktopPet.exe).</summary>
 		static readonly string[] ExeNames = { "DeskPals.exe", "DesktopPet.exe" };
 
 		/// <summary>Where an installed copy can be: Program Files, or %LocalAppData% of the versions before 2.7.</summary>
