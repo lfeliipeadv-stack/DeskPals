@@ -4,10 +4,10 @@ A versão mais recente do DeskPals fica na página de versões do GitHub: <https
 
 | Arquivo | Para quem |
 | --- | --- |
-| [DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-Instalador.exe) | **Recomendado.** Confere o .NET 10, instala o programa e o Editor de Pets e cria os atalhos. |
-| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-completo.exe) | Abre direto, sem instalar nada (arquivo maior, com o .NET dentro). |
-| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
-| [PetEditor.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/PetEditor.exe) | O Editor de Pets, para criar e mudar pets. O instalador já traz, e o programa baixa sozinho na primeira vez que você abre Configurações › Editor de Pets. |
+| [DeskPals-Instalador.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-Instalador.exe) | **Recomendado.** Confere o .NET 10, instala o programa e o Editor de Pets e cria os atalhos. |
+| [DeskPals-completo.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-completo.exe) | Abre direto, sem instalar nada (arquivo maior, com o .NET dentro). |
+| [DeskPals.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
+| [DeskPals-Editor.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-Editor.exe) | O Editor de Pets, para criar e mudar pets. O instalador já traz, e o programa baixa sozinho na primeira vez que você abre Configurações › Editor de Pets. |
 
 Os arquivos não têm assinatura digital, então o Windows pode avisar que o editor é desconhecido. Cada versão publica o `SHA256SUMS` para conferir o download: veja [Instalação](https://lfeliipeadv-stack.github.io/DeskPals/wiki/Instalacao.html).
 

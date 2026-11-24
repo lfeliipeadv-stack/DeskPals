@@ -26,10 +26,18 @@ namespace DesktopPet
     {
 #if SELFCONTAINED
         // the "full" exe (no .NET needed) updates to the full exe, never to the one that needs .NET
-        private const string ExeAsset = "DesktopPet-completo.exe";
+        private const string ExeAsset = "DeskPals-completo.exe", OldExeAsset = "DesktopPet-completo.exe";
 #else
-        private const string ExeAsset = "DesktopPet.exe";
+        private const string ExeAsset = "DeskPals.exe", OldExeAsset = "DesktopPet.exe";
 #endif
+        /// <summary>
+        /// The program in a release: DeskPals.exe from 1.2.0 on (the releases also carry a copy named DesktopPet.exe,
+        /// for the versions before, which look for that name). The file on this computer keeps its own name.
+        /// </summary>
+        static string ExeAssetOf(Release release) => release.Assets.ContainsKey(ExeAsset) ? ExeAsset : OldExeAsset;
+        static bool HasExe(Release release) => release.Assets.ContainsKey(ExeAsset) || release.Assets.ContainsKey(OldExeAsset);
+        /// <summary>Where the program running now is kept while it is replaced: "DeskPals_old.exe" (or DesktopPet_old.exe).</summary>
+        static string OldCopy(string exePath) => Path.Combine(Path.GetDirectoryName(exePath), Path.GetFileNameWithoutExtension(exePath) + "_old.exe");
         private const string LangAsset = "lang.zip";
         private const string SumsAsset = "SHA256SUMS";
 
@@ -156,7 +164,7 @@ namespace DesktopPet
                     if (!silent) PetMessage.Show(owner, Lang.T("upd.upToDate", CurrentVersion.ToString(3)));
                     return;
                 }
-                if (!release.Assets.ContainsKey(ExeAsset) || !release.Assets.ContainsKey(SumsAsset))
+                if (!HasExe(release) || !release.Assets.ContainsKey(SumsAsset))
                     throw new InvalidOperationException(Lang.T("inst.incompleteRelease", release.Version));
 
                 string notes = release.Notes.Length > 1500 ? release.Notes.Substring(0, 1500) + "…" : release.Notes;
@@ -273,7 +281,7 @@ namespace DesktopPet
         {
             if (Staged != null && Staged.Version == release.Version) return;
             var sums = ParseSums(await http.GetStringAsync(release.Assets[SumsAsset]));
-            byte[] exe = await DownloadVerifiedAsync(release, ExeAsset, sums);
+            byte[] exe = await DownloadVerifiedAsync(release, ExeAssetOf(release), sums);
             byte[] lang = release.Assets.ContainsKey(LangAsset) ? await DownloadVerifiedAsync(release, LangAsset, sums) : null;
             string tmp = StageDir + ".tmp";
             if (Directory.Exists(tmp)) Directory.Delete(tmp, true);
@@ -343,7 +351,7 @@ namespace DesktopPet
             {
                 var release = await GetLatestAsync();
                 LastCheck = DateTime.Now;
-                if (release == null || !IsNewer(release.Version) || !release.Assets.ContainsKey(ExeAsset) || !release.Assets.ContainsKey(SumsAsset)) return;
+                if (release == null || !IsNewer(release.Version) || !HasExe(release) || !release.Assets.ContainsKey(SumsAsset)) return;
                 Available = release;
                 // in the background: downloaded now, installed when the program closes
                 if (Silent)
@@ -389,12 +397,12 @@ namespace DesktopPet
         {
             string exePath = Environment.ProcessPath ?? Application.ExecutablePath;
             string appDir = Path.GetDirectoryName(exePath);
-            string oldExe = Path.Combine(appDir, "DesktopPet_old.exe");
+            string oldExe = OldCopy(exePath);
             try { if (File.Exists(oldExe)) File.Delete(oldExe); } catch (Exception skipped) { LogFile.Ignored(skipped); }   // leftover of the previous update
             {
                 // download everything and check every hash first: nothing is touched if one file is wrong
                 var sums = ParseSums(await http.GetStringAsync(release.Assets[SumsAsset]));
-                byte[] exe = await DownloadVerifiedAsync(release, ExeAsset, sums);
+                byte[] exe = await DownloadVerifiedAsync(release, ExeAssetOf(release), sums);
                 byte[] lang = release.Assets.ContainsKey(LangAsset) ? await DownloadVerifiedAsync(release, LangAsset, sums) : null;
 
                 SaveWhatsNew(release);   // the new version shows its notes once
@@ -423,7 +431,7 @@ namespace DesktopPet
         private static void ReplaceFiles(string exePath, byte[] exe, byte[] lang)
         {
             string appDir = Path.GetDirectoryName(exePath);
-            string oldExe = Path.Combine(appDir, "DesktopPet_old.exe");
+            string oldExe = OldCopy(exePath);
             try { if (File.Exists(oldExe)) File.Delete(oldExe); } catch (Exception skipped) { LogFile.Ignored(skipped); }
             File.Move(exePath, oldExe, true);
             try
@@ -467,7 +475,7 @@ namespace DesktopPet
                 "$ErrorActionPreference = 'Stop'",
                 $"try {{ Wait-Process -Id {Environment.ProcessId} -Timeout 30 -ErrorAction SilentlyContinue }} catch {{}}",
                 "function Check($file, $hash) { $b = [IO.File]::ReadAllBytes($file); $h = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($b)).Replace('-', ''); if ($h -ne $hash) { exit 2 }; return ,$b }",
-                $"$exe = {Q(exePath)}; $old = {Q(Path.Combine(appDir, "DesktopPet_old.exe"))}",
+                $"$exe = {Q(exePath)}; $old = {Q(OldCopy(exePath))}",
                 $"$bytes = Check {Q(newExe)} '{Sha256(exe).ToUpperInvariant()}'",
                 "if (Test-Path $old) { Remove-Item $old -Force }",
                 "Move-Item $exe $old -Force",
@@ -490,10 +498,18 @@ namespace DesktopPet
         }
 
         /// <summary>Asset of the Pet Editor in the releases (a separate program, downloaded the first time it is opened).</summary>
-        public const string EditorAsset = "PetEditor.exe";
+        public const string EditorAsset = InstallPlace.EditorExeName;
+        /// <summary>Its name before 1.2.0 (the releases still carry a copy with it, for the versions before).</summary>
+        public const string OldEditorAsset = InstallPlace.OldEditorExeName;
 
         /// <summary>Where a downloaded Pet Editor is kept (the user's folder: Program Files is read-only).</summary>
         public static string EditorPath => Path.Combine(InstallPlace.DataDir, EditorAsset);
+        /// <summary>The editor a version before 1.2.0 downloaded (replaced by the new one the next time it is brought up to date).</summary>
+        public static string OldEditorPath => Path.Combine(InstallPlace.DataDir, OldEditorAsset);
+
+        /// <summary>The editor in a release: the new name, or the old one in a release made before it.</summary>
+        public static string EditorAssetOf(Release release) => release == null ? null
+            : release.Assets.ContainsKey(EditorAsset) ? EditorAsset : release.Assets.ContainsKey(OldEditorAsset) ? OldEditorAsset : null;
 
         /// <summary>
         /// The Pet Editor of the latest release, downloaded (and checked against SHA256SUMS) into the user's folder.
@@ -509,14 +525,18 @@ namespace DesktopPet
             try
             {
                 var release = await GetLatestAsync();
-                if (release == null || !release.Assets.ContainsKey(EditorAsset) || !release.Assets.ContainsKey(SumsAsset))
+                string asset = EditorAssetOf(release);
+                if (asset == null || !release.Assets.ContainsKey(SumsAsset))
                     return File.Exists(EditorPath) ? EditorPath : null;
                 if (haveVersion != null && haveVersion == release.Version) return EditorPath;   // already the latest one
                 var sums = ParseSums(await http.GetStringAsync(release.Assets[SumsAsset]));
-                byte[] exe = await DownloadVerifiedAsync(release, EditorAsset, sums);
+                byte[] exe = await DownloadVerifiedAsync(release, asset, sums);
                 Directory.CreateDirectory(InstallPlace.DataDir);
                 File.WriteAllBytes(EditorPath, exe);
                 File.WriteAllText(versionFile, release.Version.ToString());
+                // the copy downloaded by a version before the new name is not needed any more
+                foreach (string old in new[] { OldEditorPath, OldEditorPath + ".version" })
+                    try { if (File.Exists(old)) File.Delete(old); } catch (Exception skipped) { LogFile.Ignored(skipped); }
                 return EditorPath;
             }
             catch (Exception) when (File.Exists(EditorPath))

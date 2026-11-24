@@ -81,7 +81,7 @@ namespace DesktopPetSetup
 
 		public SetupForm()
 		{
-			Text = T("Instalar o desktopPet", "Install desktopPet");
+			Text = T("Instalar o DeskPals", "Install DeskPals");
 			Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 			FormBorderStyle = FormBorderStyle.FixedDialog;
 			MaximizeBox = false; MinimizeBox = false;
@@ -93,7 +93,7 @@ namespace DesktopPetSetup
 
 			var logo = new PictureBox { Location = new Point(24, 22), Size = new Size(64, 64), SizeMode = PictureBoxSizeMode.Zoom };
 			using (var s = typeof(SetupForm).Assembly.GetManifestResourceStream("logo.png")) if (s != null) logo.Image = new Bitmap(Image.FromStream(s));
-			var title = new Label { Text = "desktopPet", Font = new Font("Segoe UI", 20f, FontStyle.Bold), Location = new Point(100, 22), AutoSize = true };
+			var title = new Label { Text = "DeskPals", Font = new Font("Segoe UI", 20f, FontStyle.Bold), Location = new Point(100, 22), AutoSize = true };
 			var subtitle = new Label { Text = T("Um bichinho para a sua área de trabalho", "A little pet for your desktop"), ForeColor = Muted, Location = new Point(102, 62), AutoSize = true };
 
 			var box = new Panel { Location = new Point(24, 108), Size = new Size(472, 132), BackColor = Color.FromArgb(246, 247, 248) };
@@ -154,7 +154,7 @@ namespace DesktopPetSetup
 			statusIcon.ForeColor = runtimeOk ? Ok : Bad;
 			status.Text = runtimeOk
 				? T("O .NET 10 já está instalado neste computador. Tudo pronto!", "The .NET 10 is already installed on this computer. All set!")
-				: T("O .NET 10 Desktop Runtime não está instalado. Ele é necessário para o desktopPet funcionar.", "The .NET 10 Desktop Runtime is not installed. desktopPet needs it.");
+				: T("O .NET 10 Desktop Runtime não está instalado. Ele é necessário para o DeskPals funcionar.", "The .NET 10 Desktop Runtime is not installed. DeskPals needs it.");
 			getRuntime.Visible = !runtimeOk;
 			install.Enabled = runtimeOk && !busy;
 			install.BackColor = install.Enabled ? Accent : Color.FromArgb(200, 200, 200);
@@ -207,13 +207,14 @@ namespace DesktopPetSetup
 			try
 			{
 				busy = true; install.Enabled = false;
-				foreach (var p in Process.GetProcessesByName(AppName).Concat(Process.GetProcessesByName("PetEditor"))) { try { p.Kill(); p.WaitForExit(3000); } catch (Exception) { } }
+				// the program and the editor, also under their names before 1.2.0 (DesktopPet.exe, PetEditor.exe)
+				foreach (var p in DesktopPet.InstallPlace.ProcessNames.SelectMany(Process.GetProcessesByName)) { try { p.Kill(); p.WaitForExit(3000); } catch (Exception) { } }
 				Directory.CreateDirectory(InstallPath);
-				string exe = Path.Combine(InstallPath, AppName + ".exe");
+				string exe = Path.Combine(InstallPath, DesktopPet.InstallPlace.ExeName);
 				using (var s = typeof(SetupForm).Assembly.GetManifestResourceStream("DesktopPet.exe"))
 				using (var f = File.Create(exe)) s.CopyTo(f);
 				// the Pet Editor goes next to it (when this installer carries it)
-				string editor = Path.Combine(InstallPath, "PetEditor.exe");
+				string editor = Path.Combine(InstallPath, DesktopPet.InstallPlace.EditorExeName);
 				using (var s = typeof(SetupForm).Assembly.GetManifestResourceStream("PetEditor.exe"))
 					if (s != null) using (var f = File.Create(editor)) s.CopyTo(f);
 
@@ -222,7 +223,7 @@ namespace DesktopPetSetup
 				string autostartPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
 				// the same kind of shortcut as the program's own installer (it finds and removes them)
 				string shortcut = "[InternetShortcut]\r\nURL=file:///" + exe.Replace('\\', '/') + "\r\nIconFile=" + exe + "\r\nIconIndex=0\r\n";
-				void Shortcut(bool on, string folder) { string f = Path.Combine(folder, AppName + ".url"); if (on) File.WriteAllText(f, shortcut); else if (File.Exists(f)) File.Delete(f); }
+				void Shortcut(bool on, string folder) { string f = Path.Combine(folder, DesktopPet.InstallPlace.ShortcutName); if (on) File.WriteAllText(f, shortcut); else if (File.Exists(f)) File.Delete(f); }
 				Shortcut(startMenu.Checked, startMenuPath);
 				Shortcut(desktop.Checked, desktopPath);
 				Shortcut(autostart.Checked, autostartPath);
@@ -233,16 +234,19 @@ namespace DesktopPetSetup
 				else if (File.Exists(editorLink)) File.Delete(editorLink);
 
 				// uninstall: the same script and entry as the program's own installer ("Apps" in Windows Settings)
-				string script = DesktopPet.UninstallScript.Build(AppName, new[] { Path.Combine(startMenuPath, AppName + ".url"), Path.Combine(desktopPath, AppName + ".url"), Path.Combine(autostartPath, AppName + ".url"), editorLink }, DesktopPet.InstallPlace.UninstallKey, Pt);
+				string sc = DesktopPet.InstallPlace.ShortcutName;
+				string script = DesktopPet.UninstallScript.Build(AppName, new[] { Path.Combine(startMenuPath, sc), Path.Combine(desktopPath, sc), Path.Combine(autostartPath, sc), editorLink }, DesktopPet.InstallPlace.UninstallKey, Pt);
 				string scriptPath = Path.Combine(InstallPath, "uninstall.cmd");
 				File.WriteAllText(scriptPath, script);
 				DesktopPet.InstallPlace.Register(exe, FileVersionInfo.GetVersionInfo(exe).FileVersion ?? "", scriptPath, Webpage);
+				// an install before the new names: its DesktopPet.exe, PetEditor.exe and DesktopPet.url shortcuts go
+				DesktopPet.InstallPlace.RemoveOldNames(InstallPath, new[] { startMenuPath, desktopPath, autostartPath });
 				// an older install in %LocalAppData%\DesktopPet: its program goes, the user's pets and settings stay
 				DesktopPet.InstallPlace.RemoveOldProgram();
 
 				// this installer runs as administrator: the pet opens as the normal user
 				DesktopPet.InstallPlace.StartAsUser(exe);
-				MessageBox.Show(this, T("Pronto! O desktopPet foi instalado e já está aberto.\nProcure o ícone perto do relógio.", "Done! desktopPet is installed and running.\nLook for its icon near the clock."),
+				MessageBox.Show(this, T("Pronto! O DeskPals foi instalado e já está aberto.\nProcure o ícone perto do relógio.", "Done! DeskPals is installed and running.\nLook for its icon near the clock."),
 					Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				Close();
 			}

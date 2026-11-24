@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} 버전: {1}",
   "inst.updateFailed": "업데이트할 수 없어요: {0}",
   "inst.updated": "프로그램을 업데이트했어요.",
-  "inst.incompleteRelease": "버전 {0}이(가) DesktopPet.exe 또는 SHA256SUMS 없이 게시됐어요",
+  "inst.incompleteRelease": "버전 {0}이(가) DeskPals.exe 또는 SHA256SUMS 없이 게시됐어요",
   "inst.hashMissing": "릴리스에 {0}의 SHA-256이 없어서 다운로드를 거부했어요",
   "inst.hashMismatch": "{0}이(가) SHA-256과 일치하지 않아서 다운로드를 거부했어요",
   "sources.button": "출처",

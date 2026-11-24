@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "Toleo la {0}: {1}",
   "inst.updateFailed": "Haiwezekani kusasisha: {0}",
   "inst.updated": "Programu imesasishwa.",
-  "inst.incompleteRelease": "toleo {0} lilichapishwa bila DesktopPet.exe au SHA256SUMS",
+  "inst.incompleteRelease": "toleo {0} lilichapishwa bila DeskPals.exe au SHA256SUMS",
   "inst.hashMissing": "{0} haina SHA-256 kwenye toleo, upakuaji ulikataliwa",
   "inst.hashMismatch": "{0} hailingani na SHA-256 yake, upakuaji ulikataliwa",
   "sources.button": "Vyanzo",

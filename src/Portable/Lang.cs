@@ -1575,7 +1575,7 @@ namespace DesktopPet
 				["inst.versionTitle"] = "{0} version: {1}",
 				["inst.updateFailed"] = "Unable to update: {0}",
 				["inst.updated"] = "Application was updated.",
-				["inst.incompleteRelease"] = "version {0} was published without DesktopPet.exe or SHA256SUMS",
+				["inst.incompleteRelease"] = "version {0} was published without DeskPals.exe or SHA256SUMS",
 				["inst.hashMissing"] = "{0} has no SHA-256 in the release, the download was refused",
 				["inst.hashMismatch"] = "{0} does not match its SHA-256, the download was refused",
 			};

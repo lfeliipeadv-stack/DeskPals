@@ -16,8 +16,36 @@ namespace DesktopPet
 	/// </summary>
 	internal static class InstallPlace
 	{
+		/// <summary>
+		/// The folders (Program Files, %LocalAppData%), the uninstall entry and the "start with Windows" value keep this
+		/// name: the user's pets and settings live there and every installed version finds them.
+		/// </summary>
 		public const string AppName = "DesktopPet";
 		public const string UninstallKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\" + AppName;
+
+		/// <summary>The program and its shortcuts are called DeskPals from 1.2.0 on; before, DesktopPet.</summary>
+		public const string ExeName = "DeskPals.exe", OldExeName = "DesktopPet.exe";
+		public const string EditorExeName = "DeskPals-Editor.exe", OldEditorExeName = "PetEditor.exe";
+		public const string ShortcutName = "DeskPals.url", OldShortcutName = "DesktopPet.url";
+
+		/// <summary>The program in this folder: DeskPals.exe, or DesktopPet.exe of an install updated from before the new name.</summary>
+		public static string ExeIn(string dir) =>
+			!File.Exists(Path.Combine(dir, ExeName)) && File.Exists(Path.Combine(dir, OldExeName)) ? Path.Combine(dir, OldExeName) : Path.Combine(dir, ExeName);
+
+		/// <summary>Process names (without ".exe") of the program and the editor, new and old, to close them before installing.</summary>
+		public static readonly string[] ProcessNames = { "DeskPals", "DesktopPet", "DeskPals-Editor", "PetEditor" };
+
+		/// <summary>
+		/// An install made before the new names: its DesktopPet.exe, PetEditor.exe and DesktopPet.url shortcuts go away
+		/// (the new ones were just written next to them). Shortcuts in <paramref name="shortcutFolders"/>.
+		/// </summary>
+		public static void RemoveOldNames(string programDir, IEnumerable<string> shortcutFolders)
+		{
+			foreach (string name in new[] { OldExeName, "DesktopPet_old.exe", OldEditorExeName })
+				try { File.Delete(Path.Combine(programDir, name)); } catch (Exception) { }
+			foreach (string folder in shortcutFolders)
+				try { File.Delete(Path.Combine(folder, OldShortcutName)); } catch (Exception) { }
+		}
 
 		/// <summary>C:\Program Files\DesktopPet (the 64-bit folder, also when asked from a 32-bit process).</summary>
 		public static string ProgramDir => Path.Combine(Environment.GetEnvironmentVariable("ProgramW6432") ?? Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), AppName);
@@ -50,7 +78,7 @@ namespace DesktopPet
 		public static void RemoveOldProgram()
 		{
 			string dir = DataDir;
-			foreach (string name in new[] { AppName + ".exe", "DesktopPet_old.exe", "uninstall.cmd", "icon.ico" })
+			foreach (string name in new[] { OldExeName, "DesktopPet_old.exe", ExeName, "DeskPals_old.exe", "uninstall.cmd", "icon.ico" })
 				try { File.Delete(Path.Combine(dir, name)); } catch (Exception) { }
 			try { foreach (string f in Directory.GetFiles(dir, "*.dll")) File.Delete(f); } catch (Exception) { }
 			try { if (Directory.Exists(Path.Combine(dir, "lang"))) Directory.Delete(Path.Combine(dir, "lang"), true); } catch (Exception) { }
@@ -116,8 +144,19 @@ namespace DesktopPet
 			s.AppendLine("set \"APPDIR=%~dp0\"");
 			s.AppendLine("set \"APPDIR=%APPDIR:~0,-1%\"");
 			s.AppendLine("cd /d \"%APPDIR%\\..\"");
-			s.AppendLine($"taskkill /IM {appName}.exe /f >nul 2>&1");
-			foreach (string sc in shortcuts) s.AppendLine($"del \"{sc}\" >nul 2>&1");
+			foreach (string p in InstallPlace.ProcessNames) s.AppendLine($"taskkill /IM {p}.exe /f >nul 2>&1");
+			// the shortcuts, and the ones an install before the new names left (DesktopPet.url next to DeskPals.url)
+			var all = new List<string>();
+			foreach (string sc in shortcuts)
+			{
+				if (!all.Contains(sc)) all.Add(sc);
+				if (string.Equals(Path.GetFileName(sc), InstallPlace.ShortcutName, StringComparison.OrdinalIgnoreCase))
+				{
+					string old = Path.Combine(Path.GetDirectoryName(sc), InstallPlace.OldShortcutName);
+					if (!all.Contains(old)) all.Add(old);
+				}
+			}
+			foreach (string sc in all) s.AppendLine($"del \"{sc}\" >nul 2>&1");
 			s.AppendLine($"reg delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v {appName} /f >nul 2>&1");
 			s.AppendLine($"reg delete \"HKLM\\{uninstallKey}\" /f /reg:64 >nul 2>&1");
 			s.AppendLine($"reg delete \"HKCU\\{uninstallKey}\" /f >nul 2>&1");

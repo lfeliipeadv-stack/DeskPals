@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} เวอร์ชัน: {1}",
   "inst.updateFailed": "อัปเดตไม่ได้: {0}",
   "inst.updated": "อัปเดตแอปพลิเคชันแล้ว",
-  "inst.incompleteRelease": "เวอร์ชัน {0} ถูกเผยแพร่โดยไม่มี DesktopPet.exe หรือ SHA256SUMS",
+  "inst.incompleteRelease": "เวอร์ชัน {0} ถูกเผยแพร่โดยไม่มี DeskPals.exe หรือ SHA256SUMS",
   "inst.hashMissing": "{0} ไม่มี SHA-256 ในรุ่นที่เผยแพร่ จึงปฏิเสธการดาวน์โหลด",
   "inst.hashMismatch": "{0} ไม่ตรงกับ SHA-256 ของไฟล์ จึงปฏิเสธการดาวน์โหลด",
   "sources.button": "แหล่งที่มา",

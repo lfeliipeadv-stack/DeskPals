@@ -28,7 +28,7 @@ jobs:
           PETS_DIR: ${{ github.workspace }}/Pets
           PETS_LIVE: "1"
         run: |
-          $exe = Resolve-Path "src/bin/Release/net10.0-windows/win-x64/DesktopPet.exe"
+          $exe = Resolve-Path "src/bin/Release/net10.0-windows/win-x64/DeskPals.exe"
           $result = Join-Path $env:RUNNER_TEMP "pets-live.txt"
           $p = Start-Process $exe -ArgumentList "--selftest=$result", '--only="pets live"' -PassThru
           if (-not $p.WaitForExit(4800000)) { $p.Kill(); throw "O teste ao vivo não terminou em 80 minutos" }

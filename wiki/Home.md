@@ -6,7 +6,7 @@ O **DeskPals** é um bichinho que vive na sua área de trabalho do Windows: ele 
 
 ## O que é
 
-Escrito em C# (Windows Forms) sobre .NET 10, o DeskPals é um executável único para Windows 10 e 11. A versão atual é a **1.0.0**, a primeira versão pública: o `DesktopPet.exe` tem 3.041.971 bytes (cerca de 2,9 MB) e precisa do .NET 10 Desktop Runtime instalado; o `DesktopPet-completo.exe` (52.764.698 bytes, cerca de 50 MB) traz o runtime dentro e abre em qualquer Windows 10/11; o `DesktopPet-Instalador.exe` (4.399.104 bytes) é o instalador em .NET Framework 4.8, que confere o runtime, instala o programa e o Editor de Pets e cria os atalhos; e o `PetEditor.exe` (955.053 bytes) é o Editor de Pets, para criar e mudar pets (veja [Crie o seu pet](Crie-o-seu-pet.md)).
+Escrito em C# (Windows Forms) sobre .NET 10, o DeskPals é um executável único para Windows 10 e 11. A versão atual é a **1.0.0**, a primeira versão pública: o `DeskPals.exe` tem 3.041.971 bytes (cerca de 2,9 MB) e precisa do .NET 10 Desktop Runtime instalado; o `DeskPals-completo.exe` (52.764.698 bytes, cerca de 50 MB) traz o runtime dentro e abre em qualquer Windows 10/11; o `DeskPals-Instalador.exe` (4.399.104 bytes) é o instalador em .NET Framework 4.8, que confere o runtime, instala o programa e o Editor de Pets e cria os atalhos; e o `DeskPals-Editor.exe` (955.053 bytes) é o Editor de Pets, para criar e mudar pets (veja [Crie o seu pet](Crie-o-seu-pet.md)).
 
 O programa tem duas partes:
 
@@ -28,7 +28,7 @@ O programa tem duas partes:
 
 - A galeria tem duas abas: **Meus pets** (o que já está no computador) e **Baixar pets** (o que está publicado no repositório). O `Pets/pets.json` do repositório lista hoje 64 pets, entre eles o eSheep original, o Pingus, as sete ovelhas coloridas, os dez assistentes do Office (que não têm gravidade e ficam onde você soltar), os pets criados pelo autor e os pets da comunidade do repositório original de Adriano Petrucci (Neko, Pikachu, Grian, Ano Nym, SSJ Goku e outros).
 - Antes de baixar, o programa mostra o tamanho do arquivo; durante o download, o botão vira barra de progresso e pode ser cancelado ou repetido.
-- O **Editor de Pets** (`PetEditor.exe`, aberto em Configurações › Editor de Pets) cria um pet a partir das suas imagens ou GIF, ou muda um que já existe, com prévia ao vivo, teste no desktop e publicação na galeria. Veja [Crie o seu pet](Crie-o-seu-pet.md).
+- O **Editor de Pets** (`DeskPals-Editor.exe`, aberto em Configurações › Editor de Pets) cria um pet a partir das suas imagens ou GIF, ou muda um que já existe, com prévia ao vivo, teste no desktop e publicação na galeria. Veja [Crie o seu pet](Crie-o-seu-pet.md).
 - Exportar e importar pets, tema claro/escuro/automático, idioma, inicialização com o Windows e tamanho 1×, 2× ou 4×.
 
 ### Na sua rotina
@@ -93,7 +93,7 @@ Como contribuir:
 - **Sugerir uma mudança no programa** — abra uma *issue* em [github.com/lfeliipeadv-stack/DeskPals/issues](https://github.com/lfeliipeadv-stack/DeskPals/issues) descrevendo o que você esperava e o que aconteceu.
 - **Publicar um pet na galeria** — o pet é uma pasta em `Pets/` com `animations.xml`, `icon.png`, `preview.gif` e o `README.md`; depois rode `Tools/update-pets-json.ps1` para que ele entre no `Pets/pets.json` e apareça na aba "Baixar pets".
 - **Traduzir ou ajustar um texto** — os textos vivem em `src/lang/*.json` (`pt-BR.json` e `es.json` hoje); o inglês embutido no código é a reserva para qualquer chave que falte.
-- **Ajudar nas capturas de tela** — o comando `DesktopPet.exe --snapshot=<pasta>` grava as telas do programa para uso nas páginas.
+- **Ajudar nas capturas de tela** — o comando `DeskPals.exe --snapshot=<pasta>` grava as telas do programa para uso nas páginas.
 
 Se algo aqui estiver errado ou desatualizado, prefira conferir no código: os caminhos citados na seção "Onde fica no código" são a referência para isso.
 
@@ -128,7 +128,7 @@ Se algo aqui estiver errado ou desatualizado, prefira conferir no código: os ca
 - `src/Portable/HideHotkey.cs` — atalhos globais (Ctrl+Alt+P e o atalho de perguntar)
 - `src/Portable/Chat.cs`, `src/Portable/AiAssistant.cs`, `src/Portable/FormAi.cs` — conversa com o pet e serviços de IA
 - `src/Portable/ClaudeHooks.cs`, `src/Portable/ClaudeMcp.cs`, `src/Portable/McpServer.cs`, `src/Portable/AgentBridge.cs` — integração com o Claude Code
-- `editor/` — o Editor de Pets (programa separado, `PetEditor.exe`)
+- `editor/` — o Editor de Pets (programa separado, `DeskPals-Editor.exe`)
 - `src/Portable/SelfTest.cs` — autoteste (`--selftest`)
 - `Pets/pets.json` — índice da galeria de pets
 - `Tools/release.ps1` — publicação das releases

@@ -346,6 +346,31 @@ namespace DesktopPet
 			Check("install: older install keeps its settings file", string.Equals(LocalData.ConfigPath(InstallPlace.DataDir, Path.GetTempPath()), LocalData.ConfigPath(InstallPlace.ProgramDir, Path.GetTempPath()), StringComparison.OrdinalIgnoreCase));
 			string uninstall = UninstallScript.Build("DesktopPet", new[] { @"C:\x\DesktopPet.url" }, InstallPlace.UninstallKey, true);
 			Check("install: the uninstaller asks for administrator and cleans HKLM", uninstall.Contains("-Verb RunAs") && uninstall.Contains(@"reg delete ""HKLM\" + InstallPlace.UninstallKey) && uninstall.Contains(@"%LOCALAPPDATA%\DesktopPet"));
+			// the new names (1.2.0): DeskPals.exe; an install updated from before keeps DesktopPet.exe and is still found
+			string names = UninstallScript.Build("DesktopPet", new[] { @"C:\x\DeskPals.url" }, InstallPlace.UninstallKey, true);
+			Check("names: the uninstaller closes the program under both names", names.Contains("taskkill /IM DeskPals.exe") && names.Contains("taskkill /IM DesktopPet.exe") && names.Contains("taskkill /IM DeskPals-Editor.exe"));
+			Check("names: the uninstaller removes the old shortcut too", names.Contains(@"del ""C:\x\DeskPals.url""") && names.Contains(@"del ""C:\x\DesktopPet.url"""));
+			string nameDir = Path.Combine(Path.GetTempPath(), "deskpals-names-" + Guid.NewGuid().ToString("N"));
+			try
+			{
+				Directory.CreateDirectory(nameDir);
+				Check("names: a new install is DeskPals.exe", InstallPlace.ExeIn(nameDir) == Path.Combine(nameDir, "DeskPals.exe"));
+				File.WriteAllText(Path.Combine(nameDir, "DesktopPet.exe"), "x");
+				Check("names: an install from before is found as DesktopPet.exe", InstallPlace.ExeIn(nameDir) == Path.Combine(nameDir, "DesktopPet.exe"));
+				File.WriteAllText(Path.Combine(nameDir, "DeskPals.exe"), "x");
+				File.WriteAllText(Path.Combine(nameDir, "PetEditor.exe"), "x");
+				File.WriteAllText(Path.Combine(nameDir, "DesktopPet.url"), "x");
+				File.WriteAllText(Path.Combine(nameDir, "DeskPals.url"), "x");
+				InstallPlace.RemoveOldNames(nameDir, new[] { nameDir });
+				Check("names: installing again removes the old files and shortcut, keeps the new ones",
+					!File.Exists(Path.Combine(nameDir, "DesktopPet.exe")) && !File.Exists(Path.Combine(nameDir, "PetEditor.exe")) && !File.Exists(Path.Combine(nameDir, "DesktopPet.url"))
+					&& File.Exists(Path.Combine(nameDir, "DeskPals.exe")) && File.Exists(Path.Combine(nameDir, "DeskPals.url")));
+			}
+			finally { try { Directory.Delete(nameDir, true); } catch (Exception skipped) { LogFile.Ignored(skipped); } }
+			var newRelease = new Updater.Release(); newRelease.Assets["DeskPals-Editor.exe"] = "x"; newRelease.Assets["PetEditor.exe"] = "y";
+			var oldRelease = new Updater.Release(); oldRelease.Assets["PetEditor.exe"] = "y";
+			Check("names: the editor of a release, new name first, old name in an old release",
+				Updater.EditorAssetOf(newRelease) == "DeskPals-Editor.exe" && Updater.EditorAssetOf(oldRelease) == "PetEditor.exe" && Updater.EditorAssetOf(new Updater.Release()) == null);
 			// colors: every accent changes the palette and green is the original one
 			string wasAccent = Theme.AccentId;
 			var greenAccent = Theme.Accent;

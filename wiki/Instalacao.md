@@ -8,26 +8,28 @@ O DeskPals roda em Windows 10 e 11 de 64 bits. O instalador coloca o programa em
 
 Os arquivos ficam na aba **Releases** do repositório: <https://github.com/lfeliipeadv-stack/DeskPals/releases>. A página do projeto (<https://lfeliipeadv-stack.github.io/DeskPals/>) tem um botão que aponta sempre para a versão mais recente.
 
-Cada release publica estes arquivos. Na versão 1.0.0:
+Cada release publica estes arquivos (os tamanhos são os da versão 1.0.0):
 
 | Arquivo | Tamanho | O que precisa | Quando usar |
 | --- | --- | --- | --- |
-| `DesktopPet-Instalador.exe` | 4.399.104 bytes (≈ 4,2 MB) | Nada: é .NET Framework 4.8, que já vem no Windows 10 e 11 | **Recomendado.** Confere o .NET 10, instala o programa e o Editor de Pets e cria os atalhos |
-| `DesktopPet.exe` | 3.041.971 bytes (≈ 2,9 MB) | .NET 10 Desktop Runtime (64 bits) | Só o programa, para quem já tem o runtime instalado |
-| `DesktopPet-completo.exe` | 52.764.698 bytes (≈ 50,3 MB) | Nada: o runtime vem embutido dentro do executável | Para abrir em qualquer Windows 10/11 sem instalar nada antes |
-| `PetEditor.exe` | 955.053 bytes (≈ 0,9 MB) | .NET 10 Desktop Runtime (64 bits) | O Editor de Pets, para criar e mudar pets. O instalador já traz; quem baixou só o programa recebe o editor sozinho na primeira vez que abrir Configurações → Editor de Pets |
+| `DeskPals-Instalador.exe` | 4.399.104 bytes (≈ 4,2 MB) | Nada: é .NET Framework 4.8, que já vem no Windows 10 e 11 | **Recomendado.** Confere o .NET 10, instala o programa e o Editor de Pets e cria os atalhos |
+| `DeskPals.exe` | 3.041.971 bytes (≈ 2,9 MB) | .NET 10 Desktop Runtime (64 bits) | Só o programa, para quem já tem o runtime instalado |
+| `DeskPals-completo.exe` | 52.764.698 bytes (≈ 50,3 MB) | Nada: o runtime vem embutido dentro do executável | Para abrir em qualquer Windows 10/11 sem instalar nada antes |
+| `DeskPals-Editor.exe` | 955.053 bytes (≈ 0,9 MB) | .NET 10 Desktop Runtime (64 bits) | O Editor de Pets, para criar e mudar pets. O instalador já traz; quem baixou só o programa recebe o editor sozinho na primeira vez que abrir Configurações → Editor de Pets |
 | `lang.zip` | 46.311 bytes | — | Idiomas do programa. Português e espanhol já vêm embutidos no executável; mais 20 idiomas são baixados em Configurações → Mais idiomas |
 | `SHA256SUMS` | 418 bytes | — | Conferência do download (veja [Conferir o download](#conferir-o-download)) |
 | `LICENSE.md` | — | — | A licença MIT do programa |
 
+Até a versão 1.1.0 os arquivos se chamavam `DesktopPet-Instalador.exe`, `DesktopPet.exe`, `DesktopPet-completo.exe` e `PetEditor.exe`. As releases ainda trazem cópias com esses nomes, para que uma instalação antiga se atualize sozinha. Quem já tinha o programa instalado continua com o arquivo `DesktopPet.exe`, que recebe as atualizações normalmente; ao instalar de novo com o `DeskPals-Instalador.exe`, ele vira `DeskPals.exe`, e os atalhos, o início com o Windows e as integrações com agentes de IA passam a apontar para ele.
+
 ## Instalar com o instalador (recomendado)
 
-1. Baixe o `DesktopPet-Instalador.exe` e abra com dois cliques.
+1. Baixe o `DeskPals-Instalador.exe` e abra com dois cliques.
 2. **Passo 1 — ".NET 10 Desktop Runtime".** O instalador procura o runtime no computador. Se achar, aparece *"O .NET 10 já está instalado neste computador. Tudo pronto!"*. Se faltar, o botão **"Instalar o .NET 10"** baixa o instalador oficial da Microsoft e o abre; o botão **"Instalar"** continua desabilitado até o runtime ser encontrado, e o instalador reconfere a cada 3 segundos.
 3. **Passo 2 — "Atalhos".** Três caixas: **"Menu Iniciar"** e **"Área de trabalho"** já vêm marcadas, **"Iniciar com o Windows"** vem desmarcada.
 4. **"Instalar".** O programa e o Editor de Pets são copiados para `C:\Program Files\DesktopPet`, os atalhos `.url` são criados, o `uninstall.cmd` e a entrada de desinstalação do Windows são gravados, e o programa é aberto como usuário comum. A confirmação é: *"Pronto! O desktopPet foi instalado e já está aberto. Procure o ícone perto do relógio."*
 
-O instalador pede permissão de administrador ao abrir, porque grava em Arquivos de Programas; a dica da própria tela é *"Instala em C:\Program Files, como os outros programas."* Quem não quer instalar nada usa o `DesktopPet-completo.exe`, que abre direto de qualquer pasta.
+O instalador pede permissão de administrador ao abrir, porque grava em Arquivos de Programas; a dica da própria tela é *"Instala em C:\Program Files, como os outros programas."* Quem não quer instalar nada usa o `DeskPals-completo.exe`, que abre direto de qualquer pasta.
 
 ## Aviso do Windows sobre editor desconhecido
 
@@ -35,18 +37,18 @@ As releases **não são assinadas digitalmente** — a garantia de integridade �
 
 ### Conferir o download
 
-O arquivo `SHA256SUMS` da release traz uma linha por artefato, no formato `hash  nome`. Para conferir, abra um Prompt de Comando na pasta do download e rode `certutil -hashfile DesktopPet.exe SHA256` — o resultado tem que ser igual ao hash da linha correspondente do `SHA256SUMS`. É a mesma conferência que o próprio programa faz antes de trocar o executável por uma versão nova.
+O arquivo `SHA256SUMS` da release traz uma linha por artefato, no formato `hash  nome`. Para conferir, abra um Prompt de Comando na pasta do download e rode `certutil -hashfile DeskPals.exe SHA256` — o resultado tem que ser igual ao hash da linha correspondente do `SHA256SUMS`. É a mesma conferência que o próprio programa faz antes de trocar o executável por uma versão nova.
 
 ## Instalar o .exe que precisa do .NET 10
 
 1. Instale o **.NET 10 Desktop Runtime** (64 bits) da Microsoft: <https://dotnet.microsoft.com/download/dotnet/10.0>.
-2. Baixe o `DesktopPet.exe` e abra com dois cliques.
+2. Baixe o `DeskPals.exe` e abra com dois cliques.
 
 O programa abre direto, sem instalar nada, e mostra o pet na tela. Para criar os atalhos e a entrada de desinstalação, use **"Instalar o programa..."** no menu do ícone da bandeja (veja [Instalar a partir do próprio programa](#instalar-a-partir-do-pr%C3%B3prio-programa)).
 
 ## Usar a versão completa
 
-O `DesktopPet-completo.exe` traz o runtime do .NET dentro dele (build *self-contained*): é bem maior, mas abre em qualquer Windows 10/11, sem instalar o .NET e sem precisar de internet para isso. Ele também não cria atalhos sozinho — para isso, use **"Instalar o programa..."** na bandeja.
+O `DeskPals-completo.exe` traz o runtime do .NET dentro dele (build *self-contained*): é bem maior, mas abre em qualquer Windows 10/11, sem instalar o .NET e sem precisar de internet para isso. Ele também não cria atalhos sozinho — para isso, use **"Instalar o programa..."** na bandeja.
 
 ## Instalar a partir do próprio programa
 
@@ -76,12 +78,12 @@ O instalador (`Tools/Setup`, em .NET Framework 4.8) procura o **.NET 10 Desktop 
 
 Enquanto o runtime não for encontrado, o botão **"Instalar"** fica desabilitado. Se a leitura do registro ou das pastas falhar, o instalador simplesmente trata como "não encontrado" e mostra o botão de baixar o runtime da Microsoft.
 
-Antes de copiar o executável, o instalador fecha qualquer `DesktopPet.exe` que já estiver rodando.
+Antes de copiar o executável, o instalador fecha qualquer `DeskPals.exe` que já estiver rodando.
 
 ## Requisitos mínimos
 
 - **Windows 10 ou 11, 64 bits.** O projeto é compilado como `net10.0-windows` com `RuntimeIdentifier` `win-x64` e `PlatformTarget` `x64`.
-- **.NET 10 Desktop Runtime** — só para o `DesktopPet.exe` e para o `DesktopPet-Instalador.exe`; a versão completa não precisa.
+- **.NET 10 Desktop Runtime** — só para o `DeskPals.exe` e para o `DeskPals-Instalador.exe`; a versão completa não precisa.
 - **Espaço em disco:** o programa instalado ocupa poucos MB; a versão completa ocupa cerca de 50 MB.
 - **Nenhuma conta.** Só o instalador pede administrador (uma vez, para gravar em Arquivos de Programas); o programa roda como usuário comum.
 - **Internet é opcional.** Ela é usada para baixar pets da galeria, procurar versão nova do programa, baixar idiomas e falar com um serviço de IA. Todo o resto funciona sem rede.
@@ -111,7 +113,7 @@ Duas formas, as duas usam o mesmo script (`uninstall.cmd`):
 - **Windows** → *Configurações* → *Aplicativos* → **desktopPet** → **Desinstalar**.
 - **Pelo programa:** bandeja → **"Reparar ou desinstalar..."** → **"Desinstalar"**.
 
-O script fecha o `DesktopPet.exe`, apaga os atalhos, remove a chave de registro de desinstalação e a de inicialização automática, e depois pergunta:
+O script fecha o `DeskPals.exe`, apaga os atalhos, remove a chave de registro de desinstalação e a de inicialização automática, e depois pergunta:
 
 > Apagar tambem seus pets, lembretes, humor, atalhos e configuracoes? [S]im / [N]ao (em 30 s: Nao)
 

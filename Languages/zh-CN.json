@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} 版本：{1}",
   "inst.updateFailed": "无法更新：{0}",
   "inst.updated": "应用程序已更新。",
-  "inst.incompleteRelease": "版本 {0} 发布时缺少 DesktopPet.exe 或 SHA256SUMS",
+  "inst.incompleteRelease": "版本 {0} 发布时缺少 DeskPals.exe 或 SHA256SUMS",
   "inst.hashMissing": "{0} 在发布中没有 SHA-256，已拒绝下载",
   "inst.hashMismatch": "{0} 与其 SHA-256 不符，已拒绝下载",
   "sources.button": "来源",

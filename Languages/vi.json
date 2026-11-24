@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "Phiên bản {0}: {1}",
   "inst.updateFailed": "Không cập nhật được: {0}",
   "inst.updated": "Ứng dụng đã được cập nhật.",
-  "inst.incompleteRelease": "phiên bản {0} được phát hành mà không có DesktopPet.exe hoặc SHA256SUMS",
+  "inst.incompleteRelease": "phiên bản {0} được phát hành mà không có DeskPals.exe hoặc SHA256SUMS",
   "inst.hashMissing": "{0} không có SHA-256 trong bản phát hành, đã từ chối tải xuống",
   "inst.hashMismatch": "{0} không khớp với SHA-256 của nó, đã từ chối tải xuống",
   "sources.button": "Nguồn",

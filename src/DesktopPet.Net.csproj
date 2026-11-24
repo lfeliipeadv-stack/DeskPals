@@ -13,7 +13,7 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>DesktopPet</RootNamespace>
-    <AssemblyName>DesktopPet</AssemblyName>
+    <AssemblyName>DeskPals</AssemblyName>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <ApplicationManifest>Properties\app.net.manifest</ApplicationManifest>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>

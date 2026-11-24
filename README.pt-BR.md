@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-Instalador.exe"><b>⬇️ Baixar para Windows (grátis)</b></a>
+  <a href="https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-Instalador.exe"><b>⬇️ Baixar para Windows (grátis)</b></a>
   &nbsp;·&nbsp;
   <a href="https://lfeliipeadv-stack.github.io/DeskPals/demo.html">🖥️ Testar no navegador</a>
   &nbsp;·&nbsp;
@@ -189,10 +189,10 @@ Tiradas do próprio programa.
 
 | Arquivo | Para quem |
 | --- | --- |
-| **[DesktopPet-Instalador.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-Instalador.exe)** | **Recomendado.** Confere o .NET 10 (e oferece o instalador oficial da Microsoft se faltar), instala o programa e o Editor de Pets em Arquivos de Programas e cria os atalhos. |
-| [DesktopPet-completo.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-completo.exe) | Abre direto, sem instalar nada: o .NET vem dentro (arquivo maior, cerca de 50 MB). |
-| [DesktopPet.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
-| [PetEditor.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/PetEditor.exe) | Só o Editor de Pets (o programa também o baixa sozinho na primeira vez que você abre o editor). |
+| **[DeskPals-Instalador.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-Instalador.exe)** | **Recomendado.** Confere o .NET 10 (e oferece o instalador oficial da Microsoft se faltar), instala o programa e o Editor de Pets em Arquivos de Programas e cria os atalhos. |
+| [DeskPals-completo.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-completo.exe) | Abre direto, sem instalar nada: o .NET vem dentro (arquivo maior, cerca de 50 MB). |
+| [DeskPals.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals.exe) | Só o programa, para quem já tem o [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0). |
+| [DeskPals-Editor.exe](https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-Editor.exe) | Só o Editor de Pets (o programa também o baixa sozinho na primeira vez que você abre o editor). |
 
 Precisa de **Windows 10 ou 11, 64 bits**. O instalador pede permissão de administrador uma vez (para gravar em
 Arquivos de Programas); o programa roda como usuário comum. O ícone aparece perto do relógio: clique com o botão direito e escolha
@@ -273,8 +273,8 @@ Autoteste com o código de verdade (o resultado vai para o arquivo; o código de
 `--only=nome` roda só os testes com esse nome):
 
 ```bash
-DesktopPet.exe --selftest=resultado.txt
-PetEditor.exe --devtests=Pets
+DeskPals.exe --selftest=resultado.txt
+DeskPals-Editor.exe --devtests=Pets
 ```
 
 | Ferramenta | O que faz |

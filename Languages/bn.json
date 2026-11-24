@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} সংস্করণ: {1}",
   "inst.updateFailed": "আপডেট করা যায়নি: {0}",
   "inst.updated": "অ্যাপটি আপডেট হয়েছে।",
-  "inst.incompleteRelease": "সংস্করণ {0} DesktopPet.exe বা SHA256SUMS ছাড়াই প্রকাশিত হয়েছে",
+  "inst.incompleteRelease": "সংস্করণ {0} DeskPals.exe বা SHA256SUMS ছাড়াই প্রকাশিত হয়েছে",
   "inst.hashMissing": "রিলিজে {0}-এর কোনো SHA-256 নেই, ডাউনলোড প্রত্যাখ্যান করা হয়েছে",
   "inst.hashMismatch": "{0} তার SHA-256-এর সাথে মেলে না, ডাউনলোড প্রত্যাখ্যান করা হয়েছে",
   "sources.button": "উৎস",

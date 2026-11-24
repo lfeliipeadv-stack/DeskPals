@@ -1,6 +1,6 @@
 # Crie o seu pet
 
-O DeskPals vem com o **Editor de Pets** (`PetEditor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
+O DeskPals vem com o **Editor de Pets** (`DeskPals-Editor.exe`), um programa à parte para criar um pet a partir das suas imagens ou mudar um que já existe: imagens, animações, entradas na tela, sons, com prévia ao vivo. O pet criado anda, vira, dorme, cai e pode ser arremessado como os outros.
 
 A ideia de um editor de pets vem do [desktopPet-Editor](https://github.com/Adrianotiger/desktopPet-Editor), o editor online de Adriano Petrucci, criador do desktopPet. Os dois usam o mesmo formato (`animations.xml`, validado pelo esquema `animations.xsd` dele), então um pet feito num abre no outro.
 
@@ -8,9 +8,9 @@ A ideia de um editor de pets vem do [desktopPet-Editor](https://github.com/Adria
 
 ## Abrir o Editor de Pets
 
-- **Pelo programa:** **Configurações › Programa › Editor de Pets › Abrir…**. Se o editor ainda não estiver no computador (quem baixou só o `DesktopPet.exe`), o programa baixa o `PetEditor.exe` da última versão publicada, confere o SHA-256 dele contra o `SHA256SUMS` e abre.
-- **Pelo instalador:** o `DesktopPet-Instalador.exe` já instala o editor ao lado do programa, com atalho próprio.
-- **Direto:** o `PetEditor.exe` também está na página de versões: <https://github.com/lfeliipeadv-stack/DeskPals/releases/latest>. Ele precisa do .NET 10 Desktop Runtime, como o `DesktopPet.exe`.
+- **Pelo programa:** **Configurações › Programa › Editor de Pets › Abrir…**. Se o editor ainda não estiver no computador (quem baixou só o `DeskPals.exe`), o programa baixa o `DeskPals-Editor.exe` da última versão publicada, confere o SHA-256 dele contra o `SHA256SUMS` e abre.
+- **Pelo instalador:** o `DeskPals-Instalador.exe` já instala o editor ao lado do programa, com atalho próprio.
+- **Direto:** o `DeskPals-Editor.exe` também está na página de versões: <https://github.com/lfeliipeadv-stack/DeskPals/releases/latest>. Ele precisa do .NET 10 Desktop Runtime, como o `DeskPals.exe`.
 
 O editor abre na página **Projeto**, sem nenhum pet carregado. Ali ficam as ações (Assistente de pet novo, Novo pet, Abrir arquivo, Abrir pasta, Salvar como, Exportar como .zip e Publicar na galeria), os pets **abertos recentemente** e os **pets baixados no DesktopPet**, em cartões com a imagem de cada um. Um clique num cartão abre o pet. Quem prefere o jeito antigo liga **Abrir o último pet ao iniciar** nas Configurações do editor.
 
@@ -216,7 +216,7 @@ Programas antigos ignoram esse atributo. Em português e espanhol o painel mostr
 
 ```powershell
 $env:PETS_DIR = "$PWD\Pets"
-src\bin\Release\net10.0-windows\win-x64\DesktopPet.exe --selftest=C:\temp\nomes.txt --only="picker all pets"
+src\bin\Release\net10.0-windows\win-x64\DeskPals.exe --selftest=C:\temp\nomes.txt --only="picker all pets"
 ```
 
 O resultado lista, para cada pet, o que o painel oferece e os nomes que faltam traduzir.
@@ -231,7 +231,7 @@ O resultado lista, para cada pet, o que o painel oferece e os nomes que faltam t
 ## Onde fica no código
 
 - `editor/` — o Editor de Pets: `UI/MainForm.cs` (a janela), `UI/Wizard.cs` (o assistente), `Pages/` (uma classe por página), `Core/PetDoc.cs` (o pet aberto, o desfazer e o histórico entre sessões), `Core/Validator.cs` (o Verificador), `UI/GalleryDialog.cs` (exportar e publicar) e `Core/DesktopTest.cs` (testar no desktop)
-- `src/Portable/Updater.cs` — `GetEditorAsync`, que baixa o `PetEditor.exe` da release quando falta
+- `src/Portable/Updater.cs` — `GetEditorAsync`, que baixa o `DeskPals-Editor.exe` da release quando falta
 - `src/Portable/FormSettings.Pets.cs` — `OpenPetEditor` (o botão do Editor de Pets), `AddLocalPet` (os pets com prefixo `meu-`) e a importação
 - `src/Portable/FormSettings.Options.cs` — a linha "Editor de Pets" na seção "Programa"
 - `src/Portable/PetStore.cs` — onde os pets ficam no disco (`%LocalAppData%\DesktopPet\pets\`) e o `version.txt`

@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} sürümü: {1}",
   "inst.updateFailed": "Güncellenemedi: {0}",
   "inst.updated": "Uygulama güncellendi.",
-  "inst.incompleteRelease": "{0} sürümü DesktopPet.exe veya SHA256SUMS olmadan yayımlandı",
+  "inst.incompleteRelease": "{0} sürümü DeskPals.exe veya SHA256SUMS olmadan yayımlandı",
   "inst.hashMissing": "Sürümde {0} için SHA-256 yok, indirme reddedildi",
   "inst.hashMismatch": "{0} SHA-256 değeriyle eşleşmiyor, indirme reddedildi",
   "sources.button": "Kaynaklar",

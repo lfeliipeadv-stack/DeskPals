@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} ورژن: {1}",
   "inst.updateFailed": "اپ ڈیٹ نہیں ہو سکا: {0}",
   "inst.updated": "ایپلیکیشن اپ ڈیٹ ہو گئی۔",
-  "inst.incompleteRelease": "ورژن {0} بغیر DesktopPet.exe یا SHA256SUMS کے شائع ہوا",
+  "inst.incompleteRelease": "ورژن {0} بغیر DeskPals.exe یا SHA256SUMS کے شائع ہوا",
   "inst.hashMissing": "ریلیز میں {0} کا SHA-256 نہیں، ڈاؤن لوڈ مسترد کر دیا گیا",
   "inst.hashMismatch": "{0} اپنے SHA-256 سے مطابقت نہیں رکھتا، ڈاؤن لوڈ مسترد کر دیا گیا",
   "sources.button": "ذرائع",

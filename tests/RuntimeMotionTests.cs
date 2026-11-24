@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
@@ -40,8 +40,8 @@ class RuntimeMotionTests
         try
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            // .NET 10: the program is DesktopPet.dll (DesktopPet.exe is only the launcher); .NET Framework: DesktopPet.exe
-            Assembly app = Assembly.LoadFrom(File.Exists("DesktopPet.dll") ? "DesktopPet.dll" : "DesktopPet.exe");
+            // .NET 10: the program is DeskPals.dll (DeskPals.exe is only the launcher; DesktopPet.dll before 1.2.0); .NET Framework: DesktopPet.exe
+            Assembly app = Assembly.LoadFrom(File.Exists("DeskPals.dll") ? "DeskPals.dll" : File.Exists("DesktopPet.dll") ? "DesktopPet.dll" : "DesktopPet.exe");
             var program = app.GetType("DesktopPet.Program",true);
             object startup=FormatterServices.GetUninitializedObject(app.GetType("DesktopPet.StartUp",true));
             program.GetField("Mainthread",flags).SetValue(null,startup);

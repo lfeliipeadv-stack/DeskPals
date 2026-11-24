@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "إصدار {0}: {1}",
   "inst.updateFailed": "تعذّر التحديث: {0}",
   "inst.updated": "تم تحديث التطبيق.",
-  "inst.incompleteRelease": "نُشر الإصدار {0} بدون DesktopPet.exe أو SHA256SUMS",
+  "inst.incompleteRelease": "نُشر الإصدار {0} بدون DeskPals.exe أو SHA256SUMS",
   "inst.hashMissing": "لا يحتوي الإصدار على SHA-256 لـ {0}، تم رفض التنزيل",
   "inst.hashMismatch": "{0} لا يطابق قيمة SHA-256 الخاصة به، تم رفض التنزيل",
   "sources.button": "المصادر",

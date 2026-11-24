@@ -1273,7 +1273,7 @@
   "inst.versionTitle": "{0} – versão {1}",
   "inst.updateFailed": "Não foi possível atualizar: {0}",
   "inst.updated": "O programa foi atualizado.",
-  "inst.incompleteRelease": "a versão {0} foi publicada sem o DesktopPet.exe ou o SHA256SUMS",
+  "inst.incompleteRelease": "a versão {0} foi publicada sem o DeskPals.exe ou o SHA256SUMS",
   "inst.hashMissing": "{0} não tem SHA-256 no release, o download foi recusado",
   "inst.hashMismatch": "{0} não confere com o SHA-256, o download foi recusado",
 

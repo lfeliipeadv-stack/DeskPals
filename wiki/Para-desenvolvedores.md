@@ -25,7 +25,7 @@ O projeto que é publicado hoje é **`src/DesktopPet.Net.csproj`** (SDK-style). 
 dotnet build src/DesktopPet.Net.csproj -c Release
 ```
 
-O executável sai em `src/bin/Release/net10.0-windows/win-x64/DesktopPet.exe` — é exatamente esse caminho que o workflow de CI usa.
+O executável sai em `src/bin/Release/net10.0-windows/win-x64/DeskPals.exe` — é exatamente esse caminho que o workflow de CI usa.
 
 ### Publicar (build normal, precisa do .NET 10 Desktop Runtime)
 
@@ -41,7 +41,7 @@ Em `Release` o projeto liga `PublishSingleFile` e `IncludeNativeLibrariesForSelf
 dotnet publish src/DesktopPet.Net.csproj -c Release -o ..\publish-completo -p:SelfContained=true
 ```
 
-Com `SelfContained=true` o projeto define a constante `SELFCONTAINED` e liga `EnableCompressionInSingleFile`. O arquivo resultante é o `DesktopPet-completo.exe` (cerca de 50 MB): funciona direto, sem instalar nada.
+Com `SelfContained=true` o projeto define a constante `SELFCONTAINED` e liga `EnableCompressionInSingleFile`. O arquivo resultante é o `DeskPals-completo.exe` (cerca de 50 MB): funciona direto, sem instalar nada.
 
 ### A versão do programa
 
@@ -60,7 +60,7 @@ dotnet publish src/DesktopPet.Net.csproj -c Release -o ..\publish
 dotnet publish src/DesktopPet.Net.csproj -c Release -o ..\publish-completo -p:SelfContained=true
 
 # autoteste
-src\bin\Release\net10.0-windows\win-x64\DesktopPet.exe --selftest=C:\temp\resultado.txt
+src\bin\Release\net10.0-windows\win-x64\DeskPals.exe --selftest=C:\temp\resultado.txt
 
 # testes de movimento
 powershell -NoProfile -File tests\run-net-motion-tests.ps1 -Scales 1,3
@@ -71,7 +71,7 @@ powershell -NoProfile -File tests\run-net-motion-tests.ps1 -Scales 1,3
 O autoteste roda as verificações **com o código de verdade**, sem janelas de mentira: cada check chama a classe real do programa. Ele é a rede de segurança principal do projeto.
 
 ```powershell
-DesktopPet.exe --selftest=C:\temp\resultado.txt
+DeskPals.exe --selftest=C:\temp\resultado.txt
 ```
 
 - Cada linha do arquivo é `PASS  nome` ou `FAIL  nome  →  detalhe` (a seta e o detalhe só aparecem quando falha).
@@ -128,12 +128,12 @@ A build legada em .NET Framework tem o runner `tests/run-motion-tests.ps1`, que 
 | `Tools/PetPack` | Monta um pet a partir de quadros PNG prontos (por exemplo gerados no PixelLab), usando o mesmo modelo de XML do PetGen. Os quadros ficam em `Tools/PetPack/art/<pet>/<animação>/frame_NNN.png`. | `dotnet run --project Tools/PetPack/PetPack.csproj -- Pets` |
 | `Tools/update-pets-json.ps1` | Reescreve em `Pets/pets.json` o campo `size` (o tamanho que o GitHub vai servir, já com LF) e as contagens `animations` e `sounds` de cada pet, lendo o `animations.xml` dele. Rode depois de mexer em um pet. | `powershell -ExecutionPolicy Bypass -File Tools\update-pets-json.ps1` |
 | `Tools/make-previews.ps1` | Gera o `preview.gif` de cada pet (o pet andando mais uma de suas maracinhas, ~120 px, fundo transparente, 128 cores) com `ffmpeg`. O programa mostra esse GIF no painel de detalhes. | `powershell -ExecutionPolicy Bypass -File Tools\make-previews.ps1` — ou `-Only rex` para um pet só |
-| `Tools/Setup` | O instalador em .NET Framework 4.8 (`DesktopPet-Instalador.exe`). Ele procura o .NET 10 Desktop Runtime, oferece o instalador oficial da Microsoft quando falta, cria os atalhos e instala em `%LocalAppData%\DesktopPet`. | `dotnet build Tools\Setup\Setup.csproj -c Release -p:AppExe=<caminho do exe> -p:Version=<versão>` |
+| `Tools/Setup` | O instalador em .NET Framework 4.8 (`DeskPals-Instalador.exe`). Ele procura o .NET 10 Desktop Runtime, oferece o instalador oficial da Microsoft quando falta, cria os atalhos e instala em `%LocalAppData%\DesktopPet`. | `dotnet build Tools\Setup\Setup.csproj -c Release -p:AppExe=<caminho do exe> -p:Version=<versão>` |
 | `Tools/release.ps1` | Monta a versão nova e publica a release no GitHub. Detalhado na seção seguinte. | `pwsh Tools\release.ps1 -Version 1.0.1` |
 
 As duas primeiras ferramentas recebem a pasta de destino como primeiro argumento (`Pets`, por padrão). Depois de rodar o PetGen ou o PetPack, o passo obrigatório é rodar o `update-pets-json.ps1` e o `make-previews.ps1`, senão o painel mostra tamanho e contagens errados e a prévia não existe.
 
-O **Editor de Pets** fica em `editor/` (programa separado, .NET 10): cria e edita pets com prévia ao vivo e testa no desktop com `DesktopPet.exe --test-pet=<arquivo>`, uma cópia do programa que mostra só aquele pet, não grava nada e recarrega quando o arquivo muda. Ele usa do `src` o modelo do XML, o tema e o tocador de MP3 (arquivos ligados, não copiados). O `release.ps1` publica o `PetEditor.exe` junto da release, o instalador o coloca ao lado do `DesktopPet.exe`, e uma instalação antiga o baixa (conferindo o SHA256SUMS) na primeira vez que se clica em Configurações → Editor de Pets. Para conferir: `PetEditor.exe --roundtrip=Pets` lê e salva de novo cada pet da pasta (sai com 0 se nada mudou) , `PetEditor.exe --devtests=Pets` roda os testes do editor (assistente, cópia entre pets, GIF, otimização, .zip) e `PetEditor.exe <pet> --snap=<pasta>` grava uma foto de cada página e de cada janela, no tema claro e no escuro, mais um `cortes.txt` com todo texto ou botão que passa da borda (`--snapsize=1000x660` escolhe o tamanho da janela , `--scale=1.5` simula o zoom do Windows e `--lang=en` mostra o editor em inglês só naquela vez). O `release.ps1` roda os testes e as fotos em 100% e 150% e para se algo falhar ou ficar cortado. Com a variável `PE_TIMING=<arquivo>`, o editor anota quanto tempo leva cada etapa da abertura.
+O **Editor de Pets** fica em `editor/` (programa separado, .NET 10): cria e edita pets com prévia ao vivo e testa no desktop com `DeskPals.exe --test-pet=<arquivo>`, uma cópia do programa que mostra só aquele pet, não grava nada e recarrega quando o arquivo muda. Ele usa do `src` o modelo do XML, o tema e o tocador de MP3 (arquivos ligados, não copiados). O `release.ps1` publica o `DeskPals-Editor.exe` junto da release, o instalador o coloca ao lado do `DeskPals.exe`, e uma instalação antiga o baixa (conferindo o SHA256SUMS) na primeira vez que se clica em Configurações → Editor de Pets. Para conferir: `DeskPals-Editor.exe --roundtrip=Pets` lê e salva de novo cada pet da pasta (sai com 0 se nada mudou) , `DeskPals-Editor.exe --devtests=Pets` roda os testes do editor (assistente, cópia entre pets, GIF, otimização, .zip) e `DeskPals-Editor.exe <pet> --snap=<pasta>` grava uma foto de cada página e de cada janela, no tema claro e no escuro, mais um `cortes.txt` com todo texto ou botão que passa da borda (`--snapsize=1000x660` escolhe o tamanho da janela , `--scale=1.5` simula o zoom do Windows e `--lang=en` mostra o editor em inglês só naquela vez). O `release.ps1` roda os testes e as fotos em 100% e 150% e para se algo falhar ou ficar cortado. Com a variável `PE_TIMING=<arquivo>`, o editor anota quanto tempo leva cada etapa da abertura.
 
 `Tools/PetTester` é uma ferramenta antiga em .NET Framework 4.8 (Windows Forms): abre um XML de animação para inspeção. Ela não faz parte da build publicada.
 
@@ -146,8 +146,8 @@ O script faz tudo em ordem, cada passo conferindo o anterior:
 | 0 | Roda `update-pets-json.ps1` e confere a galeria: avisa se uma pasta em `Pets/` não está listada em `pets.json` e **falha** se o `pets.json` listar uma pasta sem `animations.xml` |
 | 1 | Escreve a versão em `src/Properties/AssemblyInfoPortable.cs` (`AssemblyVersion` e `AssemblyFileVersion` como `<versão>.0`) |
 | 2 | `dotnet publish` da build normal e conferência: a `FileVersion` do exe tem de ser exatamente `<versão>.0` |
-| 2b | `dotnet publish -p:SelfContained=true` e renomeia o resultado para `DesktopPet-completo.exe` |
-| 2b2 | `dotnet publish` do Editor de Pets (`editor/PetEditor.csproj`) para `PetEditor.exe` |
+| 2b | `dotnet publish -p:SelfContained=true` e renomeia o resultado para `DeskPals-completo.exe` |
+| 2b2 | `dotnet publish` do Editor de Pets (`editor/PetEditor.csproj`) para `DeskPals-Editor.exe` |
 | 2b3 | Roda os testes do editor (`--devtests`) e tira as fotos de cada página em 100% e 150% de zoom; **falha** se um teste falhar ou se algum texto ficar cortado |
 | 2c | Compila o instalador net48 em `Tools/Setup` com `-p:AppExe=<exe>` e `-p:Version=<versão>` |
 | 3 | Empacota `src/lang/*.json` em `lang.zip` |
@@ -170,10 +170,10 @@ Cada release `vX.Y.Z` publica estes arquivos. Os tamanhos abaixo são os reais d
 
 | Arquivo | Tamanho | Para quê |
 | --- | --- | --- |
-| `DesktopPet.exe` | 3.041.971 bytes (~2,9 MB) | o programa; precisa do .NET 10 Desktop Runtime |
-| `DesktopPet-completo.exe` | 52.764.698 bytes (~50 MB) | o programa com o runtime dentro; não precisa instalar nada |
-| `DesktopPet-Instalador.exe` | 4.399.104 bytes (~4,2 MB) | instalador em .NET Framework 4.8: confere o runtime, instala o programa e o Editor de Pets e cria os atalhos |
-| `PetEditor.exe` | 955.053 bytes (~0,9 MB) | o Editor de Pets (programa separado; o DesktopPet baixa sozinho quando falta) |
+| `DeskPals.exe` | 3.041.971 bytes (~2,9 MB) | o programa; precisa do .NET 10 Desktop Runtime |
+| `DeskPals-completo.exe` | 52.764.698 bytes (~50 MB) | o programa com o runtime dentro; não precisa instalar nada |
+| `DeskPals-Instalador.exe` | 4.399.104 bytes (~4,2 MB) | instalador em .NET Framework 4.8: confere o runtime, instala o programa e o Editor de Pets e cria os atalhos |
+| `DeskPals-Editor.exe` | 955.053 bytes (~0,9 MB) | o Editor de Pets (programa separado; o DesktopPet baixa sozinho quando falta) |
 | `lang.zip` | 46.311 bytes | os arquivos de idioma, para quem baixou só o `.exe` |
 | `SHA256SUMS` | 418 bytes | o hash de cada um dos cinco arquivos acima |
 | `LICENSE.md` | — | a licença MIT |
@@ -287,7 +287,7 @@ O arquivo aparece sozinho na lista de idiomas da página **Configurações** —
 Para gerar o modelo com todas as chaves, use:
 
 ```powershell
-DesktopPet.exe --export-lang=C:\temp\modelo.json
+DeskPals.exe --export-lang=C:\temp\modelo.json
 ```
 
 Para instalar um idioma numa cópia portátil já em uso, basta soltar o `.json` na pasta `lang` ao lado do `.exe`.
@@ -355,7 +355,7 @@ Dois deles precisam de atenção em ambiente de CI: o `--selftest` abre janelas 
 - `src/lang/pt-BR.json`, `src/lang/es.json` — os textos do programa
 - `src/Portable/Updater.cs`, `src/Portable/AppInfo.cs` — a atualização automática e os endereços do repositório
 - `src/Portable/FormSettings.Snapshots.cs` — as capturas das janelas (`--snapshot`)
-- `editor/` — o Editor de Pets (`PetEditor.exe`)
+- `editor/` — o Editor de Pets (`DeskPals-Editor.exe`)
 - `src/Resources/animations.xsd` — o esquema do `animations.xml`
 - `Pets/pets.json` — o índice da galeria
 - `Tools/PetGen/Program.cs`, `Tools/PetGen/PetModel.cs`, `Tools/PetGen/PetSounds.cs` — o gerador de pets

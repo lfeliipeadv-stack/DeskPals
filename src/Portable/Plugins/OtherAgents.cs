@@ -51,6 +51,32 @@ namespace DesktopPet
 
 		public static string Command(string what) => "\"" + Exe + "\" " + Marker + what;
 
+		/// <summary>
+		/// Codex or Cursor call a program that is not there any more (installed again as DeskPals.exe, so DesktopPet.exe
+		/// went away, or moved): they are pointed to this copy. A program that is still there is left alone.
+		/// </summary>
+		public static void RefreshPaths()
+		{
+			try
+			{
+				if (CodexInstalled)
+				{
+					var ours = File.ReadAllLines(CodexConfig).FirstOrDefault(l => l.TrimStart().StartsWith("notify") && l.Contains(Marker));
+					var parts = ours == null ? null : TomlStrings(ours);
+					if (parts != null && parts.Count > 0 && !File.Exists(parts[0])) { SetCodex(false); SetCodex(true); }
+				}
+				if (CursorInstalled && JsonNode.Parse(File.ReadAllText(CursorHooks))?["hooks"] is JsonObject hooks)
+				{
+					bool gone = hooks.Select(kv => kv.Value).OfType<JsonArray>().SelectMany(a => a)
+						.Select(h => h?["command"]?.GetValue<string>() ?? "")
+						.Where(c => c.Contains(Marker) && c.StartsWith("\""))
+						.Any(c => { int end = c.IndexOf('"', 1); return end > 1 && !File.Exists(c.Substring(1, end - 1)); });
+					if (gone) SetCursor(true);
+				}
+			}
+			catch (Exception skipped) { LogFile.Ignored(skipped); }
+		}
+
 		// ------------------------------------------------------------------ Codex: notify = [...] in config.toml
 
 		public static bool CodexInstalled

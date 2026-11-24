@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "Versi {0}: {1}",
   "inst.updateFailed": "Tidak bisa memperbarui: {0}",
   "inst.updated": "Aplikasi sudah diperbarui.",
-  "inst.incompleteRelease": "versi {0} diterbitkan tanpa DesktopPet.exe atau SHA256SUMS",
+  "inst.incompleteRelease": "versi {0} diterbitkan tanpa DeskPals.exe atau SHA256SUMS",
   "inst.hashMissing": "{0} tidak punya SHA-256 di rilis, unduhan ditolak",
   "inst.hashMismatch": "{0} tidak cocok dengan SHA-256-nya, unduhan ditolak",
   "sources.button": "Sumber",

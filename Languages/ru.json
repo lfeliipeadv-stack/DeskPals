@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0}, версия: {1}",
   "inst.updateFailed": "Не удалось обновить: {0}",
   "inst.updated": "Программа обновлена.",
-  "inst.incompleteRelease": "версия {0} опубликована без DesktopPet.exe или SHA256SUMS",
+  "inst.incompleteRelease": "версия {0} опубликована без DeskPals.exe или SHA256SUMS",
   "inst.hashMissing": "у {0} нет SHA-256 в выпуске, загрузка отклонена",
   "inst.hashMismatch": "{0} не совпадает со своим SHA-256, загрузка отклонена",
   "sources.button": "Источники",

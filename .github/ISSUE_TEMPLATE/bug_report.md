@@ -19,7 +19,7 @@ assignees: ''
 
 **Versão e Windows** / Version and Windows
 - Versão do DeskPals (Configurações › Sobre): 
-- Download usado: Instalador / DesktopPet.exe / DesktopPet-completo.exe
+- Download usado: Instalador / DeskPals.exe / DeskPals-completo.exe
 - Windows: 10 / 11
 - Pet em uso: 
 

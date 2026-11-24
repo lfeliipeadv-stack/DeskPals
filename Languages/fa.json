@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "نسخهٔ {0}: {1}",
   "inst.updateFailed": "به‌روزرسانی ممکن نشد: {0}",
   "inst.updated": "برنامه به‌روز شد.",
-  "inst.incompleteRelease": "نسخهٔ {0} بدون DesktopPet.exe یا SHA256SUMS منتشر شده است",
+  "inst.incompleteRelease": "نسخهٔ {0} بدون DeskPals.exe یا SHA256SUMS منتشر شده است",
   "inst.hashMissing": "{0} در این نسخه SHA-256 ندارد، دانلود رد شد",
   "inst.hashMismatch": "{0} با SHA-256 خود جور نیست، دانلود رد شد",
   "sources.button": "منابع",

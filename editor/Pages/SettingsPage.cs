@@ -90,7 +90,7 @@ namespace PetEditor
 			var browse = new FlatButton(L.T("set.browse"));
 			browse.Click += (o, e) =>
 			{
-				using var dlg = new OpenFileDialog { Filter = "DesktopPet.exe|DesktopPet.exe|*.exe|*.exe" };
+				using var dlg = new OpenFileDialog { Filter = "DeskPals.exe|DeskPals.exe;DesktopPet.exe|*.exe|*.exe" };
 				if (dlg.ShowDialog(this) == DialogResult.OK) path.Text = dlg.FileName;
 			};
 			test.Controls.Add(Ui.Row(Ui.Labeled(L.T("set.appPath"), path), browse));

@@ -78,7 +78,7 @@ itself, with the real code and a pet on screen:
 
 ```powershell
 dotnet build src/DesktopPet.Net.csproj -c Release
-src/bin/Release/net10.0-windows/win-x64/DesktopPet.exe --selftest=$env:TEMP\selftest.txt
+src/bin/Release/net10.0-windows/win-x64/DeskPals.exe --selftest=$env:TEMP\selftest.txt
 ```
 
 The program writes one `PASS`/`FAIL` line per check, closes by itself and returns the

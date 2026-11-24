@@ -832,7 +832,7 @@ function hideBubble() {
 }
 
 /* ----------------------------------------------------------------- o menu */
-const DOWNLOAD = "https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DesktopPet-Instalador.exe";
+const DOWNLOAD = "https://github.com/lfeliipeadv-stack/DeskPals/releases/latest/download/DeskPals-Instalador.exe";
 
 function openMenu(x, y) {
   menu.innerHTML = "";

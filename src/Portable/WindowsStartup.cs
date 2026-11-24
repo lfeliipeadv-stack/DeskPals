@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -7,7 +8,7 @@ namespace DesktopPet
 {
     /// <summary>
     /// "Start with Windows": an entry in HKCU\...\Run pointing to this exe (no admin rights needed).
-    /// The installer used to put a DesktopPet.url in the Startup folder instead; it counts as "on" too,
+    /// The installer used to put a DesktopPet.url (DeskPals.url from 1.2.0) in the Startup folder instead; it counts as "on" too,
     /// and is removed when the option is turned off, so the program never starts twice.
     /// </summary>
     internal static class WindowsStartup
@@ -15,7 +16,7 @@ namespace DesktopPet
         const string RunKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
         const string ValueName = "DesktopPet";
 
-        static string StartupShortcut => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "DesktopPet.url");
+        static string[] StartupShortcuts => new[] { InstallPlace.ShortcutName, InstallPlace.OldShortcutName }.Select(n => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), n)).ToArray();
 
         public static bool Enabled
         {
@@ -25,7 +26,7 @@ namespace DesktopPet
                 {
                     using (var key = Registry.CurrentUser.OpenSubKey(RunKey))
                         if (key?.GetValue(ValueName) is string s && s.Length > 0) return true;
-                    return File.Exists(StartupShortcut);
+                    return StartupShortcuts.Any(File.Exists);
                 }
                 catch (Exception) { return false; }
             }
@@ -42,7 +43,7 @@ namespace DesktopPet
                     else key.DeleteValue(ValueName, false);
                 }
                 // one way only: the old shortcut would start a second copy
-                if (File.Exists(StartupShortcut)) File.Delete(StartupShortcut);
+                foreach (string sc in StartupShortcuts) if (File.Exists(sc)) File.Delete(sc);
                 return true;
             }
             catch (Exception ex)

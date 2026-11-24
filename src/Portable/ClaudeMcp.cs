@@ -59,6 +59,26 @@ namespace DesktopPet
 
 		public static Task<(bool ok, string output)> Unregister() => Run($"mcp remove --scope user {Name}");
 
+		/// <summary>
+		/// Registered with a program that is not there any more (installed again as DeskPals.exe, so DesktopPet.exe went
+		/// away, or moved): registered again with this copy. A registration that still works (another copy, a
+		/// developer build) is left alone.
+		/// </summary>
+		public static async Task RefreshPath()
+		{
+			try
+			{
+				string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".claude.json");
+				if (!IsRegistered()) return;
+				var root = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(file));
+				string command = root?["mcpServers"]?[Name]?["command"]?.GetValue<string>();
+				if (string.IsNullOrEmpty(command) || File.Exists(command)) return;
+				await Unregister();
+				await Register();
+			}
+			catch (Exception skipped) { LogFile.Ignored(skipped); }
+		}
+
 		static async Task<(bool ok, string output)> Run(string args)
 		{
 			string claude = FindClaude();

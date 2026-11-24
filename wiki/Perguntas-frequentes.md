@@ -82,7 +82,7 @@ A garantia de integridade nesse caso é o **SHA-256**: cada release publica um a
 Para conferir na mão, abra um Prompt de Comando na pasta do download e rode:
 
 ```
-certutil -hashfile DesktopPet.exe SHA256
+certutil -hashfile DeskPals.exe SHA256
 ```
 
 O resultado tem que ser igual ao hash da linha correspondente do `SHA256SUMS`. Veja [Conferir o download](Instalacao.md#conferir-o-download).
@@ -171,15 +171,15 @@ O script fecha o programa, apaga os atalhos e as chaves de registro e pergunta:
 
 ## Por que o .NET 10 é necessário?
 
-Porque o `DesktopPet.exe` publicado é **dependente do runtime**: ele não carrega o .NET dentro de si e precisa do **.NET 10 Desktop Runtime** instalado no Windows (é o `Microsoft.WindowsDesktop.App` versão 10.x, 64 bits). Sem ele, o Windows mostra um erro dizendo que o framework necessário está faltando.
+Porque o `DeskPals.exe` publicado é **dependente do runtime**: ele não carrega o .NET dentro de si e precisa do **.NET 10 Desktop Runtime** instalado no Windows (é o `Microsoft.WindowsDesktop.App` versão 10.x, 64 bits). Sem ele, o Windows mostra um erro dizendo que o framework necessário está faltando.
 
 Dá para contornar de duas formas:
 
 | Arquivo | O que é | Precisa do .NET 10? |
 | --- | --- | --- |
-| `DesktopPet.exe` (3.041.971 bytes, ≈ 2,9 MB) | Só o programa | **Sim** |
-| `DesktopPet-completo.exe` (52.764.698 bytes, ≈ 50,3 MB) | O mesmo programa com o runtime embutido (*self-contained*) | Não |
-| `DesktopPet-Instalador.exe` (4.399.104 bytes, ≈ 4,2 MB) | O instalador, escrito em .NET Framework 4.8 | Não — o 4.8 já vem no Windows 10 e 11 |
+| `DeskPals.exe` (3.041.971 bytes, ≈ 2,9 MB) | Só o programa | **Sim** |
+| `DeskPals-completo.exe` (52.764.698 bytes, ≈ 50,3 MB) | O mesmo programa com o runtime embutido (*self-contained*) | Não |
+| `DeskPals-Instalador.exe` (4.399.104 bytes, ≈ 4,2 MB) | O instalador, escrito em .NET Framework 4.8 | Não — o 4.8 já vem no Windows 10 e 11 |
 
 É por isso que o instalador abre mesmo num computador sem o .NET 10: ele é .NET Framework 4.8. E é por isso que ele funciona como conferidor: ele procura o `Microsoft.WindowsDesktop.App` versão 10.x em quatro lugares (`DOTNET_ROOT\shared\Microsoft.WindowsDesktop.App`, `%ProgramFiles%\dotnet`, `C:\Program Files\dotnet` e a chave de registro `HKLM\SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App`). Se não achar, mostra o botão **"Instalar o .NET 10"**, que baixa o instalador oficial da Microsoft.
 
@@ -224,7 +224,7 @@ São dois caminhos, dependendo do que você quer.
 2. Rode `Tools/update-pets-json.ps1` para que o pet entre no `Pets/pets.json` e apareça na aba "Baixar pets".
 3. Abra uma *issue* (ou um *pull request*) no repositório com a pasta do pet.
 
-As capturas de tela dos pets saem do próprio programa: `DesktopPet.exe --snapshot=<pasta>` grava as telas do programa e dos pets.
+As capturas de tela dos pets saem do próprio programa: `DeskPals.exe --snapshot=<pasta>` grava as telas do programa e dos pets.
 
 ## Glossário rápido
 
@@ -241,7 +241,7 @@ As capturas de tela dos pets saem do próprio programa: `DesktopPet.exe --snapsh
 | **Ollama** | Programa que roda modelos de IA dentro do seu próprio computador. Sem chave, sem conta e sem enviar pergunta para fora. Na página Assistente ele aparece com o selo **"Grátis · no seu computador"**. |
 | **API local** | O canal que o programa abre em `127.0.0.1` para outros scripts do seu computador falarem com o pet: `POST /say`, `POST /react` e `POST /hook/<evento>`, com o segredo no cabeçalho `X-DesktopPet`. |
 | **DPAPI** | A parte do Windows que criptografa dados vinculados à conta do usuário. É o que protege a chave da IA no computador. |
-| **Self-contained** | Build que carrega o runtime do .NET dentro do próprio executável. É o caso do `DesktopPet-completo.exe`. |
+| **Self-contained** | Build que carrega o runtime do .NET dentro do próprio executável. É o caso do `DeskPals-completo.exe`. |
 
 ## Ver também
 

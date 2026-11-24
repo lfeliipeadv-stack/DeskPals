@@ -25,35 +25,49 @@ namespace PetEditor
 			var s = EditorSettings.Current.DesktopPetPath;
 			if (!string.IsNullOrWhiteSpace(s) && File.Exists(s) && SupportsTest(s)) return s;
 			string here = AppContext.BaseDirectory;
-			var candidates = new List<string> { Path.Combine(here, "DesktopPet.exe") };
+			var candidates = new List<string>();
+			foreach (var name in ExeNames) candidates.Add(Path.Combine(here, name));
 			// developer: the build of the repository (editor\bin\...\ next to src\bin\...\) comes before an installed copy
 			var dir = new DirectoryInfo(here);
 			for (int i = 0; i < 6 && dir != null; i++, dir = dir.Parent)
-				candidates.Add(Path.Combine(dir.FullName, "src", "bin", "Release", "net10.0-windows", "win-x64", "DesktopPet.exe"));
-			candidates.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "DesktopPet", "DesktopPet.exe"));
-			candidates.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DesktopPet", "DesktopPet.exe"));
+				foreach (var name in ExeNames) candidates.Add(Path.Combine(dir.FullName, "src", "bin", "Release", "net10.0-windows", "win-x64", name));
+			candidates.AddRange(Installed());
 			return candidates.FirstOrDefault(c => File.Exists(c) && SupportsTest(c));
 		}
+
+		/// <summary>The program's name from 1.2.0 on, and before (an install updated from then keeps DesktopPet.exe).</summary>
+		static readonly string[] ExeNames = { "DeskPals.exe", "DesktopPet.exe" };
+
+		/// <summary>Where an installed copy can be: Program Files, or %LocalAppData% of the versions before 2.7.</summary>
+		static IEnumerable<string> Installed() =>
+			new[] { Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) }
+				.SelectMany(root => ExeNames.Select(name => Path.Combine(root, "DesktopPet", name)));
 
 		/// <summary>The first version with "--test-pet". An older one would start as a second normal DesktopPet.</summary>
 		public static readonly Version TestVersion = new(2, 8, 3);
 
-		/// <summary>This DesktopPet.exe can show a test pet (its version, or a developer build of the repository).</summary>
+		/// <summary>
+		/// This program can show a test pet (its version, or a developer build of the repository). The builds made while
+		/// it was written were numbered 2.x; the public versions started again at 1.0.0 (after 2.8.x), and all of them can.
+		/// </summary>
 		public static bool SupportsTest(string exe)
 		{
 			try
 			{
 				if (exe.Replace('/', '\\').Contains(@"\src\bin\", StringComparison.OrdinalIgnoreCase)) return true;
 				var v = System.Diagnostics.FileVersionInfo.GetVersionInfo(exe);
-				return new Version(v.FileMajorPart, v.FileMinorPart, v.FileBuildPart) >= TestVersion;
+				var version = new Version(v.FileMajorPart, v.FileMinorPart, v.FileBuildPart);
+				if (version.Major == 2) return version >= TestVersion;
+				// the original eSheep (Adriano's) also had 1.x versions, without the test: its product is "eSheep"
+				return version.Major >= 1 && !(v.ProductName ?? "").StartsWith("eSheep", StringComparison.OrdinalIgnoreCase);
 			}
 			catch { return false; }
 		}
 
-		/// <summary>An installed DesktopPet too old for the test (to say so instead of "not found").</summary>
+		/// <summary>An installed copy too old for the test (to say so instead of "not found").</summary>
 		public static string OldInstalled()
 		{
-			foreach (var c in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "DesktopPet", "DesktopPet.exe"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DesktopPet", "DesktopPet.exe") })
+			foreach (var c in Installed())
 				if (File.Exists(c) && !SupportsTest(c)) return System.Diagnostics.FileVersionInfo.GetVersionInfo(c).FileVersion;
 			return null;
 		}

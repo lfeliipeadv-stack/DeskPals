@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} バージョン: {1}",
   "inst.updateFailed": "アップデートできませんでした: {0}",
   "inst.updated": "アプリをアップデートしました。",
-  "inst.incompleteRelease": "バージョン {0} は DesktopPet.exe または SHA256SUMS なしで公開されました",
+  "inst.incompleteRelease": "バージョン {0} は DeskPals.exe または SHA256SUMS なしで公開されました",
   "inst.hashMissing": "{0} にはリリース内の SHA-256 がないため、ダウンロードを拒否しました",
   "inst.hashMismatch": "{0} が SHA-256 と一致しないため、ダウンロードを拒否しました",
   "sources.button": "取得元",

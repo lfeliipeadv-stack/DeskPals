@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} వెర్షన్: {1}",
   "inst.updateFailed": "అప్‌డేట్ చేయలేకపోయాను: {0}",
   "inst.updated": "అప్లికేషన్ అప్‌డేట్ అయింది.",
-  "inst.incompleteRelease": "వెర్షన్ {0} DesktopPet.exe లేదా SHA256SUMS లేకుండా ప్రచురించబడింది",
+  "inst.incompleteRelease": "వెర్షన్ {0} DeskPals.exe లేదా SHA256SUMS లేకుండా ప్రచురించబడింది",
   "inst.hashMissing": "విడుదలలో {0}కి SHA-256 లేదు, డౌన్‌లోడ్ తిరస్కరించబడింది",
   "inst.hashMismatch": "{0} దాని SHA-256తో సరిపోలడం లేదు, డౌన్‌లోడ్ తిరస్కరించబడింది",
   "sources.button": "మూలాలు",

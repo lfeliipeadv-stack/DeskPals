@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -12,7 +12,7 @@ class DisplayTopologyTests
     {
         try {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            Assembly app=Assembly.LoadFrom(File.Exists("DesktopPet.dll") ? "DesktopPet.dll" : "DesktopPet.exe");   // .NET 10 : .NET Framework
+            Assembly app=Assembly.LoadFrom(File.Exists("DeskPals.dll") ? "DeskPals.dll" : File.Exists("DesktopPet.dll") ? "DesktopPet.dll" : "DesktopPet.exe");   // .NET 10 : .NET Framework
             int staleIndex=Screen.AllScreens.Length;
             object xml=Activator.CreateInstance(app.GetType("DesktopPet.Xml"),new object[]{1});
             object width=xml.GetType().GetMethod("ParseValue").Invoke(xml,new object[]{"screenW","display removal",staleIndex});

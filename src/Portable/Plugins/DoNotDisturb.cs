@@ -108,7 +108,7 @@ namespace DesktopPet
 							using (var np = root.OpenSubKey(name))
 								foreach (var app in np?.GetSubKeyNames() ?? new string[0])
 								{
-									if (app.IndexOf("powershell", StringComparison.OrdinalIgnoreCase) >= 0 || app.IndexOf("DesktopPet", StringComparison.OrdinalIgnoreCase) >= 0) continue;
+									if (app.IndexOf("powershell", StringComparison.OrdinalIgnoreCase) >= 0 || app.IndexOf("DesktopPet", StringComparison.OrdinalIgnoreCase) >= 0 || app.IndexOf("DeskPals", StringComparison.OrdinalIgnoreCase) >= 0) continue;
 									using (var k = np.OpenSubKey(app)) if (InUse(k)) return true;
 								}
 						}

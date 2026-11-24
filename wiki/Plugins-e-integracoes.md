@@ -177,7 +177,7 @@ O botão **Testar** roda um exemplo curto pela porta real: pensando → editando
 A opção **Deixar o Claude falar pelo pet (MCP)** registra o programa como servidor MCP do Claude Code. O registro é feito pelo próprio comando do Claude Code (`claude mcp add`), então nenhum arquivo de configuração é editado à mão:
 
 ```
-claude mcp add --scope user desktoppet -- "C:\...\DesktopPet.exe" --mcp
+claude mcp add --scope user desktoppet -- "C:\...\DeskPals.exe" --mcp
 ```
 
 Se o Claude Code não for encontrado no computador, o programa copia esse comando para a área de transferência e mostra a caixa com ele, para você colar num terminal.
@@ -214,7 +214,7 @@ O segundo cartão cobre quem não é o Claude Code, com quatro linhas:
 O comando do item "Qualquer outro programa" é:
 
 ```
-"C:\...\DesktopPet.exe" --agent=done
+"C:\...\DeskPals.exe" --agent=done
 ```
 
 Ele avisa o pet que já está rodando e não falha se o pet estiver fechado. O nível começa em 1 e sobe de 3, 8, 15, 24… tarefas; a cada nível novo o pet comemora com "Nível {0}! Obrigado por todo o trabalho juntos 🎉".

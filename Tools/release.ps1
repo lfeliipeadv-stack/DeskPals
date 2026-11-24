@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Build a DesktopPet release and publish it on GitHub (the source of the in-app updater).
+    Build a DeskPals release and publish it on GitHub (the source of the in-app updater).
 
 .DESCRIPTION
     0. Updates size and counts of every pet in Pets\pets.json (Tools\update-pets-json.ps1)
@@ -9,7 +9,7 @@
     3. Packs lang\*.json into lang.zip
     2b. Builds the Pet Editor and DeskPals Weather (with its snow engine, Snowhush), runs their tests and packs them
     4. Writes SHA256SUMS (the updater refuses any file whose hash does not match)
-    5. Creates the GitHub release "v<Version>" with the three files (needs the GitHub CLI, "gh auth login")
+    5. Creates the GitHub release "v<Version>" with the files (and copies under the names before 1.2.0) (needs the GitHub CLI, "gh auth login")
 
     Commit the version change after the release.
 
@@ -54,7 +54,7 @@ if (Test-Path $out) { Remove-Item $out -Recurse -Force }
 $binDir = Join-Path $env:TEMP 'deskpals-release-bin\'
 dotnet publish (Join-Path $src 'DesktopPet.Net.csproj') -c Release -o $out --nologo "-p:BaseOutputPath=$binDir"
 if ($LASTEXITCODE -ne 0) { throw "dotnet publish failed" }
-$exe = Join-Path $out 'DesktopPet.exe'
+$exe = Join-Path $out 'DeskPals.exe'
 $built = (Get-Item $exe).VersionInfo.FileVersion
 if ($built -ne "$Version.0") { throw "The exe reports version $built instead of $Version.0" }
 
@@ -62,16 +62,16 @@ if ($built -ne "$Version.0") { throw "The exe reports version $built instead of 
 $fullDir = Join-Path $out 'full'
 dotnet publish (Join-Path $src 'DesktopPet.Net.csproj') -c Release -o $fullDir --nologo -p:SelfContained=true "-p:BaseOutputPath=$binDir"
 if ($LASTEXITCODE -ne 0) { throw "dotnet publish (full) failed" }
-$fullExe = Join-Path $out 'DesktopPet-completo.exe'
-Copy-Item (Join-Path $fullDir 'DesktopPet.exe') $fullExe -Force
+$fullExe = Join-Path $out 'DeskPals-completo.exe'
+Copy-Item (Join-Path $fullDir 'DeskPals.exe') $fullExe -Force
 Remove-Item $fullDir -Recurse -Force
 
 # 2b2. Pet Editor (a separate program): published next to the app, carried by the installer, downloaded by older installs
 $editorDir = Join-Path $out 'editor'
 dotnet publish (Join-Path $root 'editor\PetEditor.csproj') -c Release -o $editorDir --nologo
 if ($LASTEXITCODE -ne 0) { throw "dotnet publish (editor) failed" }
-$editorExe = Join-Path $out 'PetEditor.exe'
-Copy-Item (Join-Path $editorDir 'PetEditor.exe') $editorExe -Force
+$editorExe = Join-Path $out 'DeskPals-Editor.exe'
+Copy-Item (Join-Path $editorDir 'DeskPals-Editor.exe') $editorExe -Force
 Remove-Item $editorDir -Recurse -Force
 
 # 2b3. Pet Editor checked before it goes out: its own tests, then a picture of every page and window at 100% and
@@ -128,21 +128,32 @@ if (-not $wp.WaitForExit(300000)) { Stop-Process -Id $wp.Id -Force; throw "DeskP
 if ($wp.ExitCode -ne 0) { throw "DeskPals Weather: $($wp.ExitCode) test(s) failed (see $weatherReport)" }
 $weatherZip = Join-Path $out 'DeskPals-Weather.zip'
 Compress-Archive -Path (@('DeskPalsWeather.exe', 'DeskPals-Snowhush.exe', 'Snowhush-LICENSE.txt', 'NOTICE.txt') | ForEach-Object { Join-Path $weatherDir $_ }) -DestinationPath $weatherZip -Force
-Remove-Item $weatherDir -Recurse -Force
+# the snow engine started by the tests may still be closing: it holds its exe in that folder
+Get-Process | Where-Object { $_.Path -and $_.Path.StartsWith($weatherDir, [StringComparison]::OrdinalIgnoreCase) } | Stop-Process -Force -ErrorAction SilentlyContinue
+for ($try = 0; $try -lt 10; $try++) { try { Remove-Item $weatherDir -Recurse -Force -ErrorAction Stop; break } catch { if ($try -eq 9) { throw }; Start-Sleep -Milliseconds 500 } }
 Write-Output "DeskPals Weather: tests passed, packed in DeskPals-Weather.zip"
 
-# 2c. installer (.NET Framework 4.8, comes with Windows): checks the .NET 10 Desktop Runtime, then installs DesktopPet.exe (and the Pet Editor)
+# 2c. installer (.NET Framework 4.8, comes with Windows): checks the .NET 10 Desktop Runtime, then installs DeskPals.exe (and the Pet Editor)
 dotnet build (Join-Path $root 'Tools\Setup\Setup.csproj') -c Release --nologo "-p:AppExe=$exe" "-p:EditorExe=$editorExe" "-p:Version=$Version"
 if ($LASTEXITCODE -ne 0) { throw "installer build failed" }
-$setupExe = Join-Path $out 'DesktopPet-Instalador.exe'
-Copy-Item (Join-Path $root 'Tools\Setup\bin\Release\net48\DesktopPet-Instalador.exe') $setupExe -Force
+$setupExe = Join-Path $out 'DeskPals-Instalador.exe'
+Copy-Item (Join-Path $root 'Tools\Setup\bin\Release\net48\DeskPals-Instalador.exe') $setupExe -Force
+
+# 2d. the same files under their names before 1.2.0 (DesktopPet.exe, DesktopPet-completo.exe, PetEditor.exe,
+# DesktopPet-Instalador.exe): an installed 1.0.x or 1.1.x looks for those names to update itself (and to download
+# the editor), and old links point to them. Same bytes, in SHA256SUMS too.
+$legacyDir = Join-Path $out 'nomes-antigos'
+New-Item -ItemType Directory -Force $legacyDir | Out-Null
+$legacy = foreach ($pair in @(@($exe, 'DesktopPet.exe'), @($fullExe, 'DesktopPet-completo.exe'), @($editorExe, 'PetEditor.exe'), @($setupExe, 'DesktopPet-Instalador.exe'))) {
+    $copy = Join-Path $legacyDir $pair[1]; Copy-Item $pair[0] $copy -Force; $copy
+}
 
 # 3. languages
 $langZip = Join-Path $out 'lang.zip'
 Compress-Archive -Path (Join-Path $src 'lang\*.json') -DestinationPath $langZip -Force
 
 # 4. hashes ("hash  name", LF, like sha256sum)
-$sums = foreach ($f in @($exe, $fullExe, $setupExe, $editorExe, $weatherZip, $langZip)) {
+$sums = foreach ($f in @($exe, $fullExe, $setupExe, $editorExe, $weatherZip, $langZip) + $legacy) {
     (Get-FileHash $f -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + (Split-Path $f -Leaf)
 }
 $sumsFile = Join-Path $out 'SHA256SUMS'
@@ -150,19 +161,19 @@ $sumsFile = Join-Path $out 'SHA256SUMS'
 Write-Output ""
 Write-Output ($sums -join "`n")
 Write-Output ""
-Write-Output ("DesktopPet.exe: {0:N0} KB" -f ((Get-Item $exe).Length / 1KB))
-Write-Output ("DesktopPet-completo.exe: {0:N0} KB" -f ((Get-Item $fullExe).Length / 1KB))
-Write-Output ("PetEditor.exe: {0:N0} KB" -f ((Get-Item $editorExe).Length / 1KB))
+Write-Output ("DeskPals.exe: {0:N0} KB" -f ((Get-Item $exe).Length / 1KB))
+Write-Output ("DeskPals-completo.exe: {0:N0} KB" -f ((Get-Item $fullExe).Length / 1KB))
+Write-Output ("DeskPals-Editor.exe: {0:N0} KB" -f ((Get-Item $editorExe).Length / 1KB))
 Write-Output ("DeskPals-Weather.zip: {0:N0} KB" -f ((Get-Item $weatherZip).Length / 1KB))
 
 if ($NoUpload) { Write-Output "Built in $out (not uploaded)."; return }
 
 # 5. GitHub release
-if (-not $Notes) { $Notes = "DesktopPet $Version" }
-$Notes += "`n`n**Qual baixar?**`n- ``DesktopPet-Instalador.exe`` (recomendado): verifica se o .NET 10 está no computador, instala se faltar e cria os atalhos.`n- ``DesktopPet-completo.exe``: funciona direto, sem instalar nada (arquivo maior).`n- ``DesktopPet.exe``: só o programa, precisa do [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).`n- ``PetEditor.exe``: o Editor de Pets (o instalador já traz; o DesktopPet também baixa sozinho na primeira vez que for aberto).`n- ``DeskPals-Weather.zip``: a extensão DeskPals Weather (neve, chuva, neblina, sol, cenas…). Não precisa baixar à mão: o DeskPals baixa quando ela é ligada na aba Extensões."
+if (-not $Notes) { $Notes = "DeskPals $Version" }
+$Notes += "`n`n**Qual baixar?**`n- ``DeskPals-Instalador.exe`` (recomendado): verifica se o .NET 10 está no computador, instala se faltar e cria os atalhos.`n- ``DeskPals-completo.exe``: funciona direto, sem instalar nada (arquivo maior).`n- ``DeskPals.exe``: só o programa, precisa do [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).`n- ``DeskPals-Editor.exe``: o Editor de Pets (o instalador já traz; o DeskPals também baixa sozinho na primeira vez que for aberto).`n- ``DeskPals-Weather.zip``: a extensão DeskPals Weather (neve, chuva, neblina, sol, cenas…). Não precisa baixar à mão: o DeskPals baixa quando ela é ligada na aba Extensões.`n`nOs arquivos ``DesktopPet*.exe`` e ``PetEditor.exe`` são os mesmos programas com os nomes de antes: ficam aqui para quem tem uma versão antiga receber a atualização sozinho. Não precisa baixá-los."
 # notes go through a file: quotes or line breaks in the text would break the command line
 $notesFile = Join-Path $out 'NOTES.md'
 [IO.File]::WriteAllText($notesFile, $Notes, $utf8)
-gh release create "v$Version" $setupExe $fullExe $exe $editorExe $weatherZip $langZip $sumsFile (Join-Path $root 'LICENSE.md') --repo $Repo --title "DeskPals $Version" --notes-file $notesFile --target master
+gh release create "v$Version" $setupExe $fullExe $exe $editorExe $weatherZip $langZip $sumsFile (Join-Path $root 'LICENSE.md') @legacy --repo $Repo --title "DeskPals $Version" --notes-file $notesFile --target master
 if ($LASTEXITCODE -ne 0) { throw "gh release create failed" }
 Write-Output "Release v$Version published on https://github.com/$Repo/releases"

@@ -223,6 +223,12 @@ namespace DesktopPet
                 RefreshBuiltInPet();
             }
             WindowsStartup.Refresh();   // "start with Windows" follows the exe after an install
+            if (IsApplicationInstalled() && !SelfTest.Running)
+            {
+                // installed again as DeskPals.exe (DesktopPet.exe went away): the AI agents call this copy now
+                OtherAgents.RefreshPaths();
+                _ = ClaudeMcp.RefreshPath();
+            }
 
             // Show the system tray icon.
             using (ProcessIcon pi = new ProcessIcon())

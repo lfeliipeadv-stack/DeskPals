@@ -42,7 +42,9 @@ namespace DesktopPet
             /// <summary>
             /// Application Name.
             /// </summary>
-        readonly string appName = "DesktopPet";
+        /// <summary>A shortcut of the program in this folder: DeskPals.url, or DesktopPet.url of a version before the new name.</summary>
+        static bool ShortcutIn(string folder) =>
+            File.Exists(Path.Combine(folder, InstallPlace.ShortcutName)) || File.Exists(Path.Combine(folder, InstallPlace.OldShortcutName));
             /// <summary>
             /// Name of the uninstall batch file.
             /// </summary>
@@ -203,9 +205,9 @@ namespace DesktopPet
                 checkBox3.Visible = true;
                 button2.Enabled = false;
 
-                checkBox1.Checked = File.Exists(Path.Combine(startMenuPath, $"{appName}.url"));
-                checkBox2.Checked = File.Exists(Path.Combine(desktopPath, $"{appName}.url"));
-                checkBox3.Checked = File.Exists(Path.Combine(autostartPath, $"{appName}.url"));
+                checkBox1.Checked = ShortcutIn(startMenuPath);
+                checkBox2.Checked = ShortcutIn(desktopPath);
+                checkBox3.Checked = ShortcutIn(autostartPath);
             }
 
             Show();
@@ -252,7 +254,7 @@ namespace DesktopPet
             /// </summary>
         private void InstallApplication()
         {
-            string sDestExe = Path.Combine(installPath, appName + ".exe");
+            string sDestExe = Path.Combine(installPath, InstallPlace.ExeName);
             string dataDir = InstallPlace.DataDir;
             string iconFile = Path.Combine(dataDir, "icon.ico");
             try
@@ -265,9 +267,9 @@ namespace DesktopPet
 
             var shortcuts = new[]
             {
-                checkBox1.Checked ? Path.Combine(startMenuPath, appName + ".url") : "",
-                checkBox2.Checked ? Path.Combine(desktopPath, appName + ".url") : "",
-                checkBox3.Checked ? Path.Combine(autostartPath, appName + ".url") : "",
+                checkBox1.Checked ? Path.Combine(startMenuPath, InstallPlace.ShortcutName) : "",
+                checkBox2.Checked ? Path.Combine(desktopPath, InstallPlace.ShortcutName) : "",
+                checkBox3.Checked ? Path.Combine(autostartPath, InstallPlace.ShortcutName) : "",
             };
             string request = string.Join("|", shortcuts) + "|" + iconFile + "|" + (Lang.Current.StartsWith("pt", StringComparison.OrdinalIgnoreCase) ? "pt" : "en");
 
@@ -316,11 +318,13 @@ namespace DesktopPet
                 var parts = request.Split('|');
                 string target = InstallPlace.ProgramDir;
                 Directory.CreateDirectory(target);
-                string exe = Path.Combine(target, InstallPlace.AppName + ".exe");
+                string exe = Path.Combine(target, InstallPlace.ExeName);
                 if (!string.Equals(Path.GetFullPath(sourceExe), Path.GetFullPath(exe), StringComparison.OrdinalIgnoreCase))
                 {
-                    foreach (var p in Process.GetProcessesByName(InstallPlace.AppName))
-                        try { if (p.Id != Environment.ProcessId && string.Equals(p.MainModule?.FileName, exe, StringComparison.OrdinalIgnoreCase)) { p.Kill(); p.WaitForExit(3000); } } catch (Exception skipped) { LogFile.Ignored(skipped); }
+                    // the copy installed there, also under the old name (DesktopPet.exe), closes first
+                    foreach (string name in InstallPlace.ProcessNames)
+                        foreach (var p in Process.GetProcessesByName(name))
+                            try { if (p.Id != Environment.ProcessId && string.Equals(Path.GetDirectoryName(p.MainModule?.FileName ?? ""), target, StringComparison.OrdinalIgnoreCase)) { p.Kill(); p.WaitForExit(3000); } } catch (Exception skipped) { LogFile.Ignored(skipped); }
                     File.Copy(sourceExe, exe, true);
                 }
                 string langFrom = Path.Combine(Path.GetDirectoryName(sourceExe), "lang"), langTo = Path.Combine(target, "lang");
@@ -336,15 +340,19 @@ namespace DesktopPet
                     if (parts[i].Length > 0) { Directory.CreateDirectory(Path.GetDirectoryName(parts[i])); File.WriteAllText(parts[i], contents); }
 
                 // uninstall.cmd: every place a shortcut can be (also the ones not chosen now, made later in "Repair")
-                string startMenu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "Programs", InstallPlace.AppName + ".url");
-                string desktop = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), InstallPlace.AppName + ".url");
-                string startup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), InstallPlace.AppName + ".url");
+                string startMenu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "Programs", InstallPlace.ShortcutName);
+                string desktop = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), InstallPlace.ShortcutName);
+                string startup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), InstallPlace.ShortcutName);
                 var all = new System.Collections.Generic.List<string> { startMenu, desktop, startup };
                 for (int i = 0; i < 3 && i < parts.Length; i++) if (parts[i].Length > 0 && !all.Contains(parts[i])) all.Add(parts[i]);
                 bool pt = parts.Length > 4 && parts[4] == "pt";
                 string scriptPath = Path.Combine(target, "uninstall.cmd");
                 File.WriteAllText(scriptPath, UninstallScript.Build(InstallPlace.AppName, all, InstallPlace.UninstallKey, pt));
                 InstallPlace.Register(exe, FileVersionInfo.GetVersionInfo(exe).FileVersion, scriptPath, AppInfo.RepoUrl);
+                // an install before the new names: its DesktopPet.exe and DesktopPet.url shortcuts go (the new ones are here)
+                var folders = new System.Collections.Generic.List<string>();
+                foreach (string sc in all) { string d = Path.GetDirectoryName(sc); if (!folders.Contains(d)) folders.Add(d); }
+                InstallPlace.RemoveOldNames(target, folders);
                 InstallPlace.RemoveOldProgram();
                 return null;
             }
@@ -362,7 +370,7 @@ namespace DesktopPet
             /// <param name="e">Mouse event values.</param>
         private void Button2_Click(object sender, EventArgs e)
         {
-            string sDestExe = installPath + "\\" + appName + ".exe";
+            string sDestExe = InstallPlace.ExeIn(installPath);   // an install updated from before the new name still has DesktopPet.exe
 
             string contents = $@"
 [InternetShortcut] 
@@ -371,26 +379,29 @@ IconFile={sDestExe.Replace('\\', '/')}
 IconIndex=0
             ";
             
-            if (checkBox1.Checked != File.Exists(Path.Combine(startMenuPath, $"{appName}.url")))
+            if (checkBox1.Checked != ShortcutIn(startMenuPath))
             {
-                string file = Path.Combine(startMenuPath, $"{appName}.url");
+                string file = Path.Combine(startMenuPath, InstallPlace.ShortcutName);
+                try { File.Delete(Path.Combine(startMenuPath, InstallPlace.OldShortcutName)); } catch (Exception skipped) { LogFile.Ignored(skipped); }   // the one of an older version
                     
                 if (checkBox1.Checked)  // add to start menu
                     File.WriteAllText(file, contents);
                 else                    // remove from start menu
                     File.Delete(file);
             }
-            if(checkBox2.Checked != File.Exists(Path.Combine(desktopPath, $"{appName}.url")))
+            if (checkBox2.Checked != ShortcutIn(desktopPath))
             {
-                string file = Path.Combine(desktopPath, $"{appName}.url");
+                string file = Path.Combine(desktopPath, InstallPlace.ShortcutName);
+                try { File.Delete(Path.Combine(desktopPath, InstallPlace.OldShortcutName)); } catch (Exception skipped) { LogFile.Ignored(skipped); }   // the one of an older version
                 if (checkBox2.Checked)  // add to desktop
                     File.WriteAllText(file, contents);
                 else                    // remove from desktop
                     File.Delete(file);
             }
-            if(checkBox3.Checked != File.Exists(Path.Combine(autostartPath, $"{appName}.url")))
+            if (checkBox3.Checked != ShortcutIn(autostartPath))
             {
-                string file = Path.Combine(autostartPath, $"{appName}.url");
+                string file = Path.Combine(autostartPath, InstallPlace.ShortcutName);
+                try { File.Delete(Path.Combine(autostartPath, InstallPlace.OldShortcutName)); } catch (Exception skipped) { LogFile.Ignored(skipped); }   // the one of an older version
                 if (checkBox3.Checked)  // add to auto start
                     File.WriteAllText(file, contents);
                 else                    // remove from auto start

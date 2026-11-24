@@ -4,7 +4,7 @@ Thanks for wanting to help DeskPals! There are three main ways. (Issues and pull
 
 ## A new pet for the gallery
 
-1. Open the **Pet Editor** (Settings › App › Pet Editor, or `PetEditor.exe`).
+1. Open the **Pet Editor** (Settings › App › Pet Editor, or `DeskPals-Editor.exe`).
 2. Create the pet with the **New pet wizard** or change an existing one (use **Save as** to keep the original untouched).
 3. Test it with **Test on desktop** (F5): it opens a second DesktopPet with only your pet, without touching yours.
 4. Check the **Validator**: the gallery only accepts pets with no errors and with a name and author in the Header.
@@ -32,7 +32,7 @@ The app is C# (Windows Forms) on .NET 10. Before sending a pull request:
 
 ```bash
 dotnet build src/DesktopPet.Net.csproj -c Release
-src\bin\Release\net10.0-windows\win-x64\DesktopPet.exe --selftest=result.txt --only=<what you changed>
+src\bin\Release\net10.0-windows\win-x64\DeskPals.exe --selftest=result.txt --only=<what you changed>
 ```
 
 The self-test runs against the real code; the exit code is the number of failures. Details are in

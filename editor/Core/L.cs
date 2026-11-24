@@ -94,9 +94,9 @@ msg.openFail|Não foi possível abrir: {0}|Could not open: {0}|No se pudo abrir:
 msg.saveFail|Não foi possível salvar: {0}|Could not save: {0}|No se pudo guardar: {0}
 msg.saveChanges|Salvar as mudanças em “{0}”?|Save the changes to “{0}”?|¿Guardar los cambios en “{0}”?
 msg.noXmlInFolder|Esta pasta não tem um animations.xml.|This folder has no animations.xml.|Esta carpeta no tiene un animations.xml.
-msg.saveWithErrors|O pet tem {0} erro(s) que podem travar o DesktopPet. Salvar mesmo assim?|The pet has {0} error(s) that can stop DesktopPet. Save anyway?|La mascota tiene {0} error(es) que pueden detener DesktopPet. ¿Guardar de todos modos?
+msg.saveWithErrors|O pet tem {0} erro(s) que podem travar o DeskPals. Salvar mesmo assim?|The pet has {0} error(s) that can stop DeskPals. Save anyway?|La mascota tiene {0} error(es) que pueden detener DeskPals. ¿Guardar de todos modos?
 open.folder|Escolha a pasta do pet (a que tem o animations.xml)|Choose the pet's folder (the one with animations.xml)|Elige la carpeta de la mascota (la que tiene animations.xml)
-open.filter|Pet do DesktopPet (animations.xml)¦*.xml|DesktopPet pet (animations.xml)¦*.xml|Mascota de DesktopPet (animations.xml)¦*.xml
+open.filter|Pet do DeskPals (animations.xml)¦*.xml|DeskPals pet (animations.xml)¦*.xml|Mascota de DeskPals (animations.xml)¦*.xml
 
 proj.title|Projeto|Project|Proyecto
 proj.intro|Crie um pet novo ou abra um que já existe. O pet é um único arquivo, animations.xml, com as imagens, as animações e os sons.|Create a new pet or open one that exists. A pet is a single file, animations.xml, with its pictures, animations and sounds.|Crea una mascota nueva o abre una que ya existe. La mascota es un solo archivo, animations.xml, con las imágenes, las animaciones y los sonidos.
@@ -120,18 +120,18 @@ pub.needHeader|Dê um nome ao pet e escreva o autor (página Cabeçalho) antes d
 pub.body|Um pet novo para a galeria.\n\n- Nome: {0}\n- Autor: {1}\n- Animações: {3} · Quadros: {4} · Sons: {5}\n\n{2}\n\n<!-- Arraste o arquivo {6} para cá (ele está selecionado no Explorador) e clique em Submit new issue. -->|A new pet for the gallery.\n\n- Name: {0}\n- Author: {1}\n- Animations: {3} · Frames: {4} · Sounds: {5}\n\n{2}\n\n<!-- Drag the file {6} here (it is selected in Explorer) and click Submit new issue. -->|Una mascota nueva para la galería.\n\n- Nombre: {0}\n- Autor: {1}\n- Animaciones: {3} · Cuadros: {4} · Sonidos: {5}\n\n{2}\n\n<!-- Arrastra el archivo {6} aquí (está seleccionado en el Explorador) y haz clic en Submit new issue. -->
 pub.done|Pronto: {0}\nArraste esse arquivo para a página do GitHub que abriu e clique em “Submit new issue”.|Done: {0}\nDrag this file onto the GitHub page that opened and click “Submit new issue”.|Listo: {0}\nArrastra este archivo a la página de GitHub que se abrió y haz clic en “Submit new issue”.
 zip.filter|Arquivo zip (*.zip)¦*.zip|Zip file (*.zip)¦*.zip|Archivo zip (*.zip)¦*.zip
-zip.done|Pronto: {0} ({1} KB). Quem receber descompacta a pasta dentro dos pets do DesktopPet.|Done: {0} ({1} KB). Whoever gets it unzips the folder into the pets of DesktopPet.|Listo: {0} ({1} KB). Quien lo reciba descomprime la carpeta dentro de las mascotas de DesktopPet.
+zip.done|Pronto: {0} ({1} KB). Quem receber descompacta a pasta dentro dos pets do DeskPals.|Done: {0} ({1} KB). Whoever gets it unzips the folder into the pets of DeskPals.|Listo: {0} ({1} KB). Quien lo reciba descomprime la carpeta dentro de las mascotas de DeskPals.
 proj.thisPet|Este pet: {0}|This pet: {0}|Esta mascota: {0}
 proj.stats|{0} animações · {1} quadros de {2}×{3} px · {4} entradas · {5} janelas filhas · {6} sons|{0} animations · {1} frames of {2}×{3} px · {4} entrances · {5} child windows · {6} sounds|{0} animaciones · {1} cuadros de {2}×{3} px · {4} entradas · {5} ventanas hijas · {6} sonidos
 proj.showFolder|Mostrar na pasta|Show in folder|Mostrar en la carpeta
 proj.recent|Abertos recentemente|Recently opened|Abiertos recientemente
 proj.noRecent|Nenhum ainda.|None yet.|Ninguno todavía.
-proj.installed|Pets baixados no DesktopPet|Pets downloaded in DesktopPet|Mascotas descargadas en DesktopPet
+proj.installed|Pets baixados no DeskPals|Pets downloaded in DeskPals|Mascotas descargadas en DeskPals
 proj.installedHint|Abra um deles para estudar como foi feito ou para criar uma variação (use “Salvar como” para não mexer no original).|Open one to see how it was made or to make a variation (use “Save as” to keep the original).|Abre una para ver cómo se hizo o para crear una variación (usa “Guardar como” para no tocar el original).
 proj.noInstalled|Nenhum pet baixado neste computador.|No pet downloaded on this computer.|Ninguna mascota descargada en este equipo.
 
 head.title|Cabeçalho|Header|Encabezado
-head.intro|O nome e as informações que aparecem no DesktopPet (menu, galeria e “sobre”).|The name and details shown in DesktopPet (menu, gallery and “about”).|El nombre y la información que aparecen en DesktopPet (menú, galería y “acerca de”).
+head.intro|O nome e as informações que aparecem no DeskPals (menu, galeria e “sobre”).|The name and details shown in DeskPals (menu, gallery and “about”).|El nombre y la información que aparecen en DeskPals (menú, galería y “acerca de”).
 head.petname|Nome do pet|Pet name|Nombre de la mascota
 head.petnameHint|Curto (até 16 letras): aparece no menu e nos balões.|Short (up to 16 letters): shown in the menu and the bubbles.|Corto (hasta 16 letras): aparece en el menú y los globos.
 head.titleField|Título|Title|Título
@@ -314,16 +314,16 @@ chk.soundAnim|Um som toca com a animação #{0}, que não existe.|A sound plays 
 chk.noFrames|{0} não tem quadros.|{0} has no frames.|{0} no tiene cuadros.
 chk.badFrame|{0} usa o quadro {1}, mas a folha só vai até o {2}.|{0} uses frame {1}, but the sheet only goes up to {2}.|{0} usa el cuadro {1}, pero la hoja solo llega al {2}.
 chk.repeatFrom|{0}: “repetir a partir do quadro” passa do último quadro.|{0}: “repeat from frame” is past the last frame.|{0}: “repetir desde el cuadro” pasa del último cuadro.
-chk.nextMissing|{0} leva à animação #{1}, que não existe (o DesktopPet trava).|{0} leads to animation #{1}, which does not exist (DesktopPet stops).|{0} lleva a la animación #{1}, que no existe (DesktopPet se detiene).
+chk.nextMissing|{0} leva à animação #{1}, que não existe (o DeskPals trava).|{0} leads to animation #{1}, which does not exist (DeskPals stops).|{0} lleva a la animación #{1}, que no existe (DeskPals se detiene).
 chk.what|{0}, {1}|{0}, {1}|{0}, {1}
 chk.interval|{0}: o intervalo é zero ou negativo.|{0}: the interval is zero or negative.|{0}: el intervalo es cero o negativo.
 chk.noNext|{0} não tem próxima: ao terminar, o pet reaparece em outro lugar.|{0} has no next one: at the end the pet appears somewhere else.|{0} no tiene siguiente: al terminar, la mascota reaparece en otro lugar.
 chk.noBorder|{0} anda, mas não diz o que fazer numa borda: o pet sai da tela.|{0} moves but says nothing for a border: the pet leaves the screen.|{0} se mueve pero no dice qué hacer en un borde: la mascota sale de la pantalla.
 chk.unreached|{0} nunca é tocada (nenhuma animação ou entrada leva a ela).|{0} is never played (no animation or entrance leads to it).|{0} nunca se toca (ninguna animación o entrada lleva a ella).
-chk.noKey|Não há animação “{0}”: o DesktopPet usa uma genérica.|There is no “{0}” animation: DesktopPet uses a plain one.|No hay animación “{0}”: DesktopPet usa una genérica.
+chk.noKey|Não há animação “{0}”: o DeskPals usa uma genérica.|There is no “{0}” animation: DeskPals uses a plain one.|No hay animación “{0}”: DeskPals usa una genérica.
 
-test.errors|O pet tem {0} erro(s) que podem travar o DesktopPet. Testar mesmo assim?|The pet has {0} error(s) that can stop DesktopPet. Test anyway?|La mascota tiene {0} error(es) que pueden detener DesktopPet. ¿Probar de todos modos?
-test.noApp|Não encontrei o DesktopPet.exe. Indique onde ele está nas Configurações.|DesktopPet.exe was not found. Tell where it is in the Settings.|No encontré DesktopPet.exe. Indica dónde está en la Configuración.
+test.errors|O pet tem {0} erro(s) que podem travar o DeskPals. Testar mesmo assim?|The pet has {0} error(s) that can stop DeskPals. Test anyway?|La mascota tiene {0} error(es) que pueden detener DeskPals. ¿Probar de todos modos?
+test.noApp|Não encontrei o DeskPals.exe. Indique onde ele está nas Configurações.|DeskPals.exe was not found. Tell where it is in the Settings.|No encontré DeskPals.exe. Indica dónde está en la Configuración.
 test.fail|Não foi possível abrir o teste: {0}|Could not start the test: {0}|No se pudo iniciar la prueba: {0}
 
 set.title|Configurações|Settings|Configuración
@@ -355,26 +355,26 @@ set.backSky|Céu|Sky|Cielo
 set.backChecker|Xadrez|Checker|Ajedrez
 set.backDark|Escuro|Dark|Oscuro
 set.zoom|Tamanho do pet|Pet size|Tamaño de la mascota
-set.zoomHint|Como a opção “escala” do DesktopPet.|Like the “scale” option of DesktopPet.|Como la opción “escala” de DesktopPet.
+set.zoomHint|Como a opção “escala” do DeskPals.|Like the “scale” option of DeskPals.|Como la opción “escala” de DeskPals.
 set.sound|Tocar os sons na prévia|Play the sounds in the preview|Reproducir los sonidos en la vista previa
 set.test|Testar no desktop|Test on the desktop|Probar en el escritorio
-set.testHint|O teste abre um segundo DesktopPet só com este pet: ele não mexe no seu pet nem nas suas configurações, e recarrega sozinho quando você muda algo no editor. Para encerrar, use o ícone de teste na bandeja ou feche o editor.|The test opens a second DesktopPet with only this pet: it does not touch your pet or settings, and reloads by itself when you change something. To stop it, use the test icon in the tray or close the editor.|La prueba abre un segundo DesktopPet solo con esta mascota: no toca tu mascota ni tu configuración y se recarga sola cuando cambias algo. Para terminar, usa el icono de prueba en la bandeja o cierra el editor.
-set.appPath|DesktopPet.exe|DesktopPet.exe|DesktopPet.exe
+set.testHint|O teste abre um segundo DeskPals só com este pet: ele não mexe no seu pet nem nas suas configurações, e recarrega sozinho quando você muda algo no editor. Para encerrar, use o ícone de teste na bandeja ou feche o editor.|The test opens a second DeskPals with only this pet: it does not touch your pet or settings, and reloads by itself when you change something. To stop it, use the test icon in the tray or close the editor.|La prueba abre un segundo DeskPals solo con esta mascota: no toca tu mascota ni tu configuración y se recarga sola cuando cambias algo. Para terminar, usa el icono de prueba en la bandeja o cierra el editor.
+set.appPath|DeskPals.exe|DeskPals.exe|DeskPals.exe
 set.browse|Procurar|Browse|Buscar
 set.found|Usando {0}|Using {0}|Usando {0}
-set.notFound|DesktopPet.exe não encontrado|DesktopPet.exe not found|DesktopPet.exe no encontrado
+set.notFound|DeskPals.exe não encontrado|DeskPals.exe not found|DeskPals.exe no encontrado
 set.about|Sobre|About|Acerca de
 set.aboutText|Editor de Pets {0}, do DeskPals. Software livre (licença MIT), baseado no desktopPet de Adriano Petrucci e inspirado no editor online dele, o desktopPet-Editor; ovelha original de Tatsutoshi Nomura.|Pet Editor {0}, from DeskPals. Free software (MIT license), based on desktopPet by Adriano Petrucci and inspired by his online editor, desktopPet-Editor; original sheep by Tatsutoshi Nomura.|Editor de Mascotas {0}, de DeskPals. Software libre (licencia MIT), basado en desktopPet de Adriano Petrucci e inspirado en su editor en línea, desktopPet-Editor; oveja original de Tatsutoshi Nomura.
 set.keys|Atalhos: Ctrl+N novo · Ctrl+O abrir · Ctrl+S salvar · Ctrl+Shift+S salvar como · Ctrl+Z desfazer · Ctrl+Y refazer · F5 testar no desktop · Delete exclui o item escolhido da lista · Na prévia: Espaço pausa, → avança um passo, R recomeça. Arraste imagens, um GIF ou um animations.xml para a janela.|Shortcuts: Ctrl+N new · Ctrl+O open · Ctrl+S save · Ctrl+Shift+S save as · Ctrl+Z undo · Ctrl+Y redo · F5 test on the desktop · Delete removes the chosen item of a list · In the preview: Space pauses, → one step, R restarts. Drag pictures, a GIF or an animations.xml onto the window.|Atajos: Ctrl+N nuevo · Ctrl+O abrir · Ctrl+S guardar · Ctrl+Shift+S guardar como · Ctrl+Z deshacer · Ctrl+Y rehacer · F5 probar en el escritorio · Supr elimina el elemento elegido de una lista · En la vista previa: Espacio pausa, → avanza un paso, R reinicia. Arrastre imágenes, un GIF o un animations.xml a la ventana.
 
-chk.intro|Tudo o que pode atrapalhar o pet no DesktopPet. Erros fazem o pet travar ou sumir; avisos são coisas que funcionam, mas provavelmente não como você quer. Clique num item para ir até ele.|Everything that can get in the pet's way in DesktopPet. Errors stop or hide the pet; warnings work, but probably not as you mean. Click an item to go there.|Todo lo que puede estorbar a la mascota en DesktopPet. Los errores la detienen o la ocultan; los avisos funcionan, pero probablemente no como quieres. Haz clic en un elemento para ir allí.
+chk.intro|Tudo o que pode atrapalhar o pet no DeskPals. Erros fazem o pet travar ou sumir; avisos são coisas que funcionam, mas provavelmente não como você quer. Clique num item para ir até ele.|Everything that can get in the pet's way in DeskPals. Errors stop or hide the pet; warnings work, but probably not as you mean. Click an item to go there.|Todo lo que puede estorbar a la mascota en DeskPals. Los errores la detienen o la ocultan; los avisos funcionan, pero probablemente no como quieres. Haz clic en un elemento para ir allí.
 chk.all|Todos|All|Todos
 chk.errors|Erros|Errors|Errores
 chk.warnings|Avisos|Warnings|Avisos
 chk.again|Verificar de novo|Check again|Verificar de nuevo
 chk.zeroProb|{0}: todas as chances de “{1}” são zero, nenhuma é escolhida.|{0}: every chance of “{1}” is zero, none is chosen.|{0}: todas las probabilidades de “{1}” son cero, ninguna se elige.
 chk.spawnZero|Todas as entradas têm chance zero: o pet não aparece.|Every entrance has chance zero: the pet does not appear.|Todas las entradas tienen probabilidad cero: la mascota no aparece.
-chk.dupName|Duas animações se chamam “{0}” ({1}): quando o DesktopPet procura pelo nome, só a primeira é usada.|Two animations are called “{0}” ({1}): when DesktopPet looks for the name, only the first is used.|Dos animaciones se llaman “{0}” ({1}): cuando DesktopPet busca por nombre, solo se usa la primera.
+chk.dupName|Duas animações se chamam “{0}” ({1}): quando o DeskPals procura pelo nome, só a primeira é usada.|Two animations are called “{0}” ({1}): when DeskPals looks for the name, only the first is used.|Dos animaciones se llaman “{0}” ({1}): cuando DeskPals busca por nombre, solo se usa la primera.
 chk.childForever|A janela filha que começa em “{0}” (#{1}) nunca termina: fica na tela até o pet ir embora.|The child window that starts with “{0}” (#{1}) never ends: it stays on the screen until the pet goes.|La ventana hija que empieza con “{0}” (#{1}) nunca termina: se queda en pantalla hasta que la mascota se va.
 chk.bigSound|O som de “{0}” tem {1} KB: deixa o pet pesado para baixar.|The sound of “{0}” is {1} KB: it makes the pet heavy to download.|El sonido de “{0}” tiene {1} KB: hace pesada la mascota.
 chk.bigFrame|Quadros de {0}×{1} px são grandes demais para um pet de área de trabalho.|Frames of {0}×{1} px are too big for a desktop pet.|Cuadros de {0}×{1} px son demasiado grandes para una mascota de escritorio.
@@ -428,7 +428,7 @@ beh.create|Criar a animação|Create the animation|Crear la animación
 beh.walk|Andar|Walk|Caminar
 beh.walk.d|Anda para a frente; vira nas laterais e cai quando fica sem chão.|Walks forward; turns at the sides and falls without ground.|Camina hacia adelante; gira en los lados y cae sin suelo.
 beh.turn|Virar|Turn|Girar
-beh.turn.d|Vira para o outro lado (o DesktopPet espelha o desenho).|Turns to the other side (DesktopPet mirrors the drawing).|Gira hacia el otro lado (DesktopPet refleja el dibujo).
+beh.turn.d|Vira para o outro lado (o DeskPals espelha o desenho).|Turns to the other side (DeskPals mirrors the drawing).|Gira hacia el otro lado (DeskPals refleja el dibujo).
 beh.idle|Parado|Standing|Quieto
 beh.idle.d|Fica parado um pouco e volta a andar.|Stands a while and walks again.|Se queda quieto un rato y vuelve a caminar.
 beh.blink|Piscar|Blink|Parpadear
@@ -442,15 +442,15 @@ beh.climb.d|Ao chegar na lateral da tela, sobe por ela; lá em cima, solta e cai
 beh.sit|Sentar|Sit|Sentarse
 beh.sit.d|Senta e fica um tempo sentado.|Sits down for a while.|Se sienta un rato.
 beh.sleep|Dormir|Sleep|Dormir
-beh.sleep.d|Dorme um bom tempo (o DesktopPet também usa quando você pede para ele dormir).|Sleeps a good while (DesktopPet also uses it when you tell it to sleep).|Duerme un buen rato (DesktopPet también la usa cuando le pides que duerma).
+beh.sleep.d|Dorme um bom tempo (o DeskPals também usa quando você pede para ele dormir).|Sleeps a good while (DeskPals also uses it when you tell it to sleep).|Duerme un buen rato (DeskPals también la usa cuando le pides que duerma).
 beh.happy|Feliz|Happy|Feliz
-beh.happy.d|Mostra que está feliz (o DesktopPet usa nas reações).|Shows it is happy (DesktopPet uses it in reactions).|Muestra que está feliz (DesktopPet la usa en reacciones).
+beh.happy.d|Mostra que está feliz (o DeskPals usa nas reações).|Shows it is happy (DeskPals uses it in reactions).|Muestra que está feliz (DeskPals la usa en reacciones).
 beh.dance|Dançar|Dance|Bailar
 beh.dance.d|Dança no lugar.|Dances in place.|Baila en su sitio.
 beh.talk|Falar|Talk|Hablar
-beh.talk.d|Mexe a boca: o DesktopPet usa enquanto mostra um balão.|Moves its mouth: DesktopPet uses it while a bubble is shown.|Mueve la boca: DesktopPet la usa mientras muestra un globo.
+beh.talk.d|Mexe a boca: o DeskPals usa enquanto mostra um balão.|Moves its mouth: DeskPals uses it while a bubble is shown.|Mueve la boca: DeskPals la usa mientras muestra un globo.
 beh.fall|Cair|Fall|Caer
-beh.fall.d|Cai cada vez mais rápido até o chão ou uma janela (o DesktopPet usa quando o pet é solto).|Falls faster and faster to the ground or a window (DesktopPet uses it when the pet is let go).|Cae cada vez más rápido al suelo o a una ventana (DesktopPet la usa al soltar la mascota).
+beh.fall.d|Cai cada vez mais rápido até o chão ou uma janela (o DeskPals usa quando o pet é solto).|Falls faster and faster to the ground or a window (DeskPals uses it when the pet is let go).|Cae cada vez más rápido al suelo o a una ventana (DeskPals la usa al soltar la mascota).
 beh.land|Pousar|Land|Aterrizar
 beh.land.d|Chega ao chão depois de cair ou de ser jogado.|Reaches the ground after falling or being thrown.|Llega al suelo después de caer o de ser lanzada.
 beh.drag|Ser pego|Picked up|Ser agarrada
@@ -474,7 +474,7 @@ wiz.useSheet|Usar a folha deste pet|Use this pet's sheet|Usar la hoja de esta ma
 wiz.face|Os desenhos olham para|The drawings face|Los dibujos miran hacia
 wiz.faceLeft|a esquerda|the left|la izquierda
 wiz.faceRight|a direita (serão espelhados)|the right (they will be mirrored)|la derecha (se reflejarán)
-wiz.faceHint|O DesktopPet usa desenhos olhando para a esquerda e espelha quando o pet vira.|DesktopPet uses drawings facing left and mirrors them when the pet turns.|DesktopPet usa dibujos mirando a la izquierda y los refleja cuando la mascota gira.
+wiz.faceHint|O DeskPals usa desenhos olhando para a esquerda e espelha quando o pet vira.|DeskPals uses drawings facing left and mirrors them when the pet turns.|DeskPals usa dibujos mirando a la izquierda y los refleja cuando la mascota gira.
 wiz.none|Nenhuma imagem ainda.|No picture yet.|Ninguna imagen todavía.
 wiz.loaded|{0} quadros de {1}×{2} px.|{0} frames of {1}×{2} px.|{0} cuadros de {1}×{2} px.
 wiz.roleHint|Clique nos quadros de “{0}”, na ordem.|Click the frames of “{0}”, in order.|Haz clic en los cuadros de “{0}”, en orden.
@@ -577,7 +577,7 @@ px.move|Mover um pixel|Move one pixel|Mover un píxel
 px.save|Salvar no quadro|Save to the frame|Guardar en el cuadro
 
 skin.button|Criar uma skin…|Make a skin…|Crear una skin…
-tip.skin.button|Uma cópia do pet em outras cores; o DesktopPet escolhe uma skin para cada pet na tela.|A copy of the pet in other colours; DesktopPet picks a skin for each pet on screen.|Una copia de la mascota en otros colores; DesktopPet elige una skin para cada mascota en pantalla.
+tip.skin.button|Uma cópia do pet em outras cores; o DeskPals escolhe uma skin para cada pet na tela.|A copy of the pet in other colours; DeskPals picks a skin for each pet on screen.|Una copia de la mascota en otros colores; DeskPals elige una skin para cada mascota en pantalla.
 skin.title|Nova skin (outras cores)|New skin (other colours)|Nueva skin (otros colores)
 skin.intro|Clique na cor da direita para trocar. A prévia mostra o primeiro quadro. A skin nova vai para o fim da folha, com todos os quadros.|Click the colour on the right to change it. The preview shows the first frame. The new skin goes to the end of the sheet, with every frame.|Haz clic en el color de la derecha para cambiarlo. La vista previa muestra el primer cuadro. La skin nueva va al final de la hoja, con todos los cuadros.
 skin.ok|Criar a skin|Make the skin|Crear la skin
@@ -600,9 +600,9 @@ opt.notSmaller|Não deu para diminuir sem mudar a imagem.|It could not be made s
 opt.heavySound|O som de “{0}” tem {1} KB: diminua a qualidade (64 kbps, mono) num editor de áudio.|The sound of “{0}” is {1} KB: lower its quality (64 kbps, mono) in an audio editor.|El sonido de “{0}” tiene {1} KB: baja su calidad (64 kbps, mono) en un editor de audio.
 
 gal.title|Preparar para a galeria|Prepare for the gallery|Preparar para la galería
-gal.intro|Cria a pasta do pet como a galeria do DesktopPet usa: animations.xml, icon.png, README em inglês e português e preview.gif (o pet andando e um truque). Se a pasta escolhida tiver o pets.json da galeria, a linha do pet também é atualizada.|Makes the pet's folder as the DesktopPet gallery uses it: animations.xml, icon.png, README in English and Portuguese and preview.gif (the pet walking and a trick). If the chosen folder has the gallery's pets.json, the pet's line is updated too.|Crea la carpeta de la mascota como la usa la galería de DesktopPet: animations.xml, icon.png, README en inglés y portugués y preview.gif (la mascota caminando y un truco). Si la carpeta elegida tiene el pets.json de la galería, también se actualiza su línea.
+gal.intro|Cria a pasta do pet como a galeria do DeskPals usa: animations.xml, icon.png, README em inglês e português e preview.gif (o pet andando e um truque). Se a pasta escolhida tiver o pets.json da galeria, a linha do pet também é atualizada.|Makes the pet's folder as the DeskPals gallery uses it: animations.xml, icon.png, README in English and Portuguese and preview.gif (the pet walking and a trick). If the chosen folder has the gallery's pets.json, the pet's line is updated too.|Crea la carpeta de la mascota como la usa la galería de DeskPals: animations.xml, icon.png, README en inglés y portugués y preview.gif (la mascota caminando y un truco). Si la carpeta elegida tiene el pets.json de la galería, también se actualiza su línea.
 gal.parent|Pasta dos pets|Pets folder|Carpeta de mascotas
-gal.parentHint|Na galeria do DesktopPet, é a pasta Pets do repositório (a que tem o pets.json).|In the DesktopPet gallery it is the Pets folder of the repository (the one with pets.json).|En la galería de DesktopPet es la carpeta Pets del repositorio (la que tiene pets.json).
+gal.parentHint|Na galeria do DeskPals, é a pasta Pets do repositório (a que tem o pets.json).|In the DeskPals gallery it is the Pets folder of the repository (the one with pets.json).|En la galería de DeskPals es la carpeta Pets del repositorio (la que tiene pets.json).
 gal.folder|Nome da pasta do pet|Pet folder name|Nombre de la carpeta
 gal.folderHint|Sem espaços nem acentos (por exemplo: meu_pet).|No spaces or accents (for example: my_pet).|Sin espacios ni acentos (por ejemplo: mi_mascota).
 gal.json|Atualizar o pets.json (tamanho, contagens e data)|Update pets.json (size, counts and date)|Actualizar pets.json (tamaño, cuentas y fecha)
@@ -615,13 +615,13 @@ set.tour|Ver o tour de novo|Show the tour again|Ver el tour de nuevo
 tour.next|Próximo|Next|Siguiente
 tour.skip|Pular|Skip|Saltar
 tour.done|Começar|Start|Empezar
-tour.welcome|Bem-vindo ao Editor de Pets! Aqui você cria um pet seu para o DesktopPet ou muda um que já existe. Vou mostrar as partes principais em 8 passos.|Welcome to the Pet Editor! Here you make a pet of your own for DesktopPet or change one. Here are the main parts in 8 steps.|¡Bienvenido al Editor de Mascotas! Aquí creas una mascota propia para DesktopPet o cambias una. Te muestro las partes principales en 8 pasos.
+tour.welcome|Bem-vindo ao Editor de Pets! Aqui você cria um pet seu para o DeskPals ou muda um que já existe. Vou mostrar as partes principais em 8 passos.|Welcome to the Pet Editor! Here you make a pet of your own for DeskPals or change one. Here are the main parts in 8 steps.|¡Bienvenido al Editor de Mascotas! Aquí creas una mascota propia para DeskPals o cambias una. Te muestro las partes principales en 8 pasos.
 tour.project|Projeto: comece aqui. O Assistente monta um pet a partir das suas imagens em três passos; também dá para abrir um pet que já existe.|Project: start here. The Assistant builds a pet from your pictures in three steps; you can also open an existing pet.|Proyecto: empieza aquí. El Asistente crea una mascota con tus imágenes en tres pasos; también puedes abrir una existente.
 tour.sheet|Folha de sprites: a imagem com todos os quadros. Importe um PNG, monte a partir de vários PNGs ou de um GIF, retoque pixels e crie skins de outras cores.|Sprite sheet: the picture with every frame. Import a PNG, build it from PNGs or a GIF, retouch pixels and make skins in other colours.|Hoja de sprites: la imagen con todos los cuadros. Importa un PNG, móntala desde PNG o un GIF, retoca píxeles y crea skins de otros colores.
 tour.animations|Animações: o coração do pet. Escolha os quadros, o movimento e o que vem depois. A prévia embaixo mostra como fica, e você pode pegar o pet com o mouse.|Animations: the heart of the pet. Choose frames, movement and what comes next. The preview below shows the result, and you can grab the pet with the mouse.|Animaciones: el corazón de la mascota. Elige cuadros, movimiento y lo que sigue. La vista previa abajo muestra el resultado, y puedes agarrar la mascota con el ratón.
 tour.spawns|Entradas na tela: de onde o pet aparece e com qual animação começa.|Entrances: where the pet appears and with which animation it starts.|Entradas: dónde aparece la mascota y con qué animación empieza.
-tour.check|Verificador: avisa o que pode travar ou atrapalhar o pet no DesktopPet. Ao lado ficam o Mapa das animações e o XML.|Checker: tells what can stop or disturb the pet in DesktopPet. Next to it are the Animation map and the XML.|Verificador: avisa lo que puede detener o estorbar a la mascota en DesktopPet. Al lado están el Mapa de animaciones y el XML.
-tour.test|Testar no desktop (F5): o pet aparece de verdade na sua tela, num DesktopPet de teste que não mexe no seu pet, e se atualiza a cada mudança.|Test on the desktop (F5): the pet really appears on your screen, in a test DesktopPet that does not touch your pet, and updates with every change.|Probar en el escritorio (F5): la mascota aparece de verdad en tu pantalla, en un DesktopPet de prueba que no toca tu mascota, y se actualiza con cada cambio.
+tour.check|Verificador: avisa o que pode travar ou atrapalhar o pet no DeskPals. Ao lado ficam o Mapa das animações e o XML.|Checker: tells what can stop or disturb the pet in DeskPals. Next to it are the Animation map and the XML.|Verificador: avisa lo que puede detener o estorbar a la mascota en DeskPals. Al lado están el Mapa de animaciones y el XML.
+tour.test|Testar no desktop (F5): o pet aparece de verdade na sua tela, num DeskPals de teste que não mexe no seu pet, e se atualiza a cada mudança.|Test on the desktop (F5): the pet really appears on your screen, in a test DeskPals that does not touch your pet, and updates with every change.|Probar en el escritorio (F5): la mascota aparece de verdad en tu pantalla, en un DeskPals de prueba que no toca tu mascota, y se actualiza con cada cambio.
 tour.settings|Configurações: tema claro ou escuro, cores, idioma e a prévia. Este tour pode ser visto de novo aqui.|Settings: light or dark theme, colours, language and the preview. This tour can be seen again here.|Configuración: tema claro u oscuro, colores, idioma y la vista previa. Este tour se puede ver de nuevo aquí.
 
 tip.act.new|Um pet novo: pelo assistente (a partir das suas imagens) ou pelo modelo pronto. Ctrl+N|A new pet: with the assistant (from your pictures) or the ready model. Ctrl+N|Una mascota nueva: con el asistente (con tus imágenes) o con el modelo listo. Ctrl+N
@@ -629,8 +629,8 @@ tip.act.open|Abrir um animations.xml. Ctrl+O|Open an animations.xml. Ctrl+O|Abri
 tip.act.save|Salvar o pet (com uma cópia .bak do anterior). Ctrl+S|Save the pet (with a .bak copy of the old one). Ctrl+S|Guardar la mascota (con una copia .bak de la anterior). Ctrl+S
 tip.act.undo|Desfazer a última mudança. Ctrl+Z|Undo the last change. Ctrl+Z|Deshacer el último cambio. Ctrl+Z
 tip.act.redo|Refazer. Ctrl+Y|Redo. Ctrl+Y|Rehacer. Ctrl+Y
-tip.act.check|Ver o que pode atrapalhar o pet no DesktopPet.|See what can get in the pet's way in DesktopPet.|Ver lo que puede estorbar a la mascota en DesktopPet.
-tip.act.test|Ver o pet de verdade na tela, sem mexer no seu DesktopPet. F5|See the pet for real on the screen, without touching your DesktopPet. F5|Ver la mascota de verdad en pantalla, sin tocar tu DesktopPet. F5
+tip.act.check|Ver o que pode atrapalhar o pet no DeskPals.|See what can get in the pet's way in DeskPals.|Ver lo que puede estorbar a la mascota en DeskPals.
+tip.act.test|Ver o pet de verdade na tela, sem mexer no seu DeskPals. F5|See the pet for real on the screen, without touching your DeskPals. F5|Ver la mascota de verdad en pantalla, sin tocar tu DeskPals. F5
 tip.nav.project|Pet novo, abrir, recentes, assistente e preparar para a galeria.|New pet, open, recent, assistant and gallery.|Mascota nueva, abrir, recientes, asistente y galería.
 tip.nav.header|Nome, autor, descrição e ícone.|Name, author, description and icon.|Nombre, autor, descripción e icono.
 tip.nav.sheet|A imagem com os quadros, retoque de pixels, skins e tamanho.|The picture with the frames, pixel retouch, skins and size.|La imagen con los cuadros, retoque de píxeles, skins y tamaño.
@@ -641,8 +641,8 @@ tip.nav.sounds|Sons MP3 que tocam com as animações.|MP3 sounds played with the
 tip.nav.check|Erros e avisos do pet.|Errors and warnings of the pet.|Errores y avisos de la mascota.
 tip.nav.map|Todas as animações e como uma leva à outra.|Every animation and how one leads to another.|Todas las animaciones y cómo una lleva a otra.
 tip.nav.xml|O arquivo do pet, para ver ou editar à mão.|The pet's file, to see or edit by hand.|El archivo de la mascota, para ver o editar a mano.
-tip.nav.settings|Tema, cores, idioma, prévia e o DesktopPet do teste.|Theme, colours, language, preview and the test DesktopPet.|Tema, colores, idioma, vista previa y el DesktopPet de prueba.
-test.oldApp|O DesktopPet instalado (versão {0}) ainda não tem o modo de teste. Atualize para a versão {1} ou mais nova (Configurações → Atualizações no DesktopPet) e tente de novo.|The installed DesktopPet (version {0}) does not have the test mode yet. Update it to version {1} or newer (Settings → Updates in DesktopPet) and try again.|El DesktopPet instalado (versión {0}) aún no tiene el modo de prueba. Actualízalo a la versión {1} o más nueva (Configuración → Actualizaciones en DesktopPet) y prueba de nuevo.
+tip.nav.settings|Tema, cores, idioma, prévia e o DeskPals do teste.|Theme, colours, language, preview and the test DeskPals.|Tema, colores, idioma, vista previa y el DeskPals de prueba.
+test.oldApp|O DeskPals instalado (versão {0}) ainda não tem o modo de teste. Atualize para a versão {1} ou mais nova (Configurações → Atualizações no DeskPals) e tente de novo.|The installed DeskPals (version {0}) does not have the test mode yet. Update it to version {1} or newer (Settings → Updates in DeskPals) and try again.|El DeskPals instalado (versión {0}) aún no tiene el modo de prueba. Actualízalo a la versión {1} o más nueva (Configuración → Actualizaciones en DeskPals) y prueba de nuevo.
 spawns.subText|chance {0}  ·  {1}|chance {0}  ·  {1}|probabilidad {0}  ·  {1}
 where.both|{0}, {1}|{0}, {1}|{0}, {1}
 where.taskbar|na barra de tarefas|on the taskbar|en la barra de tareas

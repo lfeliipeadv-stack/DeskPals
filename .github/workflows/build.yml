@@ -1,7 +1,7 @@
 name: Build e autoteste
 
 # A cada envio para o master (e em pull requests): compila o DesktopPet e roda o autoteste
-# (DesktopPet.exe --selftest), que verifica lembretes, Pomodoro, pet virtual, traduções, backup,
+# (DeskPals.exe --selftest), que verifica lembretes, Pomodoro, pet virtual, traduções, backup,
 # balões, menu do pet, agenda e a integração com o Claude Code com o pet de verdade na tela.
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         env:
           PETS_DIR: ${{ github.workspace }}/Pets
         run: |
-          $exe = Resolve-Path "src/bin/Release/net10.0-windows/win-x64/DesktopPet.exe"
+          $exe = Resolve-Path "src/bin/Release/net10.0-windows/win-x64/DeskPals.exe"
           $result = Join-Path $env:RUNNER_TEMP "selftest.txt"
           $p = Start-Process $exe -ArgumentList "--selftest=$result" -PassThru
           if (-not $p.WaitForExit(900000)) { $p.Kill(); throw "O autoteste não terminou em 15 minutos" }

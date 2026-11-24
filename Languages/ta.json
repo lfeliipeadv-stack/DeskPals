@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "{0} பதிப்பு: {1}",
   "inst.updateFailed": "புதுப்பிக்க முடியவில்லை: {0}",
   "inst.updated": "நிரல் புதுப்பிக்கப்பட்டது.",
-  "inst.incompleteRelease": "பதிப்பு {0} DesktopPet.exe அல்லது SHA256SUMS இல்லாமல் வெளியிடப்பட்டது",
+  "inst.incompleteRelease": "பதிப்பு {0} DeskPals.exe அல்லது SHA256SUMS இல்லாமல் வெளியிடப்பட்டது",
   "inst.hashMissing": "வெளியீட்டில் {0}-க்கு SHA-256 இல்லை, பதிவிறக்கம் மறுக்கப்பட்டது",
   "inst.hashMismatch": "{0} அதன் SHA-256-உடன் பொருந்தவில்லை, பதிவிறக்கம் மறுக்கப்பட்டது",
   "sources.button": "மூலங்கள்",

@@ -1269,7 +1269,7 @@
   "inst.versionTitle": "Version de {0} : {1}",
   "inst.updateFailed": "Mise à jour impossible : {0}",
   "inst.updated": "L'application a été mise à jour.",
-  "inst.incompleteRelease": "la version {0} a été publiée sans DesktopPet.exe ni SHA256SUMS",
+  "inst.incompleteRelease": "la version {0} a été publiée sans DeskPals.exe ni SHA256SUMS",
   "inst.hashMissing": "{0} n'a pas de SHA-256 dans la version publiée, le téléchargement a été refusé",
   "inst.hashMismatch": "{0} ne correspond pas à son SHA-256, le téléchargement a été refusé",
   "sources.button": "Sources",

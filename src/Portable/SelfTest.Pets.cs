@@ -257,6 +257,8 @@ namespace DesktopPet
 			var pet = Pet();
 			Check("bubble: a pet is on screen", pet != null);
 			if (pet == null) return;
+			// a pet still falling from the sky at the top of the screen moves away from its bubble (put below it there)
+			for (int i = 0; i < 80 && !pet.OnGround; i++) await Task.Delay(100);
 			var before = GetForegroundWindow();
 			// the bubble is created at once; on a busy machine (the GitHub one) the pet may be between two lives at that
 			// moment (then the line becomes a notification), so it is said again until a bubble shows
