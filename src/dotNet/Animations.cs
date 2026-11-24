@@ -391,6 +391,13 @@ namespace DesktopPet
             /// </summary>
         private Mp3Player Audio;
 
+        [System.Runtime.InteropServices.DllImport("winmm.dll")] static extern uint waveOutGetNumDevs();
+            /// <summary>
+            /// This computer has no sound output at all (a server, a virtual machine, the GitHub machine): every sound
+            /// fails to open there, which says nothing about the pet.
+            /// </summary>
+        public static bool NoAudioDevice { get { try { return waveOutGetNumDevs() == 0; } catch (Exception) { return false; } } }
+
         /// <summary>
         /// Load a sound for the animation from a byte array.
         /// </summary>
@@ -630,7 +637,8 @@ namespace DesktopPet
                 string error = sound.Load(Convert.FromBase64String(Base64));
                 if (error != null)
                 {
-                    StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.error, "can't open sound (ani." + ID + "): " + error);
+                    // no sound output on this computer: a warning (the pet is fine), not an error of the pet
+                    StartUp.AddDebugInfo(TSound.NoAudioDevice ? StartUp.DEBUG_TYPE.warning : StartUp.DEBUG_TYPE.error, "can't open sound (ani." + ID + "): " + error);
                     return;
                 }
                 sound.AnimationID = ID;
