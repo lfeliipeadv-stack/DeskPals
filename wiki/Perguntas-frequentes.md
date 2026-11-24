@@ -93,7 +93,7 @@ São quatro motivos diferentes, e nenhum deles é perda de arquivo sem explicaç
 
 **1. O pet saiu da galeria.** Quando um pet é removido do `Pets/pets.json`, o programa apaga do disco a pasta dele — é o que a rotina `ForgetRemovedPets` faz, ignorando o pet que está em uso e os pets que você mesmo criou. Se o que você usava era um deles, ele continua na tela e aparece com o aviso **"Este pet saiu da galeria. Ele continua aqui enquanto estiver em uso."** — até você adotar outro.
 
-**2. A pasta do pet mudou de nome.** O "Pingus" e o "Rex" foram unificados: as pastas `pingus_expansion` e `tico` viraram `pingus` e `rex`. O programa procura as pastas pelo nome novo, então a pasta antiga deixa de ser reconhecida.
+**2. A pasta do pet mudou de nome.** O "Rex" foi unificado: a pasta `tico` virou `rex`. O programa procura as pastas pelo nome novo, então a pasta antiga deixa de ser reconhecida.
 
 **3. O eSheep embutido foi atualizado junto.** O eSheep não vem de arquivo nenhum: ele fica dentro do executável e é relido a cada inicialização (`RefreshBuiltInPet`). Depois de uma atualização, ele "muda de cara" — as animações e o som são os da nova versão. Isso é o comportamento esperado.
 

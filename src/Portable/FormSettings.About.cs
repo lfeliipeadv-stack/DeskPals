@@ -179,7 +179,7 @@ namespace DesktopPet
 				(Lang.T("about.credit.tray"), "Sergi Fumanya Grunwaldt", null),
 				(Lang.T("about.credit.toss"), "Zecheriah", null),
 				(Lang.T("about.credit.fork"), "Luan Felipe", AppInfo.RepoUrl),
-				(Lang.T("about.credit.pets"), "Oliver B. · TheSuperCat · Adriano Petrucci · Zecheriah", AppInfo.PetsWebUrl),
+				(Lang.T("about.credit.pets"), "Oliver B. · TheSuperCat · Adriano Petrucci", AppInfo.PetsWebUrl),
 				(Lang.T("about.credit.pingus"), Lang.T("about.credit.pingusWho"), "https://pingus.seul.org/"),
 				(Lang.T("about.credit.assistants"), "Microsoft · BONZI Software · ClippyJS", "https://github.com/pithings/clippy"),
 				(Lang.T("about.credit.weather"), "Open-Meteo.com (CC BY 4.0)", "https://open-meteo.com/"),

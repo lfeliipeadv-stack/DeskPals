@@ -59,7 +59,7 @@ the wallpapers. The demo itself is in Portuguese.
 
 ## The pets
 
-The gallery has **64 pets**, downloaded straight from this repository (the [`Pets`](Pets) folder) through the app's
+The gallery has **58 pets**, downloaded straight from this repository (the [`Pets`](Pets) folder) through the app's
 panel, with an animated preview and the size of each one before you download it. The ones made for DeskPals, in pixel art:
 
 <table>
@@ -73,7 +73,7 @@ panel, with an animated preview and the size of each one before you download it.
     <td align="center" valign="top"><img src=".github/readme/nuvi.gif" height="110" alt="Nuvi"><br><b>Nuvi</b><br><sub>A terminal cloud that codes, hits errors, compiles and makes thunder. 45 animations.</sub></td>
     <td align="center" valign="top"><img src=".github/readme/claude.gif" height="110" alt="Claude"><br><b>Claude</b><br><sub>A fan tribute to the Claude Code mascot (not affiliated with Anthropic). 45 animations.</sub></td>
     <td align="center" valign="top"><img src="Pets/esheep64/preview.gif" height="84" alt="eSheep"><br><b>eSheep</b><br><sub>The classic little sheep. Built into the app and works offline.</sub></td>
-    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>The penguins from the free game Pingus: they dig, explode and fly balloons. By Adriano Petrucci and Zecheriah.</sub></td>
+    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>The penguins from the free game Pingus: they dig, build bridges and fly like superman. By Adriano Petrucci.</sub></td>
   </tr>
 </table>
 
@@ -303,7 +303,7 @@ More details in [For developers](https://lfeliipeadv-stack.github.io/DeskPals/wi
 - **System tray icon:** Sergi Fumanya Grunwaldt.
 - **Pet throwing and collisions with windows and other pets:** Zecheriah.
 - **.NET 10 version, translation, new pets and the Pet Editor app:** Luan Felipe.
-- **Community pets:** Oliver B. (gSheep), TheSuperCat and Oliver B. (eSheep Mate), Adriano Petrucci and Zecheriah (Pingus). Each pet shows its author in the panel.
+- **Community pets:** Oliver B. (gSheep), TheSuperCat and Oliver B. (eSheep Mate), Adriano Petrucci (Pingus). Each pet shows its author in the panel.
 - **Pingus:** art and sounds from the free game [Pingus](https://pingus.seul.org/), under the GNU GPL.
 - **Office assistants:** Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links and Rocky are Microsoft characters, and Bonzi belongs to BONZI Software (characters, art and sounds). They were converted from [ClippyJS](https://github.com/pithings/clippy), whose code is MIT. Unofficial: not affiliated with these companies.
 - **Weather forecast:** data from [Open-Meteo.com](https://open-meteo.com/); city names from [GeoNames.org](https://www.geonames.org/). Both under the Creative Commons Attribution 4.0 license (CC BY 4.0).

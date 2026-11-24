@@ -9,8 +9,8 @@ namespace DesktopPet
 	{
 		/// <summary>
 		/// The gallery's sources (this repository, the original desktopPet, others the user adds): links read right,
-		/// settings kept, the official one always first, each source in its own cache folder, and online both default
-		/// sources answer with the first one winning a pet both have. Also the readable names of untranslated
+		/// settings kept, the official one always first and the only default, each source in its own cache folder, and
+		/// online two sources answer with the first one winning a pet both have. Also the readable names of untranslated
 		/// animations, the version groups and the privacy page.
 		/// </summary>
 		static async Task GalleryFeatures()
@@ -27,8 +27,18 @@ namespace DesktopPet
 				!OptionsGit.IsPlainFolder("../x") && !OptionsGit.IsPlainFolder("a/b") && !OptionsGit.IsPlainFolder("a\\b") && !OptionsGit.IsPlainFolder("") && OptionsGit.IsPlainFolder("ssj-goku"));
 
 			string saved = Program.MyData.GetSetting("GallerySources", "");
+			bool removedBefore = Program.MyData.GetSettingBool("GalleryOriginalRemoved", false);
 			try
 			{
+				// the original desktopPet is no default any more (1.1.2): a list saved before loses it once; added
+				// again by hand afterwards, it stays
+				Program.MyData.SetSetting("GalleryOriginalRemoved", false);
+				Program.MyData.SetSetting("GallerySources", GallerySources.Official.Key + "|1\nAdrianotiger/desktopPet|1\nx/y|0");
+				Check("sources: a list saved before 1.1.2 loses the original desktopPet once",
+					string.Join(",", GallerySources.All().Select(s => s.Key)) == GallerySources.Official.Key + ",x/y", string.Join(",", GallerySources.All().Select(s => s.Key)));
+				GallerySources.Save(new[] { GallerySources.Official, new GallerySource { Owner = "Adrianotiger", Repo = "desktopPet" } });
+				Check("sources: added again by hand, the original desktopPet stays", GallerySources.All().Any(s => s.Key == "Adrianotiger/desktopPet"));
+
 				GallerySources.Save(new[] { new GallerySource { Owner = "x", Repo = "y", Enabled = false }, GallerySources.Official });
 				var all = GallerySources.All();
 				Check("sources: the official one comes first and is always on", all.Count == 2 && all[0].IsOfficial && all[0].Enabled && !all[1].Enabled,
@@ -36,13 +46,15 @@ namespace DesktopPet
 				Check("sources: a source turned off is not read", !GallerySources.Active().Any(s => s.Owner == "x"));
 
 				Program.MyData.SetSetting("GallerySources", "");   // the defaults
-				Check("sources: by default this repository and the original desktopPet",
-					GallerySources.All().Select(s => s.Key).SequenceEqual(new[] { GallerySources.Official.Key, "Adrianotiger/desktopPet" }));
+				Check("sources: by default only this repository",
+					GallerySources.All().Select(s => s.Key).SequenceEqual(new[] { GallerySources.Official.Key }), string.Join(",", GallerySources.All().Select(s => s.Key)));
+				// two sources read together: the original desktopPet added by hand
+				GallerySources.Save(new[] { GallerySources.Official, new GallerySource { Owner = "Adrianotiger", Repo = "desktopPet" } });
 				var pets = await OptionsGit.LoadLists();
 				if (!OptionsGit.Online) lines.Add("SKIP  sources online: no internet");
 				else
 				{
-					Check("sources online: both default sources answer", OptionsGit.FetchedSources.Count == 2, string.Join(", ", OptionsGit.FetchedSources));
+					Check("sources online: both sources answer", OptionsGit.FetchedSources.Count == 2, string.Join(", ", OptionsGit.FetchedSources));
 					var neko = pets.FirstOrDefault(p => p.folder == "neko");
 					Check("sources online: the first source wins a pet both have", neko?.Source?.IsOfficial == true, neko?.Source?.Key);
 					Check("sources online: no pet twice", pets.Select(p => p.folder).Distinct(StringComparer.OrdinalIgnoreCase).Count() == pets.Count);
@@ -53,7 +65,7 @@ namespace DesktopPet
 					Check("sources online: a repository without Pets/pets.json is refused", refused);
 				}
 			}
-			finally { Program.MyData.SetSetting("GallerySources", saved); }
+			finally { Program.MyData.SetSetting("GallerySources", saved); Program.MyData.SetSetting("GalleryOriginalRemoved", removedBefore); }
 
 			Check("names: technical names become readable",
 				AnimNames.Readable("run_dl") == "Run dl" && AnimNames.Readable("Flying_Up") == "Flying up" && AnimNames.Readable("jumpUp") == "Jump up"

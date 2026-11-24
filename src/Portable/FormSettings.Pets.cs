@@ -61,11 +61,6 @@ namespace DesktopPet
 				("ano_xl",      "variant.xl",     Color.FromArgb(170, 40, 40)),
 				("ano_xl_calm", "variant.xlCalm", Color.FromArgb(60, 100, 180)),
 			}),
-			("Jerma985", new[]
-			{
-				("jerma",         "variant.normal",  Color.FromArgb(120, 150, 90)),
-				("jerma_compact", "variant.compact", Color.FromArgb(160, 190, 120)),
-			}),
 		};
 
 		// ------------------------------------------------------------------ "New" badge

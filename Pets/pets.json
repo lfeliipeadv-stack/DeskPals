@@ -192,11 +192,11 @@
     {
       "folder" : "pingus",
       "name" : "Pingus",
-      "author" : "Adriano & Zecheriah",
-      "lastupdate" : "2026-11-18 19:00",
-      "size" : 1254682,
-      "animations" : 69,
-      "sounds" : 30
+      "author" : "Adriano Petrucci",
+      "lastupdate" : "2026-11-24 18:35",
+      "size" : 119844,
+      "animations" : 28,
+      "sounds" : 0
     },
     {
       "folder" : "pink_sheep",
@@ -397,15 +397,6 @@
       "sounds" : 5
     },
     {
-      "folder" : "foxy_jumpscare",
-      "name" : "Foxy Jumpscare",
-      "author" : "Zecheriah",
-      "lastupdate" : "2026-10-26",
-      "size" : 239211,
-      "animations" : 7,
-      "sounds" : 2
-    },
-    {
       "folder" : "grian",
       "name" : "Grian - Minecraft",
       "author" : "RedSparr0w",
@@ -413,24 +404,6 @@
       "size" : 49310,
       "animations" : 14,
       "sounds" : 0
-    },
-    {
-      "folder" : "jerma",
-      "name" : "Jerma985",
-      "author" : "Zecheriah",
-      "lastupdate" : "2026-10-20",
-      "size" : 3976053,
-      "animations" : 41,
-      "sounds" : 28
-    },
-    {
-      "folder" : "jerma_compact",
-      "name" : "Jerma985 Compact",
-      "author" : "Zecheriah",
-      "lastupdate" : "2026-10-20",
-      "size" : 2542432,
-      "animations" : 41,
-      "sounds" : 28
     },
     {
       "folder" : "mareep",
@@ -487,15 +460,6 @@
       "sounds" : 0
     },
     {
-      "folder" : "pingus_expansion",
-      "name" : "Pingus Expansion",
-      "author" : "Zecheriah",
-      "lastupdate" : "2026-10-20",
-      "size" : 1244483,
-      "animations" : 69,
-      "sounds" : 30
-    },
-    {
       "folder" : "pink_fox",
       "name" : "pink fox mate",
       "author" : "Michelle!",
@@ -532,15 +496,6 @@
       "sounds" : 0
     },
     {
-      "folder" : "skywire_bean",
-      "name" : "Skywire Beans",
-      "author" : "Zecheriah",
-      "lastupdate" : "2026-09-15",
-      "size" : 304791,
-      "animations" : 17,
-      "sounds" : 12
-    },
-    {
       "folder" : "ssj-goku",
       "name" : "SSJ Goku",
       "author" : "RedSparr0w",
@@ -548,15 +503,6 @@
       "size" : 54991,
       "animations" : 24,
       "sounds" : 0
-    },
-    {
-      "folder" : "twin_shot",
-      "name" : "Twin Shot",
-      "author" : "Zecheriah",
-      "lastupdate" : "2026-10-26",
-      "size" : 172455,
-      "animations" : 36,
-      "sounds" : 11
     },
     {
       "folder" : "yellow_neko",

@@ -167,6 +167,7 @@ crystal ball|bola de cristal|bola de cristal
 dab|dab|dab
 dance|dançar|bailar
 detective|detetive|detective
+digger|cavador|excavador
 digger_taskbar|cavar na barra de tarefas|cavar en la barra de tareas
 digger_window|cavar na janela|cavar en la ventana
 dive|mergulhar|zambullirse

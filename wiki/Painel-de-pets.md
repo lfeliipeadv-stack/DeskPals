@@ -175,7 +175,7 @@ A galeria é o arquivo `Pets/pets.json` do repositório do projeto. Estes são o
 | Mago | `mago` | Luan Felipe | 49 | 13 | 225 KB |
 | Nuvi | `nuvi` | Luan Felipe | 45 | 14 | 202 KB |
 | Claude | `claude` | Luan Felipe | 45 | 10 | 215 KB |
-| Pingus | `pingus` | Adriano & Zecheriah | 69 | 30 | 1,2 MB |
+| Pingus | `pingus` | Adriano Petrucci | 28 | 0 | 117 KB |
 | gSheep Azul | `blue_sheep` | Oliver B. | 271 | 35 | 1,1 MB |
 | gSheep Verde | `green_sheep` | Oliver B. | 271 | 35 | 1,1 MB |
 | gSheep Amarelo | `yellow_sheep` | Oliver B. | 271 | 35 | 1,1 MB |

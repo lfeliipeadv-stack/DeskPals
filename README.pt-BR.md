@@ -59,7 +59,7 @@ papéis de parede. [Mais sobre a demo](https://lfeliipeadv-stack.github.io/DeskP
 
 ## Os pets
 
-A galeria tem **64 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
+A galeria tem **58 pets**, baixados direto deste repositório (pasta [`Pets`](Pets)) pelo painel do programa,
 com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o DeskPals, em pixel art:
 
 <table>
@@ -73,7 +73,7 @@ com a prévia animada e o tamanho de cada um antes de baixar. Os feitos para o D
     <td align="center" valign="top"><img src=".github/readme/nuvi.gif" height="110" alt="Nuvi"><br><b>Nuvi</b><br><sub>Nuvem-terminal que programa, dá erro, compila e faz trovão. 45 animações.</sub></td>
     <td align="center" valign="top"><img src=".github/readme/claude.gif" height="110" alt="Claude"><br><b>Claude</b><br><sub>Homenagem de fã ao mascote do Claude Code (sem vínculo com a Anthropic). 45 animações.</sub></td>
     <td align="center" valign="top"><img src="Pets/esheep64/preview.gif" height="84" alt="eSheep"><br><b>eSheep</b><br><sub>A ovelhinha clássica. Vem dentro do programa e funciona sem internet.</sub></td>
-    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>Os pinguins do jogo livre Pingus: cavam, explodem e voam de balão. De Adriano Petrucci e Zecheriah.</sub></td>
+    <td align="center" valign="top"><img src="Pets/pingus/preview.gif" height="84" alt="Pingus"><br><b>Pingus</b><br><sub>Os pinguins do jogo livre Pingus: cavam, constroem pontes e voam como o super-homem. De Adriano Petrucci.</sub></td>
   </tr>
 </table>
 
@@ -306,7 +306,7 @@ fazendo. Os detalhes estão em [Para desenvolvedores](https://lfeliipeadv-stack.
 - **Ícone na bandeja do sistema:** Sergi Fumanya Grunwaldt.
 - **Arremesso do pet e colisões com janelas e outros pets:** Zecheriah.
 - **Versão .NET 10, tradução, pets novos e Editor de Pets:** Luan Felipe.
-- **Pets da comunidade:** Oliver B. (gSheep), TheSuperCat e Oliver B. (eSheep Mate), Adriano Petrucci e Zecheriah (Pingus). Cada pet mostra o autor no painel.
+- **Pets da comunidade:** Oliver B. (gSheep), TheSuperCat e Oliver B. (eSheep Mate), Adriano Petrucci (Pingus). Cada pet mostra o autor no painel.
 - **Pingus:** arte e sons do jogo livre [Pingus](https://pingus.seul.org/), sob a licença GNU GPL.
 - **Assistentes do Office:** Clippy, Merlin, Rover, Peedy, Genie, Genius, F1, Links e Rocky são personagens da Microsoft, e o Bonzi é da BONZI Software (personagens, arte e sons). Foram convertidos do [ClippyJS](https://github.com/pithings/clippy), cujo código é MIT. Não oficiais: sem vínculo com essas empresas.
 - **Previsão do tempo:** dados do [Open-Meteo.com](https://open-meteo.com/); nomes das cidades do [GeoNames.org](https://www.geonames.org/). Os dois sob a licença Creative Commons Atribuição 4.0 (CC BY 4.0).

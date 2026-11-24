@@ -53,22 +53,36 @@ namespace DesktopPet
 	public static class GallerySources
 	{
 		const string Setting = "GallerySources";
-		/// <summary>The original desktopPet of Adriano Petrucci: its community pets, read where their authors update them.</summary>
+		/// <summary>
+		/// The original desktopPet of Adriano Petrucci. It is not a default source any more (from 1.1.2): whoever wants its
+		/// pets adds it in "Where the pets come from" (it then shows with its own description).
+		/// </summary>
 		public const string OriginalOwner = "Adrianotiger", OriginalRepo = "desktopPet";
 
 		public static GallerySource Official => new GallerySource { Owner = AppInfo.RepoOwner, Repo = AppInfo.RepoName, Branch = AppInfo.Branch };
 
-		static List<GallerySource> Defaults() => new List<GallerySource>
-		{
-			Official,
-			new GallerySource { Owner = OriginalOwner, Repo = OriginalRepo, Branch = "master" },
-		};
+		static List<GallerySource> Defaults() => new List<GallerySource> { Official };
+
+		/// <summary>Set once the original desktopPet, a default source until 1.1.1, was taken out of a saved list.</summary>
+		const string OriginalRemovedSetting = "GalleryOriginalRemoved";
 
 		/// <summary>Every source of the settings (the official one first, even when the setting lost it).</summary>
 		public static List<GallerySource> All()
 		{
 			string saved = Program.MyData?.GetSetting(Setting, "") ?? "";
 			if (string.IsNullOrWhiteSpace(saved)) return Defaults();
+			// a list saved until 1.1.1 has the original desktopPet, which was a default then: it goes once. Added again
+			// by hand afterwards, it stays.
+			if (Program.MyData != null && !Program.MyData.GetSettingBool(OriginalRemovedSetting, false))
+			{
+				Program.MyData.SetSetting(OriginalRemovedSetting, true);
+				string original = OriginalOwner + "/" + OriginalRepo;
+				var kept = saved.Split(new[] { '\n', ';' }, StringSplitOptions.RemoveEmptyEntries)
+					.Where(l => !l.Trim().Split('|')[0].Trim().Equals(original, StringComparison.OrdinalIgnoreCase)).ToList();
+				saved = string.Join("\n", kept);
+				Program.MyData.SetSetting(Setting, saved);
+				if (string.IsNullOrWhiteSpace(saved)) return Defaults();
+			}
 			var list = new List<GallerySource>();
 			foreach (var line in saved.Split(new[] { '\n', ';' }, StringSplitOptions.RemoveEmptyEntries))
 			{
