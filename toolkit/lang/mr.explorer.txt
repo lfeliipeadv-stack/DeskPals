@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (mr)
+explorer.open=DeskPals Tools उघडा
+explorer.pref=Windows च्या राइट-क्लिक मेनूमध्ये दाखवा
+explorer.prefHint=फाइल्स आणि फोल्डर्सच्या राइट-क्लिक मेनूमध्ये आणि "यांना पाठवा" मध्ये "DeskPals Tools" जोडते. Windows 11 मध्ये ते "अधिक पर्याय दाखवा" मध्ये असते.
+explorer.sendToTip=या फाइल्स DeskPals Tools मध्ये उघडा
+explorer.failed=Windows मेनू बदलता आला नाही: {0}

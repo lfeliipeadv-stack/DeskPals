@@ -1,0 +1,21 @@
+# DeskPals Tools — jendela — Bahasa Indonesia
+window.tab.files=Berkas
+window.tab.recent=Pekerjaan terakhir
+window.tab.settings=Pengaturan
+window.selected=dipilih
+window.up=Naikkan
+window.down=Turunkan
+window.remove=Keluarkan
+window.order=Seret berkas untuk mengubah urutan. Pekerjaan memakainya dari atas ke bawah.
+window.folder=Folder
+window.recent.title=Pekerjaan terakhir
+window.recent.clear=Bersihkan riwayat
+window.recent.empty=Belum ada apa-apa. Pekerjaan yang Anda lakukan akan muncul di sini.
+window.recent.ask=Bersihkan daftar pekerjaan terakhir? Berkas Anda tidak akan dihapus.
+window.recent.gone=(sudah tidak ada)
+window.today=Hari ini, {0}
+window.yesterday=Kemarin, {0}
+window.settings.title=Pengaturan
+window.settings.empty=Belum ada yang perlu diatur.
+window.settings.failed=Pengaturan ini tidak bisa diubah: {0}
+window.busy=Ada pekerjaan yang sedang berjalan. File baru akan ditambahkan setelah selesai.

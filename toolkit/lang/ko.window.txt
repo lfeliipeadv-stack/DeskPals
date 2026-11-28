@@ -1,0 +1,21 @@
+# DeskPals Tools — 창 — 한국어
+window.tab.files=파일
+window.tab.recent=최근 작업
+window.tab.settings=설정
+window.selected=선택됨
+window.up=위로
+window.down=아래로
+window.remove=빼기
+window.order=파일을 끌어서 순서를 바꾸세요. 작업은 위에서부터 차례로 사용합니다.
+window.folder=폴더
+window.recent.title=최근 작업
+window.recent.clear=기록 지우기
+window.recent.empty=아직 아무것도 없어요. 한 작업이 여기에 표시됩니다.
+window.recent.ask=최근 작업 목록을 지울까요? 파일은 삭제되지 않습니다.
+window.recent.gone=(더 이상 없음)
+window.today=오늘 {0}
+window.yesterday=어제 {0}
+window.settings.title=설정
+window.settings.empty=아직 설정할 것이 없어요.
+window.settings.failed=이 설정을 바꿀 수 없었어요: {0}
+window.busy=작업이 진행 중입니다. 새 파일은 작업이 끝나면 추가됩니다.

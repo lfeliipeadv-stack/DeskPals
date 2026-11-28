@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (te)
+explorer.open=DeskPals Tools తెరవండి
+explorer.pref=Windows రైట్-క్లిక్ మెనూలో చూపించు
+explorer.prefHint=ఫైళ్లు మరియు ఫోల్డర్ల రైట్-క్లిక్ మెనూలో మరియు "దీనికి పంపు"లో "DeskPals Tools"ను జోడిస్తుంది. Windows 11లో ఇది "మరిన్ని ఎంపికలను చూపు"లో ఉంటుంది.
+explorer.sendToTip=ఈ ఫైళ్లను DeskPals Toolsలో తెరవండి
+explorer.failed=Windows మెనూను మార్చలేకపోయాం: {0}

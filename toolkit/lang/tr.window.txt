@@ -1,0 +1,21 @@
+# DeskPals Tools — pencere — Türkçe
+window.tab.files=Dosyalar
+window.tab.recent=Son işler
+window.tab.settings=Ayarlar
+window.selected=seçili
+window.up=Yukarı taşı
+window.down=Aşağı taşı
+window.remove=Çıkar
+window.order=Sırayı değiştirmek için dosyaları sürükleyin. İşler onları yukarıdan aşağıya kullanır.
+window.folder=Klasör
+window.recent.title=Son işler
+window.recent.clear=Geçmişi temizle
+window.recent.empty=Henüz bir şey yok. Yaptığınız işler burada görünecek.
+window.recent.ask=Son işler listesi temizlensin mi? Dosyalarınız silinmeyecek.
+window.recent.gone=(artık orada değil)
+window.today=Bugün, {0}
+window.yesterday=Dün, {0}
+window.settings.title=Ayarlar
+window.settings.empty=Henüz ayarlanacak bir şey yok.
+window.settings.failed=Bu ayar değiştirilemedi: {0}
+window.busy=Bir iş sürüyor. Yeni dosyalar iş bitince eklenecek.

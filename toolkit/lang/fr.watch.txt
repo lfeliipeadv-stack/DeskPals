@@ -1,0 +1,16 @@
+# Dossiers surveillés — français
+watch.pref=Dossiers surveillés
+watch.hint=Tant que DeskPals est ouvert, les nouveaux fichiers de ces dossiers sont traités tout seuls.
+watch.button=Dossiers surveillés…
+watch.title=Dossiers surveillés
+watch.intro=Choisis des dossiers et ce qu’il faut faire de chaque nouveau fichier qui y arrive (par exemple : ton dossier de numérisations → Convertir en PDF). Cela fonctionne tant que DeskPals est ouvert.
+watch.empty=Aucun dossier pour l’instant. Clique sur « Ajouter un dossier… ».
+watch.where=Les résultats vont dans un dossier « {0} » à l’intérieur de chacun. Tes fichiers restent tels quels.
+watch.add=Ajouter un dossier…
+watch.remove=Retirer
+watch.save=Enregistrer
+watch.pick=Choisis un dossier à surveiller
+watch.missing=Ce dossier est introuvable.
+watch.drive=Choisis un dossier, pas un disque entier.
+watch.already=Ce dossier est déjà dans la liste.
+watch.outFolder=C’est ici que je mets les résultats. Choisis un autre dossier, s’il te plaît.

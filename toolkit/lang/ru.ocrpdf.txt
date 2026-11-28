@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF с поиском и чтение через Tesseract — Русский
+job.searchable=Сделать текст доступным для поиска
+doing.searchable=Делаю текст доступным для поиска…
+ocrpdf.name=с поиском
+ocrpdf.already=В этом PDF уже есть текст, по которому можно искать. Ничего делать не нужно.
+ocrpdf.noWords=Я не нашёл здесь слов, которые можно прочитать.
+ocrpdf.preview=Теперь можно найти и скопировать слов: {0} (страниц: {1}).
+ocrpdf.downloading=Загружаю данные для чтения… {0}%
+ocrpdf.fallback={0} На этот раз текст прочитал Windows.
+ocrpdf.err.download=Не удалось загрузить данные для чтения Tesseract. Проверьте подключение к интернету и попробуйте ещё раз.
+ocrpdf.err.tesseract=Tesseract не запустился на этом компьютере.
+ocrpdf.pref.tesseract=Читать текст с помощью Tesseract
+ocrpdf.pref.tesseractHint=Лучше для плохих сканов и для языков, которые Windows не читает. В первый раз загружается несколько МБ.

@@ -1,0 +1,22 @@
+# DeskPals Tools — nyaraka (Kiswahili)
+job.toword=Badilisha kuwa Word
+doing.toword=Inabadilisha kuwa Word…
+job.cleanscan=Skani kuwa PDF
+doing.cleanscan=Inasafisha picha…
+job.heichelp=Pata nyongeza ya picha za iPhone
+doing.heichelp=Inafungua Microsoft Store…
+docs.word.none=Ili kugeuza PDF kuwa hati ya Word, sakinisha Microsoft Word au LibreOffice (bure).
+docs.word.failed=PDF haikuweza kugeuzwa kuwa hati ya Word (huenda ina nenosiri au imeharibika).
+docs.word.slow=Ilichukua muda mrefu mno ikasimamishwa. Jaribu tena, au jaribu PDF ndogo zaidi.
+docs.scan.intro=Nitakata karatasi, nitainyoosha na kufanya karatasi iwe nyeupe. Kurasa ziweje?
+docs.scan.mode=Rangi
+docs.scan.color=Kwa rangi
+docs.scan.gray=Kijivu
+docs.scan.bw=Nyeusi na nyeupe
+docs.scan.noPicture=Picha hii haikuweza kufunguliwa.
+docs.name.scan=skani
+docs.heic.missing=Ili kufungua picha za iPhone (HEIC), Windows inahitaji nyongeza ya bure: "HEIF Image Extensions" kutoka Microsoft Store.
+docs.heic.opened=Ili kufungua picha za iPhone, Windows inahitaji nyongeza ya bure: nimefungua ukurasa wake kwenye Microsoft Store, bofya tu "Pata".
+docs.heic.cantOpen=Ili kufungua picha za iPhone, fungua Microsoft Store na upate "HEIF Image Extensions" ya bure.
+docs.inUse=Faili hii imefunguliwa katika programu nyingine. Ifunge huko kisha ujaribu tena.
+docs.word.protected=PDF hii hairuhusu maandishi yake kunakiliwa, kwa hiyo haiwezi kugeuzwa kuwa hati ya Word.

@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    DeskPals Tools: an extension of DeskPals, a program of its own (like DeskPals Weather and the Pet Editor), downloaded
+    only by who wants it. Files dropped on a pet (or on its window) are converted, joined, split, read (OCR)… It does not
+    stay running: it opens, does the job and closes.
+    It may use packages (DeskPals itself stays without them): PDFsharp (MIT) for the PDFs; the OCR, the audio and the
+    pictures use Windows itself (Windows.Media.Ocr, MediaTranscoder, BitmapDecoder), hence the Windows 10 target.
+    "DeskPalsTools.exe devtests" runs its tests (the release does).
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>DeskPalsTools</AssemblyName>
+    <RootNamespace>DeskPalsTools</RootNamespace>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <Version>1.0.0</Version>
+    <Product>DeskPals Tools</Product>
+    <AssemblyTitle>DeskPals Tools</AssemblyTitle>
+    <Company>DeskPals</Company>
+    <NoWarn>$(NoWarn);CA1416;WFO1000</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\Portable\Theme.cs" Link="Shared\Theme.cs" />
+    <Compile Include="..\src\Portable\ColorText.cs" Link="Shared\ColorText.cs" />
+    <Compile Include="..\src\Portable\AppInfo.cs" Link="Shared\AppInfo.cs" />
+    <Compile Include="..\editor\Core\Shims.cs" Link="Shared\Shims.cs" />
+    <!-- the texts of the languages, inside the program -->
+    <EmbeddedResource Include="lang\*.txt" LogicalName="DeskPalsTools.lang.%(Filename)%(Extension)" WithCulture="false" />
+    <PackageReference Include="PDFsharp" Version="6.1.1" />
+    <!-- PdfPig (Apache-2.0): reads the text of PDFs (summaries, which pages already have text, the tests) -->
+    <PackageReference Include="PdfPig" Version="0.1.16" />
+    <!--
+      Tesseract (Apache-2.0), the optional OCR engine. Its own build file is left out (it copies x86 and x64 DLLs
+      loose next to the program, which a single-file program cannot have): the two x64 DLLs go inside the program and
+      are put in %LocalAppData%DesktopPetextensions	esseract the first time Tesseract is used.
+    -->
+    <PackageReference Include="Tesseract" Version="5.2.0" ExcludeAssets="build" GeneratePathProperty="true" />
+    <EmbeddedResource Include="$(PkgTesseract)d*.dll" LogicalName="DeskPalsTools.tesseract.%(Filename)%(Extension)" WithCulture="false" Visible="false" />
+  </ItemGroup>
+
+</Project>

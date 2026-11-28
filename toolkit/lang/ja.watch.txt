@@ -1,0 +1,16 @@
+# 監視フォルダー — 日本語
+watch.pref=監視フォルダー
+watch.hint=DeskPals が開いている間、これらのフォルダーに入った新しいファイルを自動で処理します。
+watch.button=監視フォルダー…
+watch.title=監視フォルダー
+watch.intro=フォルダーと、そこに届いた新しいファイルごとに行うことを選んでください（例：スキャンのフォルダー → PDF に変換）。DeskPals が開いている間だけ動きます。
+watch.empty=まだフォルダーがありません。「フォルダーを追加…」をクリックしてください。
+watch.where=結果はそれぞれのフォルダー内の「{0}」フォルダーに入ります。元のファイルはそのままです。
+watch.add=フォルダーを追加…
+watch.remove=削除
+watch.save=保存
+watch.pick=監視するフォルダーを選んでください
+watch.missing=このフォルダーが見つかりません。
+watch.drive=ドライブ全体ではなく、フォルダーを選んでください。
+watch.already=このフォルダーはすでに一覧にあります。
+watch.outFolder=ここは結果を置く場所です。別のフォルダーを選んでください。

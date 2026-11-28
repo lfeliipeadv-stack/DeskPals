@@ -1,0 +1,27 @@
+# DeskPals Tools — 文字起こしと要約（日本語）
+job.transcribe=文字起こしする
+job.summarize=要約する
+doing.transcribe=文字起こし中…
+doing.summarize=要約中…
+ai.name.transcription=文字起こし
+ai.name.summary=要約
+ai.notSet=まず DeskPals でアシスタントを設定してから（設定 › アシスタント）、もう一度お試しください。
+ai.badKey=アシスタントのキーが受け付けられませんでした。DeskPals で確認してください（設定 › アシスタント）。
+ai.limit=アシスタントは今のところ上限に達しています。少し待ってからもう一度お試しください。
+ai.network=アシスタントに接続できませんでした。インターネット接続を確認して、もう一度お試しください。
+ai.serviceError=アシスタントのサービスで問題が起きました（{0}）。後でもう一度お試しください。
+ai.noTranscribe=お使いのアシスタントのサービスは音声を文字にできません。Groq（無料）ならできます。DeskPals で選んでください（設定 › アシスタント）。
+ai.tooBig=このファイルはアシスタントには大きすぎます。
+ai.noSpeech=話し声が見つかりませんでした。
+ai.noText=このファイルには文字が見つかりませんでした。
+ai.badDocument=この文書を読めませんでした（壊れている可能性があります）。
+ai.noWord=この文書を読むには、Microsoft Word か LibreOffice（無料）をインストールしてください。
+ai.httpsOnly=アシスタントのアドレスは https:// で始まる必要があります（DeskPals の「設定 › アシスタント」で確認してください）。
+ai.preparing=音声を準備しています
+ai.sending={1} 個中 {0} 個目を送信しています
+ai.listening=音声を聞いています
+ai.reading=文書を読んでいます
+ai.thinking=要約を書いています
+ai.part={1} 個中 {0} 個目を読んでいます
+ai.waiting=アシスタントを待っています（1分間に受け付ける依頼は少しだけです）
+ai.cantHear=Windows はこのファイルの音声を読み取れませんでした。

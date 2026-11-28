@@ -1,0 +1,16 @@
+# Überwachte Ordner — Deutsch
+watch.pref=Überwachte Ordner
+watch.hint=Solange DeskPals geöffnet ist, werden neue Dateien in diesen Ordnern von selbst bearbeitet.
+watch.button=Überwachte Ordner…
+watch.title=Überwachte Ordner
+watch.intro=Wähle Ordner und was mit jeder neuen Datei darin geschehen soll (zum Beispiel: dein Scan-Ordner → In PDF umwandeln). Das funktioniert, solange DeskPals geöffnet ist.
+watch.empty=Noch kein Ordner. Klicke auf „Ordner hinzufügen…“.
+watch.where=Die Ergebnisse kommen jeweils in einen Ordner „{0}“ darin. Deine Dateien bleiben, wie sie sind.
+watch.add=Ordner hinzufügen…
+watch.remove=Entfernen
+watch.save=Speichern
+watch.pick=Wähle einen Ordner zum Überwachen
+watch.missing=Dieser Ordner wurde nicht gefunden.
+watch.drive=Wähle einen Ordner, kein ganzes Laufwerk.
+watch.already=Dieser Ordner ist schon in der Liste.
+watch.outFolder=Hier lege ich die Ergebnisse ab. Bitte wähle einen anderen Ordner.

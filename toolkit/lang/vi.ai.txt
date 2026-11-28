@@ -1,0 +1,27 @@
+# DeskPals Tools — chép lời và tóm tắt (Tiếng Việt)
+job.transcribe=Chuyển thành văn bản
+job.summarize=Tóm tắt
+doing.transcribe=Đang chuyển thành văn bản…
+doing.summarize=Đang tóm tắt…
+ai.name.transcription=bản chép lời
+ai.name.summary=tóm tắt
+ai.notSet=Hãy thiết lập trợ lý trong DeskPals trước (Cài đặt › Trợ lý), rồi thử lại.
+ai.badKey=Khóa của trợ lý không được chấp nhận. Hãy kiểm tra trong DeskPals (Cài đặt › Trợ lý).
+ai.limit=Trợ lý tạm thời đã đến giới hạn. Hãy đợi một chút rồi thử lại.
+ai.network=Không kết nối được với trợ lý. Hãy kiểm tra internet rồi thử lại.
+ai.serviceError=Dịch vụ của trợ lý gặp sự cố ({0}). Hãy thử lại sau.
+ai.noTranscribe=Dịch vụ trợ lý của bạn không chuyển được giọng nói thành văn bản. Groq (miễn phí) làm được: hãy chọn nó trong DeskPals (Cài đặt › Trợ lý).
+ai.tooBig=Tệp này quá lớn đối với trợ lý.
+ai.noSpeech=Không tìm thấy giọng nói nào.
+ai.noText=Không tìm thấy chữ trong tệp này.
+ai.badDocument=Không đọc được tài liệu này (có thể nó bị hỏng).
+ai.noWord=Để đọc tài liệu này, hãy cài Microsoft Word hoặc LibreOffice (miễn phí).
+ai.httpsOnly=Địa chỉ của trợ lý phải bắt đầu bằng https:// (kiểm tra trong DeskPals, Cài đặt › Trợ lý).
+ai.preparing=Đang chuẩn bị âm thanh
+ai.sending=Đang gửi phần {0}/{1}
+ai.listening=Đang nghe âm thanh
+ai.reading=Đang đọc tài liệu
+ai.thinking=Đang viết bản tóm tắt
+ai.part=Đang đọc phần {0}/{1}
+ai.waiting=Đang chờ trợ lý (trợ lý chỉ nhận vài yêu cầu mỗi phút)
+ai.cantHear=Windows không đọc được âm thanh của tệp này.

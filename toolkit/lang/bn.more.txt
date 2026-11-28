@@ -1,0 +1,13 @@
+# DeskPals Tools — more (bn)
+viewer.files={0}টি ফাইল
+viewer.pageOf={0} · পৃ. {1}
+ocrpdf.pref.languages=পড়ার ভাষা…
+ocrpdf.langs.intro=আপনার নথির ভাষাগুলো বেছে নিন। প্রতিটি নতুন ভাষা প্রথমবার কয়েক MB ডাউনলোড করে।
+ocrpdf.langs.none=অন্তত একটি ভাষা বেছে নিন।
+job.askai=ফাইল সম্পর্কে জিজ্ঞাসা করুন
+doing.askai=কথোপকথন সংরক্ষণ হচ্ছে…
+askai.name=প্রশ্ন
+askai.placeholder=ফাইল সম্পর্কে একটি প্রশ্ন লিখুন…
+askai.ask=জিজ্ঞাসা করুন
+askai.ready=প্রস্তুত। ফাইল সম্পর্কে যা খুশি জিজ্ঞাসা করুন।
+askai.thinking=ভাবছে…

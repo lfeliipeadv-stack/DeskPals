@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (ru)
+explorer.open=Открыть DeskPals Tools
+explorer.pref=Показывать в контекстном меню Windows
+explorer.prefHint=Добавляет «DeskPals Tools» в меню правой кнопки мыши для файлов и папок, а также в «Отправить». В Windows 11 он находится в разделе «Показать дополнительные параметры».
+explorer.sendToTip=Открыть эти файлы в DeskPals Tools
+explorer.failed=Не удалось изменить меню Windows: {0}

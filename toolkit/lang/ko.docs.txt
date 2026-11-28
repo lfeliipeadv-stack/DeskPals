@@ -1,0 +1,22 @@
+# DeskPals Tools — 문서 (한국어)
+job.toword=Word로 변환
+doing.toword=Word로 변환하는 중…
+job.cleanscan=스캔해서 PDF로
+doing.cleanscan=사진을 깨끗하게 만드는 중…
+job.heichelp=iPhone 사진용 추가 기능 받기
+doing.heichelp=Microsoft Store를 여는 중…
+docs.word.none=PDF를 Word 문서로 바꾸려면 Microsoft Word나 LibreOffice(무료)를 설치하세요.
+docs.word.failed=PDF를 Word 문서로 바꾸지 못했어요(암호가 있거나 손상되었을 수 있어요).
+docs.word.slow=너무 오래 걸려서 멈췄어요. 다시 해 보거나 더 작은 PDF로 해 보세요.
+docs.scan.intro=종이 부분을 잘라내고 반듯하게 펴서 종이를 하얗게 만들게요. 페이지를 어떻게 만들까요?
+docs.scan.mode=색상
+docs.scan.color=컬러
+docs.scan.gray=회색조
+docs.scan.bw=흑백
+docs.scan.noPicture=이 사진을 열 수 없어요.
+docs.name.scan=스캔
+docs.heic.missing=iPhone 사진(HEIC)을 열려면 Windows에 무료 추가 기능인 Microsoft Store의 "HEIF 이미지 확장"이 필요해요.
+docs.heic.opened=iPhone 사진을 열려면 Windows에 무료 추가 기능이 필요해요. Microsoft Store에서 페이지를 열어 두었으니 "받기"만 누르세요.
+docs.heic.cantOpen=iPhone 사진을 열려면 Microsoft Store를 열고 무료 "HEIF 이미지 확장"을 받으세요.
+docs.inUse=이 파일이 다른 프로그램에서 열려 있어요. 그 프로그램에서 닫고 다시 시도해 주세요.
+docs.word.protected=이 PDF는 글자 복사가 금지되어 있어서 Word 문서로 바꿀 수 없어요.

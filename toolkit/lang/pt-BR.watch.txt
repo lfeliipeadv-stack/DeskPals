@@ -1,0 +1,16 @@
+# Pastas vigiadas — português do Brasil
+watch.pref=Pastas vigiadas
+watch.hint=Enquanto o DeskPals estiver aberto, os arquivos novos nessas pastas são tratados sozinhos.
+watch.button=Pastas vigiadas…
+watch.title=Pastas vigiadas
+watch.intro=Escolha pastas e o que fazer com cada arquivo novo que chegar nelas (por exemplo: a pasta das digitalizações → Converter em PDF). Funciona enquanto o DeskPals estiver aberto.
+watch.empty=Nenhuma pasta ainda. Clique em “Adicionar pasta…”.
+watch.where=Os resultados vão para uma pasta “{0}” dentro de cada uma. Seus arquivos ficam como estão.
+watch.add=Adicionar pasta…
+watch.remove=Remover
+watch.save=Salvar
+watch.pick=Escolha uma pasta para vigiar
+watch.missing=Essa pasta não foi encontrada.
+watch.drive=Escolha uma pasta, não um disco inteiro.
+watch.already=Essa pasta já está na lista.
+watch.outFolder=É aqui que eu coloco os resultados. Escolha outra pasta, por favor.

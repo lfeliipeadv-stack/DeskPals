@@ -1,0 +1,27 @@
+# DeskPals Tools — 转写和摘要（简体中文）
+job.transcribe=转成文字
+job.summarize=生成摘要
+doing.transcribe=正在转成文字…
+doing.summarize=正在生成摘要…
+ai.name.transcription=转写
+ai.name.summary=摘要
+ai.notSet=请先在 DeskPals 中设置助手（设置 › 助手），然后再试一次。
+ai.badKey=助手的密钥未被接受。请在 DeskPals 中检查（设置 › 助手）。
+ai.limit=助手暂时达到了使用上限。请稍等一会儿再试。
+ai.network=无法连接到助手。请检查网络连接后再试。
+ai.serviceError=助手的服务出了问题（{0}）。请稍后再试。
+ai.noTranscribe=你的助手服务无法把语音转成文字。Groq（免费）可以：请在 DeskPals 中选择它（设置 › 助手）。
+ai.tooBig=这个文件对助手来说太大了。
+ai.noSpeech=没有找到说话的声音。
+ai.noText=这个文件里没有找到文字。
+ai.badDocument=无法读取这个文档（可能已损坏）。
+ai.noWord=要读取这个文档，请安装 Microsoft Word 或 LibreOffice（免费）。
+ai.httpsOnly=助手的地址必须以 https:// 开头（请在 DeskPals 的“设置 › 助手”中检查）。
+ai.preparing=正在准备音频
+ai.sending=正在发送第 {0} 部分，共 {1} 部分
+ai.listening=正在听音频
+ai.reading=正在读取文档
+ai.thinking=正在写摘要
+ai.part=正在读取第 {0} 部分，共 {1} 部分
+ai.waiting=正在等待助手（它每分钟只接受少量请求）
+ai.cantHear=Windows 无法读取此文件的声音。

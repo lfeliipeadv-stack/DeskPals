@@ -1,0 +1,13 @@
+# DeskPals Tools — searchable PDFs and the Tesseract reader — English
+job.searchable=Make text searchable
+doing.searchable=Making the text searchable…
+ocrpdf.name=searchable
+ocrpdf.already=This PDF already has text you can search. Nothing to do.
+ocrpdf.noWords=I could not find any words to read here.
+ocrpdf.preview={0} words can now be found and copied ({1} page(s)).
+ocrpdf.downloading=Downloading the reading data… {0}%
+ocrpdf.fallback={0} This time Windows read the text instead.
+ocrpdf.err.download=I could not download the reading data for Tesseract. Check the internet and try again.
+ocrpdf.err.tesseract=Tesseract did not start on this computer.
+ocrpdf.pref.tesseract=Read text with Tesseract
+ocrpdf.pref.tesseractHint=Better for bad scans and for languages Windows does not read. The first time, it downloads a few MB.

@@ -1,0 +1,21 @@
+# DeskPals Tools — النافذة — العربية
+window.tab.files=الملفات
+window.tab.recent=المهام الأخيرة
+window.tab.settings=الإعدادات
+window.selected=محدد
+window.up=نقل لأعلى
+window.down=نقل لأسفل
+window.remove=إزالة
+window.order=اسحب الملفات لتغيير الترتيب. تُستخدم الملفات من الأعلى إلى الأسفل.
+window.folder=مجلد
+window.recent.title=المهام الأخيرة
+window.recent.clear=مسح السجل
+window.recent.empty=لا يوجد شيء بعد. ستظهر هنا المهام التي تقوم بها.
+window.recent.ask=هل تريد مسح قائمة المهام الأخيرة؟ لن يتم حذف ملفاتك.
+window.recent.gone=(لم يعد موجودًا)
+window.today=اليوم، {0}
+window.yesterday=أمس، {0}
+window.settings.title=الإعدادات
+window.settings.empty=لا يوجد ما يمكن ضبطه بعد.
+window.settings.failed=تعذّر تغيير هذا الإعداد: {0}
+window.busy=هناك مهمة قيد التنفيذ. ستُضاف الملفات الجديدة عند انتهائها.

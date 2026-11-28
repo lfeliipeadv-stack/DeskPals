@@ -1,0 +1,13 @@
+# DeskPals Tools — more (fr)
+viewer.files={0} fichiers
+viewer.pageOf={0} · p. {1}
+ocrpdf.pref.languages=Langues de lecture…
+ocrpdf.langs.intro=Choisissez les langues de vos documents. Chaque nouvelle langue télécharge quelques Mo la première fois.
+ocrpdf.langs.none=Choisissez au moins une langue.
+job.askai=Poser une question sur le fichier
+doing.askai=Enregistrement de la conversation…
+askai.name=questions
+askai.placeholder=Tapez une question sur le fichier…
+askai.ask=Demander
+askai.ready=Prêt. Demandez ce que vous voulez sur le fichier.
+askai.thinking=Réflexion…

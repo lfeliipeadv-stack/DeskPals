@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (fa)
+explorer.open=باز کردن DeskPals Tools
+explorer.pref=نمایش در منوی کلیک راست ویندوز
+explorer.prefHint=«DeskPals Tools» را به منوی کلیک راست فایل‌ها و پوشه‌ها و به «ارسال به» اضافه می‌کند. در ویندوز ۱۱ زیر «نمایش گزینه‌های بیشتر» است.
+explorer.sendToTip=باز کردن این فایل‌ها در DeskPals Tools
+explorer.failed=منوی ویندوز تغییر نکرد: {0}

@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (th)
+explorer.open=เปิด DeskPals Tools
+explorer.pref=แสดงในเมนูคลิกขวาของ Windows
+explorer.prefHint=เพิ่ม "DeskPals Tools" ในเมนูคลิกขวาของไฟล์และโฟลเดอร์ และใน "ส่งไปยัง" ใน Windows 11 จะอยู่ใน "แสดงตัวเลือกเพิ่มเติม"
+explorer.sendToTip=เปิดไฟล์เหล่านี้ใน DeskPals Tools
+explorer.failed=ไม่สามารถเปลี่ยนเมนูของ Windows ได้: {0}

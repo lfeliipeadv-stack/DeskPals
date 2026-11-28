@@ -1,0 +1,21 @@
+# DeskPals Tools — विंडो — हिन्दी
+window.tab.files=फ़ाइलें
+window.tab.recent=हाल के काम
+window.tab.settings=सेटिंग्स
+window.selected=चुना हुआ
+window.up=ऊपर करें
+window.down=नीचे करें
+window.remove=हटाएँ
+window.order=क्रम बदलने के लिए फ़ाइलें खींचें। काम इन्हें ऊपर से नीचे इस्तेमाल करते हैं।
+window.folder=फ़ोल्डर
+window.recent.title=हाल के काम
+window.recent.clear=इतिहास साफ़ करें
+window.recent.empty=अभी यहाँ कुछ नहीं है। आपके किए काम यहाँ दिखेंगे।
+window.recent.ask=हाल के कामों की सूची साफ़ करें? आपकी फ़ाइलें नहीं मिटेंगी।
+window.recent.gone=(अब वहाँ नहीं है)
+window.today=आज, {0}
+window.yesterday=कल, {0}
+window.settings.title=सेटिंग्स
+window.settings.empty=अभी सेट करने को कुछ नहीं है।
+window.settings.failed=यह सेटिंग बदली नहीं जा सकी: {0}
+window.busy=एक काम चल रहा है। नई फ़ाइलें उसके पूरा होने पर जोड़ी जाएँगी।

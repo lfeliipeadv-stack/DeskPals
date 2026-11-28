@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (ko)
+explorer.open=DeskPals Tools 열기
+explorer.pref=Windows 오른쪽 클릭 메뉴에 표시
+explorer.prefHint=파일과 폴더의 오른쪽 클릭 메뉴와 "보내기"에 "DeskPals Tools"를 추가합니다. Windows 11에서는 "더 많은 옵션 표시" 안에 있습니다.
+explorer.sendToTip=이 파일을 DeskPals Tools에서 열기
+explorer.failed=Windows 메뉴를 바꿀 수 없습니다: {0}

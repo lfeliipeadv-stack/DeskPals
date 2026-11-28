@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF consultables et le lecteur Tesseract — Français
+job.searchable=Rendre le texte consultable
+doing.searchable=Le texte devient consultable…
+ocrpdf.name=consultable
+ocrpdf.already=Ce PDF contient déjà du texte que l'on peut rechercher. Rien à faire.
+ocrpdf.noWords=Je n'ai trouvé aucun mot à lire ici.
+ocrpdf.preview={0} mots peuvent maintenant être trouvés et copiés ({1} page(s)).
+ocrpdf.downloading=Téléchargement des données de lecture… {0} %
+ocrpdf.fallback={0} Cette fois, c'est Windows qui a lu le texte.
+ocrpdf.err.download=Je n'ai pas pu télécharger les données de lecture de Tesseract. Vérifiez la connexion Internet et réessayez.
+ocrpdf.err.tesseract=Tesseract n'a pas pu démarrer sur cet ordinateur.
+ocrpdf.pref.tesseract=Lire le texte avec Tesseract
+ocrpdf.pref.tesseractHint=Mieux pour les mauvais scans et pour les langues que Windows ne lit pas. La première fois, il télécharge quelques Mo.

@@ -1,0 +1,27 @@
+# DeskPals Tools — kunakili sauti na muhtasari (Kiswahili)
+job.transcribe=Geuza kuwa maandishi
+job.summarize=Fupisha
+doing.transcribe=Inageuza kuwa maandishi…
+doing.summarize=Inafupisha…
+ai.name.transcription=nakala ya maandishi
+ai.name.summary=muhtasari
+ai.notSet=Kwanza weka msaidizi kwenye DeskPals (Mipangilio › Msaidizi), kisha ujaribu tena.
+ai.badKey=Ufunguo wa msaidizi haukukubaliwa. Ukague kwenye DeskPals (Mipangilio › Msaidizi).
+ai.limit=Msaidizi amefikia kikomo chake kwa sasa. Subiri kidogo kisha ujaribu tena.
+ai.network=Imeshindwa kumfikia msaidizi. Kagua muunganisho wako wa intaneti kisha ujaribu tena.
+ai.serviceError=Huduma ya msaidizi ilipata tatizo ({0}). Jaribu tena baadaye.
+ai.noTranscribe=Huduma ya msaidizi wako haiwezi kugeuza sauti kuwa maandishi. Groq (bure) inaweza: ichague kwenye DeskPals (Mipangilio › Msaidizi).
+ai.tooBig=Faili hii ni kubwa mno kwa msaidizi.
+ai.noSpeech=Hakuna maneno yaliyosemwa yaliyopatikana.
+ai.noText=Hakuna maandishi yaliyopatikana kwenye faili hii.
+ai.badDocument=Hati hii haikuweza kusomwa (huenda imeharibika).
+ai.noWord=Ili kusoma hati hii, sakinisha Microsoft Word au LibreOffice (bure).
+ai.httpsOnly=Anwani ya msaidizi lazima ianze na https:// (ikague kwenye DeskPals, Mipangilio › Msaidizi).
+ai.preparing=Inaandaa sauti
+ai.sending=Inatuma sehemu ya {0} kati ya {1}
+ai.listening=Inasikiliza sauti
+ai.reading=Inasoma hati
+ai.thinking=Inaandika muhtasari
+ai.part=Inasoma sehemu ya {0} kati ya {1}
+ai.waiting=Inamsubiri msaidizi (anapokea maombi machache tu kwa dakika)
+ai.cantHear=Windows haikuweza kusoma sauti ya faili hii.

@@ -1,0 +1,22 @@
+# DeskPals Tools — दस्तऐवज (मराठी)
+job.toword=Word मध्ये रूपांतरित करा
+doing.toword=Word मध्ये रूपांतरित करत आहे…
+job.cleanscan=स्कॅन करून PDF बनवा
+doing.cleanscan=फोटो स्वच्छ करत आहे…
+job.heichelp=iPhone फोटोंसाठी ॲड-ऑन मिळवा
+doing.heichelp=Microsoft Store उघडत आहे…
+docs.word.none=PDF चे Word दस्तऐवज करण्यासाठी Microsoft Word किंवा LibreOffice (मोफत) इंस्टॉल करा.
+docs.word.failed=PDF चे Word दस्तऐवज करता आले नाही (त्याला पासवर्ड असेल किंवा ते खराब झाले असेल).
+docs.word.slow=खूप वेळ लागला म्हणून थांबवले. पुन्हा प्रयत्न करा, किंवा लहान PDF वापरून पाहा.
+docs.scan.intro=मी कागद कापून वेगळा करेन, सरळ करेन आणि कागद पांढरा करेन. पाने कशी असावीत?
+docs.scan.mode=रंग
+docs.scan.color=रंगीत
+docs.scan.gray=राखाडी
+docs.scan.bw=कृष्णधवल
+docs.scan.noPicture=हे चित्र उघडता आले नाही.
+docs.name.scan=स्कॅन
+docs.heic.missing=iPhone चे फोटो (HEIC) उघडण्यासाठी Windows ला एक मोफत अ‍ॅड-ऑन हवे: Microsoft Store मधील "HEIF Image Extensions".
+docs.heic.opened=iPhone चे फोटो उघडण्यासाठी Windows ला एक मोफत अ‍ॅड-ऑन हवे: मी Microsoft Store मध्ये त्याचे पान उघडले आहे, फक्त "मिळवा" वर क्लिक करा.
+docs.heic.cantOpen=iPhone चे फोटो उघडण्यासाठी Microsoft Store उघडा आणि मोफत "HEIF Image Extensions" मिळवा.
+docs.inUse=ही फाइल दुसऱ्या प्रोग्राममध्ये उघडी आहे. ती तिथे बंद करा आणि पुन्हा प्रयत्न करा.
+docs.word.protected=या PDF मधील मजकूर कॉपी करण्याची परवानगी नाही, त्यामुळे त्याचे Word दस्तऐवज करता येत नाही.

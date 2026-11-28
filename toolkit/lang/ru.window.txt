@@ -1,0 +1,21 @@
+# DeskPals Tools — окно — Русский
+window.tab.files=Файлы
+window.tab.recent=Недавние задачи
+window.tab.settings=Настройки
+window.selected=выбрано
+window.up=Выше
+window.down=Ниже
+window.remove=Убрать
+window.order=Перетаскивайте файлы, чтобы изменить порядок. Они используются сверху вниз.
+window.folder=Папка
+window.recent.title=Недавние задачи
+window.recent.clear=Очистить историю
+window.recent.empty=Пока пусто. Здесь появятся выполненные задачи.
+window.recent.ask=Очистить список недавних задач? Ваши файлы не будут удалены.
+window.recent.gone=(больше нет)
+window.today=Сегодня, {0}
+window.yesterday=Вчера, {0}
+window.settings.title=Настройки
+window.settings.empty=Пока нечего настраивать.
+window.settings.failed=Не удалось изменить эту настройку: {0}
+window.busy=Сейчас идёт работа. Новые файлы добавятся, когда она закончится.

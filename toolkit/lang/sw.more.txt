@@ -1,0 +1,13 @@
+# DeskPals Tools — more (sw)
+viewer.files=Faili {0}
+viewer.pageOf={0} · uk. {1}
+ocrpdf.pref.languages=Lugha za kusoma…
+ocrpdf.langs.intro=Chagua lugha za hati zako. Kila lugha mpya hupakua MB chache mara ya kwanza.
+ocrpdf.langs.none=Chagua angalau lugha moja.
+job.askai=Uliza kuhusu faili
+doing.askai=Inahifadhi mazungumzo…
+askai.name=maswali
+askai.placeholder=Andika swali kuhusu faili…
+askai.ask=Uliza
+askai.ready=Tayari. Uliza chochote kuhusu faili.
+askai.thinking=Inafikiri…

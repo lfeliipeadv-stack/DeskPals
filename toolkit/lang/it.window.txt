@@ -1,0 +1,21 @@
+# DeskPals Tools — la finestra — Italiano
+window.tab.files=File
+window.tab.recent=Lavori recenti
+window.tab.settings=Impostazioni
+window.selected=selezionato
+window.up=Sposta su
+window.down=Sposta giù
+window.remove=Togli
+window.order=Trascina i file per cambiare l'ordine. I lavori li usano dall'alto in basso.
+window.folder=Cartella
+window.recent.title=Lavori recenti
+window.recent.clear=Cancella cronologia
+window.recent.empty=Ancora niente. I lavori che fai appariranno qui.
+window.recent.ask=Cancellare l'elenco dei lavori recenti? I tuoi file non verranno eliminati.
+window.recent.gone=(non c'è più)
+window.today=Oggi, {0}
+window.yesterday=Ieri, {0}
+window.settings.title=Impostazioni
+window.settings.empty=Ancora niente da impostare.
+window.settings.failed=Non è stato possibile cambiare questa impostazione: {0}
+window.busy=C'è un lavoro in corso. I nuovi file verranno aggiunti quando sarà finito.

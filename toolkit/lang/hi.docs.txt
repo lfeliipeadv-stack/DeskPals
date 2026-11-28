@@ -1,0 +1,22 @@
+# DeskPals Tools — दस्तावेज़ (हिन्दी)
+job.toword=Word में बदलें
+doing.toword=Word में बदला जा रहा है…
+job.cleanscan=स्कैन करके PDF बनाएँ
+doing.cleanscan=फ़ोटो साफ़ की जा रही हैं…
+job.heichelp=iPhone फ़ोटो का ऐड-ऑन पाएँ
+doing.heichelp=Microsoft Store खोला जा रहा है…
+docs.word.none=PDF को Word दस्तावेज़ बनाने के लिए Microsoft Word या LibreOffice (मुफ़्त) इंस्टॉल करें।
+docs.word.failed=PDF को Word दस्तावेज़ में नहीं बदला जा सका (शायद इसमें पासवर्ड है या यह खराब है)।
+docs.word.slow=बहुत समय लग गया, इसलिए रोक दिया गया। फिर से कोशिश करें, या कोई छोटी PDF आज़माएँ।
+docs.scan.intro=मैं काग़ज़ को काटकर अलग करूँगा, सीधा करूँगा और काग़ज़ को सफ़ेद कर दूँगा। पेज कैसे दिखें?
+docs.scan.mode=रंग
+docs.scan.color=रंगीन
+docs.scan.gray=धूसर (ग्रे)
+docs.scan.bw=श्वेत-श्याम
+docs.scan.noPicture=यह तस्वीर नहीं खुल सकी।
+docs.name.scan=स्कैन
+docs.heic.missing=iPhone की फ़ोटो (HEIC) खोलने के लिए Windows को एक मुफ़्त ऐड-ऑन चाहिए: Microsoft Store से "HEIF Image Extensions"।
+docs.heic.opened=iPhone की फ़ोटो खोलने के लिए Windows को एक मुफ़्त ऐड-ऑन चाहिए: मैंने Microsoft Store में उसका पेज खोल दिया है, बस "प्राप्त करें" पर क्लिक करें।
+docs.heic.cantOpen=iPhone की फ़ोटो खोलने के लिए Microsoft Store खोलें और मुफ़्त "HEIF Image Extensions" प्राप्त करें।
+docs.inUse=यह फ़ाइल किसी दूसरे प्रोग्राम में खुली है। उसे वहाँ बंद करें और फिर से कोशिश करें।
+docs.word.protected=यह PDF अपना टेक्स्ट कॉपी करने की अनुमति नहीं देती, इसलिए इसे Word दस्तावेज़ नहीं बनाया जा सकता।

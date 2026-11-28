@@ -1,0 +1,13 @@
+# DeskPals Tools — more (fa)
+viewer.files={0} فایل
+viewer.pageOf={0} · ص {1}
+ocrpdf.pref.languages=زبان‌های خواندن…
+ocrpdf.langs.intro=زبان‌های سندهایتان را انتخاب کنید. هر زبان تازه بار اول چند مگابایت دانلود می‌کند.
+ocrpdf.langs.none=دست‌کم یک زبان انتخاب کنید.
+job.askai=پرسیدن درباره فایل
+doing.askai=در حال ذخیره گفتگو…
+askai.name=پرسش‌ها
+askai.placeholder=پرسشی درباره فایل بنویسید…
+askai.ask=بپرس
+askai.ready=آماده است. هرچه درباره فایل می‌خواهید بپرسید.
+askai.thinking=در حال فکر کردن…

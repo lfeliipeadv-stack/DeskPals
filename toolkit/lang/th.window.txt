@@ -1,0 +1,21 @@
+# DeskPals Tools — หน้าต่าง — ไทย
+window.tab.files=ไฟล์
+window.tab.recent=งานล่าสุด
+window.tab.settings=การตั้งค่า
+window.selected=เลือกอยู่
+window.up=เลื่อนขึ้น
+window.down=เลื่อนลง
+window.remove=เอาออก
+window.order=ลากไฟล์เพื่อเปลี่ยนลำดับ งานจะใช้ไฟล์จากบนลงล่าง
+window.folder=โฟลเดอร์
+window.recent.title=งานล่าสุด
+window.recent.clear=ล้างประวัติ
+window.recent.empty=ยังไม่มีอะไร งานที่คุณทำจะแสดงที่นี่
+window.recent.ask=ล้างรายการงานล่าสุดไหม? ไฟล์ของคุณจะไม่ถูกลบ
+window.recent.gone=(ไม่อยู่ที่เดิมแล้ว)
+window.today=วันนี้ {0}
+window.yesterday=เมื่อวาน {0}
+window.settings.title=การตั้งค่า
+window.settings.empty=ยังไม่มีอะไรให้ตั้งค่า
+window.settings.failed=เปลี่ยนการตั้งค่านี้ไม่ได้: {0}
+window.busy=มีงานกำลังทำอยู่ ไฟล์ใหม่จะถูกเพิ่มเมื่องานเสร็จ

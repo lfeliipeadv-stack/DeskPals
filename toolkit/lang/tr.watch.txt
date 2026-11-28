@@ -1,0 +1,16 @@
+# İzlenen klasörler — Türkçe
+watch.pref=İzlenen klasörler
+watch.hint=DeskPals açıkken bu klasörlere gelen yeni dosyalar kendiliğinden işlenir.
+watch.button=İzlenen klasörler…
+watch.title=İzlenen klasörler
+watch.intro=Klasörleri ve içlerine gelen her yeni dosyayla ne yapılacağını seç (örneğin: tarama klasörün → PDF'ye dönüştür). DeskPals açıkken çalışır.
+watch.empty=Henüz klasör yok. “Klasör ekle…” düğmesine tıkla.
+watch.where=Sonuçlar her birinin içindeki “{0}” klasörüne gider. Dosyaların olduğu gibi kalır.
+watch.add=Klasör ekle…
+watch.remove=Kaldır
+watch.save=Kaydet
+watch.pick=İzlenecek bir klasör seç
+watch.missing=Bu klasör bulunamadı.
+watch.drive=Bütün bir sürücü değil, bir klasör seç.
+watch.already=Bu klasör zaten listede.
+watch.outFolder=Sonuçları buraya koyuyorum. Lütfen başka bir klasör seç.

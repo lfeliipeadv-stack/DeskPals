@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (sw)
+explorer.open=Fungua DeskPals Tools
+explorer.pref=Onyesha kwenye menyu ya kubofya kulia ya Windows
+explorer.prefHint=Huongeza "DeskPals Tools" kwenye menyu ya kubofya kulia ya faili na folda, na kwenye "Tuma kwa". Kwenye Windows 11 iko chini ya "Onyesha chaguo zaidi".
+explorer.sendToTip=Fungua faili hizi kwenye DeskPals Tools
+explorer.failed=Imeshindikana kubadilisha menyu ya Windows: {0}

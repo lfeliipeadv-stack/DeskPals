@@ -1,0 +1,21 @@
+# DeskPals Tools — উইন্ডো — বাংলা
+window.tab.files=ফাইল
+window.tab.recent=সাম্প্রতিক কাজ
+window.tab.settings=সেটিংস
+window.selected=নির্বাচিত
+window.up=উপরে নিন
+window.down=নিচে নিন
+window.remove=সরান
+window.order=ক্রম বদলাতে ফাইলগুলো টেনে আনুন। কাজগুলো এগুলো উপর থেকে নিচে ব্যবহার করে।
+window.folder=ফোল্ডার
+window.recent.title=সাম্প্রতিক কাজ
+window.recent.clear=ইতিহাস মুছুন
+window.recent.empty=এখনও কিছু নেই। আপনার করা কাজ এখানে দেখা যাবে।
+window.recent.ask=সাম্প্রতিক কাজের তালিকা মুছবেন? আপনার ফাইল মোছা হবে না।
+window.recent.gone=(আর সেখানে নেই)
+window.today=আজ, {0}
+window.yesterday=গতকাল, {0}
+window.settings.title=সেটিংস
+window.settings.empty=এখনও সেট করার মতো কিছু নেই।
+window.settings.failed=এই সেটিং বদলানো যায়নি: {0}
+window.busy=একটি কাজ চলছে। কাজ শেষ হলে নতুন ফাইলগুলো যোগ হবে।

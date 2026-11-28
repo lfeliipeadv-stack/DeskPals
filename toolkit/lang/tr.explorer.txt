@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (tr)
+explorer.open=DeskPals Tools'u aç
+explorer.pref=Windows sağ tık menüsünde göster
+explorer.prefHint="DeskPals Tools"u dosya ve klasörlerin sağ tık menüsüne ve "Gönder" menüsüne ekler. Windows 11'de "Daha fazla seçenek göster" altındadır.
+explorer.sendToTip=Bu dosyaları DeskPals Tools'ta aç
+explorer.failed=Windows menüsü değiştirilemedi: {0}

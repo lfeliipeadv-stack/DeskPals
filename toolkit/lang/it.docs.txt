@@ -1,0 +1,22 @@
+# DeskPals Tools — documenti (italiano)
+job.toword=Converti in Word
+doing.toword=Conversione in Word…
+job.cleanscan=Scansiona in PDF
+doing.cleanscan=Pulizia delle foto…
+job.heichelp=Installa l'estensione per le foto dell'iPhone
+doing.heichelp=Apertura di Microsoft Store…
+docs.word.none=Per trasformare un PDF in un documento Word, installa Microsoft Word o LibreOffice (gratis).
+docs.word.failed=Non è stato possibile trasformare il PDF in un documento Word (potrebbe avere una password o essere danneggiato).
+docs.word.slow=Ci ha messo troppo ed è stato fermato. Riprova, oppure prova con un PDF più piccolo.
+docs.scan.intro=Ritaglio il foglio, lo raddrizzo e rendo bianca la carta. Come vuoi le pagine?
+docs.scan.mode=Colori
+docs.scan.color=A colori
+docs.scan.gray=In grigio
+docs.scan.bw=Bianco e nero
+docs.scan.noPicture=Non è stato possibile aprire questa immagine.
+docs.name.scan=scansione
+docs.heic.missing=Per aprire le foto dell'iPhone (HEIC), Windows ha bisogno di un componente gratuito: "Estensioni per immagini HEIF" da Microsoft Store.
+docs.heic.opened=Per aprire le foto dell'iPhone, Windows ha bisogno di un componente gratuito: ho aperto la sua pagina in Microsoft Store, basta fare clic su "Ottieni".
+docs.heic.cantOpen=Per aprire le foto dell'iPhone, apri Microsoft Store e scarica le "Estensioni per immagini HEIF" (gratis).
+docs.inUse=Questo file è aperto in un altro programma. Chiudilo lì e riprova.
+docs.word.protected=Questo PDF non permette di copiare il testo, quindi non può diventare un documento Word.

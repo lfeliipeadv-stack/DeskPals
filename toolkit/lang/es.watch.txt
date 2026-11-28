@@ -1,0 +1,16 @@
+# Carpetas vigiladas — español
+watch.pref=Carpetas vigiladas
+watch.hint=Mientras DeskPals esté abierto, los archivos nuevos de estas carpetas se procesan solos.
+watch.button=Carpetas vigiladas…
+watch.title=Carpetas vigiladas
+watch.intro=Elige carpetas y qué hacer con cada archivo nuevo que llegue a ellas (por ejemplo: la carpeta de escaneos → Convertir a PDF). Funciona mientras DeskPals esté abierto.
+watch.empty=Todavía no hay carpetas. Haz clic en “Añadir carpeta…”.
+watch.where=Los resultados van a una carpeta “{0}” dentro de cada una. Tus archivos quedan como están.
+watch.add=Añadir carpeta…
+watch.remove=Quitar
+watch.save=Guardar
+watch.pick=Elige una carpeta para vigilar
+watch.missing=No se encontró esa carpeta.
+watch.drive=Elige una carpeta, no un disco entero.
+watch.already=Esa carpeta ya está en la lista.
+watch.outFolder=Aquí es donde pongo los resultados. Elige otra carpeta, por favor.

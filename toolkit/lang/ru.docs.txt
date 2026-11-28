@@ -1,0 +1,22 @@
+# DeskPals Tools — документы (русский)
+job.toword=Преобразовать в Word
+doing.toword=Преобразую в Word…
+job.cleanscan=Скан в PDF
+doing.cleanscan=Очищаю фотографии…
+job.heichelp=Установить дополнение для фото с iPhone
+doing.heichelp=Открываю Microsoft Store…
+docs.word.none=Чтобы превратить PDF в документ Word, установите Microsoft Word или LibreOffice (бесплатно).
+docs.word.failed=Не удалось превратить PDF в документ Word (возможно, у него есть пароль или он повреждён).
+docs.word.slow=Это заняло слишком много времени, и работа была остановлена. Попробуйте ещё раз или возьмите PDF поменьше.
+docs.scan.intro=Я вырежу лист, выровняю его и сделаю бумагу белой. Какими должны быть страницы?
+docs.scan.mode=Цвета
+docs.scan.color=Цветные
+docs.scan.gray=В оттенках серого
+docs.scan.bw=Чёрно-белые
+docs.scan.noPicture=Не удалось открыть это изображение.
+docs.name.scan=скан
+docs.heic.missing=Чтобы открывать фото с iPhone (HEIC), Windows нужно бесплатное дополнение «HEIF Image Extensions» из Microsoft Store.
+docs.heic.opened=Чтобы открывать фото с iPhone, Windows нужно бесплатное дополнение: я открыл его страницу в Microsoft Store, просто нажмите «Получить».
+docs.heic.cantOpen=Чтобы открывать фото с iPhone, откройте Microsoft Store и установите бесплатное дополнение «HEIF Image Extensions».
+docs.inUse=Этот файл открыт в другой программе. Закройте его там и попробуйте снова.
+docs.word.protected=Этот PDF запрещает копировать текст, поэтому его нельзя превратить в документ Word.

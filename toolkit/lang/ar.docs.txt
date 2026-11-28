@@ -1,0 +1,22 @@
+# DeskPals Tools — المستندات (العربية)
+job.toword=تحويل إلى Word
+doing.toword=جارٍ التحويل إلى Word…
+job.cleanscan=مسح ضوئي إلى PDF
+doing.cleanscan=جارٍ تنظيف الصور…
+job.heichelp=احصل على إضافة صور iPhone
+doing.heichelp=جارٍ فتح Microsoft Store…
+docs.word.none=لتحويل ملف PDF إلى مستند Word، ثبّت Microsoft Word أو LibreOffice (مجاني).
+docs.word.failed=تعذّر تحويل ملف PDF إلى مستند Word (ربما له كلمة مرور أو أنه تالف).
+docs.word.slow=استغرق الأمر وقتًا طويلًا فتم إيقافه. حاول مرة أخرى، أو جرّب ملف PDF أصغر.
+docs.scan.intro=سأقصّ الورقة وأجعلها مستقيمة وأجعل الورق أبيض. كيف تريد أن تكون الصفحات؟
+docs.scan.mode=الألوان
+docs.scan.color=بالألوان
+docs.scan.gray=بالرمادي
+docs.scan.bw=أبيض وأسود
+docs.scan.noPicture=تعذّر فتح هذه الصورة.
+docs.name.scan=مسح ضوئي
+docs.heic.missing=لفتح صور iPhone ‏(HEIC) يحتاج Windows إلى إضافة مجانية: "HEIF Image Extensions" من Microsoft Store.
+docs.heic.opened=لفتح صور iPhone يحتاج Windows إلى إضافة مجانية: فتحتُ صفحتها في Microsoft Store، فقط انقر "الحصول عليه".
+docs.heic.cantOpen=لفتح صور iPhone، افتح Microsoft Store واحصل على "HEIF Image Extensions" المجانية.
+docs.inUse=هذا الملف مفتوح في برنامج آخر. أغلقه هناك ثم حاول مرة أخرى.
+docs.word.protected=لا يسمح ملف PDF هذا بنسخ نصه، لذلك لا يمكن تحويله إلى مستند Word.

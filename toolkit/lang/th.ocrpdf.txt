@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF ที่ค้นหาได้และตัวอ่าน Tesseract — ไทย
+job.searchable=ทำให้ค้นหาข้อความได้
+doing.searchable=กำลังทำให้ค้นหาข้อความได้…
+ocrpdf.name=ค้นหาได้
+ocrpdf.already=PDF นี้มีข้อความที่ค้นหาได้อยู่แล้ว ไม่ต้องทำอะไรเพิ่ม
+ocrpdf.noWords=ไม่พบคำที่อ่านได้ในไฟล์นี้
+ocrpdf.preview=ตอนนี้ค้นหาและคัดลอกได้ {0} คำ ({1} หน้า)
+ocrpdf.downloading=กำลังดาวน์โหลดข้อมูลสำหรับอ่าน… {0}%
+ocrpdf.fallback={0} ครั้งนี้ Windows เป็นผู้อ่านข้อความแทน
+ocrpdf.err.download=ดาวน์โหลดข้อมูลสำหรับอ่านของ Tesseract ไม่ได้ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง
+ocrpdf.err.tesseract=Tesseract เปิดในคอมพิวเตอร์เครื่องนี้ไม่ได้
+ocrpdf.pref.tesseract=อ่านข้อความด้วย Tesseract
+ocrpdf.pref.tesseractHint=ดีกว่าสำหรับงานสแกนคุณภาพต่ำและภาษาที่ Windows อ่านไม่ได้ ครั้งแรกจะดาวน์โหลดไม่กี่ MB

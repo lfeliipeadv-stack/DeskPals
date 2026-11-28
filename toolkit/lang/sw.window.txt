@@ -1,0 +1,21 @@
+# DeskPals Tools — dirisha — Kiswahili
+window.tab.files=Faili
+window.tab.recent=Kazi za karibuni
+window.tab.settings=Mipangilio
+window.selected=imechaguliwa
+window.up=Panda juu
+window.down=Shuka chini
+window.remove=Ondoa
+window.order=Buruta faili kubadilisha mpangilio. Kazi huzitumia kutoka juu hadi chini.
+window.folder=Folda
+window.recent.title=Kazi za karibuni
+window.recent.clear=Futa historia
+window.recent.empty=Bado hakuna kitu. Kazi unazofanya zitaonekana hapa.
+window.recent.ask=Futa orodha ya kazi za karibuni? Faili zako hazitafutwa.
+window.recent.gone=(haipo tena)
+window.today=Leo, {0}
+window.yesterday=Jana, {0}
+window.settings.title=Mipangilio
+window.settings.empty=Bado hakuna cha kupanga.
+window.settings.failed=Mpangilio huu haukuweza kubadilishwa: {0}
+window.busy=Kuna kazi inayoendelea. Faili mpya zitaongezwa itakapokamilika.

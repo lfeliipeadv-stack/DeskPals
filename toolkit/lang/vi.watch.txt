@@ -1,0 +1,16 @@
+# Thư mục theo dõi — Tiếng Việt
+watch.pref=Thư mục theo dõi
+watch.hint=Khi DeskPals đang mở, các tệp mới trong những thư mục này sẽ được tự động xử lý.
+watch.button=Thư mục theo dõi…
+watch.title=Thư mục theo dõi
+watch.intro=Chọn thư mục và việc cần làm với mỗi tệp mới được đưa vào (ví dụ: thư mục bản quét → Chuyển sang PDF). Hoạt động khi DeskPals đang mở.
+watch.empty=Chưa có thư mục nào. Bấm “Thêm thư mục…”.
+watch.where=Kết quả được đặt vào thư mục “{0}” bên trong mỗi thư mục. Tệp của bạn vẫn giữ nguyên.
+watch.add=Thêm thư mục…
+watch.remove=Gỡ bỏ
+watch.save=Lưu
+watch.pick=Chọn một thư mục để theo dõi
+watch.missing=Không tìm thấy thư mục này.
+watch.drive=Hãy chọn một thư mục, không phải cả ổ đĩa.
+watch.already=Thư mục này đã có trong danh sách.
+watch.outFolder=Đây là nơi tôi đặt kết quả. Vui lòng chọn thư mục khác.

@@ -1,0 +1,13 @@
+# DeskPals Tools — more (tr)
+viewer.files={0} dosya
+viewer.pageOf={0} · s. {1}
+ocrpdf.pref.languages=Okuma dilleri…
+ocrpdf.langs.intro=Belgelerinizin dillerini seçin. Her yeni dil ilk kullanımda birkaç MB indirir.
+ocrpdf.langs.none=En az bir dil seçin.
+job.askai=Dosya hakkında sor
+doing.askai=Sohbet kaydediliyor…
+askai.name=sorular
+askai.placeholder=Dosya hakkında bir soru yazın…
+askai.ask=Sor
+askai.ready=Hazır. Dosya hakkında ne istersen sor.
+askai.thinking=Düşünüyor…

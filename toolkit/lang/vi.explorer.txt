@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (vi)
+explorer.open=Mở DeskPals Tools
+explorer.pref=Hiện trong menu chuột phải của Windows
+explorer.prefHint=Thêm "DeskPals Tools" vào menu chuột phải của tệp và thư mục, và vào "Gửi tới". Trên Windows 11, nó nằm trong "Hiện thêm tùy chọn".
+explorer.sendToTip=Mở các tệp này trong DeskPals Tools
+explorer.failed=Không thể thay đổi menu của Windows: {0}

@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (id)
+explorer.open=Buka DeskPals Tools
+explorer.pref=Tampilkan di menu klik kanan Windows
+explorer.prefHint=Menambahkan "DeskPals Tools" ke menu klik kanan file dan folder, serta ke "Kirim ke". Di Windows 11, ada di "Tampilkan opsi lainnya".
+explorer.sendToTip=Buka file ini di DeskPals Tools
+explorer.failed=Menu Windows tidak dapat diubah: {0}

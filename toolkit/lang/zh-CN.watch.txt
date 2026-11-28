@@ -1,0 +1,16 @@
+# 监视的文件夹 — 简体中文
+watch.pref=监视的文件夹
+watch.hint=DeskPals 打开时，这些文件夹里的新文件会自动处理。
+watch.button=监视的文件夹…
+watch.title=监视的文件夹
+watch.intro=选择文件夹，以及对放进去的每个新文件要做什么（例如：扫描文件夹 → 转换为 PDF）。DeskPals 打开时才会工作。
+watch.empty=还没有文件夹。点击“添加文件夹…”。
+watch.where=结果会放到每个文件夹里的“{0}”文件夹中。你的文件保持不变。
+watch.add=添加文件夹…
+watch.remove=移除
+watch.save=保存
+watch.pick=选择要监视的文件夹
+watch.missing=找不到这个文件夹。
+watch.drive=请选择一个文件夹，而不是整个磁盘。
+watch.already=这个文件夹已经在列表里了。
+watch.outFolder=这里是我放结果的地方。请选择其他文件夹。

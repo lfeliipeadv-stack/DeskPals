@@ -1,0 +1,22 @@
+# DeskPals Tools — పత్రాలు (తెలుగు)
+job.toword=Word గా మార్చు
+doing.toword=Word గా మారుస్తోంది…
+job.cleanscan=స్కాన్ చేసి PDF చేయి
+doing.cleanscan=ఫోటోలను శుభ్రం చేస్తోంది…
+job.heichelp=iPhone ఫోటోల యాడ్-ఆన్ పొందండి
+doing.heichelp=Microsoft Store తెరుస్తోంది…
+docs.word.none=PDF ను Word పత్రంగా మార్చడానికి Microsoft Word లేదా LibreOffice (ఉచితం) ఇన్‌స్టాల్ చేయండి.
+docs.word.failed=PDF ను Word పత్రంగా మార్చలేకపోయాం (దానికి పాస్‌వర్డ్ ఉండవచ్చు లేదా అది పాడై ఉండవచ్చు).
+docs.word.slow=చాలా సమయం పట్టడంతో ఆపేశాం. మళ్లీ ప్రయత్నించండి, లేదా చిన్న PDF తో ప్రయత్నించండి.
+docs.scan.intro=నేను కాగితాన్ని కత్తిరించి, నిటారుగా చేసి, కాగితాన్ని తెల్లగా చేస్తాను. పేజీలు ఎలా ఉండాలి?
+docs.scan.mode=రంగులు
+docs.scan.color=రంగులో
+docs.scan.gray=బూడిద రంగులో
+docs.scan.bw=నలుపు తెలుపు
+docs.scan.noPicture=ఈ చిత్రాన్ని తెరవలేకపోయాం.
+docs.name.scan=స్కాన్
+docs.heic.missing=iPhone ఫోటోలు (HEIC) తెరవడానికి Windows కి ఒక ఉచిత యాడ్-ఆన్ కావాలి: Microsoft Store లోని "HEIF Image Extensions".
+docs.heic.opened=iPhone ఫోటోలు తెరవడానికి Windows కి ఒక ఉచిత యాడ్-ఆన్ కావాలి: Microsoft Store లో దాని పేజీని తెరిచాను, "పొందండి" పై క్లిక్ చేస్తే చాలు.
+docs.heic.cantOpen=iPhone ఫోటోలు తెరవడానికి Microsoft Store తెరిచి ఉచిత "HEIF Image Extensions" పొందండి.
+docs.inUse=ఈ ఫైల్ వేరే ప్రోగ్రామ్‌లో తెరిచి ఉంది. దాన్ని అక్కడ మూసి, మళ్లీ ప్రయత్నించండి.
+docs.word.protected=ఈ PDF తన వచనాన్ని కాపీ చేయడానికి అనుమతించదు, కాబట్టి దాన్ని Word పత్రంగా మార్చలేం.

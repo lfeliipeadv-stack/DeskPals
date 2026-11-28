@@ -1,0 +1,27 @@
+# DeskPals Tools — yazıya dökme ve özetleme (Türkçe)
+job.transcribe=Yazıya dök
+job.summarize=Özetle
+doing.transcribe=Yazıya dökülüyor…
+doing.summarize=Özetleniyor…
+ai.name.transcription=döküm
+ai.name.summary=özet
+ai.notSet=Önce DeskPals'ta asistanı ayarlayın (Ayarlar › Asistan), sonra tekrar deneyin.
+ai.badKey=Asistanın anahtarı kabul edilmedi. DeskPals'ta kontrol edin (Ayarlar › Asistan).
+ai.limit=Asistan şimdilik sınırına ulaştı. Biraz bekleyip tekrar deneyin.
+ai.network=Asistana ulaşılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.
+ai.serviceError=Asistanın hizmetinde bir sorun oldu ({0}). Daha sonra tekrar deneyin.
+ai.noTranscribe=Asistanınızın hizmeti konuşmayı yazıya çeviremiyor. Groq (ücretsiz) çevirebilir: DeskPals'ta onu seçin (Ayarlar › Asistan).
+ai.tooBig=Bu dosya asistan için çok büyük.
+ai.noSpeech=İçinde konuşma bulunamadı.
+ai.noText=Bu dosyada metin bulunamadı.
+ai.badDocument=Bu belge okunamadı (hasarlı olabilir).
+ai.noWord=Bu belgeyi okumak için Microsoft Word veya LibreOffice (ücretsiz) yükleyin.
+ai.httpsOnly=Asistanın adresi https:// ile başlamalı (DeskPals'ta kontrol edin, Ayarlar › Asistan).
+ai.preparing=Ses hazırlanıyor
+ai.sending=Parça {0}/{1} gönderiliyor
+ai.listening=Ses dinleniyor
+ai.reading=Belge okunuyor
+ai.thinking=Özet yazılıyor
+ai.part=Parça {0}/{1} okunuyor
+ai.waiting=Asistan bekleniyor (dakikada yalnızca birkaç istek kabul ediyor)
+ai.cantHear=Windows bu dosyanın sesini okuyamadı.

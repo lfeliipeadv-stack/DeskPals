@@ -1,0 +1,21 @@
+# DeskPals Tools — 窗口 — 简体中文
+window.tab.files=文件
+window.tab.recent=最近的任务
+window.tab.settings=设置
+window.selected=已选中
+window.up=上移
+window.down=下移
+window.remove=移出
+window.order=拖动文件可以改变顺序。任务会按从上到下的顺序使用它们。
+window.folder=文件夹
+window.recent.title=最近的任务
+window.recent.clear=清除历史
+window.recent.empty=这里还没有内容。你完成的任务会显示在这里。
+window.recent.ask=要清除最近的任务列表吗？你的文件不会被删除。
+window.recent.gone=（已不在原处）
+window.today=今天 {0}
+window.yesterday=昨天 {0}
+window.settings.title=设置
+window.settings.empty=暂时没有需要设置的内容。
+window.settings.failed=无法更改此设置：{0}
+window.busy=有任务正在进行。新文件会在任务完成后加入。

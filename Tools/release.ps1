@@ -133,6 +133,21 @@ Get-Process | Where-Object { $_.Path -and $_.Path.StartsWith($weatherDir, [Strin
 for ($try = 0; $try -lt 10; $try++) { try { Remove-Item $weatherDir -Recurse -Force -ErrorAction Stop; break } catch { if ($try -eq 9) { throw }; Start-Sleep -Milliseconds 500 } }
 Write-Output "DeskPals Weather: tests passed, packed in DeskPals-Weather.zip"
 
+# 2b5. DeskPals Tools, an extension (a program of its own): converts, joins, splits and reads files dropped on a pet.
+# DeskPals downloads DeskPals-Tools.zip the first time it is needed. Its tests run before it is packed.
+$toolsDir = Join-Path $out 'toolkit'
+dotnet publish (Join-Path $root 'toolkit\DeskPalsTools.csproj') -c Release -o $toolsDir --nologo "-p:Version=$Version"
+if ($LASTEXITCODE -ne 0) { throw "dotnet publish (DeskPals Tools) failed" }
+$toolsReport = Join-Path $env:TEMP 'DeskPalsTools-devtests.txt'
+$tp = Start-Process (Join-Path $toolsDir 'DeskPalsTools.exe') -ArgumentList "--devtests=`"$toolsReport`"" -PassThru
+if (-not $tp.WaitForExit(1200000)) { Stop-Process -Id $tp.Id -Force; throw "DeskPals Tools: the tests did not finish in 20 minutes" }
+if ($tp.ExitCode -ne 0) { throw "DeskPals Tools: $($tp.ExitCode) test(s) failed (see $toolsReport)" }
+[IO.File]::WriteAllText((Join-Path $toolsDir 'NOTICE.txt'), "DeskPals Tools $Version`r`n`r`nPart of DeskPals (MIT license). PDFs with PDFsharp (MIT license, empira Software GmbH). The OCR, the audio and the pictures use Windows itself.`r`n", $utf8)
+$toolsZip = Join-Path $out 'DeskPals-Tools.zip'
+Compress-Archive -Path (@('DeskPalsTools.exe', 'NOTICE.txt') | ForEach-Object { Join-Path $toolsDir $_ }) -DestinationPath $toolsZip -Force
+Remove-Item $toolsDir -Recurse -Force
+Write-Output "DeskPals Tools: tests passed, packed in DeskPals-Tools.zip"
+
 # 2c. installer (.NET Framework 4.8, comes with Windows): checks the .NET 10 Desktop Runtime, then installs DeskPals.exe (and the Pet Editor)
 dotnet build (Join-Path $root 'Tools\Setup\Setup.csproj') -c Release --nologo "-p:AppExe=$exe" "-p:EditorExe=$editorExe" "-p:Version=$Version"
 if ($LASTEXITCODE -ne 0) { throw "installer build failed" }
@@ -153,7 +168,7 @@ $langZip = Join-Path $out 'lang.zip'
 Compress-Archive -Path (Join-Path $src 'lang\*.json') -DestinationPath $langZip -Force
 
 # 4. hashes ("hash  name", LF, like sha256sum)
-$sums = foreach ($f in @($exe, $fullExe, $setupExe, $editorExe, $weatherZip, $langZip) + $legacy) {
+$sums = foreach ($f in @($exe, $fullExe, $setupExe, $editorExe, $weatherZip, $toolsZip, $langZip) + $legacy) {
     (Get-FileHash $f -Algorithm SHA256).Hash.ToLowerInvariant() + '  ' + (Split-Path $f -Leaf)
 }
 $sumsFile = Join-Path $out 'SHA256SUMS'
@@ -165,15 +180,16 @@ Write-Output ("DeskPals.exe: {0:N0} KB" -f ((Get-Item $exe).Length / 1KB))
 Write-Output ("DeskPals-completo.exe: {0:N0} KB" -f ((Get-Item $fullExe).Length / 1KB))
 Write-Output ("DeskPals-Editor.exe: {0:N0} KB" -f ((Get-Item $editorExe).Length / 1KB))
 Write-Output ("DeskPals-Weather.zip: {0:N0} KB" -f ((Get-Item $weatherZip).Length / 1KB))
+Write-Output ("DeskPals-Tools.zip: {0:N0} KB" -f ((Get-Item $toolsZip).Length / 1KB))
 
 if ($NoUpload) { Write-Output "Built in $out (not uploaded)."; return }
 
 # 5. GitHub release
 if (-not $Notes) { $Notes = "DeskPals $Version" }
-$Notes += "`n`n**Qual baixar?**`n- ``DeskPals-Instalador.exe`` (recomendado): verifica se o .NET 10 está no computador, instala se faltar e cria os atalhos.`n- ``DeskPals-completo.exe``: funciona direto, sem instalar nada (arquivo maior).`n- ``DeskPals.exe``: só o programa, precisa do [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).`n- ``DeskPals-Editor.exe``: o Editor de Pets (o instalador já traz; o DeskPals também baixa sozinho na primeira vez que for aberto).`n- ``DeskPals-Weather.zip``: a extensão DeskPals Weather (neve, chuva, neblina, sol, cenas…). Não precisa baixar à mão: o DeskPals baixa quando ela é ligada na aba Extensões.`n`nOs arquivos ``DesktopPet*.exe`` e ``PetEditor.exe`` são os mesmos programas com os nomes de antes: ficam aqui para quem tem uma versão antiga receber a atualização sozinho. Não precisa baixá-los."
+$Notes += "`n`n**Qual baixar?**`n- ``DeskPals-Instalador.exe`` (recomendado): verifica se o .NET 10 está no computador, instala se faltar e cria os atalhos.`n- ``DeskPals-completo.exe``: funciona direto, sem instalar nada (arquivo maior).`n- ``DeskPals.exe``: só o programa, precisa do [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).`n- ``DeskPals-Editor.exe``: o Editor de Pets (o instalador já traz; o DeskPals também baixa sozinho na primeira vez que for aberto).`n- ``DeskPals-Weather.zip``: a extensão DeskPals Weather (neve, chuva, neblina, sol, cenas…). Não precisa baixar à mão: o DeskPals baixa quando ela é ligada na aba Extensões.`n- ``DeskPals-Tools.zip``: a extensão DeskPals Tools (Word em PDF, juntar e separar PDFs, OCR, imagens, áudio em MP3, ZIP). O DeskPals baixa sozinho na primeira vez que você solta um arquivo no pet.`n`nOs arquivos ``DesktopPet*.exe`` e ``PetEditor.exe`` são os mesmos programas com os nomes de antes: ficam aqui para quem tem uma versão antiga receber a atualização sozinho. Não precisa baixá-los."
 # notes go through a file: quotes or line breaks in the text would break the command line
 $notesFile = Join-Path $out 'NOTES.md'
 [IO.File]::WriteAllText($notesFile, $Notes, $utf8)
-gh release create "v$Version" $setupExe $fullExe $exe $editorExe $weatherZip $langZip $sumsFile (Join-Path $root 'LICENSE.md') @legacy --repo $Repo --title "DeskPals $Version" --notes-file $notesFile --target master
+gh release create "v$Version" $setupExe $fullExe $exe $editorExe $weatherZip $toolsZip $langZip $sumsFile (Join-Path $root 'LICENSE.md') @legacy --repo $Repo --title "DeskPals $Version" --notes-file $notesFile --target master
 if ($LASTEXITCODE -ne 0) { throw "gh release create failed" }
 Write-Output "Release v$Version published on https://github.com/$Repo/releases"

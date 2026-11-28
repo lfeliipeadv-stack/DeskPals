@@ -1,0 +1,16 @@
+# Folda zinazofuatiliwa — Kiswahili
+watch.pref=Folda zinazofuatiliwa
+watch.hint=DeskPals ikiwa wazi, faili mpya katika folda hizi hushughulikiwa zenyewe.
+watch.button=Folda zinazofuatiliwa…
+watch.title=Folda zinazofuatiliwa
+watch.intro=Chagua folda na nini kifanyike kwa kila faili mpya inayoingia (kwa mfano: folda ya skani → Badilisha kuwa PDF). Inafanya kazi DeskPals ikiwa wazi.
+watch.empty=Bado hakuna folda. Bofya “Ongeza folda…”.
+watch.where=Matokeo huenda kwenye folda “{0}” ndani ya kila moja. Faili zako hubaki kama zilivyo.
+watch.add=Ongeza folda…
+watch.remove=Ondoa
+watch.save=Hifadhi
+watch.pick=Chagua folda ya kufuatilia
+watch.missing=Folda hii haikupatikana.
+watch.drive=Chagua folda, si diski nzima.
+watch.already=Folda hii tayari iko kwenye orodha.
+watch.outFolder=Hapa ndipo ninapoweka matokeo. Tafadhali chagua folda nyingine.

@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (zh-CN)
+explorer.open=打开 DeskPals Tools
+explorer.pref=显示在 Windows 右键菜单中
+explorer.prefHint=将“DeskPals Tools”添加到文件和文件夹的右键菜单以及“发送到”中。在 Windows 11 中，它位于“显示更多选项”里。
+explorer.sendToTip=在 DeskPals Tools 中打开这些文件
+explorer.failed=无法更改 Windows 菜单：{0}

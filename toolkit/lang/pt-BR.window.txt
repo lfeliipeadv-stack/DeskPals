@@ -1,0 +1,21 @@
+# DeskPals Tools — a janela (arquivos em ordem, trabalhos recentes, configurações) — Português (Brasil)
+window.tab.files=Arquivos
+window.tab.recent=Trabalhos recentes
+window.tab.settings=Configurações
+window.selected=selecionado
+window.up=Subir
+window.down=Descer
+window.remove=Tirar da lista
+window.order=Arraste os arquivos para mudar a ordem. Os trabalhos usam de cima para baixo.
+window.folder=Pasta
+window.recent.title=Trabalhos recentes
+window.recent.clear=Limpar histórico
+window.recent.empty=Nada por aqui ainda. Os trabalhos que você fizer vão aparecer aqui.
+window.recent.ask=Limpar a lista de trabalhos recentes? Seus arquivos não serão apagados.
+window.recent.gone=(não está mais lá)
+window.today=Hoje, {0}
+window.yesterday=Ontem, {0}
+window.settings.title=Configurações
+window.settings.empty=Nada para configurar ainda.
+window.settings.failed=Não deu para mudar esta configuração: {0}
+window.busy=Um trabalho está em andamento. Os arquivos novos entram na lista quando ele terminar.

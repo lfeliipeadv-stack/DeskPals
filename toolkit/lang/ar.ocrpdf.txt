@@ -1,0 +1,13 @@
+# DeskPals Tools — ملفات PDF قابلة للبحث وقارئ Tesseract — العربية
+job.searchable=اجعل النص قابلاً للبحث
+doing.searchable=جارٍ جعل النص قابلاً للبحث…
+ocrpdf.name=قابل للبحث
+ocrpdf.already=يحتوي ملف PDF هذا بالفعل على نص يمكن البحث فيه. لا يوجد ما يجب فعله.
+ocrpdf.noWords=لم أجد هنا أي كلمات لقراءتها.
+ocrpdf.preview=يمكن الآن العثور على {0} كلمة ونسخها ({1} صفحة).
+ocrpdf.downloading=جارٍ تنزيل بيانات القراءة… {0}%
+ocrpdf.fallback={0} هذه المرة قرأ Windows النص بدلاً منه.
+ocrpdf.err.download=لم أتمكن من تنزيل بيانات القراءة الخاصة بـ Tesseract. تحقق من الاتصال بالإنترنت وحاول مرة أخرى.
+ocrpdf.err.tesseract=تعذّر تشغيل Tesseract على هذا الكمبيوتر.
+ocrpdf.pref.tesseract=قراءة النص باستخدام Tesseract
+ocrpdf.pref.tesseractHint=أفضل للمسح الضوئي الرديء وللغات التي لا يقرؤها Windows. في المرة الأولى ينزّل بضعة ميغابايت.

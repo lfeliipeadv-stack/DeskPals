@@ -1,0 +1,21 @@
+# DeskPals Tools — విండో — తెలుగు
+window.tab.files=ఫైళ్లు
+window.tab.recent=ఇటీవలి పనులు
+window.tab.settings=సెట్టింగ్‌లు
+window.selected=ఎంచుకున్నది
+window.up=పైకి జరుపు
+window.down=కిందికి జరుపు
+window.remove=తీసివేయి
+window.order=క్రమం మార్చడానికి ఫైళ్లను లాగండి. పనులు వాటిని పై నుండి కిందికి వాడతాయి.
+window.folder=ఫోల్డర్
+window.recent.title=ఇటీవలి పనులు
+window.recent.clear=చరిత్రను తుడిచివేయి
+window.recent.empty=ఇంకా ఏమీ లేదు. మీరు చేసిన పనులు ఇక్కడ కనిపిస్తాయి.
+window.recent.ask=ఇటీవలి పనుల జాబితాను తుడిచివేయాలా? మీ ఫైళ్లు తొలగించబడవు.
+window.recent.gone=(ఇప్పుడు అక్కడ లేదు)
+window.today=ఈరోజు, {0}
+window.yesterday=నిన్న, {0}
+window.settings.title=సెట్టింగ్‌లు
+window.settings.empty=ఇంకా సెట్ చేయడానికి ఏమీ లేదు.
+window.settings.failed=ఈ సెట్టింగ్‌ను మార్చలేకపోయాం: {0}
+window.busy=ఒక పని జరుగుతోంది. అది పూర్తయ్యాక కొత్త ఫైళ్లు జోడించబడతాయి.

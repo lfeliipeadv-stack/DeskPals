@@ -1,0 +1,27 @@
+# DeskPals Tools — 받아쓰기와 요약 (한국어)
+job.transcribe=텍스트로 받아쓰기
+job.summarize=요약하기
+doing.transcribe=받아쓰는 중…
+doing.summarize=요약하는 중…
+ai.name.transcription=받아쓰기
+ai.name.summary=요약
+ai.notSet=먼저 DeskPals에서 어시스턴트를 설정한 뒤(설정 › 어시스턴트) 다시 시도하세요.
+ai.badKey=어시스턴트 키가 받아들여지지 않았습니다. DeskPals에서 확인하세요(설정 › 어시스턴트).
+ai.limit=어시스턴트가 지금은 한도에 도달했습니다. 잠시 기다린 뒤 다시 시도하세요.
+ai.network=어시스턴트에 연결할 수 없습니다. 인터넷 연결을 확인하고 다시 시도하세요.
+ai.serviceError=어시스턴트 서비스에 문제가 생겼습니다({0}). 나중에 다시 시도하세요.
+ai.noTranscribe=사용 중인 어시스턴트 서비스는 말을 글로 바꿀 수 없습니다. Groq(무료)는 할 수 있어요. DeskPals에서 선택하세요(설정 › 어시스턴트).
+ai.tooBig=이 파일은 어시스턴트가 처리하기에 너무 큽니다.
+ai.noSpeech=말소리를 찾지 못했습니다.
+ai.noText=이 파일에서 글자를 찾지 못했습니다.
+ai.badDocument=이 문서를 읽을 수 없습니다(손상되었을 수 있습니다).
+ai.noWord=이 문서를 읽으려면 Microsoft Word 또는 LibreOffice(무료)를 설치하세요.
+ai.httpsOnly=어시스턴트 주소는 https://로 시작해야 합니다(DeskPals의 설정 › 어시스턴트에서 확인하세요).
+ai.preparing=오디오 준비 중
+ai.sending={1}개 중 {0}번째 보내는 중
+ai.listening=오디오 듣는 중
+ai.reading=문서 읽는 중
+ai.thinking=요약 쓰는 중
+ai.part={1}개 중 {0}번째 읽는 중
+ai.waiting=도우미를 기다리는 중 (1분에 몇 개의 요청만 받습니다)
+ai.cantHear=Windows가 이 파일의 소리를 읽지 못했습니다.

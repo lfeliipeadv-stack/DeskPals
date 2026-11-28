@@ -1,0 +1,21 @@
+# DeskPals Tools — the window (files in order, recent jobs, settings) — English
+window.tab.files=Files
+window.tab.recent=Recent jobs
+window.tab.settings=Settings
+window.selected=selected
+window.up=Move up
+window.down=Move down
+window.remove=Remove
+window.order=Drag the files to change the order. Jobs use them from top to bottom.
+window.folder=Folder
+window.recent.title=Recent jobs
+window.recent.clear=Clear history
+window.recent.empty=Nothing here yet. The jobs you do will show up here.
+window.recent.ask=Clear the list of recent jobs? Your files will not be deleted.
+window.recent.gone=(no longer there)
+window.today=Today, {0}
+window.yesterday=Yesterday, {0}
+window.settings.title=Settings
+window.settings.empty=Nothing to set up yet.
+window.settings.failed=This setting could not be changed: {0}
+window.busy=A job is running. The new files will be added when it is done.

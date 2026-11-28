@@ -1,0 +1,13 @@
+# DeskPals Tools — aranabilir PDF'ler ve Tesseract okuyucusu — Türkçe
+job.searchable=Metni aranabilir yap
+doing.searchable=Metin aranabilir yapılıyor…
+ocrpdf.name=aranabilir
+ocrpdf.already=Bu PDF'te zaten aranabilen bir metin var. Yapılacak bir şey yok.
+ocrpdf.noWords=Burada okunacak hiç kelime bulamadım.
+ocrpdf.preview=Artık {0} kelime bulunabilir ve kopyalanabilir ({1} sayfa).
+ocrpdf.downloading=Okuma verileri indiriliyor… %{0}
+ocrpdf.fallback={0} Bu sefer metni Windows okudu.
+ocrpdf.err.download=Tesseract'ın okuma verilerini indiremedim. İnternet bağlantını kontrol edip tekrar dene.
+ocrpdf.err.tesseract=Tesseract bu bilgisayarda açılamadı.
+ocrpdf.pref.tesseract=Metinleri Tesseract ile oku
+ocrpdf.pref.tesseractHint=Kötü taramalar ve Windows'un okuyamadığı diller için daha iyi. İlk seferde birkaç MB indirir.

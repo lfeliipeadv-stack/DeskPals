@@ -1,0 +1,22 @@
+# DeskPals Tools — دستاویزات (اردو)
+job.toword=Word میں تبدیل کریں
+doing.toword=Word میں تبدیل ہو رہا ہے…
+job.cleanscan=اسکین کر کے PDF بنائیں
+doing.cleanscan=تصاویر صاف کی جا رہی ہیں…
+job.heichelp=iPhone تصاویر کا ایڈ آن حاصل کریں
+doing.heichelp=Microsoft Store کھل رہا ہے…
+docs.word.none=PDF کو Word دستاویز بنانے کے لیے Microsoft Word یا LibreOffice (مفت) انسٹال کریں۔
+docs.word.failed=PDF کو Word دستاویز میں نہیں بدلا جا سکا (شاید اس پر پاس ورڈ ہے یا یہ خراب ہے)۔
+docs.word.slow=بہت دیر لگ گئی اس لیے روک دیا گیا۔ دوبارہ کوشش کریں، یا کوئی چھوٹی PDF آزمائیں۔
+docs.scan.intro=میں کاغذ کو کاٹ کر الگ کروں گا، سیدھا کروں گا اور کاغذ کو سفید کر دوں گا۔ صفحات کیسے ہوں؟
+docs.scan.mode=رنگ
+docs.scan.color=رنگین
+docs.scan.gray=سرمئی
+docs.scan.bw=سیاہ و سفید
+docs.scan.noPicture=یہ تصویر نہیں کھل سکی۔
+docs.name.scan=اسکین
+docs.heic.missing=iPhone کی تصاویر (HEIC) کھولنے کے لیے Windows کو ایک مفت ایڈ آن چاہیے: Microsoft Store سے "HEIF Image Extensions"۔
+docs.heic.opened=iPhone کی تصاویر کھولنے کے لیے Windows کو ایک مفت ایڈ آن چاہیے: میں نے Microsoft Store میں اس کا صفحہ کھول دیا ہے، بس "حاصل کریں" پر کلک کریں۔
+docs.heic.cantOpen=iPhone کی تصاویر کھولنے کے لیے Microsoft Store کھولیں اور مفت "HEIF Image Extensions" حاصل کریں۔
+docs.inUse=یہ فائل کسی اور پروگرام میں کھلی ہے۔ اسے وہاں بند کریں اور دوبارہ کوشش کریں۔
+docs.word.protected=یہ PDF اپنا متن کاپی کرنے کی اجازت نہیں دیتی، اس لیے اسے Word دستاویز نہیں بنایا جا سکتا۔

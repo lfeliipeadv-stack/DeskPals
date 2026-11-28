@@ -1,0 +1,16 @@
+# Cartelle sorvegliate — italiano
+watch.pref=Cartelle sorvegliate
+watch.hint=Finché DeskPals è aperto, i nuovi file in queste cartelle vengono elaborati da soli.
+watch.button=Cartelle sorvegliate…
+watch.title=Cartelle sorvegliate
+watch.intro=Scegli le cartelle e cosa fare con ogni nuovo file che vi arriva (per esempio: la cartella delle scansioni → Converti in PDF). Funziona finché DeskPals è aperto.
+watch.empty=Ancora nessuna cartella. Fai clic su “Aggiungi cartella…”.
+watch.where=I risultati vanno in una cartella “{0}” dentro ciascuna. I tuoi file restano come sono.
+watch.add=Aggiungi cartella…
+watch.remove=Rimuovi
+watch.save=Salva
+watch.pick=Scegli una cartella da sorvegliare
+watch.missing=Questa cartella non è stata trovata.
+watch.drive=Scegli una cartella, non un intero disco.
+watch.already=Questa cartella è già nell’elenco.
+watch.outFolder=Qui metto i risultati. Scegli un’altra cartella, per favore.

@@ -1,0 +1,13 @@
+# DeskPals Tools — தேடக்கூடிய PDF மற்றும் Tesseract வாசிப்பான் — தமிழ்
+job.searchable=உரையைத் தேடக்கூடியதாக்கு
+doing.searchable=உரை தேடக்கூடியதாக்கப்படுகிறது…
+ocrpdf.name=தேடக்கூடியது
+ocrpdf.already=இந்த PDF-இல் ஏற்கெனவே தேடக்கூடிய உரை உள்ளது. செய்ய எதுவும் இல்லை.
+ocrpdf.noWords=இங்கே படிக்க எந்தச் சொல்லும் கிடைக்கவில்லை.
+ocrpdf.preview=இப்போது {0} சொற்களைத் தேடி நகலெடுக்கலாம் ({1} பக்கம்).
+ocrpdf.downloading=வாசிப்புத் தரவு பதிவிறக்கப்படுகிறது… {0}%
+ocrpdf.fallback={0} இந்த முறை உரையை Windows படித்தது.
+ocrpdf.err.download=Tesseract-க்கான வாசிப்புத் தரவைப் பதிவிறக்க முடியவில்லை. இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்.
+ocrpdf.err.tesseract=இந்தக் கணினியில் Tesseract தொடங்கவில்லை.
+ocrpdf.pref.tesseract=Tesseract மூலம் உரையைப் படி
+ocrpdf.pref.tesseractHint=தரம் குறைந்த ஸ்கேன்களுக்கும் Windows படிக்காத மொழிகளுக்கும் சிறந்தது. முதல் முறை சில MB பதிவிறக்கும்.

@@ -1,0 +1,27 @@
+# DeskPals Tools — trascrivere e riassumere (Italiano)
+job.transcribe=Trascrivi in testo
+job.summarize=Riassumi
+doing.transcribe=Trascrizione in corso…
+doing.summarize=Riassunto in corso…
+ai.name.transcription=trascrizione
+ai.name.summary=riassunto
+ai.notSet=Prima configura l'assistente in DeskPals (Impostazioni › Assistente), poi riprova.
+ai.badKey=La chiave dell'assistente non è stata accettata. Controllala in DeskPals (Impostazioni › Assistente).
+ai.limit=L'assistente ha raggiunto il suo limite per ora. Aspetta un po' e riprova.
+ai.network=Impossibile raggiungere l'assistente. Controlla la connessione a internet e riprova.
+ai.serviceError=Il servizio dell'assistente ha avuto un problema ({0}). Riprova più tardi.
+ai.noTranscribe=Il servizio del tuo assistente non sa trasformare la voce in testo. Groq (gratis) sì: sceglilo in DeskPals (Impostazioni › Assistente).
+ai.tooBig=Questo file è troppo grande per l'assistente.
+ai.noSpeech=Non è stata trovata nessuna voce.
+ai.noText=Non è stato trovato testo in questo file.
+ai.badDocument=Non è stato possibile leggere questo documento (potrebbe essere danneggiato).
+ai.noWord=Per leggere questo documento, installa Microsoft Word o LibreOffice (gratis).
+ai.httpsOnly=L'indirizzo dell'assistente deve iniziare con https:// (controllalo in DeskPals, Impostazioni › Assistente).
+ai.preparing=Preparazione dell'audio
+ai.sending=Invio della parte {0} di {1}
+ai.listening=Ascolto dell'audio
+ai.reading=Lettura del documento
+ai.thinking=Scrittura del riassunto
+ai.part=Lettura della parte {0} di {1}
+ai.waiting=In attesa dell'assistente (accetta solo poche richieste al minuto)
+ai.cantHear=Windows non è riuscito a leggere l'audio di questo file.

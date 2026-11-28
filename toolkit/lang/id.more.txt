@@ -1,0 +1,13 @@
+# DeskPals Tools — more (id)
+viewer.files={0} berkas
+viewer.pageOf={0} · hlm. {1}
+ocrpdf.pref.languages=Bahasa yang dibaca…
+ocrpdf.langs.intro=Pilih bahasa dokumen Anda. Setiap bahasa baru mengunduh beberapa MB pada kali pertama.
+ocrpdf.langs.none=Pilih setidaknya satu bahasa.
+job.askai=Tanya tentang berkas
+doing.askai=Menyimpan percakapan…
+askai.name=pertanyaan
+askai.placeholder=Ketik pertanyaan tentang berkas…
+askai.ask=Tanya
+askai.ready=Siap. Tanyakan apa saja tentang berkas ini.
+askai.thinking=Berpikir…

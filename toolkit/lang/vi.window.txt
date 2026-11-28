@@ -1,0 +1,21 @@
+# DeskPals Tools — cửa sổ — Tiếng Việt
+window.tab.files=Tệp
+window.tab.recent=Việc gần đây
+window.tab.settings=Cài đặt
+window.selected=đã chọn
+window.up=Lên trên
+window.down=Xuống dưới
+window.remove=Bỏ ra
+window.order=Kéo các tệp để đổi thứ tự. Các việc dùng chúng từ trên xuống dưới.
+window.folder=Thư mục
+window.recent.title=Việc gần đây
+window.recent.clear=Xóa lịch sử
+window.recent.empty=Chưa có gì. Các việc bạn làm sẽ hiện ở đây.
+window.recent.ask=Xóa danh sách việc gần đây? Các tệp của bạn sẽ không bị xóa.
+window.recent.gone=(không còn ở đó)
+window.today=Hôm nay, {0}
+window.yesterday=Hôm qua, {0}
+window.settings.title=Cài đặt
+window.settings.empty=Chưa có gì để cài đặt.
+window.settings.failed=Không thể đổi cài đặt này: {0}
+window.busy=Đang có một việc chạy. Các tệp mới sẽ được thêm khi việc đó xong.

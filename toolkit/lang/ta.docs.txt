@@ -1,0 +1,22 @@
+# DeskPals Tools — ஆவணங்கள் (தமிழ்)
+job.toword=Word ஆக மாற்று
+doing.toword=Word ஆக மாற்றுகிறது…
+job.cleanscan=ஸ்கேன் செய்து PDF ஆக்கு
+doing.cleanscan=புகைப்படங்களைச் சுத்தம் செய்கிறது…
+job.heichelp=iPhone புகைப்படச் செருகுநிரலைப் பெறு
+doing.heichelp=Microsoft Store திறக்கிறது…
+docs.word.none=PDF-ஐ Word ஆவணமாக மாற்ற, Microsoft Word அல்லது LibreOffice (இலவசம்) நிறுவுங்கள்.
+docs.word.failed=PDF-ஐ Word ஆவணமாக மாற்ற முடியவில்லை (அதில் கடவுச்சொல் இருக்கலாம் அல்லது சேதமடைந்திருக்கலாம்).
+docs.word.slow=மிக அதிக நேரம் ஆனதால் நிறுத்தப்பட்டது. மீண்டும் முயலுங்கள், அல்லது சிறிய PDF-ஐ முயலுங்கள்.
+docs.scan.intro=தாளை வெட்டி எடுத்து, நேராக்கி, காகிதத்தை வெள்ளையாக்குகிறேன். பக்கங்கள் எப்படி இருக்க வேண்டும்?
+docs.scan.mode=வண்ணங்கள்
+docs.scan.color=வண்ணத்தில்
+docs.scan.gray=சாம்பல் நிறத்தில்
+docs.scan.bw=கருப்பு வெள்ளை
+docs.scan.noPicture=இந்தப் படத்தைத் திறக்க முடியவில்லை.
+docs.name.scan=ஸ்கேன்
+docs.heic.missing=iPhone புகைப்படங்களை (HEIC) திறக்க Windows-க்கு ஒரு இலவச கூடுதல் இணைப்பு தேவை: Microsoft Store-இல் உள்ள "HEIF Image Extensions".
+docs.heic.opened=iPhone புகைப்படங்களைத் திறக்க Windows-க்கு ஒரு இலவச கூடுதல் இணைப்பு தேவை: Microsoft Store-இல் அதன் பக்கத்தைத் திறந்துவிட்டேன், "பெறு" என்பதைக் கிளிக் செய்தால் போதும்.
+docs.heic.cantOpen=iPhone புகைப்படங்களைத் திறக்க, Microsoft Store-ஐத் திறந்து இலவச "HEIF Image Extensions"-ஐப் பெறுங்கள்.
+docs.inUse=இந்தக் கோப்பு வேறொரு நிரலில் திறந்திருக்கிறது. அதை அங்கே மூடிவிட்டு மீண்டும் முயலவும்.
+docs.word.protected=இந்த PDF அதன் உரையை நகலெடுக்க அனுமதிக்கவில்லை, அதனால் அதை Word ஆவணமாக மாற்ற முடியாது.

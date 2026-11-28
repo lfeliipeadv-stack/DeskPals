@@ -1,0 +1,22 @@
+# DeskPals Tools — নথি (বাংলা)
+job.toword=Word-এ রূপান্তর করুন
+doing.toword=Word-এ রূপান্তর করা হচ্ছে…
+job.cleanscan=স্ক্যান করে PDF বানান
+doing.cleanscan=ছবিগুলো পরিষ্কার করা হচ্ছে…
+job.heichelp=iPhone-এর ছবির অ্যাড-অন নিন
+doing.heichelp=Microsoft Store খোলা হচ্ছে…
+docs.word.none=PDF-কে Word নথি বানাতে Microsoft Word বা LibreOffice (বিনামূল্যে) ইনস্টল করুন।
+docs.word.failed=PDF-টিকে Word নথিতে রূপান্তর করা গেল না (হয়তো এতে পাসওয়ার্ড আছে বা এটি নষ্ট)।
+docs.word.slow=খুব বেশি সময় লাগছিল, তাই থামিয়ে দেওয়া হয়েছে। আবার চেষ্টা করুন, বা ছোট একটি PDF দিয়ে চেষ্টা করুন।
+docs.scan.intro=আমি কাগজটা কেটে আলাদা করব, সোজা করব আর কাগজ সাদা করে দেব। পাতাগুলো কেমন হবে?
+docs.scan.mode=রং
+docs.scan.color=রঙিন
+docs.scan.gray=ধূসর
+docs.scan.bw=সাদা-কালো
+docs.scan.noPicture=এই ছবিটি খোলা গেল না।
+docs.name.scan=স্ক্যান
+docs.heic.missing=iPhone-এর ছবি (HEIC) খুলতে Windows-এর একটি বিনামূল্যের অ্যাড-অন দরকার: Microsoft Store থেকে "HEIF Image Extensions"।
+docs.heic.opened=iPhone-এর ছবি খুলতে Windows-এর একটি বিনামূল্যের অ্যাড-অন দরকার: আমি Microsoft Store-এ এর পাতা খুলে দিয়েছি, শুধু "পান"-এ ক্লিক করুন।
+docs.heic.cantOpen=iPhone-এর ছবি খুলতে Microsoft Store খুলুন এবং বিনামূল্যের "HEIF Image Extensions" নিন।
+docs.inUse=ফাইলটি অন্য একটি প্রোগ্রামে খোলা আছে। সেখানে বন্ধ করে আবার চেষ্টা করুন।
+docs.word.protected=এই PDF-এর লেখা কপি করার অনুমতি নেই, তাই এটিকে Word নথি বানানো যাবে না।

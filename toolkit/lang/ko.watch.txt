@@ -1,0 +1,16 @@
+# 감시 폴더 — 한국어
+watch.pref=감시 폴더
+watch.hint=DeskPals가 열려 있는 동안 이 폴더에 들어온 새 파일을 자동으로 처리합니다.
+watch.button=감시 폴더…
+watch.title=감시 폴더
+watch.intro=폴더와, 그 폴더에 새 파일이 들어올 때마다 할 일을 고르세요(예: 스캔 폴더 → PDF로 변환). DeskPals가 열려 있는 동안 작동합니다.
+watch.empty=아직 폴더가 없습니다. “폴더 추가…”를 누르세요.
+watch.where=결과는 각 폴더 안의 “{0}” 폴더에 저장됩니다. 원래 파일은 그대로 남습니다.
+watch.add=폴더 추가…
+watch.remove=제거
+watch.save=저장
+watch.pick=감시할 폴더를 고르세요
+watch.missing=이 폴더를 찾을 수 없습니다.
+watch.drive=드라이브 전체가 아니라 폴더를 고르세요.
+watch.already=이 폴더는 이미 목록에 있습니다.
+watch.outFolder=여기는 결과를 넣는 곳이에요. 다른 폴더를 골라 주세요.

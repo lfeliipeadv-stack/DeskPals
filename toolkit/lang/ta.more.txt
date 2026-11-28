@@ -1,0 +1,13 @@
+# DeskPals Tools — more (ta)
+viewer.files={0} கோப்புகள்
+viewer.pageOf={0} · பக். {1}
+ocrpdf.pref.languages=படிக்கும் மொழிகள்…
+ocrpdf.langs.intro=உங்கள் ஆவணங்களின் மொழிகளைத் தேர்வுசெய்யவும். ஒவ்வொரு புதிய மொழியும் முதல்முறை சில MB பதிவிறக்கும்.
+ocrpdf.langs.none=குறைந்தது ஒரு மொழியைத் தேர்வுசெய்யவும்.
+job.askai=கோப்பைப் பற்றிக் கேள்
+doing.askai=உரையாடலைச் சேமிக்கிறது…
+askai.name=கேள்விகள்
+askai.placeholder=கோப்பைப் பற்றி ஒரு கேள்வியைத் தட்டச்சிடவும்…
+askai.ask=கேள்
+askai.ready=தயார். கோப்பைப் பற்றி எதையும் கேளுங்கள்.
+askai.thinking=யோசிக்கிறது…

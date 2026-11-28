@@ -1,0 +1,13 @@
+# DeskPals Tools — durchsuchbare PDFs und der Tesseract-Leser — Deutsch
+job.searchable=Text durchsuchbar machen
+doing.searchable=Text wird durchsuchbar gemacht…
+ocrpdf.name=durchsuchbar
+ocrpdf.already=Dieses PDF hat schon Text, den man durchsuchen kann. Es gibt nichts zu tun.
+ocrpdf.noWords=Ich habe hier keine Wörter zum Lesen gefunden.
+ocrpdf.preview={0} Wörter kann man jetzt finden und kopieren ({1} Seite(n)).
+ocrpdf.downloading=Lesedaten werden heruntergeladen… {0} %
+ocrpdf.fallback={0} Diesmal hat Windows den Text gelesen.
+ocrpdf.err.download=Ich konnte die Lesedaten für Tesseract nicht herunterladen. Prüfe die Internetverbindung und versuche es noch einmal.
+ocrpdf.err.tesseract=Tesseract ließ sich auf diesem Computer nicht starten.
+ocrpdf.pref.tesseract=Text mit Tesseract lesen
+ocrpdf.pref.tesseractHint=Besser für schlechte Scans und für Sprachen, die Windows nicht liest. Beim ersten Mal werden ein paar MB heruntergeladen.

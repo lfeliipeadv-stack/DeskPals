@@ -1,0 +1,13 @@
+# DeskPals Tools — খোঁজা যায় এমন PDF ও Tesseract রিডার — বাংলা
+job.searchable=লেখা খোঁজার উপযোগী করুন
+doing.searchable=লেখা খোঁজার উপযোগী করা হচ্ছে…
+ocrpdf.name=খোঁজা যায়
+ocrpdf.already=এই PDF-এ আগে থেকেই খোঁজা যায় এমন লেখা আছে। কিছু করার দরকার নেই।
+ocrpdf.noWords=এখানে পড়ার মতো কোনো শব্দ খুঁজে পাইনি।
+ocrpdf.preview=এখন {0}টি শব্দ খোঁজা ও কপি করা যাবে ({1} পৃষ্ঠা)।
+ocrpdf.downloading=পড়ার ডেটা ডাউনলোড হচ্ছে… {0}%
+ocrpdf.fallback={0} এবার লেখাটি Windows পড়েছে।
+ocrpdf.err.download=Tesseract-এর পড়ার ডেটা ডাউনলোড করতে পারিনি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।
+ocrpdf.err.tesseract=এই কম্পিউটারে Tesseract চালু হয়নি।
+ocrpdf.pref.tesseract=Tesseract দিয়ে লেখা পড়ুন
+ocrpdf.pref.tesseractHint=খারাপ স্ক্যান এবং Windows যে ভাষা পড়ে না সেগুলোর জন্য ভালো। প্রথমবার কয়েক MB ডাউনলোড করে।

@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (fr)
+explorer.open=Ouvrir DeskPals Tools
+explorer.pref=Afficher dans le menu du clic droit de Windows
+explorer.prefHint=Ajoute « DeskPals Tools » au menu du clic droit des fichiers et des dossiers, et à « Envoyer vers ». Sous Windows 11, il se trouve dans « Afficher d’autres options ».
+explorer.sendToTip=Ouvrir ces fichiers dans DeskPals Tools
+explorer.failed=Impossible de modifier le menu de Windows : {0}

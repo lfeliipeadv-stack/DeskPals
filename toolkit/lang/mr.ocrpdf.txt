@@ -1,0 +1,13 @@
+# DeskPals Tools — शोधता येणारे PDF आणि Tesseract वाचक — मराठी
+job.searchable=मजकूर शोधता येईल असा करा
+doing.searchable=मजकूर शोधता येईल असा केला जात आहे…
+ocrpdf.name=शोधता येणारा
+ocrpdf.already=या PDF मध्ये आधीच शोधता येईल असा मजकूर आहे. काहीही करण्याची गरज नाही.
+ocrpdf.noWords=मला इथे वाचण्यासाठी एकही शब्द सापडला नाही.
+ocrpdf.preview=आता {0} शब्द शोधता आणि कॉपी करता येतील ({1} पान).
+ocrpdf.downloading=वाचनाचा डेटा डाउनलोड होत आहे… {0}%
+ocrpdf.fallback={0} या वेळी मजकूर Windows ने वाचला.
+ocrpdf.err.download=मला Tesseract चा वाचनाचा डेटा डाउनलोड करता आला नाही. इंटरनेट तपासा आणि पुन्हा प्रयत्न करा.
+ocrpdf.err.tesseract=या संगणकावर Tesseract सुरू झाले नाही.
+ocrpdf.pref.tesseract=Tesseract ने मजकूर वाचा
+ocrpdf.pref.tesseractHint=खराब स्कॅन आणि Windows वाचत नाही अशा भाषांसाठी अधिक चांगले. पहिल्यांदा काही MB डाउनलोड करते.

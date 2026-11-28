@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF zinazotafutika na kisomaji cha Tesseract — Kiswahili
+job.searchable=Fanya maandishi yatafutike
+doing.searchable=Ninafanya maandishi yatafutike…
+ocrpdf.name=inayotafutika
+ocrpdf.already=PDF hii tayari ina maandishi yanayoweza kutafutwa. Hakuna cha kufanya.
+ocrpdf.noWords=Sikupata maneno yoyote ya kusoma hapa.
+ocrpdf.preview=Sasa maneno {0} yanaweza kutafutwa na kunakiliwa (kurasa {1}).
+ocrpdf.downloading=Ninapakua data ya kusoma… {0}%
+ocrpdf.fallback={0} Wakati huu Windows ndiyo iliyosoma maandishi.
+ocrpdf.err.download=Sikuweza kupakua data ya kusoma ya Tesseract. Angalia intaneti kisha ujaribu tena.
+ocrpdf.err.tesseract=Tesseract haikuweza kuanza kwenye kompyuta hii.
+ocrpdf.pref.tesseract=Soma maandishi kwa Tesseract
+ocrpdf.pref.tesseractHint=Bora zaidi kwa nakala zilizochanganuliwa vibaya na lugha ambazo Windows haisomi. Mara ya kwanza hupakua MB chache.

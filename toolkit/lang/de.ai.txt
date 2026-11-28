@@ -1,0 +1,27 @@
+# DeskPals Tools — transkribieren und zusammenfassen (Deutsch)
+job.transcribe=In Text umwandeln
+job.summarize=Zusammenfassen
+doing.transcribe=Wird in Text umgewandelt…
+doing.summarize=Wird zusammengefasst…
+ai.name.transcription=Transkription
+ai.name.summary=Zusammenfassung
+ai.notSet=Richte zuerst den Assistenten in DeskPals ein (Einstellungen › Assistent) und versuche es dann noch einmal.
+ai.badKey=Der Schlüssel des Assistenten wurde nicht akzeptiert. Prüfe ihn in DeskPals (Einstellungen › Assistent).
+ai.limit=Der Assistent hat sein Limit vorerst erreicht. Warte kurz und versuche es noch einmal.
+ai.network=Der Assistent ist nicht erreichbar. Prüfe deine Internetverbindung und versuche es noch einmal.
+ai.serviceError=Beim Dienst des Assistenten gab es ein Problem ({0}). Versuche es später noch einmal.
+ai.noTranscribe=Der Dienst deines Assistenten kann Sprache nicht in Text umwandeln. Groq (kostenlos) kann es: Wähle es in DeskPals (Einstellungen › Assistent).
+ai.tooBig=Diese Datei ist zu groß für den Assistenten.
+ai.noSpeech=Darin wurde keine Sprache gefunden.
+ai.noText=In dieser Datei wurde kein Text gefunden.
+ai.badDocument=Dieses Dokument konnte nicht gelesen werden (es ist vielleicht beschädigt).
+ai.noWord=Um dieses Dokument zu lesen, installiere Microsoft Word oder LibreOffice (kostenlos).
+ai.httpsOnly=Die Adresse des Assistenten muss mit https:// beginnen (prüfe sie in DeskPals, Einstellungen › Assistent).
+ai.preparing=Audio wird vorbereitet
+ai.sending=Teil {0} von {1} wird gesendet
+ai.listening=Audio wird angehört
+ai.reading=Dokument wird gelesen
+ai.thinking=Zusammenfassung wird geschrieben
+ai.part=Teil {0} von {1} wird gelesen
+ai.waiting=Warte auf den Assistenten (er nimmt nur wenige Anfragen pro Minute an)
+ai.cantHear=Windows konnte den Ton dieser Datei nicht lesen.

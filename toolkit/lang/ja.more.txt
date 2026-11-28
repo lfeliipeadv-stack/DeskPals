@@ -1,0 +1,13 @@
+# DeskPals Tools — more (ja)
+viewer.files={0} 個のファイル
+viewer.pageOf={0} · {1} ページ
+ocrpdf.pref.languages=読み取る言語…
+ocrpdf.langs.intro=書類の言語を選んでください。新しい言語は初回に数 MB をダウンロードします。
+ocrpdf.langs.none=少なくとも 1 つの言語を選んでください。
+job.askai=ファイルについて質問
+doing.askai=会話を保存しています…
+askai.name=質問
+askai.placeholder=ファイルについての質問を入力…
+askai.ask=質問する
+askai.ready=準備ができました。ファイルについて何でも聞いてください。
+askai.thinking=考えています…

@@ -1,0 +1,22 @@
+# DeskPals Tools — 文書 (日本語)
+job.toword=Word に変換
+doing.toword=Word に変換しています…
+job.cleanscan=スキャンして PDF に
+doing.cleanscan=写真をきれいにしています…
+job.heichelp=iPhone の写真用アドオンを入手
+doing.heichelp=Microsoft Store を開いています…
+docs.word.none=PDF を Word 文書にするには、Microsoft Word または LibreOffice（無料）をインストールしてください。
+docs.word.failed=PDF を Word 文書にできませんでした（パスワードがあるか、壊れている可能性があります）。
+docs.word.slow=時間がかかりすぎたため中止しました。もう一度試すか、小さめの PDF でお試しください。
+docs.scan.intro=紙の部分を切り抜いてまっすぐにし、紙を白くします。ページの仕上がりはどうしますか？
+docs.scan.mode=色
+docs.scan.color=カラー
+docs.scan.gray=グレー
+docs.scan.bw=白黒
+docs.scan.noPicture=この画像を開けませんでした。
+docs.name.scan=スキャン
+docs.heic.missing=iPhone の写真（HEIC）を開くには、Windows に無料の追加機能「HEIF 画像拡張機能」（Microsoft Store）が必要です。
+docs.heic.opened=iPhone の写真を開くには、Windows に無料の追加機能が必要です。Microsoft Store のページを開いたので、「入手」をクリックするだけです。
+docs.heic.cantOpen=iPhone の写真を開くには、Microsoft Store を開いて無料の「HEIF 画像拡張機能」を入手してください。
+docs.inUse=このファイルは別のプログラムで開かれています。そちらで閉じてから、もう一度お試しください。
+docs.word.protected=この PDF は文字のコピーが禁止されているため、Word 文書にできません。

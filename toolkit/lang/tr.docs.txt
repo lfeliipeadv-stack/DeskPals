@@ -1,0 +1,22 @@
+# DeskPals Tools — belgeler (Türkçe)
+job.toword=Word'e dönüştür
+doing.toword=Word'e dönüştürülüyor…
+job.cleanscan=Taranmış PDF yap
+doing.cleanscan=Fotoğraflar temizleniyor…
+job.heichelp=iPhone fotoğrafları için eklentiyi al
+doing.heichelp=Microsoft Store açılıyor…
+docs.word.none=Bir PDF'yi Word belgesine dönüştürmek için Microsoft Word veya LibreOffice (ücretsiz) yükleyin.
+docs.word.failed=PDF, Word belgesine dönüştürülemedi (parolası olabilir veya bozuk olabilir).
+docs.word.slow=Çok uzun sürdü ve durduruldu. Tekrar deneyin ya da daha küçük bir PDF deneyin.
+docs.scan.intro=Sayfayı kesip düzelteceğim ve kâğıdı beyaz yapacağım. Sayfalar nasıl olsun?
+docs.scan.mode=Renkler
+docs.scan.color=Renkli
+docs.scan.gray=Gri
+docs.scan.bw=Siyah beyaz
+docs.scan.noPicture=Bu resim açılamadı.
+docs.name.scan=tarama
+docs.heic.missing=iPhone fotoğraflarını (HEIC) açmak için Windows'un ücretsiz bir eklentiye ihtiyacı var: Microsoft Store'dan "HEIF Image Extensions".
+docs.heic.opened=iPhone fotoğraflarını açmak için Windows'un ücretsiz bir eklentiye ihtiyacı var: Microsoft Store'da sayfasını açtım, sadece "Al" düğmesine tıklayın.
+docs.heic.cantOpen=iPhone fotoğraflarını açmak için Microsoft Store'u açın ve ücretsiz "HEIF Image Extensions" eklentisini alın.
+docs.inUse=Bu dosya başka bir programda açık. Orada kapatıp yeniden deneyin.
+docs.word.protected=Bu PDF metninin kopyalanmasına izin vermiyor, bu yüzden Word belgesine dönüştürülemez.

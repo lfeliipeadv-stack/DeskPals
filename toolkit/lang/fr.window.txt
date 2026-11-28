@@ -1,0 +1,21 @@
+# DeskPals Tools — la fenêtre — Français
+window.tab.files=Fichiers
+window.tab.recent=Tâches récentes
+window.tab.settings=Réglages
+window.selected=sélectionné
+window.up=Monter
+window.down=Descendre
+window.remove=Retirer
+window.order=Faites glisser les fichiers pour changer l'ordre. Ils sont utilisés de haut en bas.
+window.folder=Dossier
+window.recent.title=Tâches récentes
+window.recent.clear=Effacer l'historique
+window.recent.empty=Rien pour l'instant. Les tâches que vous faites apparaîtront ici.
+window.recent.ask=Effacer la liste des tâches récentes ? Vos fichiers ne seront pas supprimés.
+window.recent.gone=(n'est plus là)
+window.today=Aujourd'hui, {0}
+window.yesterday=Hier, {0}
+window.settings.title=Réglages
+window.settings.empty=Rien à régler pour l'instant.
+window.settings.failed=Ce réglage n'a pas pu être changé : {0}
+window.busy=Une tâche est en cours. Les nouveaux fichiers seront ajoutés quand elle sera finie.

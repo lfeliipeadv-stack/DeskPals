@@ -1,0 +1,13 @@
+# DeskPals Tools — 可搜索的 PDF 和 Tesseract 识别 — 简体中文
+job.searchable=让文字可搜索
+doing.searchable=正在让文字可搜索…
+ocrpdf.name=可搜索
+ocrpdf.already=这个 PDF 已经有可以搜索的文字了，无需处理。
+ocrpdf.noWords=这里没有找到可以识别的文字。
+ocrpdf.preview=现在可以查找和复制 {0} 个词（{1} 页）。
+ocrpdf.downloading=正在下载识别数据… {0}%
+ocrpdf.fallback={0} 这次改由 Windows 识别文字。
+ocrpdf.err.download=无法下载 Tesseract 的识别数据。请检查网络后重试。
+ocrpdf.err.tesseract=Tesseract 无法在这台电脑上启动。
+ocrpdf.pref.tesseract=用 Tesseract 识别文字
+ocrpdf.pref.tesseractHint=更适合质量差的扫描件和 Windows 无法识别的语言。第一次使用时会下载几 MB。

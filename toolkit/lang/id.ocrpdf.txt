@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF yang bisa dicari dan pembaca Tesseract — Bahasa Indonesia
+job.searchable=Buat teks bisa dicari
+doing.searchable=Membuat teks bisa dicari…
+ocrpdf.name=bisa dicari
+ocrpdf.already=PDF ini sudah punya teks yang bisa dicari. Tidak ada yang perlu dilakukan.
+ocrpdf.noWords=Saya tidak menemukan kata apa pun untuk dibaca di sini.
+ocrpdf.preview=Sekarang {0} kata bisa dicari dan disalin ({1} halaman).
+ocrpdf.downloading=Mengunduh data baca… {0}%
+ocrpdf.fallback={0} Kali ini Windows yang membaca teksnya.
+ocrpdf.err.download=Saya tidak bisa mengunduh data baca untuk Tesseract. Periksa internet lalu coba lagi.
+ocrpdf.err.tesseract=Tesseract tidak bisa dijalankan di komputer ini.
+ocrpdf.pref.tesseract=Baca teks dengan Tesseract
+ocrpdf.pref.tesseractHint=Lebih baik untuk hasil pindai yang buruk dan bahasa yang tidak dibaca Windows. Pertama kali, akan mengunduh beberapa MB.

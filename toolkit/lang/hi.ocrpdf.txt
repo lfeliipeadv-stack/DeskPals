@@ -1,0 +1,13 @@
+# DeskPals Tools — खोजने योग्य PDF और Tesseract रीडर — हिन्दी
+job.searchable=टेक्स्ट को खोजने योग्य बनाएँ
+doing.searchable=टेक्स्ट को खोजने योग्य बनाया जा रहा है…
+ocrpdf.name=खोजने योग्य
+ocrpdf.already=इस PDF में पहले से ऐसा टेक्स्ट है जिसे खोजा जा सकता है। कुछ करने की ज़रूरत नहीं।
+ocrpdf.noWords=मुझे यहाँ पढ़ने के लिए कोई शब्द नहीं मिला।
+ocrpdf.preview=अब {0} शब्द खोजे और कॉपी किए जा सकते हैं ({1} पेज)।
+ocrpdf.downloading=पढ़ने का डेटा डाउनलोड हो रहा है… {0}%
+ocrpdf.fallback={0} इस बार टेक्स्ट Windows ने पढ़ा।
+ocrpdf.err.download=मैं Tesseract का पढ़ने का डेटा डाउनलोड नहीं कर सका। इंटरनेट जाँचें और फिर से कोशिश करें।
+ocrpdf.err.tesseract=Tesseract इस कंप्यूटर पर शुरू नहीं हो सका।
+ocrpdf.pref.tesseract=Tesseract से टेक्स्ट पढ़ें
+ocrpdf.pref.tesseractHint=खराब स्कैन और उन भाषाओं के लिए बेहतर जिन्हें Windows नहीं पढ़ता। पहली बार कुछ MB डाउनलोड करता है।

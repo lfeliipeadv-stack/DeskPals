@@ -1,0 +1,22 @@
+# DeskPals Tools — tài liệu (Tiếng Việt)
+job.toword=Chuyển sang Word
+doing.toword=Đang chuyển sang Word…
+job.cleanscan=Quét thành PDF
+doing.cleanscan=Đang làm sạch ảnh…
+job.heichelp=Cài tiện ích cho ảnh iPhone
+doing.heichelp=Đang mở Microsoft Store…
+docs.word.none=Để biến PDF thành tài liệu Word, hãy cài Microsoft Word hoặc LibreOffice (miễn phí).
+docs.word.failed=Không thể biến PDF thành tài liệu Word (có thể nó có mật khẩu hoặc bị hỏng).
+docs.word.slow=Mất quá lâu nên đã dừng lại. Hãy thử lại, hoặc thử một PDF nhỏ hơn.
+docs.scan.intro=Tôi sẽ cắt tờ giấy ra, làm thẳng nó và làm cho giấy trắng. Bạn muốn các trang trông thế nào?
+docs.scan.mode=Màu sắc
+docs.scan.color=Có màu
+docs.scan.gray=Màu xám
+docs.scan.bw=Đen trắng
+docs.scan.noPicture=Không thể mở ảnh này.
+docs.name.scan=bản quét
+docs.heic.missing=Để mở ảnh iPhone (HEIC), Windows cần một tiện ích miễn phí: "HEIF Image Extensions" trong Microsoft Store.
+docs.heic.opened=Để mở ảnh iPhone, Windows cần một tiện ích miễn phí: tôi đã mở trang của nó trong Microsoft Store, bạn chỉ cần bấm "Nhận".
+docs.heic.cantOpen=Để mở ảnh iPhone, hãy mở Microsoft Store và tải "HEIF Image Extensions" miễn phí.
+docs.inUse=Tệp này đang mở trong một chương trình khác. Hãy đóng nó ở đó rồi thử lại.
+docs.word.protected=PDF này không cho phép sao chép chữ nên không thể biến thành tài liệu Word.

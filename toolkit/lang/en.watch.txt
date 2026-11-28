@@ -1,0 +1,16 @@
+# Watched folders — English
+watch.pref=Watched folders
+watch.hint=While DeskPals is open, new files in these folders are handled on their own.
+watch.button=Watched folders…
+watch.title=Watched folders
+watch.intro=Choose folders and what to do with each new file that arrives in them (for example: your scans folder → Convert to PDF). It works while DeskPals is open.
+watch.empty=No folder yet. Click “Add a folder…”.
+watch.where=The results go to a “{0}” folder inside each one. Your files stay as they are.
+watch.add=Add a folder…
+watch.remove=Remove
+watch.save=Save
+watch.pick=Choose a folder to watch
+watch.missing=This folder was not found.
+watch.drive=Choose a folder, not a whole drive.
+watch.already=This folder is already in the list.
+watch.outFolder=This is where I put the results. Please choose another folder.

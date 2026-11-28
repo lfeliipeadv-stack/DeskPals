@@ -1,0 +1,13 @@
+# DeskPals Tools — PDFs pesquisáveis e o leitor Tesseract — Português (Brasil)
+job.searchable=Deixar o texto pesquisável
+doing.searchable=Deixando o texto pesquisável…
+ocrpdf.name=pesquisável
+ocrpdf.already=Este PDF já tem texto que dá para pesquisar. Não há nada a fazer.
+ocrpdf.noWords=Não encontrei nenhuma palavra para ler aqui.
+ocrpdf.preview=Agora dá para achar e copiar {0} palavras ({1} página(s)).
+ocrpdf.downloading=Baixando os dados de leitura… {0}%
+ocrpdf.fallback={0} Desta vez, o próprio Windows leu o texto.
+ocrpdf.err.download=Não consegui baixar os dados de leitura do Tesseract. Confira a internet e tente de novo.
+ocrpdf.err.tesseract=O Tesseract não abriu neste computador.
+ocrpdf.pref.tesseract=Ler textos com o Tesseract
+ocrpdf.pref.tesseractHint=Melhor para digitalizações ruins e para idiomas que o Windows não lê. Na primeira vez, baixa alguns MB.

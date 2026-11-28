@@ -1,0 +1,21 @@
+# DeskPals Tools — ウィンドウ — 日本語
+window.tab.files=ファイル
+window.tab.recent=最近の作業
+window.tab.settings=設定
+window.selected=選択中
+window.up=上へ
+window.down=下へ
+window.remove=外す
+window.order=ファイルをドラッグして順番を変えられます。上から順に使われます。
+window.folder=フォルダー
+window.recent.title=最近の作業
+window.recent.clear=履歴を消す
+window.recent.empty=まだ何もありません。行った作業がここに表示されます。
+window.recent.ask=最近の作業の一覧を消しますか？ファイルは削除されません。
+window.recent.gone=(見つかりません)
+window.today=今日 {0}
+window.yesterday=昨日 {0}
+window.settings.title=設定
+window.settings.empty=まだ設定する項目はありません。
+window.settings.failed=この設定を変更できませんでした: {0}
+window.busy=作業の途中です。新しいファイルは作業が終わってから追加されます。

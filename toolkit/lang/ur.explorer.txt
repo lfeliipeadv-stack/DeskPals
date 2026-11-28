@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (ur)
+explorer.open=DeskPals Tools کھولیں
+explorer.pref=Windows کے رائٹ کلک مینو میں دکھائیں
+explorer.prefHint=فائلوں اور فولڈرز کے رائٹ کلک مینو اور "بھیجیں" میں "DeskPals Tools" شامل کرتا ہے۔ Windows 11 میں یہ "مزید اختیارات دکھائیں" میں ہوتا ہے۔
+explorer.sendToTip=یہ فائلیں DeskPals Tools میں کھولیں
+explorer.failed=Windows کا مینو تبدیل نہیں ہو سکا: {0}

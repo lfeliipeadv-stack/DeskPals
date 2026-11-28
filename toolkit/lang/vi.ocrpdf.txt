@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF tìm kiếm được và trình đọc Tesseract — Tiếng Việt
+job.searchable=Cho phép tìm kiếm văn bản
+doing.searchable=Đang làm cho văn bản tìm kiếm được…
+ocrpdf.name=tìm kiếm được
+ocrpdf.already=PDF này đã có văn bản tìm kiếm được. Không cần làm gì thêm.
+ocrpdf.noWords=Tôi không tìm thấy chữ nào để đọc ở đây.
+ocrpdf.preview=Giờ đã có thể tìm và sao chép {0} từ ({1} trang).
+ocrpdf.downloading=Đang tải dữ liệu đọc… {0}%
+ocrpdf.fallback={0} Lần này Windows đã đọc văn bản thay thế.
+ocrpdf.err.download=Tôi không tải được dữ liệu đọc cho Tesseract. Hãy kiểm tra kết nối mạng rồi thử lại.
+ocrpdf.err.tesseract=Tesseract không khởi động được trên máy tính này.
+ocrpdf.pref.tesseract=Đọc văn bản bằng Tesseract
+ocrpdf.pref.tesseractHint=Tốt hơn cho bản quét kém và cho các ngôn ngữ Windows không đọc được. Lần đầu sẽ tải vài MB.

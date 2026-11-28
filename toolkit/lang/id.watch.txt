@@ -1,0 +1,16 @@
+# Folder yang dipantau — Bahasa Indonesia
+watch.pref=Folder yang dipantau
+watch.hint=Selama DeskPals terbuka, file baru di folder ini diproses dengan sendirinya.
+watch.button=Folder yang dipantau…
+watch.title=Folder yang dipantau
+watch.intro=Pilih folder dan apa yang dilakukan pada setiap file baru yang masuk (misalnya: folder hasil pindai → Ubah ke PDF). Berfungsi selama DeskPals terbuka.
+watch.empty=Belum ada folder. Klik “Tambah folder…”.
+watch.where=Hasilnya masuk ke folder “{0}” di dalam masing-masing folder. File kamu tetap seperti semula.
+watch.add=Tambah folder…
+watch.remove=Hapus
+watch.save=Simpan
+watch.pick=Pilih folder untuk dipantau
+watch.missing=Folder ini tidak ditemukan.
+watch.drive=Pilih sebuah folder, bukan seluruh drive.
+watch.already=Folder ini sudah ada di daftar.
+watch.outFolder=Di sinilah aku menaruh hasilnya. Silakan pilih folder lain.

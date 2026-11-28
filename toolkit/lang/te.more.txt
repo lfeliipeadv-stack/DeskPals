@@ -1,0 +1,13 @@
+# DeskPals Tools — more (te)
+viewer.files={0} ఫైళ్లు
+viewer.pageOf={0} · పే. {1}
+ocrpdf.pref.languages=చదివే భాషలు…
+ocrpdf.langs.intro=మీ పత్రాల భాషలను ఎంచుకోండి. ప్రతి కొత్త భాష మొదటిసారి కొన్ని MB డౌన్‌లోడ్ చేస్తుంది.
+ocrpdf.langs.none=కనీసం ఒక భాషను ఎంచుకోండి.
+job.askai=ఫైల్ గురించి అడగండి
+doing.askai=సంభాషణ సేవ్ అవుతోంది…
+askai.name=ప్రశ్నలు
+askai.placeholder=ఫైల్ గురించి ఒక ప్రశ్న టైప్ చేయండి…
+askai.ask=అడగండి
+askai.ready=సిద్ధం. ఫైల్ గురించి ఏదైనా అడగండి.
+askai.thinking=ఆలోచిస్తోంది…

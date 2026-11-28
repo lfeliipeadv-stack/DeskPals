@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (bn)
+explorer.open=DeskPals Tools খুলুন
+explorer.pref=Windows-এর রাইট-ক্লিক মেনুতে দেখান
+explorer.prefHint=ফাইল ও ফোল্ডারের রাইট-ক্লিক মেনুতে এবং "পাঠান"-এ "DeskPals Tools" যোগ করে। Windows 11-এ এটি "আরও বিকল্প দেখান"-এর মধ্যে থাকে।
+explorer.sendToTip=এই ফাইলগুলো DeskPals Tools-এ খুলুন
+explorer.failed=Windows মেনু বদলানো গেল না: {0}

@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF قابل جستجو و خواندن با Tesseract — فارسی
+job.searchable=متن را قابل جستجو کن
+doing.searchable=در حال قابل جستجو کردن متن…
+ocrpdf.name=قابل جستجو
+ocrpdf.already=این PDF از قبل متنی دارد که می‌شود در آن جستجو کرد. کاری لازم نیست.
+ocrpdf.noWords=اینجا هیچ کلمه‌ای برای خواندن پیدا نکردم.
+ocrpdf.preview=حالا می‌توان {0} کلمه را پیدا و کپی کرد ({1} صفحه).
+ocrpdf.downloading=در حال دانلود داده‌های خواندن… {0}٪
+ocrpdf.fallback={0} این بار Windows متن را خواند.
+ocrpdf.err.download=نتوانستم داده‌های خواندن Tesseract را دانلود کنم. اینترنت را بررسی کنید و دوباره امتحان کنید.
+ocrpdf.err.tesseract=Tesseract روی این رایانه اجرا نشد.
+ocrpdf.pref.tesseract=خواندن متن با Tesseract
+ocrpdf.pref.tesseractHint=برای اسکن‌های بی‌کیفیت و زبان‌هایی که Windows نمی‌خواند بهتر است. بار اول چند مگابایت دانلود می‌کند.

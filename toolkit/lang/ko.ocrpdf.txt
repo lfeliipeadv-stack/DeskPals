@@ -1,0 +1,13 @@
+# DeskPals Tools — 검색 가능한 PDF와 Tesseract 읽기 — 한국어
+job.searchable=텍스트 검색 가능하게 만들기
+doing.searchable=텍스트를 검색 가능하게 만드는 중…
+ocrpdf.name=검색 가능
+ocrpdf.already=이 PDF에는 이미 검색할 수 있는 텍스트가 있어요. 할 일이 없어요.
+ocrpdf.noWords=여기에서 읽을 수 있는 단어를 찾지 못했어요.
+ocrpdf.preview=이제 단어 {0}개를 찾고 복사할 수 있어요({1}페이지).
+ocrpdf.downloading=읽기 데이터를 내려받는 중… {0}%
+ocrpdf.fallback={0} 이번에는 Windows가 텍스트를 읽었어요.
+ocrpdf.err.download=Tesseract 읽기 데이터를 내려받지 못했어요. 인터넷 연결을 확인하고 다시 시도해 주세요.
+ocrpdf.err.tesseract=이 컴퓨터에서 Tesseract를 시작하지 못했어요.
+ocrpdf.pref.tesseract=Tesseract로 텍스트 읽기
+ocrpdf.pref.tesseractHint=품질이 낮은 스캔이나 Windows가 읽지 못하는 언어에 더 좋아요. 처음 한 번은 몇 MB를 내려받아요.

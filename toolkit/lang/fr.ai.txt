@@ -1,0 +1,27 @@
+# DeskPals Tools — transcrire et résumer (Français)
+job.transcribe=Transcrire en texte
+job.summarize=Résumer
+doing.transcribe=Transcription en cours…
+doing.summarize=Résumé en cours…
+ai.name.transcription=transcription
+ai.name.summary=résumé
+ai.notSet=Configurez d'abord l'assistant dans DeskPals (Paramètres › Assistant), puis réessayez.
+ai.badKey=La clé de l'assistant n'a pas été acceptée. Vérifiez-la dans DeskPals (Paramètres › Assistant).
+ai.limit=L'assistant a atteint sa limite pour le moment. Patientez un peu et réessayez.
+ai.network=Impossible de joindre l'assistant. Vérifiez votre connexion Internet et réessayez.
+ai.serviceError=Le service de l'assistant a eu un problème ({0}). Réessayez plus tard.
+ai.noTranscribe=Le service de votre assistant ne sait pas transformer la parole en texte. Groq (gratuit) le fait : choisissez-le dans DeskPals (Paramètres › Assistant).
+ai.tooBig=Ce fichier est trop gros pour l'assistant.
+ai.noSpeech=Aucune parole n'a été trouvée.
+ai.noText=Aucun texte n'a été trouvé dans ce fichier.
+ai.badDocument=Ce document n'a pas pu être lu (il est peut-être endommagé).
+ai.noWord=Pour lire ce document, installez Microsoft Word ou LibreOffice (gratuit).
+ai.httpsOnly=L'adresse de l'assistant doit commencer par https:// (vérifiez-la dans DeskPals, Paramètres › Assistant).
+ai.preparing=Préparation de l'audio
+ai.sending=Envoi de la partie {0} sur {1}
+ai.listening=Écoute de l'audio
+ai.reading=Lecture du document
+ai.thinking=Rédaction du résumé
+ai.part=Lecture de la partie {0} sur {1}
+ai.waiting=En attente de l'assistant (il n'accepte que quelques demandes par minute)
+ai.cantHear=Windows n'a pas pu lire le son de ce fichier.

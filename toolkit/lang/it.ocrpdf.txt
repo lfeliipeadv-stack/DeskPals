@@ -1,0 +1,13 @@
+# DeskPals Tools — PDF ricercabili e il lettore Tesseract — Italiano
+job.searchable=Rendi il testo ricercabile
+doing.searchable=Rendo il testo ricercabile…
+ocrpdf.name=ricercabile
+ocrpdf.already=Questo PDF ha già un testo che si può cercare. Non c'è niente da fare.
+ocrpdf.noWords=Non ho trovato nessuna parola da leggere qui.
+ocrpdf.preview=Ora si possono trovare e copiare {0} parole ({1} pagina/e).
+ocrpdf.downloading=Scarico i dati di lettura… {0}%
+ocrpdf.fallback={0} Questa volta il testo l'ha letto Windows.
+ocrpdf.err.download=Non sono riuscito a scaricare i dati di lettura di Tesseract. Controlla la connessione a internet e riprova.
+ocrpdf.err.tesseract=Tesseract non si è avviato su questo computer.
+ocrpdf.pref.tesseract=Leggi il testo con Tesseract
+ocrpdf.pref.tesseractHint=Meglio per scansioni di bassa qualità e per le lingue che Windows non legge. La prima volta scarica qualche MB.

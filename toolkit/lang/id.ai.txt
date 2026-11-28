@@ -1,0 +1,27 @@
+# DeskPals Tools — transkripsi dan ringkasan (Bahasa Indonesia)
+job.transcribe=Ubah jadi teks
+job.summarize=Ringkas
+doing.transcribe=Mengubah jadi teks…
+doing.summarize=Meringkas…
+ai.name.transcription=transkripsi
+ai.name.summary=ringkasan
+ai.notSet=Atur dulu asisten di DeskPals (Pengaturan › Asisten), lalu coba lagi.
+ai.badKey=Kunci asisten tidak diterima. Periksa di DeskPals (Pengaturan › Asisten).
+ai.limit=Asisten sudah mencapai batasnya untuk sementara. Tunggu sebentar lalu coba lagi.
+ai.network=Tidak bisa menghubungi asisten. Periksa koneksi internet Anda lalu coba lagi.
+ai.serviceError=Layanan asisten mengalami masalah ({0}). Coba lagi nanti.
+ai.noTranscribe=Layanan asisten Anda tidak bisa mengubah suara jadi teks. Groq (gratis) bisa: pilih di DeskPals (Pengaturan › Asisten).
+ai.tooBig=File ini terlalu besar untuk asisten.
+ai.noSpeech=Tidak ditemukan suara orang bicara.
+ai.noText=Tidak ada teks di file ini.
+ai.badDocument=Dokumen ini tidak bisa dibaca (mungkin rusak).
+ai.noWord=Untuk membaca dokumen ini, pasang Microsoft Word atau LibreOffice (gratis).
+ai.httpsOnly=Alamat asisten harus diawali https:// (periksa di DeskPals, Pengaturan › Asisten).
+ai.preparing=Menyiapkan audio
+ai.sending=Mengirim bagian {0} dari {1}
+ai.listening=Mendengarkan audio
+ai.reading=Membaca dokumen
+ai.thinking=Menulis ringkasan
+ai.part=Membaca bagian {0} dari {1}
+ai.waiting=Menunggu asisten (ia hanya menerima sedikit permintaan per menit)
+ai.cantHear=Windows tidak dapat membaca suara file ini.

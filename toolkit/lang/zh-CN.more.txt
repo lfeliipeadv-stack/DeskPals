@@ -1,0 +1,13 @@
+# DeskPals Tools — more (zh-CN)
+viewer.files={0} 个文件
+viewer.pageOf={0} · 第 {1} 页
+ocrpdf.pref.languages=识别语言…
+ocrpdf.langs.intro=选择文档使用的语言。每种新语言第一次使用时会下载几 MB。
+ocrpdf.langs.none=请至少选择一种语言。
+job.askai=就文件提问
+doing.askai=正在保存对话…
+askai.name=问答
+askai.placeholder=输入关于文件的问题…
+askai.ask=提问
+askai.ready=准备好了。关于这个文件，尽管问。
+askai.thinking=思考中…

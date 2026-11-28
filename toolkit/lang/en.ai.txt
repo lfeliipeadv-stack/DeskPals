@@ -1,0 +1,27 @@
+# DeskPals Tools — transcribe and summarize (English)
+job.transcribe=Transcribe to text
+job.summarize=Summarize
+doing.transcribe=Transcribing…
+doing.summarize=Summarizing…
+ai.name.transcription=transcription
+ai.name.summary=summary
+ai.notSet=First set up the assistant in DeskPals (Settings › Assistant), then try again.
+ai.badKey=The assistant's key was not accepted. Check it in DeskPals (Settings › Assistant).
+ai.limit=The assistant has reached its limit for now. Wait a little and try again.
+ai.network=Could not reach the assistant. Check your internet connection and try again.
+ai.serviceError=The assistant's service had a problem ({0}). Try again later.
+ai.noTranscribe=Your assistant's service cannot turn speech into text. Groq (free) can: choose it in DeskPals (Settings › Assistant).
+ai.tooBig=This file is too big for the assistant.
+ai.noSpeech=No speech was found in it.
+ai.noText=No text was found in this file.
+ai.badDocument=This document could not be read (it may be damaged).
+ai.noWord=To read this document, install Microsoft Word or LibreOffice (free).
+ai.httpsOnly=The assistant's address must start with https:// (check it in DeskPals, Settings › Assistant).
+ai.preparing=Preparing the audio
+ai.sending=Sending part {0} of {1}
+ai.listening=Listening to the audio
+ai.reading=Reading the document
+ai.thinking=Writing the summary
+ai.part=Reading part {0} of {1}
+ai.waiting=Waiting for the assistant (it takes only a few requests a minute)
+ai.cantHear=Windows could not read the sound of this file.

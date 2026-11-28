@@ -1,0 +1,21 @@
+# DeskPals Tools — சாளரம் — தமிழ்
+window.tab.files=கோப்புகள்
+window.tab.recent=சமீபத்திய வேலைகள்
+window.tab.settings=அமைப்புகள்
+window.selected=தேர்ந்தெடுக்கப்பட்டது
+window.up=மேலே நகர்த்து
+window.down=கீழே நகர்த்து
+window.remove=நீக்கு
+window.order=வரிசையை மாற்ற கோப்புகளை இழுக்கவும். வேலைகள் அவற்றை மேலிருந்து கீழாகப் பயன்படுத்தும்.
+window.folder=கோப்புறை
+window.recent.title=சமீபத்திய வேலைகள்
+window.recent.clear=வரலாற்றை அழி
+window.recent.empty=இன்னும் எதுவும் இல்லை. நீங்கள் செய்யும் வேலைகள் இங்கே தெரியும்.
+window.recent.ask=சமீபத்திய வேலைகளின் பட்டியலை அழிக்கவா? உங்கள் கோப்புகள் நீக்கப்படாது.
+window.recent.gone=(இப்போது அங்கு இல்லை)
+window.today=இன்று, {0}
+window.yesterday=நேற்று, {0}
+window.settings.title=அமைப்புகள்
+window.settings.empty=இன்னும் அமைக்க எதுவும் இல்லை.
+window.settings.failed=இந்த அமைப்பை மாற்ற முடியவில்லை: {0}
+window.busy=ஒரு வேலை நடந்துகொண்டிருக்கிறது. அது முடிந்ததும் புதிய கோப்புகள் சேர்க்கப்படும்.

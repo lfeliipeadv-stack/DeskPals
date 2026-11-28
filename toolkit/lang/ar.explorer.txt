@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (ar)
+explorer.open=فتح DeskPals Tools
+explorer.pref=إظهار في قائمة النقر بزر الماوس الأيمن في Windows
+explorer.prefHint=يضيف "DeskPals Tools" إلى قائمة النقر بزر الماوس الأيمن للملفات والمجلدات، وإلى "إرسال إلى". في Windows 11 تجده ضمن "إظهار المزيد من الخيارات".
+explorer.sendToTip=فتح هذه الملفات في DeskPals Tools
+explorer.failed=تعذر تغيير قائمة Windows: {0}

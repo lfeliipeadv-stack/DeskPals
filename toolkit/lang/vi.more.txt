@@ -1,0 +1,13 @@
+# DeskPals Tools — more (vi)
+viewer.files={0} tệp
+viewer.pageOf={0} · tr. {1}
+ocrpdf.pref.languages=Ngôn ngữ đọc…
+ocrpdf.langs.intro=Chọn ngôn ngữ của tài liệu. Mỗi ngôn ngữ mới tải vài MB ở lần đầu.
+ocrpdf.langs.none=Hãy chọn ít nhất một ngôn ngữ.
+job.askai=Hỏi về tệp
+doing.askai=Đang lưu cuộc trò chuyện…
+askai.name=câu hỏi
+askai.placeholder=Nhập câu hỏi về tệp…
+askai.ask=Hỏi
+askai.ready=Sẵn sàng. Hãy hỏi bất cứ điều gì về tệp.
+askai.thinking=Đang suy nghĩ…

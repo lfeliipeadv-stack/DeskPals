@@ -1,0 +1,13 @@
+# DeskPals Tools — 検索できるPDFとTesseractでの読み取り — 日本語
+job.searchable=テキストを検索可能にする
+doing.searchable=テキストを検索可能にしています…
+ocrpdf.name=検索可能
+ocrpdf.already=このPDFにはすでに検索できるテキストがあります。何もする必要はありません。
+ocrpdf.noWords=ここには読み取れる文字が見つかりませんでした。
+ocrpdf.preview={0} 語を検索・コピーできるようになりました（{1} ページ）。
+ocrpdf.downloading=読み取り用データをダウンロード中… {0}%
+ocrpdf.fallback={0} 今回はWindowsがテキストを読み取りました。
+ocrpdf.err.download=Tesseractの読み取り用データをダウンロードできませんでした。インターネット接続を確認して、もう一度お試しください。
+ocrpdf.err.tesseract=このパソコンではTesseractを起動できませんでした。
+ocrpdf.pref.tesseract=Tesseractでテキストを読み取る
+ocrpdf.pref.tesseractHint=画質の悪いスキャンや、Windowsが読めない言語に向いています。初回は数MBをダウンロードします。

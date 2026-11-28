@@ -1,0 +1,21 @@
+# DeskPals Tools — ونڈو — اردو
+window.tab.files=فائلیں
+window.tab.recent=حالیہ کام
+window.tab.settings=ترتیبات
+window.selected=منتخب
+window.up=اوپر کریں
+window.down=نیچے کریں
+window.remove=ہٹائیں
+window.order=ترتیب بدلنے کے لیے فائلوں کو گھسیٹیں۔ کام انہیں اوپر سے نیچے استعمال کرتے ہیں۔
+window.folder=فولڈر
+window.recent.title=حالیہ کام
+window.recent.clear=تاریخچہ صاف کریں
+window.recent.empty=ابھی یہاں کچھ نہیں۔ آپ کے کیے ہوئے کام یہاں نظر آئیں گے۔
+window.recent.ask=حالیہ کاموں کی فہرست صاف کریں؟ آپ کی فائلیں حذف نہیں ہوں گی۔
+window.recent.gone=(اب وہاں نہیں)
+window.today=آج، {0}
+window.yesterday=کل، {0}
+window.settings.title=ترتیبات
+window.settings.empty=ابھی ترتیب دینے کو کچھ نہیں۔
+window.settings.failed=یہ ترتیب تبدیل نہیں ہو سکی: {0}
+window.busy=ایک کام جاری ہے۔ نئی فائلیں اس کے ختم ہونے پر شامل ہو جائیں گی۔

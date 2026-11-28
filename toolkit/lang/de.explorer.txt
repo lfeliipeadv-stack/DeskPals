@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (de)
+explorer.open=DeskPals Tools öffnen
+explorer.pref=Im Rechtsklickmenü von Windows anzeigen
+explorer.prefHint=Fügt „DeskPals Tools“ zum Rechtsklickmenü von Dateien und Ordnern sowie zu „Senden an“ hinzu. In Windows 11 steht es unter „Weitere Optionen anzeigen“.
+explorer.sendToTip=Diese Dateien in DeskPals Tools öffnen
+explorer.failed=Das Windows-Menü konnte nicht geändert werden: {0}

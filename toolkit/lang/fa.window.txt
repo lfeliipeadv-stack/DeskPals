@@ -1,0 +1,21 @@
+# DeskPals Tools — پنجره — فارسی
+window.tab.files=فایل‌ها
+window.tab.recent=کارهای اخیر
+window.tab.settings=تنظیمات
+window.selected=انتخاب‌شده
+window.up=بالا بردن
+window.down=پایین بردن
+window.remove=برداشتن
+window.order=برای تغییر ترتیب، فایل‌ها را بکشید. کارها آن‌ها را از بالا به پایین استفاده می‌کنند.
+window.folder=پوشه
+window.recent.title=کارهای اخیر
+window.recent.clear=پاک کردن تاریخچه
+window.recent.empty=هنوز چیزی اینجا نیست. کارهایی که انجام می‌دهید اینجا نشان داده می‌شوند.
+window.recent.ask=فهرست کارهای اخیر پاک شود؟ فایل‌های شما حذف نمی‌شوند.
+window.recent.gone=(دیگر آنجا نیست)
+window.today=امروز، {0}
+window.yesterday=دیروز، {0}
+window.settings.title=تنظیمات
+window.settings.empty=فعلاً چیزی برای تنظیم نیست.
+window.settings.failed=این تنظیم تغییر نکرد: {0}
+window.busy=کاری در حال انجام است. فایل‌های تازه پس از پایان آن اضافه می‌شوند.

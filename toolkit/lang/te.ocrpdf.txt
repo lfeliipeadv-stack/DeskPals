@@ -1,0 +1,13 @@
+# DeskPals Tools — వెతకగల PDFలు మరియు Tesseract రీడర్ — తెలుగు
+job.searchable=టెక్స్ట్‌ను వెతకగలిగేలా చేయండి
+doing.searchable=టెక్స్ట్‌ను వెతకగలిగేలా చేస్తోంది…
+ocrpdf.name=వెతకగలిగే
+ocrpdf.already=ఈ PDFలో ఇప్పటికే వెతకగల టెక్స్ట్ ఉంది. చేయాల్సింది ఏమీ లేదు.
+ocrpdf.noWords=ఇక్కడ చదవడానికి ఏ పదమూ దొరకలేదు.
+ocrpdf.preview=ఇప్పుడు {0} పదాలను వెతకవచ్చు, కాపీ చేయవచ్చు ({1} పేజీ(లు)).
+ocrpdf.downloading=చదివే డేటా డౌన్‌లోడ్ అవుతోంది… {0}%
+ocrpdf.fallback={0} ఈసారి టెక్స్ట్‌ను Windows చదివింది.
+ocrpdf.err.download=Tesseract కోసం చదివే డేటాను డౌన్‌లోడ్ చేయలేకపోయాను. ఇంటర్నెట్ చూసి మళ్లీ ప్రయత్నించండి.
+ocrpdf.err.tesseract=ఈ కంప్యూటర్‌లో Tesseract ప్రారంభం కాలేదు.
+ocrpdf.pref.tesseract=Tesseractతో టెక్స్ట్ చదవండి
+ocrpdf.pref.tesseractHint=నాణ్యత లేని స్కాన్‌లకు, Windows చదవలేని భాషలకు మెరుగైనది. మొదటిసారి కొన్ని MB డౌన్‌లోడ్ చేస్తుంది.

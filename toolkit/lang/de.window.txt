@@ -1,0 +1,21 @@
+# DeskPals Tools — das Fenster — Deutsch
+window.tab.files=Dateien
+window.tab.recent=Letzte Aufgaben
+window.tab.settings=Einstellungen
+window.selected=ausgewählt
+window.up=Nach oben
+window.down=Nach unten
+window.remove=Entfernen
+window.order=Ziehe die Dateien, um die Reihenfolge zu ändern. Sie werden von oben nach unten verwendet.
+window.folder=Ordner
+window.recent.title=Letzte Aufgaben
+window.recent.clear=Verlauf löschen
+window.recent.empty=Noch nichts hier. Deine erledigten Aufgaben erscheinen hier.
+window.recent.ask=Die Liste der letzten Aufgaben löschen? Deine Dateien werden nicht gelöscht.
+window.recent.gone=(nicht mehr da)
+window.today=Heute, {0}
+window.yesterday=Gestern, {0}
+window.settings.title=Einstellungen
+window.settings.empty=Noch nichts einzustellen.
+window.settings.failed=Diese Einstellung konnte nicht geändert werden: {0}
+window.busy=Gerade läuft eine Aufgabe. Die neuen Dateien kommen dazu, sobald sie fertig ist.

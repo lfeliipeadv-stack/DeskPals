@@ -1,0 +1,22 @@
+# DeskPals Tools — dokumen (Bahasa Indonesia)
+job.toword=Ubah ke Word
+doing.toword=Mengubah ke Word…
+job.cleanscan=Pindai ke PDF
+doing.cleanscan=Membersihkan foto…
+job.heichelp=Pasang pengaya untuk foto iPhone
+doing.heichelp=Membuka Microsoft Store…
+docs.word.none=Untuk mengubah PDF menjadi dokumen Word, pasang Microsoft Word atau LibreOffice (gratis).
+docs.word.failed=PDF tidak dapat diubah menjadi dokumen Word (mungkin memakai kata sandi atau rusak).
+docs.word.slow=Terlalu lama sehingga dihentikan. Coba lagi, atau coba PDF yang lebih kecil.
+docs.scan.intro=Saya akan memotong lembarannya, meluruskannya, dan membuat kertasnya putih. Halamannya mau seperti apa?
+docs.scan.mode=Warna
+docs.scan.color=Berwarna
+docs.scan.gray=Abu-abu
+docs.scan.bw=Hitam putih
+docs.scan.noPicture=Gambar ini tidak dapat dibuka.
+docs.name.scan=pindaian
+docs.heic.missing=Untuk membuka foto iPhone (HEIC), Windows memerlukan tambahan gratis: "HEIF Image Extensions" dari Microsoft Store.
+docs.heic.opened=Untuk membuka foto iPhone, Windows memerlukan tambahan gratis: saya sudah membuka halamannya di Microsoft Store, cukup klik "Dapatkan".
+docs.heic.cantOpen=Untuk membuka foto iPhone, buka Microsoft Store dan pasang "HEIF Image Extensions" yang gratis.
+docs.inUse=File ini sedang terbuka di program lain. Tutup di sana lalu coba lagi.
+docs.word.protected=PDF ini tidak mengizinkan teksnya disalin, jadi tidak bisa diubah menjadi dokumen Word.

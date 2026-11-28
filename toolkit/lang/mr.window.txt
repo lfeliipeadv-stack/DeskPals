@@ -1,0 +1,21 @@
+# DeskPals Tools — विंडो — मराठी
+window.tab.files=फाइल्स
+window.tab.recent=अलीकडची कामे
+window.tab.settings=सेटिंग्ज
+window.selected=निवडलेले
+window.up=वर हलवा
+window.down=खाली हलवा
+window.remove=काढा
+window.order=क्रम बदलण्यासाठी फाइल्स ओढा. कामे त्या वरून खाली वापरतात.
+window.folder=फोल्डर
+window.recent.title=अलीकडची कामे
+window.recent.clear=इतिहास पुसा
+window.recent.empty=अजून इथे काही नाही. तुम्ही केलेली कामे इथे दिसतील.
+window.recent.ask=अलीकडच्या कामांची यादी पुसायची? तुमच्या फाइल्स हटवल्या जाणार नाहीत.
+window.recent.gone=(आता तिथे नाही)
+window.today=आज, {0}
+window.yesterday=काल, {0}
+window.settings.title=सेटिंग्ज
+window.settings.empty=अजून सेट करण्यासारखे काही नाही.
+window.settings.failed=ही सेटिंग बदलता आली नाही: {0}
+window.busy=एक काम सुरू आहे. ते पूर्ण झाल्यावर नवीन फाइल्स जोडल्या जातील.

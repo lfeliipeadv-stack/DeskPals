@@ -1,0 +1,22 @@
+# DeskPals Tools — เอกสาร (ภาษาไทย)
+job.toword=แปลงเป็น Word
+doing.toword=กำลังแปลงเป็น Word…
+job.cleanscan=สแกนเป็น PDF
+doing.cleanscan=กำลังทำความสะอาดรูปภาพ…
+job.heichelp=ติดตั้งส่วนเสริมสำหรับรูปจาก iPhone
+doing.heichelp=กำลังเปิด Microsoft Store…
+docs.word.none=หากต้องการเปลี่ยน PDF เป็นเอกสาร Word ให้ติดตั้ง Microsoft Word หรือ LibreOffice (ฟรี)
+docs.word.failed=ไม่สามารถเปลี่ยน PDF เป็นเอกสาร Word ได้ (อาจมีรหัสผ่านหรือไฟล์เสียหาย)
+docs.word.slow=ใช้เวลานานเกินไปจึงหยุดไว้ ลองอีกครั้ง หรือลองใช้ PDF ที่เล็กกว่านี้
+docs.scan.intro=ฉันจะตัดเฉพาะแผ่นกระดาษ จัดให้ตรง และทำให้กระดาษขาว อยากให้หน้าเป็นแบบไหน?
+docs.scan.mode=สี
+docs.scan.color=แบบสี
+docs.scan.gray=สีเทา
+docs.scan.bw=ขาวดำ
+docs.scan.noPicture=ไม่สามารถเปิดรูปนี้ได้
+docs.name.scan=สแกน
+docs.heic.missing=หากต้องการเปิดรูปจาก iPhone (HEIC) Windows ต้องมีส่วนเสริมฟรี: "HEIF Image Extensions" จาก Microsoft Store
+docs.heic.opened=หากต้องการเปิดรูปจาก iPhone Windows ต้องมีส่วนเสริมฟรี: ฉันเปิดหน้าของมันใน Microsoft Store ให้แล้ว แค่คลิก "รับ"
+docs.heic.cantOpen=หากต้องการเปิดรูปจาก iPhone ให้เปิด Microsoft Store แล้วรับ "HEIF Image Extensions" ซึ่งฟรี
+docs.inUse=ไฟล์นี้เปิดอยู่ในโปรแกรมอื่น ปิดไฟล์ที่นั่นแล้วลองอีกครั้ง
+docs.word.protected=PDF นี้ไม่อนุญาตให้คัดลอกข้อความ จึงเปลี่ยนเป็นเอกสาร Word ไม่ได้

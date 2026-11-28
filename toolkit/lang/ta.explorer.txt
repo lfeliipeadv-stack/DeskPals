@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (ta)
+explorer.open=DeskPals Tools-ஐத் திற
+explorer.pref=Windows வலது-கிளிக் மெனுவில் காட்டு
+explorer.prefHint=கோப்புகள் மற்றும் கோப்புறைகளின் வலது-கிளிக் மெனுவிலும் "இதற்கு அனுப்பு" பகுதியிலும் "DeskPals Tools"-ஐச் சேர்க்கிறது. Windows 11-இல் இது "மேலும் விருப்பங்களைக் காட்டு" என்பதில் இருக்கும்.
+explorer.sendToTip=இந்தக் கோப்புகளை DeskPals Tools-இல் திற
+explorer.failed=Windows மெனுவை மாற்ற முடியவில்லை: {0}

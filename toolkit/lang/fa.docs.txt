@@ -1,0 +1,22 @@
+# DeskPals Tools — اسناد (فارسی)
+job.toword=تبدیل به Word
+doing.toword=در حال تبدیل به Word…
+job.cleanscan=اسکن به PDF
+doing.cleanscan=در حال تمیز کردن عکس‌ها…
+job.heichelp=دریافت افزونهٔ عکس‌های iPhone
+doing.heichelp=در حال باز کردن Microsoft Store…
+docs.word.none=برای تبدیل PDF به سند Word، برنامه Microsoft Word یا LibreOffice (رایگان) را نصب کنید.
+docs.word.failed=تبدیل PDF به سند Word ممکن نشد (شاید رمز دارد یا خراب است).
+docs.word.slow=خیلی طول کشید و متوقف شد. دوباره امتحان کنید، یا یک PDF کوچک‌تر را امتحان کنید.
+docs.scan.intro=برگه را جدا می‌کنم، صافش می‌کنم و کاغذ را سفید می‌کنم. صفحه‌ها چطور باشند؟
+docs.scan.mode=رنگ‌ها
+docs.scan.color=رنگی
+docs.scan.gray=خاکستری
+docs.scan.bw=سیاه و سفید
+docs.scan.noPicture=این تصویر باز نشد.
+docs.name.scan=اسکن
+docs.heic.missing=برای باز کردن عکس‌های iPhone ‏(HEIC)، ویندوز به یک افزونه رایگان نیاز دارد: «HEIF Image Extensions» از Microsoft Store.
+docs.heic.opened=برای باز کردن عکس‌های iPhone، ویندوز به یک افزونه رایگان نیاز دارد: صفحه آن را در Microsoft Store باز کردم، فقط روی «دریافت» کلیک کنید.
+docs.heic.cantOpen=برای باز کردن عکس‌های iPhone، ‏Microsoft Store را باز کنید و افزونه رایگان «HEIF Image Extensions» را دریافت کنید.
+docs.inUse=این فایل در برنامهٔ دیگری باز است. آن را آنجا ببندید و دوباره امتحان کنید.
+docs.word.protected=این PDF اجازهٔ کپی کردن متنش را نمی‌دهد، پس نمی‌شود آن را به سند Word تبدیل کرد.

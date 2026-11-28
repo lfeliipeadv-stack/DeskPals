@@ -1,0 +1,6 @@
+# DeskPals Tools — Windows Explorer (ja)
+explorer.open=DeskPals Tools を開く
+explorer.pref=Windows の右クリックメニューに表示
+explorer.prefHint=ファイルとフォルダーの右クリックメニュー、および「送る」に「DeskPals Tools」を追加します。Windows 11 では「その他のオプションを確認」の中にあります。
+explorer.sendToTip=これらのファイルを DeskPals Tools で開く
+explorer.failed=Windows のメニューを変更できませんでした: {0}
