@@ -89,6 +89,38 @@ nav.check|Verificador|Checker|Verificador
 nav.map|Mapa das animações|Animation map|Mapa de animaciones
 nav.xml|XML|XML|XML
 nav.settings|Configurações|Settings|Configuración
+web.gallery|Abrir da galeria|Open from the gallery|Abrir de la galería
+web.galleryHint|Os pets da galeria do DeskPals: abra um para estudar como foi feito ou para criar uma variação.|The pets of the DeskPals gallery: open one to study how it was made or to make a variation.|Las mascotas de la galería de DeskPals: abre una para estudiar cómo se hizo o crear una variación.
+web.sourceAdd|Link do GitHub|GitHub link|Enlace de GitHub
+web.sourceAsk|Cole o link de um repositório do GitHub com pets:|Paste the link of a GitHub repository with pets:|Pega el enlace de un repositorio de GitHub con mascotas:
+web.sourceHint|O editor procura o pets.json do repositório (em Pets/ ou na raiz) e, se não houver, toda pasta com um animations.xml. Pode ser o link do repositório, de uma pasta ou de um pet só. A fonte fica guardada no editor.|The editor looks for the repository's pets.json (in Pets/ or at the root) and, when there is none, every folder with an animations.xml. It can be the link of the repository, of a folder or of a single pet. The source is kept in the editor.|El editor busca el pets.json del repositorio (en Pets/ o en la raíz) y, si no hay, toda carpeta con un animations.xml. Puede ser el enlace del repositorio, de una carpeta o de una sola mascota. La fuente queda guardada en el editor.
+web.sourceRefresh|Procurar de novo|Search again|Buscar de nuevo
+web.sourceRemove|Tirar esta fonte|Remove this source|Quitar esta fuente
+web.sourceSearching|Procurando pets em {0}…|Looking for pets in {0}…|Buscando mascotas en {0}…
+web.sourceFound|{0} pets em {1}.|{0} pets in {1}.|{0} mascotas en {1}.
+web.sourceMore|Mostrando os primeiros {0}.|Showing the first {0}.|Se muestran las primeras {0}.
+web.sourceBad|Isso não parece um link de repositório do GitHub (github.com/dono/repositório).|That does not look like a GitHub repository link (github.com/owner/repository).|Eso no parece un enlace de repositorio de GitHub (github.com/dueño/repositorio).
+web.sourceNotFound|O repositório {0} não existe ou é privado.|The repository {0} does not exist or is private.|El repositorio {0} no existe o es privado.
+web.sourceNone|Nenhum pet em {0}: não há pets.json nem pasta com animations.xml.|No pets in {0}: there is no pets.json and no folder with an animations.xml.|No hay mascotas en {0}: no hay pets.json ni carpetas con animations.xml.
+web.sourceLimit|O GitHub limitou as buscas por enquanto (60 por hora sem login). Tente de novo depois das {0}.|GitHub is limiting searches for now (60 an hour without signing in). Try again after {0}.|GitHub está limitando las búsquedas por ahora (60 por hora sin iniciar sesión). Inténtalo de nuevo después de las {0}.
+web.loadFail|Não foi possível abrir: {0}|Could not open: {0}|No se pudo abrir: {0}
+web.openUrl|Abrir de um link|Open from a link|Abrir desde un enlace
+web.openUrlHint|O link de um pet no GitHub (a pasta dele ou o animations.xml), ou de um repositório cheio de pets.|The link of a pet on GitHub (its folder or its animations.xml), or of a repository full of pets.|El enlace de una mascota en GitHub (su carpeta o su animations.xml), o de un repositorio lleno de mascotas.
+web.openUrlAsk|Cole o link do pet ou do repositório no GitHub:|Paste the link of the pet or of the repository on GitHub:|Pega el enlace de la mascota o del repositorio en GitHub:
+nav.board|Todas as animações|All animations|Todas las animaciones
+board.intro|Todas as animações do pet tocando ao mesmo tempo, cada uma no seu ritmo. Clique numa para abrir.|Every animation of the pet playing at the same time, each at its own pace. Click one to open it.|Todas las animaciones de la mascota a la vez, cada una a su ritmo. Haz clic en una para abrirla.
+board.pause|Pausar|Pause|Pausar
+board.play|Tocar|Play|Reproducir
+board.restart|Começar todas juntas|Start all together|Empezar todas juntas
+board.restartHint|Volta todas ao primeiro quadro, para ver as que combinam entre si.|Takes them all back to the first frame, to see the ones that go together.|Vuelve todas al primer cuadro, para ver las que combinan entre sí.
+board.size|Tamanho|Size|Tamaño
+board.sizeS|Pequeno|Small|Pequeño
+board.sizeM|Médio|Medium|Mediano
+board.sizeL|Grande|Large|Grande
+board.empty|O pet ainda não tem animações.|The pet has no animations yet.|La mascota aún no tiene animaciones.
+board.none|Nenhuma animação com esse nome.|No animation with that name.|Ninguna animación con ese nombre.
+anim.testThis|Testar esta|Test this one|Probar esta
+anim.testThisHint|Testa o pet no desktop começando por esta animação (depois ele segue sozinho).|Tests the pet on the desktop starting with this animation (then it goes on by itself).|Prueba la mascota en el escritorio empezando por esta animación (luego sigue sola).
 
 msg.openFail|Não foi possível abrir: {0}|Could not open: {0}|No se pudo abrir: {0}
 msg.saveFail|Não foi possível salvar: {0}|Could not save: {0}|No se pudo guardar: {0}
@@ -211,6 +243,14 @@ key.fallHard|“fall hard” toca quando o pet jogado cai com força.|“fall ha
 next.end|Ao terminar|At the end|Al terminar
 next.border|Ao bater numa borda|On a border|Al chocar con un borde
 next.gravity|Sem chão (gravidade)|Without ground (gravity)|Sin suelo (gravedad)
+next.interact|Ao encontrar outro pet|Meeting another pet|Al encontrar otra mascota
+interact.hint|Quando este pet encosta em outro, ele reage ao que o outro está fazendo: cada linha diz qual animação do outro pet dispara esta, e de que lado ele precisa estar (como no desktopPet 2.1).|When this pet touches another one, it reacts to what the other is doing: each line says which animation of the other pet triggers this one, and on which side that pet must be (as in desktopPet 2.1).|Cuando esta mascota toca a otra, reacciona a lo que la otra hace: cada línea dice qué animación de la otra mascota dispara esta, y de qué lado debe estar (como en desktopPet 2.1).
+interact.none|Nenhuma: ao encostar em outro pet, vale o que está em “Ao bater numa borda” (lado de outro pet).|None: when it touches another pet, “On a border” (side of another pet) is used.|Ninguna: al tocar otra mascota, se usa “Al chocar con un borde” (lado de otra mascota).
+interact.when|quando o outro faz|when the other plays|cuando la otra hace
+interact.noTrigger|(escolha a animação)|(choose the animation)|(elige la animación)
+interact.dir.any|de qualquer lado|from any side|desde cualquier lado
+interact.dir.infront|na frente dele|in front of it|delante de ella
+interact.dir.behind|atrás dele|behind it|detrás de ella
 next.hint|Uma é sorteada pelas chances. “Onde vale”: só na barra de tarefas, só em cima de janelas, só nas laterais da tela…|One is drawn by the chances. “Where”: only on the taskbar, only on top of windows, only at the screen sides…|Se sortea una por las probabilidades. “Dónde”: solo en la barra de tareas, solo sobre ventanas, solo en los lados de la pantalla…
 next.add|acrescentar próxima|add a next one|añadir siguiente
 next.none|Nenhuma: ao terminar, o pet reaparece em outro lugar da tela.|None: at the end the pet appears again somewhere else.|Ninguna: al terminar, la mascota reaparece en otro lugar.
@@ -639,6 +679,7 @@ tip.nav.spawns|De onde o pet entra na tela.|Where the pet comes onto the screen.
 tip.nav.childs|Imagens extras que aparecem com uma animação (bola, banheira, nave).|Extra pictures that appear with an animation (ball, bathtub, ship).|Imágenes extra que aparecen con una animación (pelota, bañera, nave).
 tip.nav.sounds|Sons MP3 que tocam com as animações.|MP3 sounds played with the animations.|Sonidos MP3 que suenan con las animaciones.
 tip.nav.check|Erros e avisos do pet.|Errors and warnings of the pet.|Errores y avisos de la mascota.
+tip.nav.board|Todas as animações tocando juntas, para ver o pet inteiro de uma vez.|Every animation playing together, to see the whole pet at once.|Todas las animaciones a la vez, para ver la mascota entera.
 tip.nav.map|Todas as animações e como uma leva à outra.|Every animation and how one leads to another.|Todas las animaciones y cómo una lleva a otra.
 tip.nav.xml|O arquivo do pet, para ver ou editar à mão.|The pet's file, to see or edit by hand.|El archivo de la mascota, para ver o editar a mano.
 tip.nav.settings|Tema, cores, idioma, prévia e o DeskPals do teste.|Theme, colours, language, preview and the test DeskPals.|Tema, colores, idioma, vista previa y el DeskPals de prueba.

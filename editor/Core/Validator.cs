@@ -78,7 +78,7 @@ namespace PetEditor
 			{
 				int id = walk.Pop();
 				if (!childAnims.Add(id) || !byIdAll.TryGetValue(id, out var ca)) continue;
-				foreach (var n in (ca.Sequence.Next ?? Array.Empty<NextNode>()).Concat(ca.Border?.Next ?? Array.Empty<NextNode>()).Concat(ca.Gravity?.Next ?? Array.Empty<NextNode>()))
+				foreach (var n in (ca.Sequence.Next ?? Array.Empty<NextNode>()).Concat(ca.Border?.Next ?? Array.Empty<NextNode>()).Concat(ca.Gravity?.Next ?? Array.Empty<NextNode>()).Concat(ca.Interact?.Next ?? Array.Empty<NextNode>()))
 					walk.Push(n.Value);
 			}
 
@@ -90,7 +90,7 @@ namespace PetEditor
 				if (f.Length == 0) E(L.T("chk.noFrames", name), "animations", a.Id);
 				else if (frames > 0 && f.Any(x => x < 0 || x >= frames)) E(L.T("chk.badFrame", name, f.First(x => x < 0 || x >= frames), frames - 1), "animations", a.Id);
 				if (a.Sequence.RepeatFromFrame >= Math.Max(1, f.Length)) E(L.T("chk.repeatFrom", name), "animations", a.Id);
-				var all = (a.Sequence.Next ?? Array.Empty<NextNode>()).Concat(a.Border?.Next ?? Array.Empty<NextNode>()).Concat(a.Gravity?.Next ?? Array.Empty<NextNode>());
+				var all = (a.Sequence.Next ?? Array.Empty<NextNode>()).Concat(a.Border?.Next ?? Array.Empty<NextNode>()).Concat(a.Gravity?.Next ?? Array.Empty<NextNode>()).Concat(a.Interact?.Next ?? Array.Empty<NextNode>());
 				foreach (var n in all)
 				{
 					reached.Add(n.Value);
@@ -122,7 +122,7 @@ namespace PetEditor
 			foreach (var a in anims)
 			{
 				string name = $"“{a.Name}” (#{a.Id})";
-				foreach (var (lst, key) in new[] { (a.Sequence.Next, "next.end"), (a.Border?.Next, "next.border"), (a.Gravity?.Next, "next.gravity") })
+				foreach (var (lst, key) in new[] { (a.Sequence.Next, "next.end"), (a.Border?.Next, "next.border"), (a.Gravity?.Next, "next.gravity"), (a.Interact?.Next, "next.interact") })
 					if (lst?.Length > 0 && lst.All(n => n.Probability <= 0)) W(L.T("chk.zeroProb", name, L.T(key)), "animations", a.Id);
 			}
 			if (r.Spawns.Spawn.Length > 0 && r.Spawns.Spawn.All(s => s.Probability <= 0)) E(L.T("chk.spawnZero"), "spawns");

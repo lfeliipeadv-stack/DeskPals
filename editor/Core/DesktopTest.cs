@@ -72,7 +72,8 @@ namespace PetEditor
 			return null;
 		}
 
-		public static void Run(MainForm owner, PetDoc doc)
+		/// <summary><paramref name="startWith"/>: the pet comes in with this animation (every entrance leads to it, in the test only).</summary>
+		public static void Run(MainForm owner, PetDoc doc, int startWith = -1)
 		{
 			if (doc == null) return;
 			var (errors, _) = Validator.Count(doc);
@@ -94,7 +95,7 @@ namespace PetEditor
 			}
 			try
 			{
-				Write(doc);
+				Write(doc, startWith);
 				if (IsRunning) return;   // the running test reloads the file by itself
 				running = Process.Start(new ProcessStartInfo(exe) { ArgumentList = { "--test-pet=" + FilePath }, UseShellExecute = false });
 			}
@@ -109,10 +110,28 @@ namespace PetEditor
 			later.Stop(); later.Start();
 		}
 
-		static void Write(PetDoc doc)
+		static void Write(PetDoc doc, int startWith = -1)
 		{
 			Directory.CreateDirectory(Folder);
-			File.WriteAllText(FilePath, PetXmlWriter.Write(doc.Root), new System.Text.UTF8Encoding(false));
+			File.WriteAllText(FilePath, StartingWith(PetXmlWriter.Write(doc.Root), startWith), new System.Text.UTF8Encoding(false));
+		}
+
+		/// <summary>
+		/// The pet's file with every entrance leading to one animation (the pet starts with it, then goes on as usual).
+		/// Only the copy of the test changes; -1 or a pet without entrances: the file as it is.
+		/// </summary>
+		internal static string StartingWith(string xml, int id)
+		{
+			if (id < 0) return xml;
+			try
+			{
+				var x = System.Xml.Linq.XDocument.Parse(xml, System.Xml.Linq.LoadOptions.PreserveWhitespace);
+				var nexts = x.Descendants().Where(e => e.Name.LocalName == "spawn").SelectMany(s => s.Elements().Where(e => e.Name.LocalName == "next")).ToList();
+				if (nexts.Count == 0) return xml;
+				foreach (var n in nexts) n.Value = id.ToString(System.Globalization.CultureInfo.InvariantCulture);
+				return x.Declaration != null ? x.Declaration + Environment.NewLine + x.Root : x.ToString();
+			}
+			catch (Exception) { return xml; }
 		}
 
 		public static void Close()

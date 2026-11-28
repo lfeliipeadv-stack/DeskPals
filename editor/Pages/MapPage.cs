@@ -61,7 +61,7 @@ namespace PetEditor
 				foreach (var a in anims)
 				{
 					void Add(NextNode[] l, int kind) { foreach (var n in l ?? Array.Empty<NextNode>()) if (ids.Contains(n.Value)) edges.Add((a.Id, n.Value, kind, n.Probability)); }
-					Add(a.Sequence.Next, 0); Add(a.Border?.Next, 1); Add(a.Gravity?.Next, 2);
+					Add(a.Sequence.Next, 0); Add(a.Border?.Next, 1); Add(a.Gravity?.Next, 2); Add(a.Interact?.Next, 1);
 				}
 				foreach (var c in Doc.Root.Childs.Child) if (ids.Contains(c.Id) && ids.Contains(c.Next)) edges.Add((c.Id, c.Next, 3, 100));
 				var depth = new Dictionary<int, int>();

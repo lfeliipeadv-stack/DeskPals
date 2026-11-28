@@ -297,7 +297,7 @@ namespace PetEditor
 			foreach (var a in Root.Animations.Animation)
 			{
 				if (a.Id == id) continue;
-				var lists = (a.Sequence.Next ?? Array.Empty<NextNode>()).Concat(a.Border?.Next ?? Array.Empty<NextNode>()).Concat(a.Gravity?.Next ?? Array.Empty<NextNode>());
+				var lists = (a.Sequence.Next ?? Array.Empty<NextNode>()).Concat(a.Border?.Next ?? Array.Empty<NextNode>()).Concat(a.Gravity?.Next ?? Array.Empty<NextNode>()).Concat(a.Interact?.Next ?? Array.Empty<NextNode>());
 				if (lists.Any(n => n.Value == id)) uses.Add(L.T("uses.anim", a.Name, a.Id));
 			}
 			foreach (var s in Root.Spawns.Spawn) if (s.Next == id) uses.Add(L.T("uses.spawn", s.Id));

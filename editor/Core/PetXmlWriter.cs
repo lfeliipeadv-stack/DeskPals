@@ -64,6 +64,7 @@ namespace PetEditor
 				sb.AppendLine("      </sequence>");
 				if (a.Border?.Next?.Length > 0) { sb.AppendLine("      <border>"); Nexts(sb, a.Border.Next, "        "); sb.AppendLine("      </border>"); }
 				if (a.Gravity?.Next?.Length > 0) { sb.AppendLine("      <gravity>"); Nexts(sb, a.Gravity.Next, "        "); sb.AppendLine("      </gravity>"); }
+				if (a.Interact?.Next?.Length > 0) { sb.AppendLine("      <interact>"); Nexts(sb, a.Interact.Next, "        "); sb.AppendLine("      </interact>"); }
 				sb.AppendLine("    </animation>");
 			}
 			sb.AppendLine("  </animations>");
@@ -113,7 +114,11 @@ namespace PetEditor
 		static void Nexts(StringBuilder sb, NextNode[] list, string indent)
 		{
 			foreach (var n in list ?? Array.Empty<NextNode>())
-				sb.AppendLine($"{indent}<next probability=\"{n.Probability}\" only=\"{E(string.IsNullOrWhiteSpace(n.OnlyFlag) ? "none" : n.OnlyFlag)}\">{n.Value}</next>");
+				sb.AppendLine($"{indent}<next probability=\"{n.Probability}\" only=\"{E(string.IsNullOrWhiteSpace(n.OnlyFlag) ? "none" : n.OnlyFlag)}\""
+					// interact (desktopPet 2.1): the other pet's animation that triggers it, and where the other pet must be
+					+ (string.IsNullOrWhiteSpace(n.Trigger) ? "" : $" trigger=\"{E(n.Trigger.Trim())}\"")
+					+ (string.IsNullOrWhiteSpace(n.Direction) ? "" : $" direction=\"{E(n.Direction.Trim())}\"")
+					+ $">{n.Value}</next>");
 		}
 	}
 }

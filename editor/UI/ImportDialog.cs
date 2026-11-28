@@ -91,7 +91,7 @@ namespace PetEditor
 			{
 				int id = todo.Pop();
 				if (!src.TryGetValue(id, out var a) || !set.Add(id) || !follow) continue;
-				foreach (var n in (a.Sequence.Next ?? Array.Empty<NextNode>()).Concat(a.Border?.Next ?? Array.Empty<NextNode>()).Concat(a.Gravity?.Next ?? Array.Empty<NextNode>()))
+				foreach (var n in (a.Sequence.Next ?? Array.Empty<NextNode>()).Concat(a.Border?.Next ?? Array.Empty<NextNode>()).Concat(a.Gravity?.Next ?? Array.Empty<NextNode>()).Concat(a.Interact?.Next ?? Array.Empty<NextNode>()))
 					if (!Common(n.Value)) todo.Push(n.Value);
 				foreach (var c in other.Root.Childs.Child.Where(c => c.Id == id)) todo.Push(c.Next);
 			}
@@ -120,6 +120,7 @@ namespace PetEditor
 				a.Sequence.Next = Map(a.Sequence.Next);
 				if (a.Border != null) { a.Border.Next = Map(a.Border.Next); if (a.Border.Next.Length == 0) a.Border = null; }
 				if (a.Gravity != null) { a.Gravity.Next = Map(a.Gravity.Next); if (a.Gravity.Next.Length == 0) a.Gravity = null; }
+				if (a.Interact != null) { a.Interact.Next = Map(a.Interact.Next); if (a.Interact.Next.Length == 0) a.Interact = null; }
 				added.Add(a);
 			}
 			doc.Root.Animations.Animation = doc.Root.Animations.Animation.Concat(added).ToArray();

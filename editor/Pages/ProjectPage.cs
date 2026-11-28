@@ -33,6 +33,8 @@ namespace PetEditor
 			actions.Controls.Add(Action("proj.wizard", "proj.wizardHint", () => Wizard.Show(Main)));
 			actions.Controls.Add(Action("proj.character", "proj.characterHint", () => CharacterDialog.Show(Main)));
 			actions.Controls.Add(Action("proj.new", "proj.newHint", Main.NewPet));
+			actions.Controls.Add(Action("web.gallery", "web.galleryHint", () => WebGalleryDialog.Show(Main)));
+			actions.Controls.Add(Action("web.openUrl", "web.openUrlHint", () => WebGalleryDialog.OpenLink(Main)));
 			actions.Controls.Add(Action("proj.gallery", "proj.galleryHint", () => GalleryDialog.Show(Main, Doc)));
 			actions.Controls.Add(Action("proj.openFile", "proj.openFileHint", () => Main.OpenDialog(false)));
 			actions.Controls.Add(Action("proj.openFolder", "proj.openFolderHint", () => Main.OpenDialog(true)));

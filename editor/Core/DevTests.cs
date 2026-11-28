@@ -207,6 +207,79 @@ namespace PetEditor
 
 				// 6. scale of the window (Windows zoom): sizes written at 100% grow, fonts too
 				Check("zoom: a size at 100% grows with the zoom of Windows", Ui.S(100) == (int)Math.Round(100 * Ui.Scale), $"zoom {Ui.Scale}");
+
+				// 7. the animations playing in place (the list and "All animations"): their frames in order, the repeats, turning
+				{
+					var walkP = pingo.Root.Animations.Animation.First(a => a.Name == "walk");
+					var lv = new LiveAnim(pingo, walkP);
+					var seen = new List<int>();
+					for (int i = 0; i < walkP.Sequence.Frame.Length; i++) { seen.Add(lv.Frame); lv.Advance(); }
+					Check("live: the frames of the animation, in order", seen.SequenceEqual(walkP.Sequence.Frame), string.Join(",", seen) + " ≠ " + string.Join(",", walkP.Sequence.Frame));
+					Check("live: a frame stays as long as the animation says", lv.Interval >= 16);
+					var fake = new XmlData.AnimationNode { Id = 900, Name = "t", Sequence = new XmlData.SequenceNode { Frame = new[] { 0, 1, 2 }, RepeatFromFrame = 1, RepeatCount = "2", Action = "flip" }, Start = new XmlData.MovingNode { X = "0", Y = "0", Interval = "100", Opacity = 1 }, End = new XmlData.MovingNode { X = "0", Y = "0", Interval = "300", Opacity = 1 } };
+					var lf = new LiveAnim(pingo, fake);
+					var steps = new List<int>();
+					for (int i = 0; i < 7; i++) { steps.Add(lf.Frame); lf.Advance(); }
+					Check("live: \"repeat from frame\" and the repeat count, as DeskPals counts them (FormPet)", steps.SequenceEqual(new[] { 0, 1, 2, 2, 1, 2, 1 }), string.Join(",", steps));
+					Check("live: an animation ending with \"flip\" turns at the end", lf.Flipped && lf.Step == 0);
+					lf.Advance(); lf.Advance();
+					Check("live: the time goes from the start interval to the end one", lf.Interval > 100 && lf.Interval < 300, lf.Interval.ToString());
+					var empty = new LiveAnim(pingo, new XmlData.AnimationNode { Id = 901, Sequence = new XmlData.SequenceNode(), Start = new XmlData.MovingNode(), End = new XmlData.MovingNode() });
+					empty.Advance();
+					Check("live: an animation without frames is left alone", !empty.HasFrames && empty.Frame == -1);
+				}
+
+				// 8. "Test this one": the copy of the test starts with the animation (every entrance leads to it), the pet stays as it is
+				{
+					string pxml = PetXmlWriter.Write(pingo.Root);
+					int target = pingo.Root.Animations.Animation.Last().Id;
+					string started = DesktopTest.StartingWith(pxml, target);
+					var root = XmlData.AnimationXML.ParseXML(started);
+					Check("test this: every entrance leads to the animation", root != null && root.Spawns.Spawn.Length > 0 && root.Spawns.Spawn.All(s => s.Next == target), root == null ? "not readable" : string.Join(",", root.Spawns.Spawn.Select(s => s.Next)));
+					Check("test this: the rest of the pet is the same", root != null && root.Animations.Animation.Length == pingo.Root.Animations.Animation.Length && root.Image.Png == pingo.Root.Image.Png);
+					Check("test this: without an animation, the file as it is", DesktopTest.StartingWith(pxml, -1) == pxml);
+					Check("test this: the pet in the editor is not changed", PetXmlWriter.Write(pingo.Root) == pxml);
+				}
+
+				// 9. links of GitHub for "Open from the gallery"
+				{
+					string Show(WebPets.Link l) => l == null ? "null" : $"{l.Owner}/{l.Repo}@{l.Branch ?? "?"}:{l.Path ?? "?"}";
+					Check("link: a repository", Show(WebPets.Parse("https://github.com/someone/pets")) == "someone/pets@?:?");
+					Check("link: owner/repo", Show(WebPets.Parse("someone/pets")) == "someone/pets@?:?");
+					Check("link: .git and a slash at the end", Show(WebPets.Parse("https://github.com/someone/pets.git/")) == "someone/pets@?:?");
+					Check("link: a folder of a branch", Show(WebPets.Parse("https://github.com/someone/pets/tree/main/Pets/frog")) == "someone/pets@main:Pets/frog");
+					Check("link: a pet's animations.xml stands for its folder", Show(WebPets.Parse("https://github.com/someone/pets/blob/main/Pets/frog/animations.xml")) == "someone/pets@main:Pets/frog");
+					Check("link: a raw link", Show(WebPets.Parse("https://raw.githubusercontent.com/someone/pets/master/frog/animations.xml")) == "someone/pets@master:frog");
+					Check("link: a raw file at the root", Show(WebPets.Parse("https://raw.githubusercontent.com/someone/pets/master/animations.xml")) == "someone/pets@master:");
+					Check("link: not GitHub", WebPets.Parse("https://example.com/a/b") == null && WebPets.Parse("") == null && WebPets.Parse("just words") == null);
+					Check("link: a folder with \"..\" is refused", WebPets.Parse("https://github.com/someone/pets/tree/main/../secret") == null);
+					var src = new WebPets.Source { Owner = "someone", Repo = "pets", Branch = "main", Path = "my pets" };
+					Check("link: the address of a folder", src.BaseUrl == "https://raw.githubusercontent.com/someone/pets/main/my%20pets/");
+					var pet = new WebPets.Pet { Folder = "gsheep-green" };
+					Check("link: a pet's name from its folder", pet.Shown == "Gsheep Green", pet.Shown);
+					Check("link: a pet's address", pet.Url(src) == src.BaseUrl + "gsheep-green/" && new WebPets.Pet { Folder = "x", Dir = "" }.Url(src) == src.BaseUrl);
+					// kept in the settings, without the official one
+					var savedSources = EditorSettings.Current.Sources;
+					try
+					{
+						WebPets.Save(new[] { WebPets.Official, src, new WebPets.Source { Owner = "a", Repo = "b", Branch = "master", Path = "", Scanned = true } });
+						var back = WebPets.Saved();
+						Check("sources: kept and read back (not the official one)", back.Count == 2 && back[0].Key == src.Key && back[1].Scanned && back[1].Path == "", string.Join(" ; ", EditorSettings.Current.Sources));
+					}
+					finally { EditorSettings.Current.Sources = savedSources; EditorSettings.Save(); }
+					// the real gallery of DeskPals (needs the internet: skipped without it)
+					try
+					{
+						var list = WebPets.Pets(WebPets.Official).GetAwaiter().GetResult();
+						Check("gallery: DeskPals' pets are listed", list.Count >= 5, list.Count + " pets");
+						var firstPet = list.First();
+						string file = WebPets.Download(WebPets.Official, firstPet).GetAwaiter().GetResult();
+						var opened = PetDoc.Open(file);
+						Check("gallery: a pet comes and opens", opened.Root.Animations.Animation.Length > 0 && opened.Frames.Count > 0, firstPet.Folder);
+						Check("gallery: it comes to the editor's own folder", file.Contains(Path.Combine("PetEditor", "online")), file);
+					}
+					catch (WebPets.Problem ex) { log.Add("SKIP  gallery (internet): " + ex.Message); }
+				}
 			}
 			catch (Exception e) { Check("no exception", false, e.ToString()); }
 			File.WriteAllLines(Path.Combine(Path.GetTempPath(), "PetEditor-devtests.txt"), log);

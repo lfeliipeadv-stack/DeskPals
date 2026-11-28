@@ -244,7 +244,7 @@ namespace PetEditor
 
 			nav.Items.Clear();
 			void Item(string key, bool enabled = true) => nav.Items.Add((key, L.T("nav." + key), enabled));
-			foreach (var k in new[] { "project", "header", "sheet", "animations", "spawns", "childs", "sounds" }) Item(k);
+			foreach (var k in new[] { "project", "header", "sheet", "animations", "board", "spawns", "childs", "sounds" }) Item(k);
 			nav.Items.Add(("-", L.T("nav.tools"), false));
 			foreach (var k in new[] { "check", "map", "xml" }) Item(k);
 			nav.Items.Add(("-", "", false));
@@ -282,6 +282,7 @@ namespace PetEditor
 			"header" => new HeaderPage(),
 			"sheet" => new SheetPage(),
 			"animations" => new AnimationsPage(),
+			"board" => new BoardPage(),
 			"spawns" => new SpawnsPage(),
 			"childs" => new ChildsPage(),
 			"sounds" => new SoundsPage(),

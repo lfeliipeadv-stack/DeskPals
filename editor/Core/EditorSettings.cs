@@ -36,6 +36,10 @@ namespace PetEditor
 		public double SplitPreview { get; set; }
 		/// <summary>The welcome tour was seen (Settings can show it again).</summary>
 		public bool TourDone { get; set; }
+		/// <summary>The size of the pictures on "All animations" (0 small, 1 medium, 2 large).</summary>
+		public int BoardSize { get; set; } = 1;
+		/// <summary>GitHub repositories added to "Open from the gallery" ("owner/repo|branch|folder|scanned").</summary>
+		public List<string> Sources { get; set; } = new();
 		/// <summary>Projects opened lately (most recent first).</summary>
 		public List<string> Recent { get; set; } = new();
 		/// <summary>Window size and state.</summary>

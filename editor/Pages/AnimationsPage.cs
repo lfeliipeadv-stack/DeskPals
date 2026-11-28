@@ -22,6 +22,24 @@ namespace PetEditor
 		AnimationNode cur;
 		int tab;   // 0 next, 1 border, 2 gravity
 		bool loading;
+		/// <summary>The thumbnails of the list play their animation (only the lines on screen move).</summary>
+		readonly Dictionary<AnimationNode, LiveAnim> live = new();
+		System.Windows.Forms.Timer liveTimer;
+
+		LiveAnim Live(AnimationNode a)
+		{
+			if (!live.TryGetValue(a, out var l)) live[a] = l = new LiveAnim(Doc, a) { Due = Environment.TickCount64 + 400 };
+			return l;
+		}
+
+		void LiveTick()
+		{
+			if (list == null || list.IsDisposed || !list.Visible || list.Items.Count == 0 || LiveAnim.Still) return;
+			long now = Environment.TickCount64;
+			int last = Math.Min(list.Items.Count - 1, list.TopIndex + list.ClientSize.Height / Math.Max(1, list.ItemHeight) + 1);
+			for (int i = Math.Max(0, list.TopIndex); i <= last; i++)
+				if (list.Items[i] is AnimationNode a && Live(a).Tick(now)) list.Invalidate(list.GetItemRectangle(i));
+		}
 
 		public override void Bind(MainForm main, PetDoc doc)
 		{
@@ -134,6 +152,10 @@ namespace PetEditor
 			top.Layout += (s, e) => { countLbl.Width = top.Width; add.Location = new Point(top.Width - add.Width, Ui.S(40)); find.Bounds = new Rectangle(0, Ui.S(40), Math.Max(Ui.S(60), add.Left - Ui.S(8)), add.Height); };
 			list = new ListBox { Dock = DockStyle.Fill, DrawMode = DrawMode.OwnerDrawFixed, ItemHeight = Ui.Thumb + Ui.S(16), BorderStyle = BorderStyle.None, BackColor = Theme.Surface, ForeColor = Theme.Text, IntegralHeight = false };
 			list.DrawItem += DrawItem;
+			liveTimer = new System.Windows.Forms.Timer { Interval = 33 };
+			liveTimer.Tick += (s, e) => LiveTick();
+			liveTimer.Start();
+			list.Disposed += (s, e) => liveTimer.Dispose();
 			// the whole name under the mouse (long names end in "…" in the list)
 			var tip = new ToolTip { InitialDelay = 400 }; int tipAt = -1;
 			list.MouseMove += (s, e) =>
@@ -190,14 +212,17 @@ namespace PetEditor
 		{
 			if (e.Index < 0) return;
 			var a = (AnimationNode)list.Items[e.Index];
-			var g = e.Graphics; Theme.Prepare(g);
+			// drawn aside and put at once: the thumbnails change many times a second without flickering
+			using var buffer = BufferedGraphicsManager.Current.Allocate(e.Graphics, e.Bounds);
+			var g = buffer.Graphics; Theme.Prepare(g);
 			bool sel = (e.State & DrawItemState.Selected) != 0;
 			using (var b = new SolidBrush(Theme.Surface)) g.FillRectangle(b, e.Bounds);
 			var r = new Rectangle(e.Bounds.X + 2, e.Bounds.Y + 2, e.Bounds.Width - 6, e.Bounds.Height - 4);
 			if (sel) { Theme.FillRounded(g, Theme.AccentSoft, r, 6); Theme.DrawRounded(g, Theme.Accent, r, 6); }
 			int th = Ui.Thumb;
 			var f = a.Sequence.Frame;
-			Ui.DrawFrame(g, Doc.Frame(f?.Length > 0 ? f[0] : -1), new Rectangle(r.X + Ui.S(6), r.Y + (r.Height - th) / 2, th, th));
+			var lv = Live(a);
+			Ui.DrawFrame(g, Doc.Frame(lv.HasFrames ? lv.Frame : f?.Length > 0 ? f[0] : -1), new Rectangle(r.X + Ui.S(6), r.Y + (r.Height - th) / 2, th, th), mirror: lv.Flipped, opacity: lv.Opacity);
 			int tx = r.X + th + Ui.S(14), tw = r.Right - tx - Ui.S(6);
 			// a problem of the checker: a mark at the right of the name (the tooltip says which)
 			var mark = ProblemMark(a.Id);
@@ -209,6 +234,7 @@ namespace PetEditor
 			TextRenderer.DrawText(g, a.Name, Ui.Font(13.5f, sel), new Rectangle(tx, r.Y + r.Height / 2 - Ui.S(18), tw, Ui.S(20)), Theme.Text, TextFormatFlags.Left | TextFormatFlags.EndEllipsis | TextFormatFlags.NoPrefix);
 			string sub = Sub(a) + (a.Picker == "no" ? "  ·  " + L.T("anim.hiddenShort") : "");
 			TextRenderer.DrawText(g, sub, Ui.Font(11.5f), new Rectangle(tx, r.Y + r.Height / 2 + 1, r.Right - tx - Ui.S(6), Ui.S(18)), Theme.TextMuted, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
+			buffer.Render();
 		}
 
 		public void SelectAnimation(int id)
@@ -246,7 +272,10 @@ namespace PetEditor
 			var dup = new FlatButton(L.T("anim.duplicate")); dup.Click += (s, e) => Duplicate();
 			var del = new FlatButton(L.T("anim.delete")) { Danger = true }; del.Click += (s, e) => DeleteCurrent();
 			var idLbl = Ui.Text(L.T("anim.idLabel", a.Id), true); idLbl.Margin = new Padding(0, 8, 14, 0);
-			col.Controls.Add(R(name, idLbl, shown, dup, del));
+			// the test on the desktop starting with this one (then the pet goes on by itself)
+			var testThis = new FlatButton("▶  " + L.T("anim.testThis")).Tip(L.T("anim.testThisHint"));
+			testThis.Click += (s, e) => DesktopTest.Run(Main, Doc, a.Id);
+			col.Controls.Add(R(name, idLbl, shown, testThis, dup, del));
 			string key = KeyHint(a.Name);
 			if (key != null) col.Controls.Add(Ui.Hint(key, W));
 
@@ -292,18 +321,22 @@ namespace PetEditor
 			// what comes next
 			var tabs = Ui.Wrap(new FlowLayoutPanel { AutoSize = true, BackColor = Theme.Surface, Margin = new Padding(0, 10, 0, 4) });   // the tabs go to a second line when narrow
 			var next = new NextEditor();
+			var hint = Ui.Hint(L.T("next.hint"), W);
 			void ShowTab(int t)
 			{
 				tab = t;
 				foreach (Label l in tabs.Controls) { bool on = (int)l.Tag == t; l.Font = Ui.Font(13.5f, on); l.ForeColor = on ? Theme.Accent : Theme.TextMuted; l.Invalidate(); }
 				if (t == 0) next.Bind(Doc, () => a.Sequence.Next ?? Array.Empty<NextNode>(), v => a.Sequence.Next = v);
 				else if (t == 1) next.Bind(Doc, () => a.Border?.Next ?? Array.Empty<NextNode>(), v => a.Border = v.Length == 0 ? null : new HitNode { Next = v });
-				else next.Bind(Doc, () => a.Gravity?.Next ?? Array.Empty<NextNode>(), v => a.Gravity = v.Length == 0 ? null : new HitNode { Next = v });
+				else if (t == 2) next.Bind(Doc, () => a.Gravity?.Next ?? Array.Empty<NextNode>(), v => a.Gravity = v.Length == 0 ? null : new HitNode { Next = v });
+				else next.Bind(Doc, () => a.Interact?.Next ?? Array.Empty<NextNode>(), v => a.Interact = v.Length == 0 ? null : new HitNode { Next = v }, interact: true);
+				hint.Text = L.T(t == 3 ? "interact.hint" : "next.hint");
 			}
-			string[] tabKeys = { "next.end", "next.border", "next.gravity" };
-			for (int i = 0; i < 3; i++)
+			int Count(int i) => i == 0 ? a.Sequence.Next?.Length ?? 0 : i == 1 ? a.Border?.Next?.Length ?? 0 : i == 2 ? a.Gravity?.Next?.Length ?? 0 : a.Interact?.Next?.Length ?? 0;
+			string[] tabKeys = { "next.end", "next.border", "next.gravity", "next.interact" };
+			for (int i = 0; i < 4; i++)
 			{
-				int n = i == 0 ? a.Sequence.Next?.Length ?? 0 : i == 1 ? a.Border?.Next?.Length ?? 0 : a.Gravity?.Next?.Length ?? 0;
+				int n = Count(i);
 				var l = new Label { Text = $"{L.T(tabKeys[i])} ({n})", Tag = i, AutoSize = true, Cursor = Cursors.Hand, Margin = new Padding(0, 0, 22, 0), BackColor = Theme.Surface };
 				l.Paint += (s, e) => { if ((int)l.Tag == tab) using (var b = new SolidBrush(Theme.Accent)) e.Graphics.FillRectangle(b, 0, l.Height - 3, l.Width, 3); };
 				l.Click += (s, e) => ShowTab((int)l.Tag);
@@ -312,14 +345,14 @@ namespace PetEditor
 			}
 			next.Changed += () =>
 			{
-				for (int i = 0; i < 3; i++)
+				for (int i = 0; i < 4; i++)
 				{
-					int n = i == 0 ? a.Sequence.Next?.Length ?? 0 : i == 1 ? a.Border?.Next?.Length ?? 0 : a.Gravity?.Next?.Length ?? 0;
+					int n = Count(i);
 					tabs.Controls[i].Text = $"{L.T(tabKeys[i])} ({n})";
 				}
 			};
 			col.Controls.Add(tabs);
-			col.Controls.Add(Ui.Hint(L.T("next.hint"), W));
+			col.Controls.Add(hint);
 			col.Controls.Add(next);
 			ShowTab(tab);
 
@@ -421,6 +454,7 @@ namespace PetEditor
 				a.Sequence.Next = a.Sequence.Next?.Where(n => n.Value != id).ToArray();
 				if (a.Border != null) { a.Border.Next = a.Border.Next?.Where(n => n.Value != id).ToArray(); if (a.Border.Next?.Length == 0) a.Border = null; }
 				if (a.Gravity != null) { a.Gravity.Next = a.Gravity.Next?.Where(n => n.Value != id).ToArray(); if (a.Gravity.Next?.Length == 0) a.Gravity = null; }
+				if (a.Interact != null) { a.Interact.Next = a.Interact.Next?.Where(n => n.Value != id).ToArray(); if (a.Interact.Next?.Length == 0) a.Interact = null; }
 			}
 			Doc.Root.Sounds.Sound = Doc.Root.Sounds.Sound.Where(s => s.Id != id).ToArray();
 			Doc.Root.Childs.Child = Doc.Root.Childs.Child.Where(c => c.Id != id).ToArray();
@@ -528,6 +562,7 @@ namespace PetEditor
 
 		public override void Reload(string what)
 		{
+			live.Clear();   // frames, times or the pet changed: the thumbnails start again with them
 			if (what is "all" or "image" or "header")
 			{
 				var id = cur?.Id ?? -1;
@@ -555,7 +590,7 @@ namespace PetEditor
 			}
 		}
 
-		public override void Shown() { Replay(); }
-		public override void Hidden() { stage?.Stop(); }
+		public override void Shown() { Replay(); liveTimer?.Start(); }
+		public override void Hidden() { stage?.Stop(); liveTimer?.Stop(); }
 	}
 }

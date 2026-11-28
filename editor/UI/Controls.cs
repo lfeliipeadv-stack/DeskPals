@@ -797,7 +797,12 @@ namespace PetEditor
 			FlowDirection = FlowDirection.TopDown; WrapContents = false; AutoSize = true; Margin = new Padding(0); BackColor = Theme.Surface;
 		}
 
-		public void Bind(PetDoc d, Func<NextNode[]> getter, Action<NextNode[]> setter) { doc = d; get = getter; set = setter; Rebuild(); }
+		/// <summary>The "meeting another pet" list (desktopPet 2.1): each row also has the other pet's animation that triggers it and where that pet must be.</summary>
+		bool interact;
+
+		public void Bind(PetDoc d, Func<NextNode[]> getter, Action<NextNode[]> setter, bool interact = false) { doc = d; get = getter; set = setter; this.interact = interact; Rebuild(); }
+
+		public static readonly string[] DirectionKeys = { "any", "infront", "behind" };
 
 		public static readonly string[] OnlyKeys = { "none", "taskbar", "window", "horizontal", "horizontal+", "vertical", "vertical+", "windowSide", "petSide" };
 
@@ -829,17 +834,35 @@ namespace PetEditor
 				var del = new FlatButton("×") { Width = 32, Danger = true };
 				del.Click += (s, e) => { var l = list.ToList(); l.RemoveAt(idx); Commit(l.ToArray(), rebuild: true); };
 				var row = Ui.Row(new Label { Text = "→", AutoSize = true, Font = Ui.Font(14), ForeColor = Theme.TextMuted, Margin = new Padding(0, 4, 4, 0) }, anim, only, prob, bar, del);
-				Controls.Add(row);
+				if (interact)
+				{
+					// "when the other pet plays [animation] · [anywhere / in front / behind]": the trigger is an animation id of the
+					// OTHER pet (the same id in a pet of the same kind); an id this pet does not have stays as "#id"
+					var trigger = new Choice(230) { Empty = string.IsNullOrWhiteSpace(n.Trigger) ? L.T("interact.noTrigger") : "#" + n.Trigger.Trim() };
+					trigger.Items.AddRange(all);
+					trigger.SelectedIndex = int.TryParse(n.Trigger, out int tid) ? Array.FindIndex(all, x => x.Id == tid) : -1;
+					trigger.SelectedIndexChanged += (s, e) => { if (trigger.SelectedItem is AnimItem ai) { list[idx].Trigger = ai.Id.ToString(); Commit(list); } };
+					var dir = new Choice(170);
+					foreach (var k in DirectionKeys) dir.Items.Add(L.T("interact.dir." + k));
+					dir.SelectedIndex = Math.Max(0, Array.IndexOf(DirectionKeys, string.IsNullOrWhiteSpace(n.Direction) ? "any" : n.Direction.Trim()));
+					dir.SelectedIndexChanged += (s, e) => { list[idx].Direction = DirectionKeys[dir.SelectedIndex]; Commit(list); };
+					var when = Ui.Row(new Label { Text = L.T("interact.when"), AutoSize = true, Font = Ui.Font(12.5f), ForeColor = Theme.TextMuted, Margin = new Padding(26, 6, 6, 0) }, trigger, dir);
+					when.Margin = new Padding(0, 0, 0, 10);
+					var block = Ui.Column(row, when);
+					Controls.Add(block);
+				}
+				else Controls.Add(row);
 			}
 			var add = new LinkLabel { Text = "+ " + L.T("next.add"), AutoSize = true, Font = Ui.Font(13), LinkColor = Theme.Accent, ActiveLinkColor = Theme.Accent, LinkBehavior = LinkBehavior.HoverUnderline, Margin = new Padding(4, 4, 0, 4) };
 			add.Click += (s, e) =>
 			{
 				var l = list.ToList();
-				l.Add(new NextNode { Probability = 10, OnlyFlag = "none", Value = doc.Root.Animations.Animation.FirstOrDefault()?.Id ?? 1 });
+				int first = doc.Root.Animations.Animation.FirstOrDefault()?.Id ?? 1;
+				l.Add(new NextNode { Probability = 10, OnlyFlag = "none", Value = first, Trigger = interact ? first.ToString() : null, Direction = interact ? "any" : null });
 				Commit(l.ToArray(), rebuild: true);
 			};
 			Controls.Add(add);
-			if (list.Length == 0) Controls.Add(Ui.Hint(L.T("next.none"), 600));
+			if (list.Length == 0) Controls.Add(Ui.Hint(L.T(interact ? "interact.none" : "next.none"), 600));
 			ResumeLayout();
 		}
 
@@ -854,8 +877,10 @@ namespace PetEditor
 				// only the bars change
 				int total = Math.Max(1, list.Sum(n => Math.Max(0, n.Probability)));
 				int i = 0;
-				foreach (var row in Controls.OfType<FlowLayoutPanel>())
+				foreach (var block in Controls.OfType<FlowLayoutPanel>())
 				{
+					// a row, or (meeting another pet) a block with the row on top
+					var row = interact && block.Controls.Count > 0 && block.Controls[0] is FlowLayoutPanel inner ? inner : block;
 					var bar = row.Controls.OfType<ShareBar>().FirstOrDefault();
 					if (bar != null && i < list.Length) { bar.Share = Math.Max(0, list[i].Probability) / (float)total; bar.Invalidate(); }
 					i++;
