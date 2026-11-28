@@ -521,6 +521,15 @@
       "size" : 62610,
       "animations" : 14,
       "sounds" : 0
+    },
+    {
+      "folder" : "thronglet",
+      "name" : "Thronglet",
+      "author" : "Luan Felipe",
+      "lastupdate" : "2026-11-28 00:40",
+      "size" : 4004174,
+      "animations" : 404,
+      "sounds" : 98
     }
   ]
 }
