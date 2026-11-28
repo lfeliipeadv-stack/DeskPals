@@ -61,6 +61,12 @@ namespace DesktopPet
 
 		public static void Start(TimeSpan length)
 		{
+			Achievements.Unlock("timer");
+			StartNow(length);
+		}
+
+		static void StartNow(TimeSpan length)
+		{
 			if (length <= TimeSpan.Zero) return;
 			total = left = length;
 			end = DateTime.Now + length;

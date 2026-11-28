@@ -149,7 +149,7 @@ namespace DesktopPet
 			Changed?.Invoke();
 		}
 
-		public static void Add(Reminder r) { All.Add(r); Save(); }
+		public static void Add(Reminder r) { All.Add(r); Save(); Achievements.Unlock("reminderNew"); }
 
 		public static void Remove(Reminder r) { All.Remove(r); Save(); }
 
@@ -202,7 +202,7 @@ namespace DesktopPet
 		{
 			var choices = new[]
 			{
-				new SpeechBubble.Choice(Lang.T("rem.done"), () => PetLevel.Add(PetLevel.ReminderPoints), true),
+				new SpeechBubble.Choice(Lang.T("rem.done"), () => { PetLevel.Add(PetLevel.ReminderPoints); Achievements.Count("reminder"); }, true),
 				new SpeechBubble.Choice(Lang.T("rem.snooze"), () =>
 				{
 					r.SnoozedUntil = DateTime.Now.AddMinutes(10);

@@ -25,6 +25,10 @@ namespace DesktopPet
 			behaviourView.AddToggle("", /* taskbar */ "opt.taskbar", SettingName.StealTaskbarFocus);
 			behaviourView.AddToggle("", /* window to front */ "opt.foreground", SettingName.WinForeground);
 			behaviourView.AddSlider("", /* volume */ "opt.volume", SettingName.Volume, 0, 100, v => Lang.T("opt.volume.value", v));
+			// how lively: the restful animations weigh more (see PetCalm)
+			behaviourView.AddChoice("", /* moon */ "opt.calm", () => PetCalm.Level, v => PetCalm.Level = v, new[] { 0, 1, 2, 3 },
+				new[] { "opt.calm.normal", "opt.calm.calm", "opt.calm.veryCalm", "opt.calm.sleepy" });
+			behaviourView.AddToggle("", /* moon */ "opt.sleepTogether", () => PetCalm.SleepTogether, on => PetCalm.SleepTogether = on);
 		}
 
 		private void BuildApplicationOptions()
@@ -51,6 +55,7 @@ namespace DesktopPet
 
 			// where the gallery's pets come from: this repository, the original desktopPet and others the user adds
 			applicationView.AddAction("", /* package */ "opt.sources", "opt.sources.button", () => OpenSources());
+			applicationView.AddToggle("", /* bell */ "opt.newPets", () => NewPets.Notify, on => NewPets.Notify = on);
 
 			// Theme: automatic (Windows), light or dark — applied at once to every window.
 			var themeModes = new[] { "auto", "light", "dark" };

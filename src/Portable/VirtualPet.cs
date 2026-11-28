@@ -116,6 +116,12 @@ namespace DesktopPet
 		/// </summary>
 		static void Change(Action<PetNeeds> change, string sayKey, PetActions.Act act, bool bubbleAfter = false)
 		{
+			if (act == PetActions.Act.Feed || act == PetActions.Act.Pet || act == PetActions.Act.Play) Achievements.Count("care");
+			ChangeNow(change, sayKey, act, bubbleAfter);
+		}
+
+		static void ChangeNow(Action<PetNeeds> change, string sayKey, PetActions.Act act, bool bubbleAfter)
+		{
 			var n = Current;
 			change(n);
 			n.Food = Math.Min(100, Math.Max(0, n.Food));

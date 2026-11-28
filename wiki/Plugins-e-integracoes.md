@@ -41,7 +41,7 @@ Os chips no topo filtram os cartões e mostram a contagem:
 | Pet virtual | O pet sente fome, quer carinho e fica cansado. Dê comida, carinho, brinque e deixe dormir pelo menu do pet. |
 | Pets se cumprimentam | Quando dois pets se encontram na tela, eles batem um papo rápido, acenam, dançam ou trocam carinho. |
 | Brincadeiras | Biscoito da sorte, bola 8 mágica e piadas, pelo menu do pet. |
-| Música e jogos | O pet dança quando começa uma música nova no Spotify e pergunta como foi o jogo quando você volta de uma partida longa. |
+| Música e jogos | O pet dança quando começa uma música nova em qualquer player (Spotify, YouTube, Deezer, Apple Music…) e pergunta como foi o jogo quando você volta de uma partida longa. |
 | Visitas | De vez em quando um bichinho visita o pet: borboleta, passarinho, abelha ou joaninha. |
 | Empurrar janelas | Um pet andando que esbarra numa janela pequena apoiada no mesmo chão empurra a janela. Janelas grandes e maximizadas nunca se movem. |
 | Monitor do PC | Passe o mouse sobre o pet para ver CPU, memória e espaço livre. O pet também comenta quando o computador está muito ocupado. |

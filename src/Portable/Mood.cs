@@ -69,6 +69,7 @@ namespace DesktopPet
 		static void Answer(int i)
 		{
 			History[Today] = i;
+			Achievements.CountDay("mood");
 			try
 			{
 				Directory.CreateDirectory(Path.GetDirectoryName(FilePath));

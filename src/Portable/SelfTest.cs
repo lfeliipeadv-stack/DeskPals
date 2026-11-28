@@ -133,6 +133,14 @@ namespace DesktopPet
 			await TryAsync("claude endpoint", ClaudeEndpoint);
 			Try("new plugins", NewPlugins);
 			await TryAsync("live plugins", LivePlugins);
+			await TryAsync("achievements", AchievementsCheck);
+			await TryAsync("media controls", MediaControls);
+			await TryAsync("new pets", NewPetsCheck);
+			await TryAsync("source filter", SourceFilterCheck);
+			await TryAsync("interact", InteractCheck);
+			await TryAsync("calm and visits", CalmAndVisitsCheck);
+			await TryAsync("tools extension", ToolsCheck);
+			await TryAsync("tools watch", ToolsWatchCheck);
 
 			lines.Insert(0, $"DesktopPet self-test {DateTime.Now:yyyy-MM-dd HH:mm:ss}  —  {failures} failure(s)");
 			try { File.WriteAllLines(outFile, lines, new UTF8Encoding(false)); } catch (Exception) { }

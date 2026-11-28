@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml;
 using System.IO;
 using System.Windows.Forms;
@@ -199,6 +199,39 @@ namespace DesktopPet
         }
 
             /// <summary>
+            /// A pet of its own, from its XML text, for a pet on screen that is not the user's pet (a visit): the sprites come
+            /// from its own sheet and nothing is written to the settings (the pet in use stays as it is).
+            /// </summary>
+            /// <returns>true when the pet and its sprites could be read.</returns>
+        public bool ReadXMLFromText(string text)
+        {
+            try
+            {
+                AnimationXML = XmlData.AnimationXML.ParseXML(text);
+                if (AnimationXML?.Image == null || string.IsNullOrEmpty(AnimationXML.Image.Png)) return false;
+                AnimationXMLString = text;
+                string png = AnimationXML.Image.Png.Trim();
+                if (png.Length % 4 > 0) png += new string('=', 4 - png.Length % 4);
+                using (var ms = new MemoryStream(Convert.FromBase64String(png)))
+                using (var image = new Bitmap(ms))
+                {
+                    while (iScale > 1 && image.Width * iScale / AnimationXML.Image.TilesX > 1024) iScale--;
+                    spriteWidth = image.Width * iScale / AnimationXML.Image.TilesX;
+                    spriteHeight = image.Height * iScale / AnimationXML.Image.TilesY;
+                    sprites = BuildSprites(image);
+                }
+                AnimationXML.Image.Png = string.Empty;
+                if (AnimationXML.Header != null) AnimationXML.Header.Icon = string.Empty;
+                return sprites.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.warning, "visiting pet not read: " + ex.Message);
+                return false;
+            }
+        }
+
+            /// <summary>
             /// Load the animations (read them from XML file)
             /// </summary>
             /// <param name="animations">Animation class where the animations should be saved</param>
@@ -333,7 +366,38 @@ namespace DesktopPet
                         );
                     }
                 }
-                
+
+                // desktopPet 2.1: what to do when this pet hits another pet whose animation triggers one of these
+                if (node.Interact?.Next != null)
+                {
+                    foreach (XmlData.NextNode nextNode in node.Interact.Next)
+                    {
+                        TNextAnimation.TOnly where;
+                        switch (nextNode.OnlyFlag)
+                        {
+                            case "taskbar": where = TNextAnimation.TOnly.TASKBAR; break;
+                            case "window": where = TNextAnimation.TOnly.WINDOW; break;
+                            case "windowSide": where = TNextAnimation.TOnly.WINDOWSIDE; break;
+                            case "horizontal": where = TNextAnimation.TOnly.HORIZONTAL; break;
+                            case "horizontal+": where = TNextAnimation.TOnly.HORIZONTAL_; break;
+                            case "vertical": where = TNextAnimation.TOnly.VERTICAL; break;
+                            case "vertical+": where = TNextAnimation.TOnly.VERTICAL_; break;
+                            case "petSide": where = TNextAnimation.TOnly.PETSIDE; break;
+                            default: where = TNextAnimation.TOnly.NONE; break;
+                        }
+                        TNextAnimation.TDirection direction;
+                        switch (nextNode.Direction)
+                        {
+                            case "infront": direction = TNextAnimation.TDirection.INFRONT; break;
+                            case "behind": direction = TNextAnimation.TDirection.BEHIND; break;
+                            default: direction = TNextAnimation.TDirection.ANY; break;
+                        }
+                        // without a trigger (or a wrong one) the line can never play: kept, but it never matches
+                        int trigger = int.TryParse(nextNode.Trigger, NumberStyles.Integer, CultureInfo.InvariantCulture, out int t) ? t : -1;
+                        ani.EndInteract.Add(new TNextAnimation(nextNode.Value, nextNode.Probability, where, trigger, direction));
+                    }
+                }
+
                 animations.SaveAnimation(ani, node.Id);
             }
 

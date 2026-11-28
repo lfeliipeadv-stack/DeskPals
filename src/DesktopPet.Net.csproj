@@ -147,6 +147,17 @@
     <Compile Include="Portable\Dialogs.cs" />
     <Compile Include="Portable\FormSettings.Plugins.cs" />
     <Compile Include="Portable\FormSettings.Home.cs" />
+    <Compile Include="Portable\Achievements.cs" />
+    <Compile Include="Portable\NewPets.cs" />
+    <Compile Include="Portable\PetCalm.cs" />
+    <Compile Include="Portable\FormSettings.Achievements.cs" />
+    <Compile Include="Portable\SelfTest.Achievements.cs" />
+    <Compile Include="Portable\SelfTest.Music.cs" />
+    <Compile Include="Portable\SelfTest.NewPets.cs" />
+    <Compile Include="Portable\SelfTest.Interact.cs" />
+    <Compile Include="Portable\SelfTest.Calm.cs" />
+    <Compile Include="Portable\SelfTest.Tools.cs" />
+    <Compile Include="Portable\SelfTest.ToolsWatch.cs" />
     <!-- one file per plugin -->
     <Compile Include="Portable\Plugins\FullScreenWatch.cs" />
     <Compile Include="Portable\Plugins\PetLevel.cs" />
@@ -158,12 +169,16 @@
     <Compile Include="Portable\Plugins\CommunityPlugins.cs" />
     <Compile Include="Portable\Plugins\WindowRules.cs" />
     <Compile Include="Portable\Plugins\WeatherExtension.cs" />
+    <Compile Include="Portable\Plugins\ToolsExtension.cs" />
+    <Compile Include="Portable\Plugins\ToolsWatch.cs" />
     <Compile Include="Portable\FormCommunityPlugins.cs" />
     <Compile Include="Portable\Plugins\NoticeOptions.cs" />
     <Compile Include="Portable\Plugins\ClipboardWatch.cs" />
     <Compile Include="Portable\Plugins\OtherAgents.cs" />
     <Compile Include="Portable\Plugins\MusicWatch.cs" />
+    <Compile Include="Portable\Plugins\MediaSession.cs" />
     <Compile Include="Portable\Plugins\Visitors.cs" />
+    <Compile Include="Portable\Plugins\PetVisits.cs" />
     <Compile Include="Portable\Plugins\MemoryCare.cs" />
     <Compile Include="Portable\Plugins\SimpleTimer.cs" />
     <Compile Include="Portable\Plugins\TypingPet.cs" />

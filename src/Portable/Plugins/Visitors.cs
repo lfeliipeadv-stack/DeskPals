@@ -61,6 +61,7 @@ namespace DesktopPet
 			next = DateTime.Now.AddMinutes(20 + rnd.Next(25));
 			var pet = Pet();
 			if (pet == null || SpeechBubble.QuietNow || (current != null && !current.IsDisposed)) return;
+			Achievements.Unlock("visitor");
 			current = new VisitorForm(pet, kind);
 			current.Show();
 		}

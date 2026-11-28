@@ -49,6 +49,7 @@ namespace DesktopPet
 			if (!asked && SpeechBubble.QuietNow) return;
 			Stop(true);
 			Showing = kind;
+			if (kind == Kind.Snow) Achievements.Unlock("snow");
 			foreach (var screen in Screen.AllScreens)
 			{
 				var o = new Overlay(screen, kind, TimeSpan.FromSeconds(Math.Max(3, seconds)));

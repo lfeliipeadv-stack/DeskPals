@@ -66,6 +66,13 @@ namespace DesktopPet
 
         /// <summary>Write every downloaded pet into <paramref name="file"/>. Returns how many pets were saved.</summary>
         public static int Export(string file)
+		{
+			int n = ExportNow(file);
+			if (n > 0) Achievements.Unlock("backup");
+			return n;
+		}
+
+		static int ExportNow(string file)
         {
             AppTime.Flush();   // the minutes counted since the last save go too
             var folders = PetStore.Folders();

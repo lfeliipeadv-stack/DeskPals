@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -164,11 +164,41 @@ namespace DesktopPet
             /// <param name="id">ID of the next animation</param>
             /// <param name="probability">Probability the next animation will be executed</param>
             /// <param name="where">Where the pet must be if you want this animation to be executed</param>
-        public TNextAnimation(int id, int probability, TOnly where) 
-        { 
-            ID = id; 
+        public TNextAnimation(int id, int probability, TOnly where)
+        {
+            ID = id;
             Probability = probability;
             only = where;
+            TriggerID = -1;
+            Direction = TDirection.ANY;
+        }
+
+            /// <summary>
+            /// Where the other pet must be for an interact animation (desktopPet 2.1).
+            /// </summary>
+        public enum TDirection
+        {
+                /// <summary>Anywhere (default).</summary>
+            ANY = 0x7F,
+                /// <summary>The other pet is in front of this one (where it is going).</summary>
+            INFRONT = 0x01,
+                /// <summary>The other pet is behind this one.</summary>
+            BEHIND = 0x02,
+        }
+            /// <summary>
+            /// Interact animations: the ID of the other pet's animation that triggers this one (-1: none).
+            /// </summary>
+        public int TriggerID;
+            /// <summary>
+            /// Interact animations: where the other pet must be. Default: ANY
+            /// </summary>
+        public TDirection Direction;
+
+            /// <summary>An interact animation: played when the other pet plays <paramref name="triggerID"/>, from <paramref name="direction"/>.</summary>
+        public TNextAnimation(int id, int probability, TOnly where, int triggerID, TDirection direction) : this(id, probability, where)
+        {
+            TriggerID = triggerID;
+            Direction = direction;
         }
     }
 
@@ -241,6 +271,10 @@ namespace DesktopPet
             /// </summary>
         public List<TNextAnimation> EndGravity;
             /// <summary>
+            /// Next animations when the pet hits another pet whose animation triggers one of them (desktopPet 2.1).
+            /// </summary>
+        public List<TNextAnimation> EndInteract;
+            /// <summary>
             /// Sequence of frames to play for this animation.
             /// </summary>
         public TSequence Sequence;
@@ -274,6 +308,7 @@ namespace DesktopPet
             EndAnimation = new List<TNextAnimation>(8);
             EndBorder = new List<TNextAnimation>(8);
             EndGravity = new List<TNextAnimation>(8);
+            EndInteract = new List<TNextAnimation>(8);
             Sequence = new TSequence
             {
                 Frames = new List<int>(16)
@@ -770,7 +805,11 @@ namespace DesktopPet
         public int SetNextSequenceAnimation(int animationID, TNextAnimation.TOnly where)
         {
             StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.info, "animation is over");
-            return SetNextGeneralAnimation(SheepAnimations[animationID].EndAnimation, where);
+            var list = SheepAnimations[animationID].EndAnimation;
+            // calmer pets (and pets getting sleepy together): the restful next ones weigh more (see PetCalm)
+            if (list.Count > 1)
+                list = list.Select(n => SheepAnimations.TryGetValue(n.ID, out var next) ? new TNextAnimation(n.ID, n.Probability * PetCalm.Weight(next.Name), n.only) : n).ToList();
+            return SetNextGeneralAnimation(list, where);
         }
 
             /// <summary>
@@ -791,9 +830,12 @@ namespace DesktopPet
             /// <param name="animations">Matching animations between both pets.</param>
             /// <param name="where">Where the pet is "walking"</param>
             /// <returns>ID of the next animation to play. -1 if there is no animation.</returns>
-        public int SetNextInteractAnimation(List<TNextAnimation> animations, TNextAnimation.TOnly where)
+        public int SetNextInteractAnimation(List<TNextAnimation> animations, TNextAnimation.TOnly where = TNextAnimation.TOnly.NONE)
         {
             StartUp.AddDebugInfo(StartUp.DEBUG_TYPE.info, "pet interaction detected");
+            // the interact animations come already chosen (trigger, direction, place): their "only" no longer filters
+            if (where == TNextAnimation.TOnly.NONE)
+                animations = animations.Select(a => new TNextAnimation(a.ID, a.Probability, TNextAnimation.TOnly.NONE)).ToList();
             return SetNextGeneralAnimation(animations, where);
         }
 
@@ -932,7 +974,7 @@ namespace DesktopPet
             /// <param name="includeBorder">Include all animations if the pet detected a border.</param>
             /// <param name="includeGravity">Include all animations if the pet detected a gravity.</param>
             /// <returns></returns>
-        public List<TNextAnimation> GetNextAnimations(int currentID, bool includeNext, bool includeBorder, bool includeGravity)
+        public List<TNextAnimation> GetNextAnimations(int currentID, bool includeNext, bool includeBorder, bool includeGravity, bool includeInteract = false)
         {
             List<TNextAnimation> list = new List<TNextAnimation>();
 
@@ -942,6 +984,8 @@ namespace DesktopPet
                 list.AddRange(SheepAnimations[currentID].EndBorder);
             if (includeGravity)
                 list.AddRange(SheepAnimations[currentID].EndGravity);
+            if (includeInteract)
+                list.AddRange(SheepAnimations[currentID].EndInteract);
 
             return list;
         }

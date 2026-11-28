@@ -112,6 +112,8 @@ namespace DesktopPet
 				Completed++;
 				DayStats.Add("focusMin", FocusMinutes);
 				PetLevel.Add(PetLevel.FocusPoints);
+				Achievements.Count("focus");
+				Achievements.CountDay("focusDays");
 				CommunityPlugins.Event("focusDone");
 				bool longBreak = Completed % 4 == 0;
 				Begin(longBreak ? Phase.LongBreak : Phase.ShortBreak, longBreak ? LongBreakMinutes : BreakMinutes);

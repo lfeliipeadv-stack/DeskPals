@@ -27,6 +27,7 @@ namespace DesktopPet
 				(Page.Reminders, "nav.reminders", "\uE823"),  // clock
 				(Page.Ai, "nav.ai", "\uE8BD"),                // chat
 				(Page.Plugins, "nav.plugins", "\uEA86"),      // puzzle
+				(Page.Achievements, "nav.achievements", "\uE734"), // star
 				(Page.Integrations, "nav.integrations", "\uE71B"), // link
 				(Page.Extensions, "nav.extensions", "\uECAA"),   // apps
 				(Page.Application, "nav.application", "\uE713"), // settings
@@ -48,7 +49,9 @@ namespace DesktopPet
 				using (var f = new Font(name, 10)) return string.Equals(f.Name, name, StringComparison.OrdinalIgnoreCase);
 			}
 
-			private Rectangle ItemRect(int i) => new Rectangle(10, 96 + i * 44, Width - 20, 38);
+			// 44 px per entry; closer together when the window is short, so the last one never runs into the button at the bottom
+			private int Step => Math.Max(32, Math.Min(44, (Height - 96 - 72) / items.Length));
+			private Rectangle ItemRect(int i) => new Rectangle(10, 96 + i * Step, Width - 20, Step - 6);
 
 			protected override void OnPaint(PaintEventArgs e)
 			{

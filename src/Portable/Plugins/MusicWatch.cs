@@ -14,7 +14,7 @@ namespace DesktopPet
 {
 	// ====================================================================== 9. music and games
 
-	/// <summary>The pet dances when a new song starts in Spotify, and asks how the game went when a long one ends.</summary>
+	/// <summary>The pet dances when a new song starts in any player, and asks how the game went when a long one ends.</summary>
 	public static class MusicWatch
 	{
 		static Timer timer;
@@ -46,9 +46,22 @@ namespace DesktopPet
 		/// <summary>Self-test: a window title to use instead of Spotify's.</summary>
 		internal static string FakeTitle;
 
+		/// <summary>
+		/// The song playing now: from the media controls of Windows (any player: Spotify, YouTube or Deezer in a
+		/// browser, Apple Music, VLC…), else from Spotify's window title; "" when nothing plays.
+		/// </summary>
 		public static string Playing()
 		{
 			if (FakeTitle != null) return IsSong(FakeTitle) ? FakeTitle : "";
+			if (media != null) return media.ToString();
+			return SpotifyTitle();
+		}
+
+		/// <summary>The app playing the song (its id in Windows, e.g. "Spotify.exe", "chrome"), or "".</summary>
+		public static string PlayingApp => media?.App ?? "";
+
+		static string SpotifyTitle()
+		{
 			try
 			{
 				foreach (var p in Process.GetProcessesByName("Spotify"))
@@ -64,17 +77,31 @@ namespace DesktopPet
 			return "";
 		}
 
+		// the media controls answer asynchronously: asked in the background, the last answer kept here
+		static volatile MediaSession.Info media;
+		static int asking;
+
+		static void AskMedia()
+		{
+			if (System.Threading.Interlocked.Exchange(ref asking, 1) == 1) return;
+			Task.Run(() =>
+			{
+				try { media = MediaSession.Current(); }
+				finally { System.Threading.Interlocked.Exchange(ref asking, 0); }
+			});
+		}
+
 		internal static void Tick()
 		{
 			if (SelfTest.Running && !SelfTest.Live) return;
+			AskMedia();   // the answer is used on the next tick (3 s later)
 			string now = Playing();
 			if (now == song) return;
 			song = now;
 			if (now.Length == 0 || SpeechBubble.QuietNow) return;
-			Program.Mainthread?.ReactAll("dance", "party", "happy", "cheer", "jump");
+			Program.Mainthread?.ReactAll("dance", "party", "happy", "cheer", "jump"); Achievements.Count("music");
 			if (SayTitle) SpeechBubble.Say("🎵 " + now, 5);
 		}
-
 		public static void GameOver(TimeSpan played)
 		{
 			if (!Enabled) return;

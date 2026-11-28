@@ -40,7 +40,7 @@ namespace DesktopPet
 				var hat = PetHats.Find(id);
 				return hat != null && hat.Level > 0 && hat.Level <= Level ? id : "";
 			}
-			set { Program.MyData.SetSetting("PetHat", value ?? ""); PetHats.Apply(); }
+			set { Program.MyData.SetSetting("PetHat", value ?? ""); PetHats.Apply(); if (!string.IsNullOrEmpty(value)) Achievements.Unlock("hat"); }
 		}
 
 		/// <summary>Something was done: add its points; a new level is celebrated, and a hat won is put on.</summary>
@@ -50,6 +50,7 @@ namespace DesktopPet
 			int before = Level;
 			Program.MyData.SetSetting("PetPoints", Points + points);
 			int now = Level;
+			Achievements.AtLeast("level", now);
 			if (now <= before) return;
 			var hat = PetHats.All.Where(h => h.Level > before && h.Level <= now).OrderByDescending(h => h.Level).FirstOrDefault();
 			if (hat != null) Hat = hat.Id;   // the new hat goes on at once (it can be changed in the plugin's options)

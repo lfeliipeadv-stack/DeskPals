@@ -210,6 +210,22 @@ namespace DesktopPet
 
 		// ------------------------------------------------------------------ COM plumbing
 
+		/// <summary>
+		/// The program ends: the factories are given back while the program still runs. Left to Windows' own clean-up
+		/// at the very end, together with the graphics of the PDF reader (DeskPals Tools draws PDFs), they could keep the
+		/// program from ending. Colour emoji are off after this (the window is gone anyway).
+		/// </summary>
+		public static void Shutdown()
+		{
+			try
+			{
+				Release(wic); Release(dwrite); Release(d2d);
+				wic = dwrite = d2d = IntPtr.Zero;
+				failed = true;
+			}
+			catch (Exception) { }
+		}
+
 		static IntPtr Slot(IntPtr obj, int index) => (*(IntPtr**)obj)[index];
 
 		static void Release(IntPtr obj)

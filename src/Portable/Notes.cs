@@ -114,7 +114,7 @@ namespace DesktopPet
 				tasks.ItemCheck += (s, e) =>
 				{
 					bool done = e.NewValue == CheckState.Checked;
-					if (done && !Notes.Tasks[e.Index].Done) PetLevel.Add(PetLevel.TaskPoints);
+					if (done && !Notes.Tasks[e.Index].Done) { PetLevel.Add(PetLevel.TaskPoints); Achievements.Count("task"); }
 					Notes.Tasks[e.Index].Done = done; Save();
 				};
 				Controls.Add(tasks);

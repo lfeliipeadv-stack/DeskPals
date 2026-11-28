@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using DesktopPet.Properties;
 using System.Drawing;
@@ -133,6 +133,7 @@ namespace DesktopPet
             ClipboardWatch.Apply();
             MusicWatch.Apply();
             Visitors.Apply();
+            PetVisits.Apply();
             MemoryCare.Apply();
             TypingPet.Apply();
             AppTime.Apply();
@@ -143,7 +144,9 @@ namespace DesktopPet
             LiveChat.Apply();
             CommunityPlugins.Apply();
             ScreenEffects.Apply();
-            WeatherExtension.Apply();   // the DeskPals Weather extension (started when on) and the pets reacting to its weather
+            WeatherExtension.Apply();
+            ToolsExtension.Apply();      // DeskPals Tools: its new versions come in   // the DeskPals Weather extension (started when on) and the pets reacting to its weather
+            ToolsWatch.Apply();          // DeskPals Tools: watched folders (new files handled by the extension, results in a "DeskPals" folder)
             Updater.StartAuto();
             PetBackup.StartAuto();
             Activity.Apply();
@@ -151,6 +154,7 @@ namespace DesktopPet
             Agenda.Start();
             HoverAsk.Start();
             Onboarding.Start();
+            Achievements.Start();
 
                 // Item: Separator.
             sep = new ToolStripSeparator();

@@ -56,7 +56,7 @@ namespace DesktopPet
 		{
 			text = (text ?? "").Trim();
 			if (text.Length == 0) return;
-			messages.Add(new Message { User = true, Text = text });
+			messages.Add(new Message { User = true, Text = text }); Achievements.Count("chat");
 			Program.Mainthread?.ReactAll("think", "review", "idea", "read");
 			SpeechBubble.Say(Lang.T("ask.thinking"), 0);
 			Message reply;
@@ -324,7 +324,7 @@ namespace DesktopPet
 			text = (text ?? "").Trim();
 			if (text.Length == 0 || busy) return;
 			input.Text = "";
-			messages.Add(new Message { User = true, Text = text });
+			messages.Add(new Message { User = true, Text = text }); Achievements.Count("chat");
 			busy = true;
 			Invalidate(); list.ScrollToEnd();
 			Program.Mainthread?.ReactAll("think", "review", "idea", "read");

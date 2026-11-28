@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using JsonIgnore = System.Text.Json.Serialization.JsonIgnoreAttribute;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -72,6 +72,17 @@ namespace DesktopPet
 		public int animations { get; set; }
 		/// <summary>Number of sounds (pets.json, optional).</summary>
 		public int sounds { get; set; }
+		/// <summary>
+		/// Where the pet's files are inside its source's folder, when that is not <see cref="folder"/> (pets.json,
+		/// optional): "classic/bowser_jr", or "" for a pet right in that folder. <see cref="OptionsGit.Normalize"/> fills it
+		/// for a list that writes the path in "folder", and keeps "folder" a plain name for this computer.
+		/// </summary>
+		public string path { get; set; }
+		/// <summary>The id of the pet's animations.xml on GitHub, for a list made without pets.json (it has no date).</summary>
+		public string rev { get; set; }
+		/// <summary>What tells a new version of the pet: its date, or the id of its file when it has no date.</summary>
+		[JsonIgnore]
+		public string Version => string.IsNullOrEmpty(lastupdate) ? (rev ?? "") : lastupdate;
 
 		/// <summary>
 		/// Image to show in the windows95-explorer on the left side
@@ -132,7 +143,7 @@ namespace DesktopPet
 		public void SelectVariant(OptionsPet v)
 		{
 			if (v == null) return;
-			folder = v.folder; name = v.name; author = v.author; lastupdate = v.lastupdate; Source = v.Source;
+			folder = v.folder; name = v.name; author = v.author; lastupdate = v.lastupdate; Source = v.Source; path = v.path; rev = v.rev;
 			size = v.size; animations = v.animations; sounds = v.sounds;
 			Image = v.Image; Preview = v.Preview; PreviewTried = v.PreviewTried; Readme = v.Readme; ReadmeLang = v.ReadmeLang; Detail = v.Detail;
 		}
@@ -186,6 +197,59 @@ namespace DesktopPet
 		internal static bool IsPlainFolder(string folder) =>
 			!string.IsNullOrWhiteSpace(folder) && folder.Length <= 80 && folder.All(c => char.IsLetterOrDigit(c) || c == '_' || c == '-' || c == '.') && !folder.Contains("..");
 
+		/// <summary>A folder inside a repository ("classic/bowser_jr"): plain names joined by "/", never ".." nor a full path.</summary>
+		internal static bool IsSafePath(string path) =>
+			!string.IsNullOrEmpty(path) && path.Length <= 200 && path.Split('/').All(IsPlainFolder);
+
+		/// <summary>Where each pet of the last list is inside its source's folder (folder → path; "" = the folder itself).</summary>
+		static Dictionary<string, string> pathOf = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+		/// <summary>Where a pet's files are inside its source's folder (its folder name, unless the list said otherwise).</summary>
+		internal static string PathOf(string folder) => pathOf.TryGetValue(folder ?? "", out var p) ? p : folder;
+
+		/// <summary>The address of one file of a pet of the gallery.</summary>
+		internal static string PetUrl(string folder, string file)
+		{
+			string p = PathOf(folder);
+			return SourceOf(folder).BaseUrl + (string.IsNullOrEmpty(p) ? "" : string.Join("/", p.Split('/').Select(Uri.EscapeDataString)) + "/") + file;
+		}
+
+		/// <summary>
+		/// The pets of a list as this program keeps them: "folder" a plain name (the name on this computer) and "path"
+		/// where the files are. A list may write a path in "folder" ("classic/bowser_jr", the layout of some galleries):
+		/// the pet keeps the last name ("bowser_jr", or the whole path with "-" when that name is taken). Entries that
+		/// would point outside their folder are left out.
+		/// </summary>
+		internal static List<OptionsPet> Normalize(IEnumerable<OptionsPet> pets, bool localFolder = false)
+		{
+			// a folder of this computer: its folders may have spaces and accents ("my pets\Rex 2"), never ".."
+			bool Safe(string w) => localFolder
+				? w.Length <= 240 && !w.Split('/').Any(s => s.Length == 0 || s == ".." || s == "." || s.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0)
+				: IsSafePath(w);
+			var all = (pets ?? Enumerable.Empty<OptionsPet>()).Where(p => p != null).ToList();
+			var id = new Dictionary<OptionsPet, string>();
+			var used = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			// a pet in a plain folder keeps its name; one in a subfolder takes the last name if it is free
+			foreach (var p in all.Where(p => p.path == null && IsPlainFolder(p.folder)))
+				if (used.Add(p.folder)) id[p] = p.folder;
+			foreach (var p in all.Where(p => !id.ContainsKey(p)))
+			{
+				if (p.path == null && IsPlainFolder(p.folder)) continue;   // a second pet with the same plain name
+				string where = (p.path ?? p.folder ?? "").Replace('\\', '/').Trim('/');
+				if (where.Length > 0 && !Safe(where)) continue;
+				if (where.Length == 0 && p.path == null) continue;   // no folder at all
+				string name = IsPlainFolder(p.folder) ? p.folder : where.Substring(where.LastIndexOf('/') + 1);
+				if (!IsPlainFolder(name) || used.Contains(name)) name = where.Replace('/', '-');
+				if (!IsPlainFolder(name) || !used.Add(name)) continue;
+				id[p] = name;
+				p.path = where == name ? null : where;
+			}
+			var result = new List<OptionsPet>();
+			foreach (var p in all)
+				if (id.TryGetValue(p, out string n)) { p.folder = n; result.Add(p); }
+			return result;
+		}
+
 		/// <summary>
 		/// Get the list of pets, from Github or locally.
 		/// </summary>
@@ -215,6 +279,7 @@ namespace DesktopPet
 		{
 			var result = new List<OptionsPet>();
 			var map = new Dictionary<string, GallerySource>(StringComparer.OrdinalIgnoreCase);
+			var paths = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 			bool any = false, all = true;
 			var fetched = new List<string>();
 			var totals = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -225,18 +290,20 @@ namespace DesktopPet
 				if (online) fetched.Add(source.Key);
 				if (json == null) continue;
 				List<OptionsPet> pets;
-				try { pets = JsonText.Deserialize<OptionsPets>(json)?.pets ?? new List<OptionsPet>(); }
+				try { pets = Normalize(JsonText.Deserialize<OptionsPets>(json)?.pets, source.LocalFolder != null); }
 				catch (Exception ex) { LogFile.Ignored(ex); continue; }   // a broken list hides only that source
-				totals[source.Key] = pets.Count(p => p != null && IsPlainFolder(p.folder));
+				totals[source.Key] = pets.Count;
 				foreach (var p in pets)
 				{
-					if (p == null || !IsPlainFolder(p.folder) || map.ContainsKey(p.folder)) continue;
+					if (map.ContainsKey(p.folder)) continue;
 					p.Source = source;
 					map[p.folder] = source;
+					paths[p.folder] = p.path ?? p.folder;
 					result.Add(p);
 				}
 			}
 			sourceOf = map;
+			pathOf = paths;
 			Online = any;
 			AllOnline = all;
 			FetchedSources = fetched;
@@ -254,18 +321,40 @@ namespace DesktopPet
 			string cached = null, jsonString = null;
 			try { Directory.CreateDirectory(dir); cached = File.Exists(jsonFile) ? File.ReadAllText(jsonFile) : null; }
 			catch (Exception skipped) { LogFile.Ignored(skipped); }
-			try
+			// a folder of this computer: the list is made from its folders every time (an edited pet shows at once)
+			if (source.LocalFolder != null)
+			{
+				if (!Directory.Exists(source.LocalFolder)) return (cached, false);
+				jsonString = JsonText.SerializeIndented(new OptionsPets { pets = GallerySources.ScanLocal(source.LocalFolder) });
+			}
+			else try
 			{
 				using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(15) })
 				{
 					client.DefaultRequestHeaders.Add("User-Agent", "DesktopPet");
 					using (var response = await client.GetAsync(source.BaseUrl + "pets.json", HttpCompletionOption.ResponseHeadersRead))
 					{
+						if (response.StatusCode == HttpStatusCode.NotFound && source.FixedUrl == null)
+						{
+							// no pets.json: the list is made from GitHub's file tree. It is asked again after 15 minutes at
+							// most (GitHub answers 60 times an hour without signing in); meanwhile the one made last time
+							string madeFile = Path.Combine(dir, "scanned.txt");
+							if (cached != null && File.Exists(madeFile) && DateTime.Now - File.GetLastWriteTime(madeFile) < TimeSpan.FromMinutes(15))
+								return (cached, true);
+							var made = await GallerySources.ScanAsync(new GallerySource { Owner = source.Owner, Repo = source.Repo, Branch = source.Branch, Path = source.PetsPath });
+							if (made == null) return (cached, false);
+							jsonString = JsonText.SerializeIndented(new OptionsPets { pets = made });
+							try { File.WriteAllText(madeFile, DateTime.Now.ToString("o")); } catch (Exception skipped) { LogFile.Ignored(skipped); }
+						}
+						else
+						{
 						response.EnsureSuccessStatusCode();
 						if (response.Content.Headers.ContentLength > MaxListBytes) throw new InvalidDataException("pets.json: too big");
 						var bytes = await response.Content.ReadAsByteArrayAsync();
 						if (bytes.Length > MaxListBytes) throw new InvalidDataException("pets.json: too big");
 						jsonString = System.Text.Encoding.UTF8.GetString(bytes).TrimStart('﻿');
+						try { File.Delete(Path.Combine(dir, "scanned.txt")); } catch (Exception skipped) { LogFile.Ignored(skipped); }
+						}
 					}
 				}
 			}
@@ -281,15 +370,14 @@ namespace DesktopPet
 				// saved here (the old "tico" folder held Rex the Dino, and the new Tico showed the dino's icon).
 				try
 				{
-					var online = JsonText.Deserialize<OptionsPets>(jsonString)?.pets ?? new List<OptionsPet>();
+					var online = Normalize(JsonText.Deserialize<OptionsPets>(jsonString)?.pets, source.LocalFolder != null);
 					List<OptionsPet> local = null;
-					try { if (cached != null) local = JsonText.Deserialize<OptionsPets>(cached)?.pets; }
+					try { if (cached != null) local = Normalize(JsonText.Deserialize<OptionsPets>(cached)?.pets, source.LocalFolder != null); }
 					catch (Exception skipped) { LogFile.Ignored(skipped); }   // a broken saved copy is simply replaced
 					local = local ?? new List<OptionsPet>();
 					foreach (var op in online)
 					{
-						if (op == null || !IsPlainFolder(op.folder)) continue;
-						if (local.Any(lp => lp?.folder == op.folder && lp.lastupdate == op.lastupdate)) continue;
+						if (local.Any(lp => lp.folder == op.folder && lp.Version == op.Version)) continue;
 						foreach (var ext in new[] { ".png", ".xml", ".md", ".gif", ".pt-BR.md", ".pt-BR.none" })
 							File.Delete(Path.Combine(dir, op.folder + ext));
 					}
@@ -381,7 +469,7 @@ namespace DesktopPet
 			try
 			{
 				using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
-				using (var request = new HttpRequestMessage(HttpMethod.Head, SourceOf(folder).BaseUrl + folder + "/animations.xml"))
+				using (var request = new HttpRequestMessage(HttpMethod.Head, PetUrl(folder, "animations.xml")))
 				{
 					client.DefaultRequestHeaders.Add("User-Agent", "DesktopPet");
 					using (var response = await client.SendAsync(request))
@@ -396,10 +484,17 @@ namespace DesktopPet
 		/// </summary>
 		public static async Task<string> DownloadPetXml(string folder, long expectedSize, IProgress<double> progress, System.Threading.CancellationToken cancel = default)
 		{
+			// a pet of a folder of this computer: read as it is
+			var url = new Uri(PetUrl(folder, "animations.xml"));
+			if (url.IsFile)
+			{
+				progress?.Report(1.0);
+				return await File.ReadAllTextAsync(url.LocalPath, System.Text.Encoding.UTF8, cancel);
+			}
 			using (var client = new HttpClient { Timeout = TimeSpan.FromMinutes(5) })
 			{
 				client.DefaultRequestHeaders.Add("User-Agent", "DesktopPet");
-				using (var response = await client.GetAsync(SourceOf(folder).BaseUrl + folder + "/animations.xml", HttpCompletionOption.ResponseHeadersRead, cancel))
+				using (var response = await client.GetAsync(PetUrl(folder, "animations.xml"), HttpCompletionOption.ResponseHeadersRead, cancel))
 				{
 					response.EnsureSuccessStatusCode();
 					long? announced = response.Content.Headers.ContentLength;
@@ -444,7 +539,7 @@ namespace DesktopPet
 			string localFile = Path.Combine(source.CacheDir, folder + "." + filename.Substring(filename.IndexOf(".") + 1));
 			if (!File.Exists(localFile))
 			{
-				using (WebResponse wrFileResponse = WebRequest.Create(source.BaseUrl + folder + "/" + filename).GetResponse())
+				using (WebResponse wrFileResponse = WebRequest.Create(PetUrl(folder, filename)).GetResponse())
 				{
 					if (wrFileResponse.ContentLength > MaxFileBytes) throw new IOException(Lang.T("sources.tooBig", MaxFileBytes / (1024 * 1024)));
 					string temp = localFile + ".part";

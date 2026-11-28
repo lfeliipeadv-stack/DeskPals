@@ -107,6 +107,22 @@ namespace DesktopPet
 			/// <summary>Tabs of the gallery: pets on this computer, and pets to download.</summary>
 			public enum Tab { Mine, Download }
 			public Tab CurrentTab = Tab.Mine;
+
+			internal List<string> TestShown() => FilteredPets().Select(p => p.folder).ToList();
+			internal List<string> TestSourceChips() => sourceChips.Select(c => c.key).ToList();
+			internal void TestSource(string key) { sourceFilter = key ?? ""; Invalidate(); }
+			internal List<string> TestShownSources() => FilteredPets().Select(SourceKey).Distinct().ToList();
+			internal void TestTab(Tab t) { if (DetailOpen) CloseDetail(); CurrentTab = t; show = ShowMode.All; Invalidate(); }
+
+			/// <summary>"Download pets", only the new ones (the pet's "See" button).</summary>
+			public void ShowNew()
+			{
+				if (DetailOpen) CloseDetail();
+				CurrentTab = Tab.Download;
+				show = ShowMode.New;
+				ScrollY = 0;
+				Invalidate();
+			}
 			private readonly List<(Rectangle rect, Tab tab)> tabRects = new List<(Rectangle, Tab)>();
 			private int hoverTab = -1;
 
@@ -123,7 +139,7 @@ namespace DesktopPet
 			private IEnumerable<OptionsPet> TabPets(Tab t) => form.WebPets.pets.Where(p => t == Tab.Mine ? IsMine(p) : IsToDownload(p));
 
 			/// <summary>Which pets the gallery shows: all, the ones made for this project, the community's, the ones with sounds.</summary>
-			private enum ShowMode { All, Original, Community, Sounds }
+			private enum ShowMode { All, Original, Community, Sounds, New }
 			private ShowMode show = ShowMode.All;
 			private readonly List<(Rectangle rect, ShowMode mode)> showChips = new List<(Rectangle, ShowMode)>();
 			private int hoverShow = -1;
@@ -144,13 +160,49 @@ namespace DesktopPet
 					case ShowMode.Original: return Each(p).Any(v => string.Equals(v.author?.Trim(), ProjectAuthor, StringComparison.OrdinalIgnoreCase));
 					case ShowMode.Community: return !Each(p).Any(v => string.Equals(v.author?.Trim(), ProjectAuthor, StringComparison.OrdinalIgnoreCase));
 					case ShowMode.Sounds: return Each(p).Any(v => v.sounds > 0 || (v.Detail != null && CountOf(v.Detail, "sounds") > 0));
+					case ShowMode.New: return form.IsNewPet(p);
 					default: return true;
 				}
 			}
 
+			// ------------------------------------------------------------------ "Source: All | Official gallery | owner/repo…"
+
+			/// <summary>The source chosen ("" = all, "official", "local" = only on this computer, or a source key "owner/repo/path").</summary>
+			private string sourceFilter = Program.MyData.GetSetting("GallerySourceFilter") ?? "";
+			private readonly List<(Rectangle rect, string key)> sourceChips = new List<(Rectangle, string)>();
+			private int hoverSourceChip = -1;
+
+			/// <summary>Where a card comes from: "official" (also the pets that come with the program), "local", or the key of its source.</summary>
+			internal static string SourceKey(OptionsPet p)
+			{
+				var r = Each(p).FirstOrDefault() ?? p;
+				if ((r.folder ?? "").StartsWith(PetStore.LocalPrefix, StringComparison.OrdinalIgnoreCase)) return "local";
+				var s = r.Source ?? OptionsGit.SourceOf(r.folder);
+				return s == null || s.IsOfficial ? "official" : s.Key;
+			}
+
+			/// <summary>The sources with pets now, in order: official, the added ones (as in the Sources window), this computer.</summary>
+			private List<(string key, string text)> SourceList()
+			{
+				var keys = new HashSet<string>(form.WebPets.pets.Select(SourceKey));
+				var list = new List<(string, string)>();
+				if (keys.Contains("official")) list.Add(("official", Lang.T("pets.source.official")));
+				foreach (var s in GallerySources.Active().Where(s => !s.IsOfficial && keys.Contains(s.Key)))
+					list.Add((s.Key, s.LocalFolder != null ? "📁 " + s.Label : s.Owner + "/" + s.Repo));
+				foreach (var k in keys.Where(k => k != "official" && k != "local" && !list.Any(x => x.Item1 == k)))
+					list.Add((k, k));
+				if (keys.Contains("local")) list.Add(("local", Lang.T("pets.source.local")));
+				return list;
+			}
+
+			/// <summary>The filter in use, or "" when its source is gone (removed or turned off).</summary>
+			private string ActiveSource => sourceFilter.Length > 0 && form.WebPets.pets.Any(p => SourceKey(p) == sourceFilter)
+				&& form.WebPets.pets.Any(p => { string k = SourceKey(p); return k != "official" && k != "local"; }) ? sourceFilter : "";
+
 			private IEnumerable<OptionsPet> FilteredPets()
 			{
-				var pets = TabPets(CurrentTab).Where(Shown);
+				string src = ActiveSource;
+				var pets = TabPets(CurrentTab).Where(Shown).Where(p => src.Length == 0 || SourceKey(p) == src);
 				if (filter.Length == 0) return pets;
 				bool Has(string s) => (s ?? "").IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
 				return pets.Where(p =>
@@ -166,8 +218,25 @@ namespace DesktopPet
 
 			/// <summary>Order of the gallery cards.</summary>
 			private enum SortMode { Recent, Name, Author }
-			private SortMode sort = SortMode.Recent;
-			private readonly List<(Rectangle rect, SortMode mode)> sortChips = new List<(Rectangle, SortMode)>();
+			private SortMode sort = Enum.TryParse(Program.MyData.GetSetting("GallerySort"), out SortMode saved) ? saved : SortMode.Recent;
+			private Rectangle sortRect;
+			private static string SortKey(SortMode m) => m == SortMode.Name ? "pets.sort.name" : m == SortMode.Author ? "pets.sort.author" : "pets.sort.recent";
+
+			/// <summary>The order button: a little menu with the three orders (the one in use checked).</summary>
+			private void ShowSortMenu()
+			{
+				var menu = new ContextMenuStrip();
+				foreach (SortMode m in new[] { SortMode.Recent, SortMode.Name, SortMode.Author })
+				{
+					var mode = m;
+					var item = new ToolStripMenuItem(Lang.T(SortKey(m))) { Checked = sort == m };
+					item.Click += (s, e) => { sort = mode; Program.MyData.SetSetting("GallerySort", mode.ToString()); ScrollY = 0; Invalidate(); };
+					menu.Items.Add(item);
+				}
+				Theme.ApplyTo(menu);
+				menu.Closed += (s, e) => BeginInvoke(new Action(menu.Dispose));
+				menu.Show(this, new Point(sortRect.Left, sortRect.Bottom + 2));
+			}
 			private int hoverChip = -1;
 			private const int MaxCardW = 190;
 
@@ -184,7 +253,6 @@ namespace DesktopPet
 			protected override int PaintContent(Graphics g, int scrollY)
 			{
 				cards.Clear();
-				sortChips.Clear();
 				var area = GridArea;
 				int y = 4 - scrollY;
 
@@ -202,11 +270,20 @@ namespace DesktopPet
 					if (hoverTab == i && !on) Theme.FillRounded(g, Theme.Hover, tr, 6);
 					Theme.DrawText(g, text, form.fontBold, tr, on ? Theme.Text : Theme.TextMuted, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
 					if (on) Theme.FillRounded(g, Theme.Accent, new Rectangle(tr.X + 12, tr.Bottom - 3, tr.Width - 24, 3), 1.5f);
+					// new pets to download: a little round count at the corner of the tab
+					int fresh = tabs[i].Item1 == Tab.Download && !Loading ? TabPets(Tab.Download).Count(form.IsNewPet) : 0;
+					if (fresh > 0)
+					{
+						string n = fresh > 99 ? "99+" : fresh.ToString();
+						int bw = Math.Max(18, Theme.MeasureText(g, n, form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 10);
+						var badge = new Rectangle(tr.Right - bw + 6, tr.Y - 2, bw, 18);
+						Theme.FillRounded(g, Theme.Accent, badge, 9);
+						Theme.DrawText(g, n, form.fontSmall, badge, Theme.AccentText, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
+					}
 					tabRects.Add((tr, tabs[i].Item1));
 					tx += tw + 6;
 				}
 				using (var line = new Pen(Theme.Border)) g.DrawLine(line, 8, y + 34, area.Width - 8, y + 34);
-				y += 44;
 
 				// --- a row of chips: a label, then the choices (the one in use is highlighted)
 				Rectangle Chip(int x, int top, string text, bool on, bool hover)
@@ -223,46 +300,81 @@ namespace DesktopPet
 					Theme.DrawText(g, Lang.T(key), form.fontSmall, new Rectangle(8, top, 160, 28), Theme.TextMuted, TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
 					return 8 + Theme.MeasureText(g, Lang.T(key), form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 8;
 				}
-				// the labels of both rows are as wide as the widest, so the chips line up
-				int labelW = Math.Max(Theme.MeasureText(g, Lang.T("pets.sortBy"), form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width,
-					Theme.MeasureText(g, Lang.T("pets.show"), form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width) + 16;
-
-				// sort: "Ordenar por: Recentes | Nome | Autor", and on the right "Fontes" (where the pets come from)
-				Label(y, "pets.sortBy");
-				int cx = labelW;
-				var modes = new[] { (SortMode.Recent, "pets.sort.recent"), (SortMode.Name, "pets.sort.name"), (SortMode.Author, "pets.sort.author") };
-				for (int i = 0; i < modes.Length; i++)
+				Rectangle Button(int x, int top, string text, bool hover)
 				{
-					var chip = Chip(cx, y, Lang.T(modes[i].Item2), sort == modes[i].Item1, hoverChip == i);
-					sortChips.Add((chip, modes[i].Item1));
-					cx += chip.Width + 6;
+					int w = Theme.MeasureText(g, text, form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 24;
+					var r = new Rectangle(x, top, w, 24);
+					Theme.FillRounded(g, hover ? Theme.Hover : Theme.Surface, r, 12);
+					Theme.DrawRounded(g, Theme.Border, r, 12);
+					Theme.DrawText(g, text, form.fontSmall, r, Theme.Text, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
+					return r;
 				}
-				string srcText = "📦  " + Lang.T("sources.button");
-				int srcW = Theme.MeasureText(g, srcText, form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 24;
-				string edText = "✏  " + Lang.T("editor.chip");
-				int edW = Theme.MeasureText(g, edText, form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 24;
-				editorRect = new Rectangle(Math.Max(cx + 12, area.Width - 8 - srcW - 6 - edW), y + 2, edW, 24);
-				Theme.FillRounded(g, hoverEditor ? Theme.Hover : Theme.Surface, editorRect, 12);
-				Theme.DrawRounded(g, Theme.Border, editorRect, 12);
-				Theme.DrawText(g, edText, form.fontSmall, editorRect, Theme.Text, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
-				sourcesRect = new Rectangle(editorRect.Right + 6, y + 2, srcW, 24);
-				Theme.FillRounded(g, hoverSources ? Theme.Hover : Theme.Surface, sourcesRect, 12);
-				Theme.DrawRounded(g, Theme.Border, sourcesRect, 12);
-				Theme.DrawText(g, srcText, form.fontSmall, sourcesRect, Theme.Text, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
-				y += 34;
+				int TextW(string text) => Theme.MeasureText(g, text, form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 24;
 
+				// --- on the right of the tabs: "↕ Recentes ▾" (the order, a menu), "✏ Criar um pet", "📦 Fontes";
+				// a narrow window puts them on a row of their own under the tabs
+				string sortText = "↕  " + Lang.T(SortKey(sort)) + "  ▾";
+				string edText = "✏  " + Lang.T("editor.chip");
+				string srcText = "📦  " + Lang.T("sources.button");
+				int buttonsW = TextW(sortText) + 6 + TextW(edText) + 6 + TextW(srcText);
+				bool beside = tx + 12 + buttonsW <= area.Width - 8;
+				int by = beside ? y + 5 : y + 44;
+				int bx = area.Width - 8 - buttonsW;
+				sortRect = Button(bx, by, sortText, hoverChip == 0);
+				editorRect = Button(sortRect.Right + 6, by, edText, hoverEditor);
+				sourcesRect = Button(editorRect.Right + 6, by, srcText, hoverSources);
+				y += beside ? 44 : 44 + 34;
+
+				// the labels of the rows are as wide as the widest, so the chips line up
+				int labelW = Math.Max(Theme.MeasureText(g, Lang.T("pets.show"), form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width,
+					Theme.MeasureText(g, Lang.T("pets.source"), form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width) + 16;
+				int cx;
 				// filter: "Mostrar: Todos | Originais | Comunidade | Com sons"
 				showChips.Clear();
 				Label(y, "pets.show");
 				cx = labelW;
 				var shows = new[] { (ShowMode.All, "pets.filter.all"), (ShowMode.Original, "pets.filter.original"), (ShowMode.Community, "pets.filter.community"), (ShowMode.Sounds, "pets.filter.sounds") };
+				// "✨ New (3)": only while there are new pets to download (or it is the filter in use)
+				int newCount = TabPets(Tab.Download).Count(form.IsNewPet);
+				if (newCount > 0 || show == ShowMode.New) shows = shows.Append((ShowMode.New, "pets.filter.new")).ToArray();
 				for (int i = 0; i < shows.Length; i++)
 				{
-					var chip = Chip(cx, y, Lang.T(shows[i].Item2), show == shows[i].Item1, hoverShow == i);
+					string chipText = shows[i].Item1 == ShowMode.New ? "✨ " + Lang.T(shows[i].Item2) + "  " + newCount : Lang.T(shows[i].Item2);
+					if (cx + TextW(chipText) > area.Width - 8 && cx > labelW) { cx = labelW; y += 30; }   // narrow window: the chips wrap
+					var chip = Chip(cx, y, chipText, show == shows[i].Item1, hoverShow == i);
 					showChips.Add((chip, shows[i].Item1));
 					cx += chip.Width + 6;
 				}
-				y += 38;
+				y += 34;
+
+				// source: "Fonte: Todas | Galeria oficial 40 | fulano/pets 12 | Neste computador 1", only once a repository
+				// was added besides the official gallery (the pets made on this computer alone do not bring the row)
+				sourceChips.Clear();
+				var sources = SourceList();
+				if (sources.Any(s => s.key != "official" && s.key != "local"))
+				{
+					Label(y, "pets.source");
+					cx = labelW;
+					string active = ActiveSource;
+					var tabPets = TabPets(CurrentTab).ToList();
+					var items = new List<(string key, string text)> { ("", Lang.T("pets.filter.all")) };
+					// a source with no pet in this tab is left out (unless it is the one chosen)
+					foreach (var s in sources)
+					{
+						int n = tabPets.Count(p => SourceKey(p) == s.key);
+						if (n > 0 || s.key == active) items.Add((s.key, s.text + "  " + n));
+					}
+					for (int i = 0; i < items.Count; i++)
+					{
+						int w = Theme.MeasureText(g, items[i].text, form.fontSmall, int.MaxValue, TextFormatFlags.SingleLine).Width + 24;
+						if (cx + w > area.Width - 8 && cx > labelW) { cx = labelW; y += 30; }   // many sources: the chips wrap
+						var chip = Chip(cx, y, items[i].text, active == items[i].key, hoverSourceChip == i);
+						sourceChips.Add((chip, items[i].key));
+						cx += chip.Width + 6;
+					}
+					y += 34;
+				}
+				y += 4;
 
 				// --- cards fill the width: as many columns as fit, cards stretched up to MaxCardW, grid centered
 				int usable = area.Width - 16;
@@ -418,12 +530,14 @@ namespace DesktopPet
 				if (!string.IsNullOrEmpty(character) && !title.StartsWith(character, StringComparison.OrdinalIgnoreCase)) title += " · " + character;
 				Theme.DrawText(g, title, form.fontH2, new Rectangle(x + 110, y + 10, w - 140, 48), Theme.Text, TextFormatFlags.WordBreak | TextFormatFlags.EndEllipsis);
 				Theme.DrawText(g, Lang.T("pets.by", pet.author), form.fontSmall, new Rectangle(x + 110, y + 60, w - 110, 18), Theme.TextMuted, TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
-				Theme.DrawText(g, Lang.T("pets.updated", ShortDate(pet.lastupdate)), form.fontSmall, new Rectangle(x + 110, y + 78, w - 110, 18), Theme.TextMuted, TextFormatFlags.SingleLine);
+				// a pet listed without pets.json has no date (its version is the id of its file on GitHub): nothing to say
+				if (!string.IsNullOrEmpty(pet.lastupdate) && char.IsDigit(pet.lastupdate[0]) && pet.lastupdate.Contains('-'))
+					Theme.DrawText(g, Lang.T("pets.updated", ShortDate(pet.lastupdate)), form.fontSmall, new Rectangle(x + 110, y + 78, w - 110, 18), Theme.TextMuted, TextFormatFlags.SingleLine);
 				// a pet of another repository says where it comes from (a link to that gallery)
 				if (pet.Source != null && !pet.Source.IsOfficial)
 				{
 					var from = new Rectangle(x + 110, y + 96, w - 110, 18);
-					Theme.DrawText(g, Lang.T("sources.from", pet.Source.Owner + "/" + pet.Source.Repo), form.fontSmall, from, Theme.Link, TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
+					Theme.DrawText(g, Lang.T("sources.from", pet.Source.LocalFolder ?? pet.Source.Owner + "/" + pet.Source.Repo), form.fontSmall, from, Theme.Link, TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
 					links.Add((from, pet.Source.WebUrl));
 					y += 10;
 				}
@@ -752,23 +866,24 @@ namespace DesktopPet
 				bool hsn = selected != null && soundRect.Contains(e.Location);
 				bool hl = selected != null && links.Any(l => l.rect.Contains(e.Location));
 				int hs = selected == null ? -1 : swatches.Where(s => s.rect.Contains(e.Location)).Select(s => s.index).DefaultIfEmpty(-1).First();
-				int hch = sortChips.FindIndex(c => c.rect.Contains(e.Location));
+				int hch = sortRect.Contains(e.Location) ? 0 : -1;
 				int htb = tabRects.FindIndex(t => t.rect.Contains(e.Location));
 				int hsh = showChips.FindIndex(c => c.rect.Contains(e.Location));
+				int hsc = sourceChips.FindIndex(c => c.rect.Contains(e.Location));
 				bool hsrc = sourcesRect.Contains(e.Location);
 				bool hed = editorRect.Contains(e.Location);
 				bool hpl = selected != null && playRect.Contains(e.Location);
-				Cursor = (hp != null || ha || hc || hx || hr || hrl || hsn || hl || hs >= 0 || hch >= 0 || htb >= 0 || hsh >= 0 || hsrc || hed || hpl) ? Cursors.Hand : Cursors.Default;
+				Cursor = (hp != null || ha || hc || hx || hr || hrl || hsn || hl || hs >= 0 || hch >= 0 || htb >= 0 || hsh >= 0 || hsc >= 0 || hsrc || hed || hpl) ? Cursors.Hand : Cursors.Default;
 				if (hp != hoverPet || ha != hoverAdopt || hc != hoverClose || hs != hoverSwatch || hch != hoverChip
 					|| hx != hoverCancel || hr != hoverRemove || hrl != hoverRetryList || hsn != hoverSound || htb != hoverTab
-					|| hsh != hoverShow || hsrc != hoverSources || hed != hoverEditor || hpl != hoverPlay)
+					|| hsh != hoverShow || hsc != hoverSourceChip || hsrc != hoverSources || hed != hoverEditor || hpl != hoverPlay)
 				{
 					if (hp != hoverPet) cardTip.SetToolTip(this, hp == null ? null
 						: hp.DisplayName + "  ·  " + (hp.Variants != null ? Lang.T(hp.VariantsAreVersions ? "pets.authorVersions" : "pets.authorColors", hp.author, hp.Variants.Length) : hp.author)
-						+ (hp.Source != null && !hp.Source.IsOfficial ? "  ·  " + Lang.T("sources.from", hp.Source.Owner + "/" + hp.Source.Repo) : ""));
+						+ (hp.Source != null && !hp.Source.IsOfficial ? "  ·  " + Lang.T("sources.from", hp.Source.LocalFolder ?? hp.Source.Owner + "/" + hp.Source.Repo) : ""));
 					hoverPet = hp; hoverAdopt = ha; hoverClose = hc; hoverSwatch = hs; hoverChip = hch;
 					hoverCancel = hx; hoverRemove = hr; hoverRetryList = hrl; hoverSound = hsn; hoverTab = htb;
-					hoverShow = hsh; hoverSources = hsrc; hoverEditor = hed; hoverPlay = hpl;
+					hoverShow = hsh; hoverSourceChip = hsc; hoverSources = hsrc; hoverEditor = hed; hoverPlay = hpl;
 					Invalidate();
 				}
 				if (hsrc) form.StatusText = Lang.T("opt.sources.desc");
@@ -783,24 +898,26 @@ namespace DesktopPet
 			{
 				base.OnMouseLeave(e);
 				hoverPet = null; hoverAdopt = hoverClose = hoverCancel = hoverRemove = hoverRetryList = hoverSound = hoverSources = hoverEditor = hoverPlay = false;
-				hoverSwatch = -1; hoverChip = -1; hoverTab = -1; hoverShow = -1;
+				hoverSwatch = -1; hoverChip = -1; hoverTab = -1; hoverShow = -1; hoverSourceChip = -1;
 				Invalidate();
 			}
 
 			protected override async void OnMouseClick(MouseEventArgs e)
 			{
 				base.OnMouseClick(e);
-				foreach (var c in sortChips)
-				{
-					if (!c.rect.Contains(e.Location)) continue;
-					sort = c.mode;
-					Invalidate();
-					return;
-				}
+				if (sortRect.Contains(e.Location)) { ShowSortMenu(); return; }
+
 				foreach (var c in showChips)
 				{
 					if (!c.rect.Contains(e.Location)) continue;
 					if (show != c.mode) { show = c.mode; ScrollY = 0; }
+					Invalidate();
+					return;
+				}
+				foreach (var c in sourceChips)
+				{
+					if (!c.rect.Contains(e.Location)) continue;
+					if (sourceFilter != c.key) { sourceFilter = c.key; Program.MyData.SetSetting("GallerySourceFilter", c.key); ScrollY = 0; }
 					Invalidate();
 					return;
 				}

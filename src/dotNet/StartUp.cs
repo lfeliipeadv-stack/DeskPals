@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -276,6 +276,7 @@ namespace DesktopPet
                     sheeps[i].Kill();
                     for (int j = i; j < iSheeps - 1; j++) sheeps[j] = sheeps[j + 1];
                     iSheeps--;
+                    sheeps[iSheeps] = null;   // the last slot still pointed at a pet (kept in memory)
                     Application.DoEvents();
                     bSheepRemoved = true;
                     break;

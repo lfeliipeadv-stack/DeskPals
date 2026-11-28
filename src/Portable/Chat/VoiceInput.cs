@@ -128,6 +128,7 @@ catch {
 			{
 				string text = await AiAssistant.Transcribe(wav, cancel);
 				LogFile.Important($"voice: the AI wrote {text.Length} letters");
+				if (text.Length > 0) Achievements.Unlock("voice");
 				return text.Length > 0 ? (Outcome.Text, text) : (Outcome.Nothing, null);
 			}
 			catch (Exception) when (cancel.IsCancellationRequested) { return (Outcome.Canceled, null); }

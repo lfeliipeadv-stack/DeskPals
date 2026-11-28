@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -257,6 +257,11 @@ namespace XmlData
         /// </summary>
         [XmlElement("gravity")]
         public HitNode Gravity;
+        /// <summary>
+        ///  What to do if the pet hits another pet whose animation triggers one of these (desktopPet 2.1).
+        /// </summary>
+        [XmlElement("interact")]
+        public HitNode Interact;
     }
 
     /// <summary>
@@ -408,6 +413,16 @@ namespace XmlData
         /// </summary>
         [XmlAttribute("only")]
         public string OnlyFlag;
+        /// <summary>
+        ///  Interact: the other pet's animation that triggers this one (optional).
+        /// </summary>
+        [XmlAttribute("trigger")]
+        public string Trigger;
+        /// <summary>
+        ///  Interact: where the other pet must be: "any" (default), "infront" or "behind".
+        /// </summary>
+        [XmlAttribute("direction")]
+        public string Direction;
         /// <summary>
         ///  Next animation ID.
         /// </summary>

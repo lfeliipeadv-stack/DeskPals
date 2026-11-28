@@ -355,6 +355,15 @@ namespace DesktopPet
 				new Card { Id = "visitors", Emoji = "🦋", Key = "plug.visitors", Category = "fun",
 					Get = () => Visitors.Enabled, Set = on => Visitors.Enabled = on,
 					ConfigureKey = "plug.visitors.button", Configure = Visitors.Visit },
+				new Card { Id = "petVisits", Emoji = "🏡", Key = "plug.petVisits", Category = "fun",
+					Get = () => PetVisits.Enabled, Set = on => PetVisits.Enabled = on,
+					Status = () => PetVisits.Enabled ? Lang.T("plug.petVisits.every", PetVisits.Every) : null,
+					Configure = () => ShowPluginOptions("plug.petVisits.title", v =>
+					{
+						v.AddChoice("", /* clock */ "plug.petVisitsEvery", () => PetVisits.Every, x => PetVisits.Every = x, PetVisits.EveryChoices,
+							PetVisits.EveryChoices.Select(m => Lang.T("plug.petVisits.every", m)).ToArray());
+						v.AddAction("", /* play */ "plug.petVisitsNow", "plug.petVisitsNow.button", () => PetVisits.Visit());
+					}) },
 				new Card { Id = "timer", Emoji = "⏱️", Key = "plug.timer", Category = "day",
 					Get = () => PluginSwitch.On("timer"), Set = on => { PluginSwitch.Set("timer", on); if (!on) SimpleTimer.Close(); },
 					Status = () => SimpleTimer.Active ? "⏱ " + (SimpleTimer.Finished ? Lang.T("timer.doneShort") : SimpleTimer.LeftText) : null,
@@ -447,6 +456,10 @@ namespace DesktopPet
 					},
 					Status = WeatherExtension.Status,
 					ConfigureKey = "opt.editor.button", Configure = async () => { await WeatherExtension.OpenAsync(this, s => StatusText = s); extensionsView?.Reload(); } },
+				// DeskPals Tools, a program of its own: its button opens its window (files can also be dropped on a pet)
+				new Card { Id = "tools", Emoji = "🛠️", Key = "ext.tools", TitleKey = "ext.tools.title",
+					Status = ToolsExtension.Status,
+					ConfigureKey = "opt.editor.button", Configure = async () => { await ToolsExtension.OpenAsync(this, s => StatusText = s); extensionsView?.Reload(); } },
 				new Card { Id = "editor", Emoji = "✏️", Key = "opt.editor",
 					Status = () => Lang.T(PetEditorApp.IsInstalled ? "ext.state.installed" : "ext.state.missing"),
 					ConfigureKey = "opt.editor.button", Configure = () => OpenPetEditor() },

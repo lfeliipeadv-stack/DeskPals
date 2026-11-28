@@ -1,4 +1,4 @@
-﻿using DesktopPet.Properties;
+using DesktopPet.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -59,7 +59,7 @@ namespace DesktopPet
 				save(System.IO.Path.Combine("details", pet.folder));
 			}
 			f.petsView.CloseDetail();
-			foreach (Page p in new[] { Page.Home, Page.Application, Page.About, Page.Reminders, Page.Plugins, Page.Integrations, Page.Ai }) { f.SelectPage(p); await Task.Delay(200); save(p.ToString().ToLowerInvariant()); }
+			foreach (Page p in new[] { Page.Home, Page.Application, Page.About, Page.Reminders, Page.Plugins, Page.Integrations, Page.Ai, Page.Achievements }) { f.SelectPage(p); await Task.Delay(200); save(p.ToString().ToLowerInvariant()); }
 			// the whole start page, in a tall window and in a wide one (four tiles a row)
 			{
 				var keep = f.Size;

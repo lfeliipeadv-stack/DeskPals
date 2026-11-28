@@ -114,9 +114,14 @@ namespace DesktopPet
             return registered;
         }
 
-        public static void Toggle() => SetHidden(!Hidden);
+        public static void Toggle() { if (!Hidden) Achievements.Unlock("hide"); SetHidden(!Hidden); }
 
         public static void SetHidden(bool hidden)
+        {
+            SetHiddenNow(hidden);
+        }
+
+        static void SetHiddenNow(bool hidden)
         {
             Hidden = hidden;
             // every pet window, children included (balloons, planes…)

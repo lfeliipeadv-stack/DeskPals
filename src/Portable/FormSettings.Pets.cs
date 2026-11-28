@@ -63,6 +63,24 @@ namespace DesktopPet
 			}),
 		};
 
+		/// <summary>The name of the colour group a pet folder belongs to ("gSheep"), or null.</summary>
+		internal static string GroupOf(string folder) =>
+			PetGroups.FirstOrDefault(g => g.variants.Any(v => string.Equals(v.folder, folder, StringComparison.OrdinalIgnoreCase))).name;
+
+		/// <summary>The pet's "See" button: the gallery, on "Download pets", showing only the new ones.</summary>
+		public static void ShowNewPets()
+		{
+			ShowPage(Page.Pets);
+			openInstance?.petsView.ShowNew();
+		}
+
+		/// <summary>Self-test: the gallery is still loading; the folders of the cards shown now.</summary>
+		internal bool TestLoading => petsView.Loading;
+		internal List<string> TestPetsShown() => petsView.TestShown();
+		internal List<string> TestSourceChips() { petsView.Refresh(); return petsView.TestSourceChips(); }
+		internal List<string> TestShownSources(string source) { petsView.TestSource(source); petsView.Refresh(); return petsView.TestShownSources(); }
+		internal void TestDownloadTab() => petsView.TestTab(PetsView.Tab.Download);
+
 		// ------------------------------------------------------------------ "New" badge
 
 		/// <summary>Pets already seen (folder → lastupdate). Null until the gallery was loaded once.</summary>
@@ -79,14 +97,14 @@ namespace DesktopPet
 		private bool IsNewPet(OptionsPet pet)
 		{
 			if (seenPets == null) return false;
-			return RealPets(pet).Any(p => !seenPets.TryGetValue(p.folder ?? "", out string d) || d != (p.lastupdate ?? ""));
+			return RealPets(pet).Any(p => !seenPets.TryGetValue(p.folder ?? "", out string d) || d != p.Version);
 		}
 
 		/// <summary>Remember that the user has seen this pet (and all its colors).</summary>
 		private void MarkSeen(OptionsPet pet)
 		{
 			if (seenPets == null || pet == null || !IsNewPet(pet)) return;
-			foreach (var p in RealPets(pet)) seenPets[p.folder ?? ""] = p.lastupdate ?? "";
+			foreach (var p in RealPets(pet)) seenPets[p.folder ?? ""] = p.Version;
 			Program.MyData.SetSeenPets(seenPets);
 		}
 
@@ -96,7 +114,7 @@ namespace DesktopPet
 			if (seenPets != null) return;
 			seenPets = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 			foreach (var pet in WebPets.pets)
-				foreach (var p in RealPets(pet)) seenPets[p.folder ?? ""] = p.lastupdate ?? "";
+				foreach (var p in RealPets(pet)) seenPets[p.folder ?? ""] = p.Version;
 			Program.MyData.SetSeenPets(seenPets);
 		}
 
@@ -219,6 +237,10 @@ namespace DesktopPet
 					AddLocalPet(inUse);
 				StatusText = OptionsGit.Online ? Lang.T("status.available", WebPets.pets.Count) : Lang.T("status.offline");
 				if (OptionsGit.Online) InitSeenPets();
+					// achievements: the whole gallery (a card of colours counts as one pet; pets of this computer only do not count)
+					if (OptionsGit.Online)
+						Achievements.GalleryPets(WebPets.pets.Where(p => !(p.folder ?? "").StartsWith(PetStore.LocalPrefix, StringComparison.OrdinalIgnoreCase))
+							.Select(p => p.Variants != null ? p.Variants.Where(v => v != null).Select(v => v.folder).ToArray() : new[] { p.folder }));
 			}
 			catch (Exception ex)
 			{
@@ -292,7 +314,7 @@ namespace DesktopPet
 		{
 			if (pet == null || BuiltInPets.IsBuiltIn(pet.folder) || !PetStore.Has(pet.folder)) return false;
 			string saved = PetStore.SavedVersion(pet.folder);
-			return saved.Length > 0 && !string.IsNullOrEmpty(pet.lastupdate) && saved != pet.lastupdate;
+			return saved.Length > 0 && pet.Version.Length > 0 && saved != pet.Version;
 		}
 
 		/// <summary>What the main button of a pet does: add another, download (or update), or adopt.</summary>
@@ -327,11 +349,11 @@ namespace DesktopPet
 				if (xml.DocumentElement?.SelectSingleNode("*[local-name()='image']") == null
 					|| xml.DocumentElement.SelectSingleNode("*[local-name()='animations']") == null)
 					throw new System.IO.InvalidDataException(Lang.T("pets.errNotPet"));
-				PetStore.Save(pet.folder, xml.OuterXml, pet.lastupdate ?? "");
+				PetStore.Save(pet.folder, xml.OuterXml, pet.Version);
 				PetStore.SaveSource(pet.folder, (pet.Source ?? OptionsGit.SourceOf(pet.folder)).Key);
 				pet.Detail = xml;                           // real counts for the detail panel
 				if (card != pet && card.folder == pet.folder) card.SelectVariant(pet);   // the card still shows this color
-				MarkSeen(pet);
+				MarkSeen(pet); Achievements.Adopted(pet.folder);
 				StatusText = Lang.T("status.downloaded", pet.DisplayName);
 				PetUpdates.Recount();
 				petsView.DownloadingFolder = null;
@@ -470,7 +492,7 @@ namespace DesktopPet
 				{
 					StatusText = Lang.T("status.downloading", pet.DisplayName);
 					content = await Task.Run(() => OptionsGit.GetPetXml(pet.folder));
-					PetStore.Save(pet.folder, content, pet.lastupdate ?? "");
+					PetStore.Save(pet.folder, content, pet.Version);
 				}
 				var xml = new XmlDocument();
 				xml.LoadXml(content);

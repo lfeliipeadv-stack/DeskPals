@@ -16,6 +16,7 @@ namespace DesktopPet
 
 		public static void FortuneCookie()
 		{
+			Achievements.Count("fun");
 			Program.Mainthread?.ReactAll("eat", "eat fish", "eat meat", "cookie", "happy");
 			SpeechBubble.Say("🥠 " + Pick("fun.fortunes"), 14);
 		}
@@ -25,12 +26,13 @@ namespace DesktopPet
 			SpeechBubble.Say(Lang.T("fun.ballAsk"), 0,
 				new SpeechBubble.Choice(Lang.T("fun.ballShake"), () =>
 				{
+					Achievements.Count("fun");
 					Program.Mainthread?.ReactAll("think", "spin", "dizzy");
 					SpeechBubble.Say("🎱 " + Pick("fun.ballAnswers"), 10);
 				}, true));
 		}
 
 		/// <summary>The pet tells a random fact or joke.</summary>
-		public static void Joke() => SpeechBubble.Say(Pick("fun.jokes"), 14);
+		public static void Joke() { Achievements.Count("fun"); SpeechBubble.Say(Pick("fun.jokes"), 14); }
 	}
 }

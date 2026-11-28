@@ -47,13 +47,14 @@ namespace DesktopPet
             }
             catch (Exception) { return; }
             Recount(notify);
+            if (notify) NewPets.Check(gallery);   // pets that arrived since the last look
         }
 
         /// <summary>Compare again with what is on disk (after a download or a removal).</summary>
         public static void Recount(bool notify = false)
         {
             var outdated = gallery.Where(p => PetStore.Has(p.folder))
-                .Where(p => { string v = PetStore.SavedVersion(p.folder); return v.Length > 0 && !string.IsNullOrEmpty(p.lastupdate) && v != p.lastupdate; })
+                .Where(p => { string v = PetStore.SavedVersion(p.folder); return v.Length > 0 && p.Version.Length > 0 && v != p.Version; })
                 .ToList();
             Outdated = outdated.Select(p => string.IsNullOrEmpty(p.name) ? p.folder : p.name).ToList();
             Changed?.Invoke();
@@ -61,9 +62,9 @@ namespace DesktopPet
 
             // one notification per new version, not at every start
             var told = Program.MyData.GetNotifiedUpdates();
-            var fresh = outdated.Where(p => !told.TryGetValue(p.folder, out var v) || v != p.lastupdate).ToList();
+            var fresh = outdated.Where(p => !told.TryGetValue(p.folder, out var v) || v != p.Version).ToList();
             if (fresh.Count == 0) return;
-            foreach (var p in fresh) told[p.folder] = p.lastupdate;
+            foreach (var p in fresh) told[p.folder] = p.Version;
             Program.MyData.SetNotifiedUpdates(told);
             string names = string.Join(", ", outdated.Select(p => string.IsNullOrEmpty(p.name) ? p.folder : p.name));
             ProcessIcon.Current?.Notify(Lang.T(outdated.Count == 1 ? "update.petTitleOne" : "update.petTitleMany", outdated.Count),
