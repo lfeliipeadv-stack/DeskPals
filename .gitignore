@@ -233,8 +233,7 @@ DesktopPet.config
 # As imagens do Wiki vem da pasta wiki/images, copiadas na hora da montagem.
 site/wiki/images/
 
-# Thronglet: pet pessoal, fica so neste computador (nunca na galeria publica)
-Pets/thronglet/
+# Thronglet pessoal (com a musica da serie): so neste computador
 docs/capturas/meu-thronglet.png
 wiki/images/detalhe-meu-thronglet.png
 icones-claude/
